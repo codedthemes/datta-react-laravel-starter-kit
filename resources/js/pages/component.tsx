@@ -78,7 +78,7 @@ export default function Dashboard() {
                             </CardHeader>
                             <CardContent>
                                 <div className="flex flex-wrap gap-2">
-                                    <Button variant="primay">Primary</Button>
+                                    <Button variant="primary">Primary</Button>
                                     <Button variant="secondary">Secondary</Button>
                                     <Button variant="success">Success</Button>
                                     <Button variant="danger">Danger</Button>
@@ -89,7 +89,7 @@ export default function Dashboard() {
                                     <Button variant="link">Link</Button>
                                 </div>
                                 <div className="grid gap-2 mt-2">
-                                    <Button variant="primay">Block Level Button</Button>
+                                    <Button variant="primary">Block Level Button</Button>
                                 </div>
                             </CardContent>
                         </Card>
@@ -101,7 +101,7 @@ export default function Dashboard() {
                             </CardHeader>
                             <CardContent>
                                 <div className="flex flex-wrap gap-2">
-                                    <Button variant="light_primay">Primary</Button>
+                                    <Button variant="light_primary">Primary</Button>
                                     <Button variant="light_secondary">Secondary</Button>
                                     <Button variant="light_success">Success</Button>
                                     <Button variant="light_danger">Danger</Button>
@@ -119,7 +119,7 @@ export default function Dashboard() {
                             </CardHeader>
                             <CardContent>
                                 <div className="flex flex-wrap gap-2">
-                                    <Button variant="light_primay">Primary</Button>
+                                    <Button variant="light_primary">Primary</Button>
                                     <Button variant="light_secondary">Secondary</Button>
                                 </div>
                             </CardContent>
@@ -133,7 +133,7 @@ export default function Dashboard() {
                             <CardContent>
                                 <Collapsible>
                                     <CollapsibleTrigger>
-                                        <Button variant="light_primay">Collapsible</Button>
+                                        Collapsible
                                     </CollapsibleTrigger>
                                     <CollapsibleContent>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</CollapsibleContent>
                                 </Collapsible>

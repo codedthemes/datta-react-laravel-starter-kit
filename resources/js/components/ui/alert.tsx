@@ -11,13 +11,13 @@ const alertVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-blue-500/20 text-blue-800 border-blue-500/2",
-        secondary: "bg-gray-500/20 text-gray-800 border-gray-500/2",
-        success: "bg-green-500/20 text-green-800 border-green-500/2",
-        danger: "bg-red-500/20 text-red-800 border-red-500/2",
-        warning: "bg-yellow-500/20 text-yellow-800 border-yellow-500/2",
-        info: "bg-cyan-500/20 text-cyan-800 border-cyan-500/2",
-        dark: "bg-slate-500/20 text-slate-800 border-slate-500/2",
+        primary: "bg-primary-500/20 text-primary-800 border-primary-500/2",
+        secondary: "bg-secondary-500/20 text-secondary-800 border-secondary-500/2",
+        success: "bg-success-500/20 text-success-800 border-success-500/2",
+        danger: "bg-danger-500/20 text-danger-800 border-danger-500/2",
+        warning: "bg-warning-500/20 text-warning-800 border-warning-500/2",
+        info: "bg-info-500/20 text-info-800 border-info-500/2",
+        dark: "bg-dark-500/20 text-dark-800 border-dark-500/2",
       },
     },
     defaultVariants: {

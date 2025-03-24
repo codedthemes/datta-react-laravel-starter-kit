@@ -9,25 +9,24 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground shadow-xs hover:bg-primary/90",
-        primay:"bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-700 focus:bg-blue-600",
-        secondary: "bg-gray-500 text-white hover:bg-gray-600 active:bg-gray-700 focus:bg-gray-600",
-        success: "bg-green-500 text-white hover:bg-green-600 active:bg-green-700 focus:bg-green-600",
-        danger: "bg-red-500 text-white hover:bg-red-600 active:bg-red-700 focus:bg-red-600",
-        warning: "bg-yellow-500 text-white hover:bg-yellow-600 active:bg-yellow-700 focus:bg-yellow-600",
-        info: "bg-cyan-500 text-white hover:bg-cyan-600 active:bg-cyan-700 focus:bg-cyan-600",
-        dark: "bg-slate-500 text-white hover:bg-slate-600 active:bg-slate-700 focus:bg-slate-600",
+        primary:"bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 focus:bg-primary-600",
+        secondary: "bg-secondary-500 text-white hover:bg-secondary-600 active:bg-secondary-700 focus:bg-secondary-600",
+        success: "bg-success-500 text-white hover:bg-success-600 active:bg-success-700 focus:bg-success-600",
+        danger: "bg-danger-500 text-white hover:bg-danger-600 active:bg-danger-700 focus:bg-danger-600",
+        warning: "bg-warning-500 text-white hover:bg-warning-600 active:bg-warning-700 focus:bg-warning-600",
+        info: "bg-info-500 text-white hover:bg-info-600 active:bg-info-700 focus:bg-info-600",
+        dark: "bg-dark-500 text-white hover:bg-dark-600 active:bg-dark-700 focus:bg-dark-600",
 
-        light: "bg-gray-50/10 text-dark dark:text-white hover:bg-gray-50/20 active:bg-gray-50/30 focus:bg-gray-50/20",
-        link: "bg-transparent text-blue-500 hover:underline active:bg-blue-50/30 focus:bg-blue-50/20",
+        light: "bg-secondary-50/10 text-dark dark:text-white hover:bg-secondary-50/20 active:bg-secondary-50/30 focus:bg-secondary-50/20",
+        link: "bg-transparent text-primary-500 hover:underline active:bg-primary-50/30 focus:bg-primary-50/20",
         
-        light_primay:"bg-blue-500/10 dark:bg-blue-500/10 text-blue-500 hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white focus:bg-blue-600 focus:text-white",
-        light_secondary:"bg-gray-500/10 dark:bg-gray-500/10 text-gray-500 hover:bg-gray-500 dark:hover:bg-gray-500 hover:text-white focus:bg-gray-600 focus:text-white",
-        light_success:"bg-green-500/10 dark:bg-green-500/10 text-green-500 hover:bg-green-500 dark:hover:bg-green-500 hover:text-white focus:bg-green-600 focus:text-white",
-        light_danger:"bg-red-500/10 dark:bg-red-500/10 text-red-500 hover:bg-red-500 dark:hover:bg-red-500 hover:text-white focus:bg-red-600 focus:text-white",
-        light_warning:"bg-yellow-500/10 dark:bg-yellow-500/10 text-yellow-500 hover:bg-yellow-500 dark:hover:bg-yellow-500 hover:text-white focus:bg-yellow-600 focus:text-white",
-        light_info:"bg-cyan-500/10 dark:bg-cyan-500/10 text-cyan-500 hover:bg-cyan-500 dark:hover:bg-cyan-500 hover:text-white focus:bg-cyan-600 focus:text-white",
-        light_dark:"bg-slate-500/10 dark:bg-slate-500/10 text-slate-500 hover:bg-slate-500 dark:hover:bg-slate-500 hover:text-white focus:bg-slate-600 focus:text-white",
+        light_primary:"bg-primary-500/10 dark:bg-primary-500/10 text-primary-500 hover:bg-primary-500 dark:hover:bg-primary-500 hover:text-white focus:bg-primary-600 focus:text-white",
+        light_secondary:"bg-secondary-500/10 dark:bg-secondary-500/10 text-secondary-500 hover:bg-secondary-500 dark:hover:bg-secondary-500 hover:text-white focus:bg-secondary-600 focus:text-white",
+        light_success:"bg-success-500/10 dark:bg-success-500/10 text-success-500 hover:bg-success-500 dark:hover:bg-success-500 hover:text-white focus:bg-success-600 focus:text-white",
+        light_danger:"bg-danger-500/10 dark:bg-danger-500/10 text-danger-500 hover:bg-danger-500 dark:hover:bg-danger-500 hover:text-white focus:bg-danger-600 focus:text-white",
+        light_warning:"bg-warning-500/10 dark:bg-warning-500/10 text-warning-500 hover:bg-warning-500 dark:hover:bg-warning-500 hover:text-white focus:bg-warning-600 focus:text-white",
+        light_info:"bg-info-500/10 dark:bg-info-500/10 text-info-500 hover:bg-info-500 dark:hover:bg-info-500 hover:text-white focus:bg-info-600 focus:text-white",
+        light_dark:"bg-dark-500/10 dark:bg-dark-500/10 text-dark-500 hover:bg-dark-500 dark:hover:bg-dark-500 hover:text-white focus:bg-dark-600 focus:text-white",
 
         outline: "border border-input bg-background shadow-xs hover:bg-accent hover:text-accent-foreground",
       },
@@ -39,7 +38,7 @@ const buttonVariants = cva(
       },
     },
     defaultVariants: {
-      variant: "default",
+      variant: "primary",
       size: "default",
     },
   }

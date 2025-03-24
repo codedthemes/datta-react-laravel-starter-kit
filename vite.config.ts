@@ -13,6 +13,10 @@ export default defineConfig({
         }),
         react(),
         tailwindcss(),
+        // tailwindcss(tailwindConfig),
+        // tailwindcss({
+        //     config:'tailwind.config.js',
+        // }),
     ],
     esbuild: {
         jsx: 'automatic',
