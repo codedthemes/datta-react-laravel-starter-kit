@@ -1,13 +1,9 @@
-/* @config "tailwind.config.js"; */
-
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
-
 @import 'tailwindcss';
-/* @import "../../tailwind.config.js"; */
+@config "../../tailwind.config.js";
 
 @plugin 'tailwindcss-animate';
+
+@import '../../tailwind_plugins/layouts/sidebar.css';
 
 @source "../views";
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';

@@ -1,5 +1,5 @@
-import keyframes from './tailwind_plugins/keyframes.js';
-import presets from './tailwind_plugins/theme-preset.js';
+// import keyframes from './tailwind_plugins/keyframes.js';
+// import presets from './tailwind_plugins/theme-preset.js';
 
 module.exports = {
   content: ['./src/**/*.{html,js}', './tailwind_plugins/**/*.{html,js}'],
@@ -205,41 +205,41 @@ module.exports = {
         'switch-active-bg': `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23ffffff'/%3e%3c/svg%3e")`,
         'choice-close-btn': `url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEiIGhlaWdodD0iMjEiIHZpZXdCb3g9IjAgMCAyMSAyMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjRkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0yLjU5Mi4wNDRsMTguMzY0IDE4LjM2NC0yLjU0OCAyLjU0OEwuMDQ0IDIuNTkyeiIvPjxwYXRoIGQ9Ik0wIDE4LjM2NEwxOC4zNjQgMGwyLjU0OCAyLjU0OEwyLjU0OCAyMC45MTJ6Ii8+PC9nPjwvc3ZnPg==)`
       },
-      keyframes: keyframes,
+      // keyframes: keyframes,
     }
   },
-  plugins: [
-    require('tailwindcss-themer')(presets),
-    require('./tailwind_plugins/layouts/header.js'),
-    require('./tailwind_plugins/layouts/sidebar.js'),
-    require('./tailwind_plugins/layouts/common.js'),
-    require('./tailwind_plugins/layouts/horizontal.js'),
-    require('./tailwind_plugins/layouts/color_header.js'),
-    require('./tailwind_plugins/layouts/compact.js'),
-    require('./tailwind_plugins/layouts/tab.js'),
-    require('./tailwind_plugins/layouts/layout-3.js'),
-    require('./tailwind_plugins/layouts/customizer.js'),
+  // plugins: [
+  //   // require('tailwindcss-themer')(presets),
+  //   require('./tailwind_plugins/layouts/header.js'),
+  //   require('./tailwind_plugins/layouts/sidebar.js'),
+  //   require('./tailwind_plugins/layouts/common.js'),
+  //   require('./tailwind_plugins/layouts/horizontal.js'),
+  //   require('./tailwind_plugins/layouts/color_header.js'),
+  //   require('./tailwind_plugins/layouts/compact.js'),
+  //   require('./tailwind_plugins/layouts/tab.js'),
+  //   require('./tailwind_plugins/layouts/layout-3.js'),
+  //   require('./tailwind_plugins/layouts/customizer.js'),
 
-    require('./tailwind_plugins/accordion.js'),
-    require('./tailwind_plugins/alerts.js'),
-    require('./tailwind_plugins/badge.js'),
-    require('./tailwind_plugins/buttons.js'),
-    require('./tailwind_plugins/breadcrumb.js'),
-    require('./tailwind_plugins/card.js'),
-    require('./tailwind_plugins/choices.js'),
-    require('./tailwind_plugins/dropdown.js'),
-    require('./tailwind_plugins/forms.js'),
-    require('./tailwind_plugins/gallery_advance.js'),
-    require('./tailwind_plugins/modal.js'),
-    require('./tailwind_plugins/notification.js'),
-    require('./tailwind_plugins/offcanvas.js'),
-    require('./tailwind_plugins/rangeslider.js'),
-    require('./tailwind_plugins/simplebar.js'),
-    require('./tailwind_plugins/slider.js'),
-    require('./tailwind_plugins/sweetalert.js'),
-    require('./tailwind_plugins/table.js'),
-    require('./tailwind_plugins/typography.js'),
+  //   require('./tailwind_plugins/accordion.js'),
+  //   require('./tailwind_plugins/alerts.js'),
+  //   require('./tailwind_plugins/badge.js'),
+  //   require('./tailwind_plugins/buttons.js'),
+  //   require('./tailwind_plugins/breadcrumb.js'),
+  //   require('./tailwind_plugins/card.js'),
+  //   require('./tailwind_plugins/choices.js'),
+  //   require('./tailwind_plugins/dropdown.js'),
+  //   require('./tailwind_plugins/forms.js'),
+  //   require('./tailwind_plugins/gallery_advance.js'),
+  //   require('./tailwind_plugins/modal.js'),
+  //   require('./tailwind_plugins/notification.js'),
+  //   require('./tailwind_plugins/offcanvas.js'),
+  //   require('./tailwind_plugins/rangeslider.js'),
+  //   require('./tailwind_plugins/simplebar.js'),
+  //   require('./tailwind_plugins/slider.js'),
+  //   require('./tailwind_plugins/sweetalert.js'),
+  //   require('./tailwind_plugins/table.js'),
+  //   require('./tailwind_plugins/typography.js'),
 
-    require('./tailwind_plugins/calendar.js')
-  ]
+  //   require('./tailwind_plugins/calendar.js')
+  // ]
 };
