@@ -1,0 +1,136 @@
+/**  =====================
+    31. Daterange css start
+========================== **/
+
+.react-calendar {
+  border: none !important;
+  border-radius: 6px;
+  box-shadow: 0 1px 10px 0 rgba(69, 90, 100, 0.2);
+  position: absolute;
+  z-index: 1000;
+  width: 255px;
+  margin: 10px;
+  @media screen and (max-width: 425px) {
+    width: 255px;
+  }
+}
+
+.react-calendar__navigation {
+  padding: 2px;
+}
+
+.react-calendar__month-view__days {
+  padding: 2px;
+}
+
+.w-286 {
+  width: 286px !important;
+}
+
+.react-calendar.end-active {
+  position: absolute;
+  right: 27px;
+}
+
+button.react-calendar__tile {
+  border-radius: 6px;
+  color: #6c757d;
+}
+
+.react-calendar__navigation__arrow {
+  color: #888;
+  font-weight: 700;
+}
+
+.react-calendar__navigation__label {
+  color: #888;
+  font-weight: 700;
+}
+
+abbr[title] {
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+button.react-calendar__tile:disabled {
+  background-color: #fff;
+  abbr[title] {
+    color: #888;
+  }
+}
+
+button.react-calendar__tile--now {
+  background-color: #e2e6ea;
+  &:enabled:hover {
+    background-color: #e2e6ea;
+  }
+}
+
+button.react-calendar__tile--active {
+  background-color: var(--bs-primary);
+  color: white;
+}
+
+button.highlight-monday {
+  border-radius: 0;
+  background-color: #e6f6fe;
+  color: var(--bs-primary);
+
+  &:enabled:hover {
+    background-color: #e6f6fe;
+    color: var(--bs-primary);
+  }
+}
+
+button.highlight-today {
+  background-color: var(--bs-success);
+  color: #fff;
+}
+
+div.react-calendar__month-view__weekNumbers .react-calendar__tile span {
+  color: var(--bs-primary);
+}
+
+.react-calendar.react-calendar-1 {
+  position: absolute;
+  left: 0px;
+  top: 44px;
+}
+
+.react-calendar.react-calendar-2 {
+  position: absolute;
+  right: 0px;
+  top: 44px;
+}
+
+.react-calendar.react-calendar-3 {
+  z-index: 1;
+  display: contents;
+}
+
+.react-calendar {
+  button.react-calendar__tile {
+    &.react-calendar__tile--range {
+      border-radius: 0;
+      background-color: #e2e6ea;
+      color: #888;
+      &.react-calendar__tile--rangeEnd {
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+        background-color: #6c757d;
+        color: #fff;
+      }
+      &.react-calendar__tile--rangeStart {
+        border-top-left-radius: 6px;
+        border-bottom-left-radius: 6px;
+        background-color: var(--bs-primary);
+        color: #fff;
+      }
+    }
+  }
+}
+
+/**  =====================
+    31. Daterange css end
+========================== **/

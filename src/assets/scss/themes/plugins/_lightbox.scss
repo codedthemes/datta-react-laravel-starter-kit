@@ -1,0 +1,19 @@
+/**  =====================
+    27. Lightbox css start
+========================== **/
+
+.fslightboxs {
+  border-radius: 2px;
+  @media (min-width: 426px) and (max-width: 991px) {
+    width: 500px !important;
+    height: 300px !important;
+  }
+  @media (min-width: 992px) {
+    width: 800px !important;
+    height: 600px !important;
+  }
+}
+
+/**  =====================
+    27. Lightbox css end
+========================== **/

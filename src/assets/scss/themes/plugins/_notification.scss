@@ -1,0 +1,75 @@
+/**  =====================
+    28. Notification css start
+========================== **/
+
+.Toastify__toast-container {
+  transform: translateX(0) !important;
+}
+.custom-toast {
+  width: 392px !important;
+  right: 75px !important;
+  padding: 14px !important;
+  border-radius: 4px !important;
+  border-left: 4px solid !important;
+  margin-bottom: 12px !important;
+  .Toastify__close-button--light:hover {
+    color: var(--bs-danger) !important;
+  }
+  .Toastify__close-button > svg {
+    width: 12px !important;
+    height: 12px !important;
+    &:hover {
+      fill: var(--bs-danger) !important;
+    }
+  }
+
+  .img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .img-thumbnail {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+  }
+
+  @media (max-width: 425px) {
+    width: 360px !important;
+    margin: auto !important;
+    top: 10px !important;
+    right: 0 !important;
+    margin-bottom: 12px !important;
+  }
+}
+
+.custom-text {
+  color: #999;
+}
+
+.custom-toast.info-toast {
+  border-left-color: var(--bs-info) !important; /* Info color (blue-ish) */
+}
+
+/* Border color for success toast */
+.custom-toast.success-toast {
+  border-left-color: var(--bs-success) !important; /* Success color (green) */
+}
+
+/* Border color for warning toast */
+.custom-toast.warning-toast {
+  border-left-color: var(--bs-warning) !important; /* Warning color (yellow) */
+}
+
+/* Border color for error toast */
+.custom-toast.error-toast {
+  border-left-color: var(--bs-danger) !important; /* Error color (red) */
+}
+
+/* Border color for default toast */
+.custom-toast.default-toast {
+  border-left-color: #95a5a6 !important; /* Default color (gray) */
+}
+/**  =====================
+    28. Notification css end
+========================== **/

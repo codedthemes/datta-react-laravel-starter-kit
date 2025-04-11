@@ -1,0 +1,18 @@
+import ComponentHeader from 'components/cards/ComponentHeader';
+import BasicSnowTheme from 'sections/forms/text-editor/quill-editor/BasicSnowTheme';
+import BubbleTheme from 'sections/forms/text-editor/quill-editor/BubbleTheme';
+
+// ==============================|| TEXT EDITOR - QUILL EDITOR ||============================== //
+
+export default function QuillPage() {
+  return (
+    <>
+      <ComponentHeader
+        caption="A vanilla JavaScript remake of bootstrap-datepicker is written from scratch as ECMAScript modules/Sass stylesheets to reproduce similar usability to bootstrap-datepicker."
+        link="https://www.tiny.cloud/"
+      />
+      <BasicSnowTheme />
+      <BubbleTheme />
+    </>
+  );
+}

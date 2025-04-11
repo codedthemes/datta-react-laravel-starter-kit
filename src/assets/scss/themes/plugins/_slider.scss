@@ -1,0 +1,108 @@
+/**  =====================
+    33. Slider css start
+========================== **/
+.slick-slider {
+  .slick-dots ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  .slick-dots li {
+    width: 12px;
+    button:before {
+      font-size: 9px;
+      opacity: 1;
+      color: #ddd;
+    }
+    &.slick-active button:before {
+      color: #999;
+    }
+  }
+}
+
+.slider-custom-btn {
+  font-size: 15px;
+  margin: 0 5px;
+  padding: 0 1em;
+  height: 2.5em;
+  border-radius: 3px;
+  border: 0;
+}
+
+.slick-dots.slick-thumb {
+  position: static;
+  padding-top: 8px;
+  padding-bottom: 10px;
+}
+
+.slick-dots.slick-thumb li {
+  width: auto;
+}
+.dot-btn {
+  // margin: 20px 0;
+  padding-top: 0px;
+}
+//
+.slick-slider {
+  .slick-prev,
+  .slick-next {
+    top: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    line-height: 60px;
+    padding: 0 15px;
+    cursor: pointer;
+    &::before {
+      font-size: 30px;
+      color: var(--bs-body-color);
+    }
+    &:hover {
+      background: var(--bs-body-bg) !important;
+    }
+
+    @media (max-width: 425px) {
+      display: none;
+    }
+  }
+  .slick-prev {
+    left: 0;
+  }
+  .slick-next {
+    right: 0;
+  }
+  .slick-dots.slick-thumb {
+    padding: 20px 0;
+    li {
+      height: auto;
+      border: 5px solid transparent;
+      &.slick-active {
+        border-color: var(--bs-primary);
+      }
+      a {
+        display: inline-block;
+      }
+    }
+  }
+}
+.play-btn {
+  font-size: 17px;
+  border: none;
+}
+.slick-dots {
+  position: absolute;
+  margin: 10px 0px;
+  top: -80px;
+  bottom: auto;
+}
+.slider-img {
+  max-width: 100%;
+  height: auto;
+}
+
+/**  =====================
+    33. Slider css end
+========================== **/

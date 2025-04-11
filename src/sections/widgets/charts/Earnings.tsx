@@ -1,0 +1,95 @@
+// third-party
+import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
+
+// project-imports
+import MainCard from 'components/MainCard';
+
+const chartOptions: ChartProps = {
+  series: [{ name: 'Market Days ', data: [10, 60, 45, 72, 45, 86], color: '#fff' }],
+
+  options: {
+    chart: {
+      toolbar: {
+        show: false
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    markers: {
+      size: 6,
+      hover: {
+        size: 5
+      }
+    },
+    stroke: {
+      curve: 'straight',
+      width: 6
+    },
+
+    grid: {
+      xaxis: {
+        lines: {
+          show: false
+        }
+      },
+      yaxis: {
+        lines: {
+          show: false
+        }
+      }
+    },
+
+    tooltip: {
+      x: {
+        show: false
+      },
+
+      marker: {
+        show: false
+      }
+    },
+
+    yaxis: {
+      labels: {
+        show: false
+      }
+    },
+
+    xaxis: {
+      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+      axisTicks: {
+        show: false
+      },
+      axisBorder: {
+        show: false
+      },
+      labels: {
+        style: {
+          colors: '#fff'
+        }
+      }
+    }
+  }
+};
+
+// =============================|| WIDGET - EARNINGS ||============================== //
+
+export default function Earnings() {
+  return (
+    <MainCard
+      headerClassName="borderless-header"
+      title={<p className="mb-0 text-white">Earnings</p>}
+      className="bg-primary gradientcolor overflow-hidden"
+      bodyClassName="py-0"
+    >
+      <div className="earning-text mb-4">
+        <h3 className="mb-3 text-white f-w-300">
+          $ 4295.36 <i className="ti ti-arrow-up teal accent-3" />
+        </h3>
+        <span className="text-uppercase text-white d-block">Total Earnings</span>
+      </div>
+      <ReactApexChart options={chartOptions.options} series={chartOptions.series} type="line" height={210} />
+    </MainCard>
+  );
+}
