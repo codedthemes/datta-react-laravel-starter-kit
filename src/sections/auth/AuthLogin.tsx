@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, FormEventHandler } from 'react';
 
 // react-bootstrap
 import Button from 'react-bootstrap/Button';
@@ -22,6 +22,7 @@ import { Link } from 'react-router-dom';
 interface LoginFormInput {
   email: string;
   password: string;
+  remember: boolean;
 }
 
 interface FormProps {
@@ -35,10 +36,14 @@ interface FormProps {
 export default function AuthLoginForm({ className, link, resetLink }: FormProps) {
   const [showPassword, setShowPassword] = useState(false);
 
+  const { data, setData, post, processing, error, reset } = useForm<Required<LoginForm>>({
+    email: '',
+    password: '',
+    remember: false,
+  });
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors }
   } = useForm<LoginFormInput>();
 
@@ -46,9 +51,17 @@ export default function AuthLoginForm({ className, link, resetLink }: FormProps)
     setShowPassword((prevState) => !prevState);
   };
 
-  const onSubmit: SubmitHandler<LoginFormInput> = () => {
-    reset();
+  const onSubmit: SubmitHandler<LoginFormInput> = (e) => {
+    // reset();
+    e.preventDefault();
+    // post(route('login'), {
+    //   onFinish: () => reset('password'),
+    // });
   };
+
+  // const submit: FormEventHandler = (e) => {
+  // };
+
 
   return (
     <MainCard className={window.location.pathname === '/auth/login-v4' ? 'my-0' : 'my-5'}>
@@ -57,7 +70,8 @@ export default function AuthLoginForm({ className, link, resetLink }: FormProps)
           <Image src={className ? WhiteLogo : Logo} alt="img" />
         </Link>
       </div>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+
+      <Form onSubmit={onSubmit}>
         <h4 className={`text-center f-w-500 mt-4 mb-3 ${className}`}>Login</h4>
         <Form.Group className="mb-3" controlId="formEmail">
           <Form.Control
@@ -67,7 +81,7 @@ export default function AuthLoginForm({ className, link, resetLink }: FormProps)
             isInvalid={!!errors.email}
             className={className && 'bg-transparent border-white text-white border-opacity-25 '}
           />
-          <Form.Control.Feedback type="invalid">{errors.email?.message}</Form.Control.Feedback>
+          <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formPassword">
           <InputGroup>

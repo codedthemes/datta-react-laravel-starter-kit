@@ -28,7 +28,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "exclude": ["node_modules", "vite.config.mts"], // Exclude vite.config.mts
-  "include": ["src", "**/*.ts", "**/*.tsx", "src/**/*"],
+  "exclude": ["node_modules", "vite.config.mts", "vendor/**/*"], // Exclude vite.config.mts
+  "include": ["src", "**/*.tsx", "src/**/*"],
   "references": [{ "path": "./tsconfig.app.json" }]
 }

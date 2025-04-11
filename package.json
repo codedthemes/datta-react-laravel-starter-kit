@@ -6,6 +6,8 @@
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
+    "build:ssr": "vite build && vite build --ssr",
+    "dev": "vite",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
     "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
