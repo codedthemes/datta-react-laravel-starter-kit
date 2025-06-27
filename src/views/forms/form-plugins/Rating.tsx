@@ -1,13 +1,13 @@
 // project-imports
-import ComponentHeader from 'components/cards/ComponentHeader';
-import RatingMain from 'sections/forms/form-plugins/rating/Rating';
+import ReferenceHeader from 'components/ReferenceHeader';
+import RatingMain from 'sections/forms/form-plugins/Rating';
 
 // =============================|| FORM PLUGIN - RATING ||============================== //
 
 export default function RatingMainPage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="A zero-dependency ES6 module that transforms a SELECT with numerical-range values (i.e. 1-5) into a dynamic star rating element."
         link="https://pryley.github.io/star-rating.js/"
       />

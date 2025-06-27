@@ -22,7 +22,7 @@ export default function SteveAdvance() {
               Lonely <span>Steve</span>
             </h2>
             <p>Steve was afraid of the Boogieman.</p>
-            <a href="#!">View more</a>
+            <a>View more</a>
           </FigureCaption>
         </Figure>
         <Figure className="effect-steve">
@@ -32,7 +32,7 @@ export default function SteveAdvance() {
               Lonely <span>Steve</span>
             </h2>
             <p>Steve was afraid of the Boogieman.</p>
-            <a href="#!">View more</a>
+            <a>View more</a>
           </FigureCaption>
         </Figure>
       </div>

@@ -5,6 +5,7 @@ import Stack from 'react-bootstrap/Stack';
 
 // project-imports
 import AuthRegisterForm from 'sections/auth/AuthRegister';
+import branding from 'branding.json';
 
 // assets
 import BackgroundImg2 from 'assets/images/authentication/img-auth-bg-2.jpg';
@@ -19,7 +20,7 @@ export default function RegisterV2Page() {
           <Row>
             <Stack className="align-items-center w-100 justify-content-center">
               <Col md={8}>
-                <h1 className="text-white mb-5">Sign up in Datta Able</h1>
+                <h1 className="text-white mb-5">Sign up in {branding.brandName}</h1>
                 <p className="text-white">
                   Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
                   dummy text ever.

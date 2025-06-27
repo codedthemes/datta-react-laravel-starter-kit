@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 // react-bootstrap
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
@@ -8,9 +6,8 @@ import Image from 'react-bootstrap/Image';
 import Row from 'react-bootstrap/Row';
 
 // assets
-import avatar1 from 'assets/images/user/avatar-1.jpg';
+import avatar1 from 'assets/images/user/avatar-1.png';
 import slider5 from 'assets/images/widget/slider5.jpg';
-import { Star } from 'phosphor-react';
 
 // ==============================|| CLIP IMAGE - CLIP IMAGE LEFT ||============================== //
 
@@ -28,23 +25,22 @@ export default function ClipImageLeft() {
           <div className="user-about-block text-center">
             <Row className="align-items-end">
               <Col className="pb-3">
-                <Link to="#!">
-                  <Star size={22} weight="fill" className="fill-warning" />
-                </Link>
+                <a>
+                  <i className="ph ph-star align-middle text-warning f-20" />
+                </a>
               </Col>
               <Col>
                 <div className="position-relative d-inline-block">
                   <Image fluid className="img-radius wid-80" src={avatar1} alt="User" />
                   <div className="certificated-badge">
-                    <i className="fas fa-certificate text-primary bg-icon" />
-                    <i className="fas fa-check front-icon text-white" />
+                    <i className="ti ti-rosette-discount-check-filled text-primary bg-icon" />
                   </div>
                 </div>
               </Col>
               <Col className="text-end pb-3">
                 <Dropdown align="end">
                   <Dropdown.Toggle as="div" bsPrefix="false" variant="link" id="dropdown-custom-components">
-                    <i className="ti ti-dots" />
+                    <i className="ph ph-dots-three-outline align-middle" />
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                     <Dropdown.Item href="#">Action</Dropdown.Item>

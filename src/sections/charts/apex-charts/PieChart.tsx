@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 // third-party
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
+// chart-options
 const chartOptions: ChartProps = {
   labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
   colors: ['#04a9f5', '#1de9b6', '#13c2c2', '#f4c22b', '#f44236'],

@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row';
 import MainCard from 'components/MainCard';
 
 // assets
-import avtar1 from 'assets/images/user/avatar-1.jpg';
+import avatar1 from 'assets/images/user/avatar-1.png';
 import slider7 from 'assets/images/widget/slider7.jpg';
 
 // ==============================|| SIMPLE CARD - CARD WITH OPTION ||============================== //
@@ -30,17 +30,17 @@ export default function CardWithOption() {
         <div className="user-about-block text-center">
           <Row className="align-items-end">
             <Col className="pb-3">
-              <a href="#!">
-                <i className="ti ti-star text-muted f-20" />
+              <a>
+                <i className="icon ph ph-star align-middle text-muted f-20" />
               </a>
             </Col>
             <Col>
-              <Image className="img-radius img-fluid wid-80" src={avtar1} alt="User image" roundedCircle />
+              <Image className="img-radius img-fluid wid-80" src={avatar1} alt="User image" roundedCircle />
             </Col>
             <Col className="text-end pb-3">
               <Dropdown align="end">
                 <Dropdown.Toggle as="a" bsPrefix="false" className="arrow-none">
-                  <i className="ti ti-dots" />
+                  <i className="ph ph-dots-three-outline align-middle" />
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item href="#">Action</Dropdown.Item>

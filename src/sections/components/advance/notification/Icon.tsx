@@ -15,52 +15,63 @@ import Img2 from 'assets/images/notification/survey-48.png';
 import Img3 from 'assets/images/notification/ok-48.png';
 import Img4 from 'assets/images/notification/medium_priority-48.png';
 import Img5 from 'assets/images/notification/high_priority-48.png';
+import useConfig from 'hooks/useConfig';
+import { getResolvedTheme, setResolvedTheme } from 'components/setResolvedTheme';
+import { ThemeMode } from 'config';
 
 type NotificationType = 'info' | 'success' | 'warning' | 'error' | 'default';
 
 // ==============================|| NOTIFICATION - ICON ||============================== //
 
 export default function NotificationIcon() {
+  const { themeDirection, mode } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
+
   const notify = (type: NotificationType) => {
     const notifications = {
-      default: { title: 'Default!', message: 'I am a default notification..', img: Img1 },
-      info: { title: 'Reminder!', message: 'You have a meeting at 10:30 AM.', img: Img2 },
-      success: { title: 'Well Done!', message: 'You just submit your resume successfully.', img: Img3 },
-      warning: { title: 'Warning!', message: 'The data presented here can be change.', img: Img4 },
-      error: { title: 'Sorry!', message: 'Could not complete your transaction.', img: Img5 }
+      default: { img: Img1, message: 'I am a default notification.' },
+      info: { img: Img2, message: 'You have a meeting at 10:30 AM.' },
+      success: { img: Img3, message: 'You just submit your resume successfully.' },
+      warning: { img: Img4, message: 'The data presented here can be change.' },
+      error: { img: Img5, message: 'Could not complete your transaction.' }
     };
-    const { title, message, img } = notifications[type] || notifications.default;
 
-    toast(
-      <Stack direction="horizontal" gap={2}>
-        <Image src={img} className="img" thumbnail />
-        <div>
-          <h5 className="mb-0">{title}</h5>
-          <p className="mb-0 custom-text">{message}</p>
-        </div>
-      </Stack>,
-      {
-        autoClose: false,
-        icon: false,
-        className: `custom-toast ${type}-toast cutom-toast-${type}`,
-        bodyClassName: 'custom-toast-body'
-      }
-    );
+    const { message, img } = notifications[type] || notifications.default;
+
+    const toastTypeMap: Record<string, (msg: string, opts: any) => void> = {
+      info: toast.info,
+      success: toast.success,
+      warning: toast.warning,
+      error: toast.error
+    };
+
+    const toastFunc = toastTypeMap[type] || toast;
+
+    toastFunc(message, {
+      rtl: themeDirection === 'rtl' ? true : false,
+      icon: <Image src={img} fluid />,
+      position: themeDirection === 'rtl' ? 'top-left' : 'top-right',
+      theme: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light'
+    });
   };
+
   return (
     <MainCard title="Notification with Icons">
       <Stack direction="horizontal" gap={2} className="flex-wrap">
-        <Button onClick={() => notify('default')}>Default</Button>
-        <Button className="btn-info" onClick={() => notify('info')}>
+        <Button variant="primary" onClick={() => notify('default')}>
+          Default
+        </Button>
+        <Button variant="info" onClick={() => notify('info')}>
           Info
         </Button>
-        <Button className="btn-success" onClick={() => notify('success')}>
+        <Button variant="success" onClick={() => notify('success')}>
           Success
         </Button>
-        <Button className="btn-warning" onClick={() => notify('warning')}>
+        <Button variant="warning" onClick={() => notify('warning')}>
           Warning
         </Button>
-        <Button className="btn-danger" onClick={() => notify('error')}>
+        <Button variant="danger" onClick={() => notify('error')}>
           Danger
         </Button>
       </Stack>

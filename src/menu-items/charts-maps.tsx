@@ -12,17 +12,17 @@ const chartsMaps: NavItemType = {
       id: 'charts',
       title: 'charts',
       type: 'collapse',
-      icon: <i className="ti ti-chart-pie" />,
+      icon: <i className="ph ph-chart-donut" />,
       children: [
         {
           id: 'apex-chart',
-          title: 'apex-chart',
+          title: 'apex chart',
           type: 'item',
           url: '/charts/apex-chart'
         },
         {
           id: 'chart-js',
-          title: 'chart-js',
+          title: 'chart js',
           type: 'item',
           url: '/charts/chart-js'
         }
@@ -32,17 +32,17 @@ const chartsMaps: NavItemType = {
       id: 'map',
       title: 'map',
       type: 'collapse',
-      icon: <i className="ti ti-map" />,
+      icon: <i className="ph ph-map-trifold" />,
       children: [
         {
           id: 'vector-map',
-          title: 'vector-map',
+          title: 'vector map',
           type: 'item',
           url: '/map/vector-map'
         },
         {
           id: 'google-map',
-          title: 'google-map',
+          title: 'google map',
           type: 'item',
           url: '/map/google-map'
         }

@@ -37,11 +37,6 @@
   &:hover {
     background: var(--pc-active-background);
     color: var(--bs-dropdown-link-color);
-    i {
-      &.material-icons-two-tone {
-        background-color: $dropdown-link-hover-color;
-      }
-    }
   }
 }
 
@@ -55,25 +50,13 @@
     i {
       font-size: 18px;
       margin-right: 10px;
-
-      &.material-icons-two-tone {
-        vertical-align: bottom;
-        font-size: 22px;
-        background-color: var(--pc-header-color);
-      }
-    }
-
-    .icon-color {
-      vertical-align: bottom;
-      font-size: 22px;
-      fill: #888 !important;
     }
 
     svg {
       width: 18px;
       height: 18px;
       margin-right: 10px;
-      fill: #5b6b79;
+      fill: #f2f2f2;
     }
 
     .float-right {
@@ -88,7 +71,9 @@
 .dropdown-menu-dark {
   .dropdown-item {
     &.active,
-    &:active {
+    &:active,
+    &:focus,
+    &:hover {
       color: var(--bs-dropdown-link-hover-color);
       background-color: var(--bs-dropdown-link-hover-bg);
     }

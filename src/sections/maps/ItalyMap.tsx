@@ -25,7 +25,7 @@ export default function ItalyMap() {
 
   return (
     <MainCard title="italy Map">
-      <div id="italy" className="h-400" />
+      <div id="italy" style={{ height: '400px' }} />
     </MainCard>
   );
 }

@@ -1,6 +1,3 @@
-import { ForwardRefExoticComponent, RefAttributes } from 'react';
-import { Link } from 'react-router-dom';
-
 // react-bootstrap
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -11,24 +8,22 @@ import { motion } from 'framer-motion';
 
 // project-imports
 import MainCard from 'components/MainCard';
-
-// assets
-import { Cube, IconProps, PenNib, Rocket, Scroll, Stack, Textbox } from 'phosphor-react';
+import branding from 'branding.json';
 
 interface ProductCardProps {
   href: string;
-  Icon: ForwardRefExoticComponent<IconProps & RefAttributes<SVGSVGElement>>;
+  Icon: string;
   title: string;
   delay: string;
 }
 
 const productCards = [
-  { href: '#', Icon: Cube, title: '1000+ UI Elements', delay: '0.5s' },
-  { href: '#', Icon: Scroll, title: '130+ Pages', delay: '0.6s' },
-  { href: '#', Icon: Stack, title: '150+ Widgets', delay: '0.7s' },
-  { href: '#', Icon: Rocket, title: 'Landing Page', delay: '0.8s' },
-  { href: '#', Icon: PenNib, title: '5+ Applications', delay: '0.9s' },
-  { href: '#', Icon: Textbox, title: 'Form Elements', delay: '1.0s' }
+  { href: '#', Icon: 'ph ph-align-center-horizontal-simple', title: 'Button', delay: '0.5s' },
+  { href: '#', Icon: 'ph ph-textbox', title: 'Forms', delay: '0.6s' },
+  { href: '#', Icon: 'ph ph-slideshow', title: 'Slider', delay: '0.7s' },
+  { href: '#', Icon: 'ph ph-align-top-simple', title: 'Dropdowns', delay: '0.8s' },
+  { href: '#', Icon: 'ph ph-table', title: 'Tables', delay: '0.9s' },
+  { href: '#', Icon: 'ph ph-feather', title: 'Icons', delay: '1.0s' }
 ];
 
 // ==============================|| PRODUCT CARD ||============================== //
@@ -42,12 +37,12 @@ function ProductCard({ href, Icon, title, delay }: ProductCardProps) {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: parseFloat(delay), duration: 0.8, ease: 'easeOut' }}
       >
-        <Link to={href} className="card">
+        <a href={href} className="card">
           <MainCard>
-            <Icon size={40} weight="duotone" className="text-primary" />
+            <i className={`${Icon} text-primary`} />
             <h5 className="mt-3 mb-0">{title}</h5>
           </MainCard>
-        </Link>
+        </a>
       </motion.div>
     </Col>
   );
@@ -73,13 +68,14 @@ export default function HelpFullComponent() {
           </Col>
           <Col md={8} xl={6}>
             <motion.p
-              className="text-white text-opacity-75 mt-lg-4 mt-2 mb-4 mb-md-5 "
+              className="text-white text-opacity-75 mt-lg-4 mt-2 mb-4 mb-md-5"
               initial={{ opacity: 0, y: 50 }}
               viewport={{ once: true }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8, ease: 'easeOut' }}
             >
-              Below are unique Components of Datta Able Bootstrap admin template which are included in the theme package you purchased.
+              Below are unique Components of {branding.brandName} Bootstrap admin template which are included in the theme package you
+              purchased.
             </motion.p>
           </Col>
         </Row>

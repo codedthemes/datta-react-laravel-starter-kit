@@ -1,6 +1,6 @@
 /**======================================================================
 =========================================================================
-Template Name: Datta able - Bootstrap Admin Template
+Template Name: Datta able - Admin Template
 Author: Codedthemes
 Support: https://codedthemes.support-hub.io/
 File: style.css
@@ -9,12 +9,12 @@ File: style.css
 
 // main framework
 @import 'settings/color-variables';
-@import '../../../node_modules/bootstrap/scss/functions';
-@import '../../../node_modules/bootstrap/scss/variables';
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
 @import 'settings/bootstrap-variables';
 @import 'settings/theme-variables';
 
-@import '../../../node_modules/bootstrap/scss/mixins';
+@import 'bootstrap/scss/mixins';
 
 $i: 1;
 @each $name, $value in $preset-colors {
@@ -179,10 +179,6 @@ $i: 1;
       color: $pc-primary;
       border-color: $pc-primary-light;
 
-      .material-icons-two-tone {
-        background-color: $pc-primary;
-      }
-
       &:hover {
         background: $pc-primary;
         color: #fff;
@@ -218,10 +214,6 @@ $i: 1;
       background: transparent;
       color: $pc-primary;
       border-color: transparent;
-
-      .material-icons-two-tone {
-        background-color: $pc-primary;
-      }
 
       &:hover {
         background: $pc-primary-light;
@@ -321,10 +313,8 @@ $i: 1;
   [data-pc-caption='#{$name}'] {
     --pc-sidebar-caption-color: #{$value};
   }
-  @if ($i <= 6) {
-    [data-pc-navimg='#{$name}'] {
-      --pc-sidebar-background: url('assets/images/layout/navbar-img-#{$i}.jpg');
-    }
+  [data-pc-navimg='#{$name}'] {
+    --pc-sidebar-background: url('assets/images/layout/navbar-img-#{$i}.jpg');
   }
   $i: $i + 1;
 }
@@ -364,4 +354,5 @@ $drp-link-icon: (
 
 [data-pc-theme='dark'] {
   @import 'themes/layouts/style-dark';
+  color-scheme: dark;
 }

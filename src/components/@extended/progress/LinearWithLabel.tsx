@@ -11,7 +11,7 @@ type CustomProgressBarProps = ProgressBarProps & {
 export default function LinearWithLabel({ value, ...others }: CustomProgressBarProps) {
   return (
     <Stack direction="horizontal" className="align-items-center justify-content-between" gap={2}>
-      <ProgressBar now={value} {...others} className="w-1" />
+      <ProgressBar now={value} {...others} className="w-100" />
       <span className="text-end">{`${Math.round(value!)}%`}</span>
     </Stack>
   );

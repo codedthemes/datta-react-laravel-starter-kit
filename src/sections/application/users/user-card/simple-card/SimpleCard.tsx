@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 import MainCard from 'components/MainCard';
 
 // assets
-import avtar2 from 'assets/images/user/avatar-2.jpg';
+import avatar2 from 'assets/images/user/avatar-2.png';
 import slider5 from 'assets/images/widget/slider5.jpg';
 
 // =============================|| SIMPLE CARD - SIMPLE CARD ||==============================
@@ -26,10 +26,10 @@ export default function SimpleCard() {
           </div>
         }
       >
-        <div className="user-about-block ">
+        <div className="user-about-block">
           <Row>
             <Col>
-              <Image src={avtar2} fluid className="wid-80 img-radius" />
+              <Image src={avatar2} fluid className="wid-80 img-radius" />
             </Col>
           </Row>
         </div>

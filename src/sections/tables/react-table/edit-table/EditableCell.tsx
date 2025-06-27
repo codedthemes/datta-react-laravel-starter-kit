@@ -51,8 +51,8 @@ function TanStackTable({ columns, initialData, striped }: { columns: any[]; init
     setEditing((prev) => ({ ...prev, [`${field}-${rowIndex}`]: false }));
   };
   return (
-    <MainCard title="Editable Cell">
-      <Table responsive striped={striped}>
+    <MainCard title="Editable Cell" className="table-card">
+      <Table responsive striped={striped} className="mb-0">
         <thead>
           <tr>
             {columns.map((column) => (

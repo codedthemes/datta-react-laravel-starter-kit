@@ -1,3 +1,7 @@
+// react-bootstrap
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+
 // project-imports
 import HorizontalFormExample from 'sections/forms/form-element/mega-options/HorizontalFormExample';
 import MegaOptionsExample from 'sections/forms/form-element/mega-options/MegaOptionExmaple.';
@@ -6,9 +10,11 @@ import MegaOptionsExample from 'sections/forms/form-element/mega-options/MegaOpt
 
 export default function MegaOptionsPage() {
   return (
-    <>
-      <MegaOptionsExample />
-      <HorizontalFormExample />
-    </>
+    <Row>
+      <Col xs={12}>
+        <MegaOptionsExample />
+        <HorizontalFormExample />
+      </Col>
+    </Row>
   );
 }

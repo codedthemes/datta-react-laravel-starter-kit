@@ -13,13 +13,11 @@ import Stack from 'react-bootstrap/Stack';
 import MainCard from 'components/MainCard';
 
 // assets
-import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
-import EmojiFlagsTwoToneIcon from '@mui/icons-material/EmojiFlagsTwoTone';
-import avatar1 from 'assets/images/user/avatar-1.jpg';
-import avatar2 from 'assets/images/user/avatar-2.jpg';
-import avatar3 from 'assets/images/user/avatar-3.jpg';
-import avatar4 from 'assets/images/user/avatar-4.jpg';
-import avatar5 from 'assets/images/user/avatar-5.jpg';
+import avatar1 from 'assets/images/user/avatar-1.png';
+import avatar2 from 'assets/images/user/avatar-2.png';
+import avatar3 from 'assets/images/user/avatar-3.png';
+import avatar4 from 'assets/images/user/avatar-4.png';
+import avatar5 from 'assets/images/user/avatar-5.png';
 
 interface User {
   id: number;
@@ -28,6 +26,7 @@ interface User {
   avatar: string;
 }
 
+// user data
 const users: User[] = [
   { id: 1, name: 'Josephin Doe', location: 'Santa Ana, CA', avatar: avatar1 },
   { id: 2, name: 'Ashoka T.', location: 'Santa Ana, CA', avatar: avatar2 },
@@ -48,28 +47,28 @@ export default function TaskBoardStutas() {
         <InputGroup>
           <FormControl placeholder="Search" />
           <InputGroup.Text>
-            <i className="ti ti-search f-20" />
+            <i className="ph ph-magnifying-glass" />
           </InputGroup.Text>
         </InputGroup>
       }
-      bodyClassName="py-0"
+      bodyClassName="p-0"
     >
       <Card.Body className="py-3 border-bottom px-0">
         <a
-          href="#"
           onClick={(e) => {
             e.preventDefault();
             setStatusOpen(!statusOpen);
           }}
-          className="link-dark d-block"
+          className="link-dark d-block px-3"
         >
           <div className="h6 mb-0">
-            <EmojiFlagsTwoToneIcon className="text-primary f-20" /> Completed Status
-            <i className="ti ti-chevron-down float-end me-1 " />
+            <i className="ph ph-flag-checkered align-middle f-20 text-primary me-1" />
+            Completed Status
+            <i className="ti ti-chevron-down float-end me-1" />
           </div>
         </a>
         <Collapse in={statusOpen}>
-          <div className="border-top pt-3 mt-3">
+          <div className="border-top pt-3 mt-3 px-3">
             {[
               { label: 'Highest priority', value: 85, variant: 'success' },
               { label: 'High priority', value: 68, variant: 'primary' },
@@ -87,20 +86,20 @@ export default function TaskBoardStutas() {
 
       <Card.Body className="py-3 px-0">
         <a
-          href="#"
           onClick={(e) => {
             e.preventDefault();
             setAssignOpen(!assignOpen);
           }}
-          className="link-dark d-block"
+          className="link-dark d-block px-3"
         >
           <div className="h6 mb-0">
-            <AccountCircleTwoToneIcon className="text-primary f-20" /> Assign User
-            <i className="ti ti-chevron-down float-end me-1 " />
+            <i className="ph ph-user-circle align-middle me-1 f-20 text-primary" />
+            Assign User
+            <i className="ti ti-chevron-down float-end me-1" />
           </div>
         </a>
         <Collapse in={assignOpen}>
-          <div className="border-top pt-3 mt-3">
+          <div className="border-top pt-3 mt-3 px-3">
             {users.map((user) => (
               <Stack direction="horizontal" className="align-items-center mb-3" key={user.id}>
                 <Image src={user.avatar} roundedCircle className="me-3" width={45} height={45} />

@@ -6,7 +6,6 @@ import Stack from 'react-bootstrap/Stack';
 
 // third-party
 import { EventInput } from '@fullcalendar/common';
-import Flatpickr from 'react-flatpickr';
 import * as Yup from 'yup';
 import { useFormik, Form as FormikForm, FormikProvider } from 'formik';
 
@@ -29,16 +28,17 @@ const COLOR_CLASS_MAP: Record<string, string> = {
   '#e6f7ff': 'event-info'
 };
 
+// formik validation
+const EventSchema = Yup.object().shape({
+  title: Yup.string().max(255).required('Title is required'),
+  description: Yup.string().max(5000),
+  venue: Yup.string().max(255).required('Venue is required'),
+  color: Yup.string().max(255)
+});
+
 // ==============================|| CALENDAR - ADD EVENT FORM ||============================== //
 
 export default function AddEventForm({ open, handleEventModal, selectedEvent }: AddEventFormProps) {
-  const EventSchema = Yup.object().shape({
-    title: Yup.string().max(255).required('Title is required'),
-    description: Yup.string().max(5000),
-    venue: Yup.string().max(255).required('Venue is required'),
-    color: Yup.string().max(255)
-  });
-
   const formik = useFormik({
     initialValues: {
       title: selectedEvent?.title || '',
@@ -132,34 +132,6 @@ export default function AddEventForm({ open, handleEventModal, selectedEvent }: 
               <Form.Control.Feedback type="invalid">
                 {typeof errors.description === 'string' ? errors.description : ''}
               </Form.Control.Feedback>
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Start Date</Form.Label>
-              <Flatpickr
-                options={{
-                  enableTime: true,
-                  dateFormat: 'Y-m-d H:i',
-                  time_24hr: true
-                }}
-                value={formik.values.start || ''} // Ensure value is never null
-                onChange={(date) => formik.setFieldValue('start', date[0] || '')} // Handle empty selection
-                className="form-control"
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>End Date</Form.Label>
-              <Flatpickr
-                options={{
-                  enableTime: true,
-                  dateFormat: 'Y-m-d H:i',
-                  time_24hr: true
-                }}
-                value={formik.values.end || ''}
-                onChange={(date) => formik.setFieldValue('end', date[0])}
-                className="form-control"
-              />
             </Form.Group>
 
             <Form.Group className="mb-3">

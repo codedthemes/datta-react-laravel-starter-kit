@@ -22,9 +22,7 @@ export default function MixedStyleButton() {
       <ButtonGroup>
         <ButtonGroup>
           <Button variant="light-danger">A</Button>
-          <Button variant="light-warning" className="text-dark">
-            A
-          </Button>
+          <Button variant="light-warning">A</Button>
           <Button variant="light-info">A</Button>
           <Button variant="light-success">A</Button>
         </ButtonGroup>

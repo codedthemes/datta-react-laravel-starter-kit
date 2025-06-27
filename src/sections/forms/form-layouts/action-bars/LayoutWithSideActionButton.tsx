@@ -18,7 +18,7 @@ export default function LayoutWithSideActionButtonPage() {
       <Form>
         <Form.Group className="mb-0">
           <Form.Label>Name:</Form.Label>
-          <Form.Control type="text" placeholder="Enter Name " />
+          <Form.Control type="text" placeholder="Enter Name" />
           <Form.Text>Please enter your Name</Form.Text>
           <hr />
 

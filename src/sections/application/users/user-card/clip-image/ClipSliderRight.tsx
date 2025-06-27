@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 // react-bootstrap
 import Col from 'react-bootstrap/Col';
 import Carousel from 'react-bootstrap/Carousel';
@@ -11,11 +9,10 @@ import Row from 'react-bootstrap/Row';
 import MainCard from 'components/MainCard';
 
 // assets
-import avatar2 from 'assets/images/user/avatar-2.jpg';
+import avatar2 from 'assets/images/user/avatar-2.png';
 import slider6 from 'assets/images/widget/slider6.jpg';
 import slider5 from 'assets/images/widget/slider5.jpg';
 import slider7 from 'assets/images/widget/slider7.jpg';
-import { Star } from 'phosphor-react';
 
 // ==============================|| CLIP IMAGE - CLIP SLIDER RIGHT ||============================== //
 
@@ -46,23 +43,22 @@ export default function ClipSliderRight() {
         <div className="user-about-block text-center">
           <Row className="align-items-end">
             <Col className="pb-3">
-              <Link to="#!">
-                <Star size={22} weight="fill" className="fill-warning" />
-              </Link>
+              <a>
+                <i className="ph ph-star align-middle text-warning f-20" />
+              </a>
             </Col>
             <Col>
               <div className="position-relative d-inline-block">
                 <Image className="img-radius img-fluid wid-80" src={avatar2} alt="User" />
                 <div className="certificated-badge">
-                  <i className="fas fa-certificate text-primary bg-icon" />
-                  <i className="fas fa-check front-icon text-white" />
+                  <i className="ti ti-rosette-discount-check-filled text-primary bg-icon" />
                 </div>
               </div>
             </Col>
             <Col className="text-end pb-3">
               <Dropdown align="end">
                 <Dropdown.Toggle as="div" bsPrefix="false" variant="link" id="dropdown-custom-components">
-                  <i className="ti ti-dots" />
+                  <i className="ph ph-dots-three-outline align-middle" />
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item href="#">Action</Dropdown.Item>

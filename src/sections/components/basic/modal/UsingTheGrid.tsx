@@ -18,7 +18,7 @@ export default function UsingTheGrid() {
   const handleClose = () => setShowModal(false);
 
   return (
-    <MainCard title="Using the grid">
+    <MainCard title="Using the Grid">
       <Button onClick={handleShow}>Launch demo modal</Button>
 
       <Modal show={showModal} onHide={handleClose}>

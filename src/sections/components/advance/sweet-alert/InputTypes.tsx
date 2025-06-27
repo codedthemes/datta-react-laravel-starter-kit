@@ -5,18 +5,18 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
 // project-imports
+import { handleCheckboxInput } from './utils/CheckboxInput';
+import { handleTextInput } from './utils/TextInput';
+import { handleEmailInput } from './utils/EmailInput';
+import { handleURLInput } from './utils/Alert';
+import { handlePasswordInput } from './utils/PasswordInput';
+import { handleTextareaInput } from './utils/TextAreaInput';
+import { handleSelectInput } from './utils/SelectInput';
+import { handleRadioInput } from './utils/RadioInput';
+import { handleFileInput } from './utils/FileInput';
+import { handleRangeInput } from './utils/RangeInput';
+import { handleMultipleInputs } from './utils/MultiInput';
 import MainCard from 'components/MainCard';
-import { handleCheckboxInput } from 'sections/components/advance/sweet-alert/utils/CheckboxInput';
-import { handleTextInput } from 'sections/components/advance/sweet-alert/utils/TextInput';
-import { handleEmailInput } from 'sections/components/advance/sweet-alert/utils/EmailInput';
-import { handleURLInput } from 'sections/components/advance/sweet-alert/utils/Alert';
-import { handlePasswordInput } from 'sections/components/advance/sweet-alert/utils/PasswordInput';
-import { handleTextareaInput } from 'sections/components/advance/sweet-alert/utils/TextAreaInput';
-import { handleSelectInput } from 'sections/components/advance/sweet-alert/utils/SelectInput';
-import { handleRadioInput } from 'sections/components/advance/sweet-alert/utils/RadioInput';
-import { handleFileInput } from 'sections/components/advance/sweet-alert/utils/FileInput';
-import { handleRangeInput } from 'sections/components/advance/sweet-alert/utils/RangeInput';
-import { handleMultipleInputs } from 'sections/components/advance/sweet-alert/utils/MultiInput';
 
 const InputTypesData = [
   { title: 'Text', function: handleTextInput },

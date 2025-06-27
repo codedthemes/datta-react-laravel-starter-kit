@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 // react-bootstrap
 import Col from 'react-bootstrap/Col';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -10,9 +8,8 @@ import Row from 'react-bootstrap/Row';
 import MainCard from 'components/MainCard';
 
 // assets
-import avatar3 from 'assets/images/user/avatar-3.jpg';
+import avatar3 from 'assets/images/user/avatar-3.png';
 import slider6 from 'assets/images/widget/slider6.jpg';
-import { Star } from 'phosphor-react';
 
 // ==============================|| SIMPLE CARD - CARD WITH SELECTED OPTION ||============================== //
 
@@ -33,9 +30,9 @@ export default function CardWithSelectedOption() {
         <div className="user-about-block text-center">
           <Row className="align-items-end">
             <Col className="pb-3">
-              <Link to="#!">
-                <Star size={22} weight="fill" className="fill-warning" />
-              </Link>
+              <a>
+                <i className="ph ph-star align-middle text-warning f-20" />
+              </a>
             </Col>
             <Col>
               <Image className="img-radius img-fluid wid-80" src={avatar3} alt="User image" roundedCircle />
@@ -43,7 +40,7 @@ export default function CardWithSelectedOption() {
             <Col className="text-end pb-3">
               <Dropdown align="end">
                 <Dropdown.Toggle as="a" className="arrow-none">
-                  <i className="ti ti-dots" />
+                  <i className="ph ph-dots-three-outline align-middle" />
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item href="#">Action</Dropdown.Item>

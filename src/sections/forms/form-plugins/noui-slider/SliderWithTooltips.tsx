@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 // react-bootstrap
 import Col from 'react-bootstrap/Col';
@@ -6,34 +6,36 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
 // third-party
-import Nouislider from 'nouislider-react';
-import 'nouislider/distribute/nouislider.css';
+import ReactSlider from 'react-slider';
 
 // ==============================|| SLIDER WITH TOOLTIPS ||============================== //
 
 export default function SliderWithTooltips() {
-  const [sliderValues, setSliderValues] = useState<number[]>([20.5, 80]);
-  const [sliderValues1, setSliderValues1] = useState<number[]>([-10, 10]);
+  const [sliderValues, setSliderValues] = useState<[number, number]>([20, 80]);
+  const [sliderValues1, setSliderValues1] = useState<[number, number]>([-10, 10]);
   const [dropdownValue, setDropdownValue] = useState<number>(1);
 
-  const handleSliderChange = (values: string[]) => {
-    setSliderValues(values.map((value) => parseFloat(value)));
+  const handleSliderChange = (values: number[]) => {
+    setSliderValues(values as [number, number]);
   };
 
-  const handleSliderChange1 = (values: string[]) => {
-    setSliderValues1(values.map((value) => parseFloat(value)));
+  const handleSliderChange1 = (value: [number, number]) => {
+    if (Array.isArray(value)) {
+      setSliderValues1(value);
+      setDropdownValue(value[0]);
+    }
   };
 
-  const handleDropdownChange1 = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newValue = parseInt(e.target.value);
-    setDropdownValue(newValue);
-
-    setSliderValues1([newValue, sliderValues1[1]]);
+  const handleDropdownChange1 = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const newMin = parseFloat(event.target.value);
+    setSliderValues1(([_, max]) => [newMin, max]);
+    setDropdownValue(newMin);
   };
 
-  useEffect(() => {
-    setSliderValues1([dropdownValue, sliderValues1[1]]);
-  }, [dropdownValue, sliderValues1]);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newMax = parseFloat(e.target.value);
+    setSliderValues1(([min]) => [min, newMax]);
+  };
 
   return (
     <>
@@ -51,13 +53,26 @@ export default function SliderWithTooltips() {
             </Col>
 
             <Col sm={6}>
-              <Nouislider
-                range={{ min: 1, max: 200 }}
-                start={sliderValues}
-                step={0.01}
-                connect
-                tooltips={true}
+              {/* @ts-ignore https://github.com/zillow/react-slider/issues/321 */}
+              <ReactSlider
+                className="custom-slider"
+                thumbClassName="custom-thumb"
+                trackClassName="custom-track"
+                value={[sliderValues[0], sliderValues[1]]}
                 onChange={handleSliderChange}
+                min={0}
+                max={200}
+                defaultValue={[0, 200]}
+                pearling
+                minDistance={10}
+                renderThumb={(props, state) => {
+                  const { key, ...rest } = props;
+                  return (
+                    <div key={key} {...rest} className="custom-thumb">
+                      <div className="custom-tooltip">{state.valueNow}</div>
+                    </div>
+                  );
+                }}
               />
             </Col>
           </Row>
@@ -116,17 +131,25 @@ export default function SliderWithTooltips() {
               </Form.Select>
             </Col>
             <Col xs={6} sm={3} className="pb-sm-0">
-              <Form.Control type="text" value={sliderValues1[1]} readOnly />
+              <Form.Control type="number" value={sliderValues1[1]} onChange={handleInputChange} />
             </Col>
 
             <Col sm={6}>
-              <Nouislider
-                range={{ min: -20, max: 40 }}
-                start={sliderValues1}
-                step={0.01}
-                connect
-                tooltips={true}
+              {/* @ts-ignore https://github.com/zillow/react-slider/issues/321 */}
+              <ReactSlider
+                className="custom-slider"
+                thumbClassName="custom-thumb"
+                trackClassName="custom-track"
+                value={sliderValues1}
                 onChange={handleSliderChange1}
+                min={-20}
+                max={40}
+                pearling
+                minDistance={1}
+                // @ts-ignore
+                renderTrack={({ key, ...restProps }) => <div key={key} {...restProps} className="custom-track" />}
+                // @ts-ignore
+                renderThumb={({ key, ...restProps }) => <div key={key} {...restProps} className="custom-thumb" />}
               />
             </Col>
           </Row>

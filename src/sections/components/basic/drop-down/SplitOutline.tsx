@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 // react-bootstrap
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
@@ -21,15 +19,9 @@ export default function SplitOutlineDropdown() {
           <Dropdown.Toggle split variant="outline-primary" />
 
           <Dropdown.Menu>
-            <Dropdown.Item as={Link} to="#!">
-              Action
-            </Dropdown.Item>
-            <Dropdown.Item as={Link} to="#!">
-              Another action
-            </Dropdown.Item>
-            <Dropdown.Item as={Link} to="#!">
-              Something else
-            </Dropdown.Item>
+            <Dropdown.Item href="#!">Action</Dropdown.Item>
+            <Dropdown.Item href="#!">Another action</Dropdown.Item>
+            <Dropdown.Item href="#!">Something else</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
         <Dropdown as={ButtonGroup}>
@@ -38,15 +30,9 @@ export default function SplitOutlineDropdown() {
           <Dropdown.Toggle split variant="outline-secondary" />
 
           <Dropdown.Menu>
-            <Dropdown.Item as={Link} to="#!">
-              Action
-            </Dropdown.Item>
-            <Dropdown.Item as={Link} to="#!">
-              Another action
-            </Dropdown.Item>
-            <Dropdown.Item as={Link} to="#!">
-              Something else
-            </Dropdown.Item>
+            <Dropdown.Item href="#!">Action</Dropdown.Item>
+            <Dropdown.Item href="#!">Another action</Dropdown.Item>
+            <Dropdown.Item href="#!">Something else</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
         <Dropdown as={ButtonGroup}>
@@ -55,15 +41,9 @@ export default function SplitOutlineDropdown() {
           <Dropdown.Toggle split variant="outline-success" />
 
           <Dropdown.Menu>
-            <Dropdown.Item as={Link} to="#!">
-              Action
-            </Dropdown.Item>
-            <Dropdown.Item as={Link} to="#!">
-              Another action
-            </Dropdown.Item>
-            <Dropdown.Item as={Link} to="#!">
-              Something else
-            </Dropdown.Item>
+            <Dropdown.Item href="#!">Action</Dropdown.Item>
+            <Dropdown.Item href="#!">Another action</Dropdown.Item>
+            <Dropdown.Item href="#!">Something else</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
         <Dropdown as={ButtonGroup}>
@@ -72,15 +52,9 @@ export default function SplitOutlineDropdown() {
           <Dropdown.Toggle split variant="outline-danger" />
 
           <Dropdown.Menu>
-            <Dropdown.Item as={Link} to="#!">
-              Action
-            </Dropdown.Item>
-            <Dropdown.Item as={Link} to="#!">
-              Another action
-            </Dropdown.Item>
-            <Dropdown.Item as={Link} to="#!">
-              Something else
-            </Dropdown.Item>
+            <Dropdown.Item href="#!">Action</Dropdown.Item>
+            <Dropdown.Item href="#!">Another action</Dropdown.Item>
+            <Dropdown.Item href="#!">Something else</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
         <Dropdown as={ButtonGroup}>
@@ -89,15 +63,9 @@ export default function SplitOutlineDropdown() {
           <Dropdown.Toggle split variant="outline-warning" />
 
           <Dropdown.Menu>
-            <Dropdown.Item as={Link} to="#!">
-              Action
-            </Dropdown.Item>
-            <Dropdown.Item as={Link} to="#!">
-              Another action
-            </Dropdown.Item>
-            <Dropdown.Item as={Link} to="#!">
-              Something else
-            </Dropdown.Item>
+            <Dropdown.Item href="#!">Action</Dropdown.Item>
+            <Dropdown.Item href="#!">Another action</Dropdown.Item>
+            <Dropdown.Item href="#!">Something else</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
         <Dropdown as={ButtonGroup}>
@@ -106,15 +74,9 @@ export default function SplitOutlineDropdown() {
           <Dropdown.Toggle split variant="outline-info" />
 
           <Dropdown.Menu>
-            <Dropdown.Item as={Link} to="#!">
-              Action
-            </Dropdown.Item>
-            <Dropdown.Item as={Link} to="#!">
-              Another action
-            </Dropdown.Item>
-            <Dropdown.Item as={Link} to="#!">
-              Something else
-            </Dropdown.Item>
+            <Dropdown.Item href="#!">Action</Dropdown.Item>
+            <Dropdown.Item href="#!">Another action</Dropdown.Item>
+            <Dropdown.Item href="#!">Something else</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </Stack>

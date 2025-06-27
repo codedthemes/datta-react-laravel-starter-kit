@@ -16,7 +16,7 @@ export default function VerticallyCentered() {
   const handleShow = () => setShow(true);
 
   return (
-    <MainCard title="Vertically centered">
+    <MainCard title="Vertically Centered">
       <Button onClick={handleShow}>Launch demo modal</Button>
 
       <Modal centered show={show} onHide={handleClose}>

@@ -4,6 +4,7 @@ import Table from 'react-bootstrap/Table';
 // project-imports
 import MainCard from 'components/MainCard';
 
+// table data
 const tableData = [
   { period: 'Today', sales: '$250.00', receipt: 'Otto', dues: '@mdo' },
   { period: 'This Week', sales: '$380.00', receipt: 'Thornton', dues: '@fat' },
@@ -16,8 +17,8 @@ const tableData = [
 
 export default function ReceiptCard({ title }: { title: string }) {
   return (
-    <MainCard title={title} bodyClassName="p-0 table-body">
-      <Table hover responsive className="m-0">
+    <MainCard title={title} className="table-card" bodyClassName="pb-0">
+      <Table hover responsive>
         <thead>
           <tr>
             <th>#</th>

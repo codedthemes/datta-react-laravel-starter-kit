@@ -49,14 +49,14 @@ function ReactTable({ data, columns }: { data: TableDataProps[]; columns: Column
   useEffect(() => setRowSelection({ 5: true }), []);
 
   return (
-    <MainCard title="Row Selection">
-      <Stack direction="horizontal" className="justify-content-between align-items-center pb-4 ">
+    <MainCard title="Row Selection" className="table-card">
+      <Stack direction="horizontal" className="justify-content-between align-items-center flex-wrap p-4" gap={2}>
         <SortingData getState={table.getState} setPageSize={table.setPageSize} />
         <div className="datatable-search">
           <DebouncedInput value={globalFilter ?? ''} onFilterChange={(value) => setGlobalFilter(String(value))} />
         </div>
       </Stack>
-      <Table hover responsive className="mb-0">
+      <Table hover responsive className="mb-0 border-top">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
@@ -76,7 +76,6 @@ function ReactTable({ data, columns }: { data: TableDataProps[]; columns: Column
           ))}
         </tbody>
       </Table>
-      <hr className="mb-0 mt-0" />
       <TablePagination
         setPageSize={table.setPageSize}
         setPageIndex={table.setPageIndex}

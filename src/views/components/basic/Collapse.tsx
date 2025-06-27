@@ -6,14 +6,14 @@ import AccordionCollapse from 'sections/components/basic/collapse/Accordion';
 import AccordionFlush from 'sections/components/basic/collapse/AccordionFlush';
 import BasicCollapse from 'sections/components/basic/collapse/BasicCollapse';
 import MultipleTargets from 'sections/components/basic/collapse/MultipleTargets';
-import ComponentHeader from 'components/cards/ComponentHeader';
+import ReferenceHeader from 'components/ReferenceHeader';
 
 // ==============================|| BASIC - COLLAPSE ||============================== //
 
 export default function CollapsePage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="Toggle the visibility of content across your project with a few classes and our JavaScript plugins."
         link="https://react-bootstrap.netlify.app/docs/utilities/transitions/#collapse"
       />

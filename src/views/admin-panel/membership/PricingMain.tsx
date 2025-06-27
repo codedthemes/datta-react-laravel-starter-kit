@@ -1,5 +1,5 @@
-// react-bootstrap
-import Pricing from 'sections/admin-panel/membership/pricing/Pricing';
+// project-imports
+import Pricing from 'sections/admin-panel/membership/Pricing';
 
 // =============================|| MEMBERSHIP - PRICING ||============================== //
 

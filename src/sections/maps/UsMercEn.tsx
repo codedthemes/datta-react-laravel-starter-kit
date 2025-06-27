@@ -25,7 +25,7 @@ export default function UsMercEnMap() {
 
   return (
     <MainCard title="us-merc-en Map">
-      <div id="us-merc-en" className="h-400" />
+      <div id="us-merc-en" style={{ height: '400px' }} />
     </MainCard>
   );
 }

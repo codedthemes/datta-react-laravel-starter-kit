@@ -7,41 +7,53 @@ import { toast } from 'react-toastify';
 
 // project-imports
 import MainCard from 'components/MainCard';
+import useConfig from 'hooks/useConfig';
+import { getResolvedTheme, setResolvedTheme } from 'components/setResolvedTheme';
+import { ThemeMode } from 'config';
 
 type NotificationType = 'info' | 'success' | 'warning' | 'error' | 'default';
 
 // ==============================|| NOTIFICATION - ALERT ||============================== //
 
 export default function NotificationAlert() {
+  const { themeDirection, mode } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
+
   const notify = (type: NotificationType) => {
     const notifications = {
-      default: { title: 'Hello', message: 'I am a default notification.' },
-      info: { title: 'Reminder!', message: 'You have a meeting at 10:30 AM.' },
-      success: { title: 'Success!', message: 'You just submit your resume successfully.' },
-      warning: { title: 'Warning!', message: 'The data presented here can be change.' },
-      error: { title: 'Sorry!', message: 'Could not complete your transaction.' }
+      default: { message: 'I am a default notification.' },
+      info: { message: 'You have a meeting at 10:30 AM.' },
+      success: { message: 'You just submit your resume successfully.' },
+      warning: { message: 'The data presented here can be change.' },
+      error: { message: 'Could not complete your transaction.' }
     };
 
-    const { title, message } = notifications[type] || notifications.default;
+    const { message } = notifications[type] || notifications.default;
 
-    toast(
-      <div>
-        <h5 className="mb-1">{title}</h5>
-        <p className="mb-0 custom-text">{message}</p>
-      </div>,
-      {
-        autoClose: false,
-        icon: false,
-        className: `custom-toast ${type}-toast cutom-toast-${type}`,
-        bodyClassName: 'custom-toast-body'
-      }
-    );
+    const toastTypeMap: Record<string, (msg: string, opts: any) => void> = {
+      info: toast.info,
+      success: toast.success,
+      warning: toast.warning,
+      error: toast.error
+    };
+
+    const toastFunc = toastTypeMap[type] || toast;
+
+    toastFunc(message, {
+      rtl: themeDirection === 'rtl' ? true : false,
+      icon: false,
+      position: themeDirection === 'rtl' ? 'top-left' : 'top-right',
+      theme: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light'
+    });
   };
 
   return (
     <MainCard title="Notification Alert">
       <Stack direction="horizontal" gap={2} className="flex-wrap">
-        <Button onClick={() => notify('default')}>Default</Button>
+        <Button variant="primary" onClick={() => notify('default')}>
+          Default
+        </Button>
         <Button variant="info" onClick={() => notify('info')}>
           Info
         </Button>

@@ -12,12 +12,8 @@ import Stack from 'react-bootstrap/Stack';
 import MainCard from 'components/MainCard';
 
 // assets
-import Avatar1 from 'assets/images/user/avatar-1.jpg';
-import Avatar2 from 'assets/images/user/avatar-2.jpg';
-import TextsmsTwoToneIcon from '@mui/icons-material/TextsmsTwoTone';
-import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
-import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
-import ChromeReaderModeTwoToneIcon from '@mui/icons-material/ChromeReaderModeTwoTone';
+import Avatar1 from 'assets/images/user/avatar-1.png';
+import Avatar2 from 'assets/images/user/avatar-2.png';
 
 interface Comment {
   id: number;
@@ -29,6 +25,7 @@ interface Comment {
   borderBottom?: boolean;
 }
 
+// initial data
 const initialComments: Comment[] = [
   {
     id: 1,
@@ -68,24 +65,26 @@ const CommentItem = ({ comment }: { comment: Comment }) => (
       <div className="h6">
         {comment.name}
         <span className="f-12 text-muted ms-1">
-          <i className="ti ti-clock me-1" />
+          <i className="ph ph-clock align-middle f-14 ms-1 me-1" />
           {comment.time}
         </span>
       </div>
       <p className="text-muted">{comment.text}</p>
-      <a href="#!" className="me-2 link-primary">
-        <TextsmsTwoToneIcon className="f-16 text-primary" /> Reply
-      </a>
-      <a href="#!" className="me-2 link-success">
-        <EditTwoToneIcon className="f-16 text-success" /> Edit
-      </a>
-      <a href="#!" className="me-2 link-danger">
-        <DeleteTwoToneIcon className="f-16 text-danger" /> Delete
+      <a className="me-2 link-primary">
+        <i className="ph ph-chat-dots align-middle f-16 text-primary me-1" />
+        Reply
+      </a>{' '}
+      <a className="me-2 link-success">
+        <i className="ph ph-pencil-simple-line align-middle f-16 text-success me-1" />
+        Edit
+      </a>{' '}
+      <a className="me-2 link-danger">
+        <i className="ph ph-trash align-middle f-16 text-danger me-1" />
+        Delete
       </a>
       {comment.borderBottom && <hr />}
-
       {comment.replies && (
-        <div className="mt-3 ps-4">
+        <div className="mt-3">
           {comment.replies.map((reply) => (
             <CommentItem key={reply.id} comment={reply} />
           ))}
@@ -104,10 +103,10 @@ export default function Comments() {
       title={
         <Stack direction="horizontal" gap={2} className="align-items-center justify-content-between">
           <h5>
-            <ChromeReaderModeTwoToneIcon className="w-20 text-primary" /> Comments
+            <i className="ph ph-chat-dots align-middle f-20 text-primary" /> Comments
           </h5>
           <Button variant="light-primary" size="sm">
-            <i className="fas fa-plus" /> Add
+            <i className="ti ti-plus" /> Add
           </Button>
         </Stack>
       }
@@ -119,9 +118,9 @@ export default function Comments() {
       </Card.Body>
       <Card.Body className="py-3">
         <InputGroup>
-          <FormControl placeholder="Add New Comment..." value="" />
+          <FormControl placeholder="Add New Comment..." defaultValue="" />
           <Button variant="light-secondary">
-            <i className="fas fa-search" />
+            <i className="ti ti-search" />
           </Button>
         </InputGroup>
       </Card.Body>

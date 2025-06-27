@@ -32,7 +32,6 @@ export default function DateInputMask() {
     const masks = refs.map((ref, index) => (ref.current ? IMask(ref.current, { mask: maskConfigs[index].mask }) : null));
 
     return () => masks.forEach((mask) => mask?.destroy());
-    // eslint-disable-next-line
   }, []);
 
   const handleChange = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {

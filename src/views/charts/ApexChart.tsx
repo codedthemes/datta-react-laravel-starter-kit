@@ -24,18 +24,17 @@ import RadarChart from 'sections/charts/apex-charts/RadarChart';
 import RadarChart2 from 'sections/charts/apex-charts/RadarChart2';
 import RedialBarChart from 'sections/charts/apex-charts/RadialBarChart';
 import RedialBarCustomAngleChart from 'sections/charts/apex-charts/RadialBarCustomAngleCharts';
-import RealTimeChart from 'sections/charts/apex-charts/RealTimeChart';
 import RoundedHeatMapChart from 'sections/charts/apex-charts/RoundedHeatmapChart';
 import ScatterChart from 'sections/charts/apex-charts/ScatterChart';
 import ScatterDateTimeChart from 'sections/charts/apex-charts/ScatterDateTimeChart';
-import ComponentHeader from 'components/cards/ComponentHeader';
+import ReferenceHeader from 'components/ReferenceHeader';
 
 // =============================|| CHARTS - APEX CHART ||============================== //
 
 export default function ApexChartPage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="ApexCharts is a modern charting library that helps developers to create beautiful and interactive visualizations for web pages."
         link="https://apexcharts.com/"
       />
@@ -80,14 +79,9 @@ export default function ApexChartPage() {
             <RedialBarCustomAngleChart />
           </MainCard>
         </Col>
-        <Col sm={6}>
+        <Col sm={12}>
           <MainCard title="Basic line chart">
             <BasicLineChart />
-          </MainCard>
-        </Col>
-        <Col sm={6}>
-          <MainCard title="Realtime Chart">
-            <RealTimeChart />
           </MainCard>
         </Col>
         <Col sm={12}>

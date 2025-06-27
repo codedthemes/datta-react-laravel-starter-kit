@@ -17,7 +17,7 @@ export default function TwoColumnsHorizontalFormPage() {
           <Form.Label>Name:</Form.Label>
         </Col>
         <Col lg={3}>
-          <Form.Control type="text" placeholder="Enter full name " />
+          <Form.Control type="text" placeholder="Enter full name" />
           <Form.Text>Please enter your full name</Form.Text>
         </Col>
         <Col lg={2} className="col-form-label">
@@ -35,9 +35,9 @@ export default function TwoColumnsHorizontalFormPage() {
         </Col>
         <Col lg={3}>
           <InputGroup>
-            <Form.Control type="password" placeholder="Enter your Password " />
+            <Form.Control type="password" placeholder="Enter your Password" />
             <InputGroup.Text>
-              <i className="ti ti-lock f-18" />
+              <i className="ph ph-lock-key" />
             </InputGroup.Text>
           </InputGroup>
           <Form.Text>Please enter your Password</Form.Text>
@@ -49,7 +49,7 @@ export default function TwoColumnsHorizontalFormPage() {
           <InputGroup>
             <Form.Control type="email" placeholder="Enter your Profile URL" />
             <InputGroup.Text>
-              <i className="ti ti-link f-18" />
+              <i className="ph ph-link" />
             </InputGroup.Text>
           </InputGroup>
           <Form.Text>Please enter your Profile URL</Form.Text>

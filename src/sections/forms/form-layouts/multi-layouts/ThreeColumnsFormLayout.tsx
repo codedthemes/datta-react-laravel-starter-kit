@@ -17,7 +17,7 @@ export default function ThreeColumnsFormLayoutPage() {
           <Col lg={4}>
             <Form.Group className="mb-3">
               <Form.Label>Name:</Form.Label>
-              <Form.Control type="text" placeholder="Enter full name " />
+              <Form.Control type="text" placeholder="Enter full name" />
               <Form.Text>Please enter your full name</Form.Text>
             </Form.Group>
           </Col>
@@ -25,7 +25,7 @@ export default function ThreeColumnsFormLayoutPage() {
           <Col lg={4}>
             <Form.Group className="mb-3">
               <Form.Label>Email:</Form.Label>
-              <Form.Control type="email" placeholder="Enter email " />
+              <Form.Control type="email" placeholder="Enter email" />
               <Form.Text>Please enter your email</Form.Text>
             </Form.Group>
           </Col>
@@ -35,9 +35,9 @@ export default function ThreeColumnsFormLayoutPage() {
               <Form.Label>Password:</Form.Label>
               <InputGroup>
                 <InputGroup.Text>
-                  <i className="ti ti-lock f-18" />
+                  <i className="ph ph-lock-key" />
                 </InputGroup.Text>
-                <Form.Control type="text" placeholder="Enter full name " />
+                <Form.Control type="text" placeholder="Enter full name" />
               </InputGroup>
               <Form.Text>Please enter your Password</Form.Text>
             </Form.Group>
@@ -59,7 +59,7 @@ export default function ThreeColumnsFormLayoutPage() {
               <InputGroup>
                 <Form.Control type="email" placeholder="Profile URL" />
                 <InputGroup.Text>
-                  <i className="ti ti-link f-18" />
+                  <i className="ph ph-link" />
                 </InputGroup.Text>
               </InputGroup>
               <Form.Text>Please enter your email</Form.Text>

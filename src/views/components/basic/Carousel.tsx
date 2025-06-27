@@ -1,9 +1,9 @@
 // react-bootstrap
-import ComponentHeader from 'components/cards/ComponentHeader';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 // project-imports
+import ReferenceHeader from 'components/ReferenceHeader';
 import BasicCarousel from 'sections/components/basic/carousel/BasicCarousel';
 import CaptionCarousel from 'sections/components/basic/carousel/CaptionCarousel';
 import ControlCarousel from 'sections/components/basic/carousel/ControlCarousel';
@@ -17,7 +17,7 @@ import IndicatorsCarousel from 'sections/components/basic/carousel/IndicatorsCar
 export default function CarouselPage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="A slideshow component for cycling through elements—images or slides of text—like a carousel."
         link="https://react-bootstrap.netlify.app/docs/components/carousel"
       />

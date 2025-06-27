@@ -7,7 +7,7 @@ import SocialLinksList from './SocialLinksList';
 import MainCard from 'components/MainCard';
 
 // assets
-import avatar3 from 'assets/images/user/avatar-3.jpg';
+import avatar3 from 'assets/images/user/avatar-3.png';
 
 // ==============================|| SOCIAL - SOCIAL LINK 2 ||============================== //
 

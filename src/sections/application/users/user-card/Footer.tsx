@@ -4,33 +4,31 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Image from 'react-bootstrap/Image';
 import Row from 'react-bootstrap/Row';
 
-// third-party
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-
 // project-imports
 import MainCard from 'components/MainCard';
 
 // assets
-import avatar1 from 'assets/images/user/avatar-1.jpg';
-import avatar2 from 'assets/images/user/avatar-2.jpg';
-import avatar3 from 'assets/images/user/avatar-3.jpg';
+import avatar1 from 'assets/images/user/avatar-1.png';
+import avatar2 from 'assets/images/user/avatar-2.png';
+import avatar3 from 'assets/images/user/avatar-3.png';
 import slider6 from 'assets/images/widget/slider6.jpg';
 import slider5 from 'assets/images/widget/slider5.jpg';
 import slider7 from 'assets/images/widget/slider7.jpg';
 
 interface SocialLink {
   platform: string;
-  icon: string | IconDefinition;
+  icon: string;
 }
 
+// social links
 const socialLinks: SocialLink[] = [
-  { platform: 'facebook', icon: 'fa-facebook-f' },
-  { platform: 'twitter', icon: 'fa-twitter' },
-  { platform: 'dribbble', icon: 'fa-dribbble' },
-  { platform: 'pinterest', icon: 'fa-pinterest' },
-  { platform: 'youtube', icon: 'fa-youtube' },
-  { platform: 'googleplus', icon: 'fa-google-plus-g' },
-  { platform: 'linkedin', icon: 'fa-linkedin-in' }
+  { platform: 'facebook', icon: 'ti ti-brand-facebook-filled' },
+  { platform: 'twitter', icon: 'ti ti-brand-twitter-filled' },
+  { platform: 'dribbble', icon: 'ti ti-brand-dribbble-filled' },
+  { platform: 'pinterest', icon: 'ti ti-brand-pinterest-filled' },
+  { platform: 'youtube', icon: 'ti ti-brand-youtube-filled' },
+  { platform: 'googleplus', icon: 'ti ti-brand-google-filled' },
+  { platform: 'linkedin', icon: 'ti ti-brand-linkedin-filled' }
 ];
 
 // ==============================|| USER CARD - FOOTER ||============================== //
@@ -73,15 +71,14 @@ export default function Footer() {
                 <div className="position-relative d-inline-block">
                   <Image className="img-radius img-fluid wid-80" src={avatar1} alt="User" />
                   <div className="certificated-badge">
-                    <i className="fas fa-certificate text-primary bg-icon" />
-                    <i className="fas fa-check front-icon text-white" />
+                    <i className="ti ti-rosette-discount-check-filled text-primary bg-icon" />
                   </div>
                 </div>
               </Col>
               <Col xs="auto" className="pb-3">
                 <Dropdown align="end">
                   <Dropdown.Toggle as="div" bsPrefix="false" className="arrow-none dropdown-toggle" id="dropdown-custom-components">
-                    <i className="ti ti-dots" />
+                    <i className="ph ph-dots-three-outline align-middle" />
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                     <Dropdown.Item href="#">Action</Dropdown.Item>
@@ -128,7 +125,7 @@ export default function Footer() {
             </Row>
           }
         >
-          <div className="user-about-block ">
+          <div className="user-about-block">
             <Row>
               <Col>
                 <Image src={avatar2} fluid className="wid-80 img-radius" />
@@ -186,7 +183,7 @@ export default function Footer() {
               <Col xs="auto">
                 <Dropdown>
                   <Dropdown.Toggle as="div" className="arrow-none dropdown-toggle" data-bs-toggle="dropdown">
-                    <i className="ti ti-dots"></i>
+                    <i className="ph ph-dots-three-outline align-middle"></i>
                   </Dropdown.Toggle>
                   <Dropdown.Menu align="end">
                     <Dropdown.Item href="#">Action</Dropdown.Item>
@@ -202,11 +199,9 @@ export default function Footer() {
             <p className="mb-0">been the industry's standard</p>
           </div>
           <ul className="list-inline f-20 mt-3 mb-0">
-            {socialLinks.map((icon) => (
-              <li className="list-inline-item">
-                <a href="#!" className={`text-${icon.platform}`}>
-                  <i className={`fab ${icon.icon}`}></i>
-                </a>
+            {socialLinks.map((icon, index) => (
+              <li className="list-inline-item" key={index}>
+                <i className={`${icon.icon} text-${icon.platform} me-1`} />
               </li>
             ))}
           </ul>

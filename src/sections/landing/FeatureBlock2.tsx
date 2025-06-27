@@ -3,6 +3,9 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
+// project-imports
+import branding from 'branding.json';
+
 // third-party
 import { motion } from 'framer-motion';
 
@@ -97,7 +100,7 @@ export default function FeatureBlock2() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8, ease: 'easeOut' }}
             >
-              Why Choose <strong className="landing-background-image">Datta Able</strong>
+              Why Choose <strong className="landing-background-image">{branding.brandName}</strong>
             </motion.h2>
 
             <motion.p
@@ -107,8 +110,8 @@ export default function FeatureBlock2() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8, ease: 'easeOut' }}
             >
-              Datta Able is a versatile and reliable choice for your admin panel, which empowers you to efficiently control and manage your
-              backend with ease.
+              {branding.brandName} is a versatile and reliable choice for your admin panel, which empowers you to efficiently control and
+              manage your backend with ease.
             </motion.p>
           </Col>
         </Row>

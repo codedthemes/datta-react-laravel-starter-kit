@@ -10,15 +10,15 @@ const adminPanel: NavItemType = {
   children: [
     {
       id: 'online-course',
-      title: 'online-course',
+      title: 'online course',
       type: 'collapse',
-      icon: <i className="ti ti-book" />,
+      icon: <i className="ph ph-book-open-text" />,
       children: [
         {
-          id: 'dashboard',
+          id: 'online-course-dashboard',
           title: 'dashboard',
           type: 'item',
-          url: '/online-course/dashboard'
+          url: '/admin-panel/online-course/dashboard'
         },
         {
           id: 'teacher',
@@ -26,22 +26,22 @@ const adminPanel: NavItemType = {
           type: 'collapse',
           children: [
             {
-              id: 'list',
+              id: 'teacher-list',
               title: 'list',
               type: 'item',
-              url: '/online-course/teacher/list'
+              url: '/admin-panel/online-course/teacher/list'
             },
             {
-              id: 'apply',
+              id: 'teacher-apply',
               title: 'apply',
               type: 'item',
-              url: '/online-course/teacher/apply'
+              url: '/admin-panel/online-course/teacher/apply'
             },
             {
-              id: 'add',
+              id: 'teacher-add',
               title: 'add',
               type: 'item',
-              url: '/online-course/teacher/add'
+              url: '/admin-panel/online-course/teacher/add'
             }
           ]
         },
@@ -51,22 +51,22 @@ const adminPanel: NavItemType = {
           type: 'collapse',
           children: [
             {
-              id: 'list',
+              id: 'student-list',
               title: 'list',
               type: 'item',
-              url: '/online-course/student/list'
+              url: '/admin-panel/online-course/student/list'
             },
             {
-              id: 'apply',
+              id: 'student-apply',
               title: 'apply',
               type: 'item',
-              url: '/online-course/student/apply'
+              url: '/admin-panel/online-course/student/apply'
             },
             {
-              id: 'add',
+              id: 'student-add',
               title: 'add',
               type: 'item',
-              url: '/online-course/student/add'
+              url: '/admin-panel/online-course/student/add'
             }
           ]
         },
@@ -76,16 +76,16 @@ const adminPanel: NavItemType = {
           type: 'collapse',
           children: [
             {
-              id: 'view',
+              id: 'course-view',
               title: 'view',
               type: 'item',
-              url: '/online-course/course/view'
+              url: '/admin-panel/online-course/course/view'
             },
             {
-              id: 'add',
+              id: 'course-add',
               title: 'add',
               type: 'item',
-              url: '/online-course/course/add'
+              url: '/admin-panel/online-course/course/add'
             }
           ]
         },
@@ -93,13 +93,13 @@ const adminPanel: NavItemType = {
           id: 'pricing',
           title: 'pricing',
           type: 'item',
-          url: '/online-course/pricing'
+          url: '/admin-panel/online-course/pricing'
         },
         {
           id: 'site',
           title: 'site',
           type: 'item',
-          url: '/online-course/site'
+          url: '/admin-panel/online-course/site'
         },
         {
           id: 'setting',
@@ -107,22 +107,22 @@ const adminPanel: NavItemType = {
           type: 'collapse',
           children: [
             {
-              id: 'payment',
+              id: 'setting-payment',
               title: 'payment',
               type: 'item',
-              url: '/online-course/setting/payment'
+              url: '/admin-panel/online-course/setting/payment'
             },
             {
-              id: 'pricing',
+              id: 'setting-pricing',
               title: 'pricing',
               type: 'item',
-              url: '/online-course/setting/pricing'
+              url: '/admin-panel/online-course/setting/pricing'
             },
             {
-              id: 'notification',
+              id: 'setting-notification',
               title: 'notification',
               type: 'item',
-              url: '/online-course/setting/notification'
+              url: '/admin-panel/online-course/setting/notification'
             }
           ]
         }
@@ -130,11 +130,10 @@ const adminPanel: NavItemType = {
     },
 
     {
-      id: '/membership',
+      id: 'membership',
       title: 'membership',
       type: 'collapse',
-      icon: <i className="ti ti-users" />,
-      url: '/admin-panel/membership/dashboard',
+      icon: <i className="ph ph-users-four" />,
       children: [
         {
           id: 'dashboard',
@@ -163,36 +162,36 @@ const adminPanel: NavItemType = {
       ]
     },
     {
-      id: '/helpdesk',
+      id: 'helpdesk',
       title: 'helpdesk',
       type: 'collapse',
-      icon: <i className="ti ti-help" />,
+      icon: <i className="ph ph-lifebuoy" />,
       children: [
         {
-          id: 'dashboard',
+          id: 'helpdesk-dashboard',
           title: 'dashboard',
           type: 'item',
           url: '/admin-panel/helpdesk/dashboard'
         },
         {
-          id: 'ticket',
+          id: 'helpdesk-ticket',
           title: 'ticket',
           type: 'collapse',
           children: [
             {
-              id: 'create',
+              id: 'helpdesk-create',
               title: 'create',
               type: 'item',
               url: '/admin-panel/helpdesk/ticket/create'
             },
             {
-              id: 'list',
+              id: 'helpdesk-list',
               title: 'list',
               type: 'item',
               url: '/admin-panel/helpdesk/ticket/list'
             },
             {
-              id: 'details',
+              id: 'helpdesk-details',
               title: 'details',
               type: 'item',
               url: '/admin-panel/helpdesk/ticket/details'
@@ -208,37 +207,37 @@ const adminPanel: NavItemType = {
       ]
     },
     {
-      id: '/invoice',
+      id: 'admin-invoice',
       title: 'invoice',
       type: 'collapse',
-      icon: <i className="ti ti-help" />,
+      icon: <i className="ph ph-printer" />,
       children: [
         {
-          id: 'dashboard',
+          id: 'invoice-dashboard',
           title: 'dashboard',
           type: 'item',
           url: '/admin-panel/invoice/dashboard'
         },
         {
-          id: 'create',
+          id: 'invoice-create',
           title: 'create',
           type: 'item',
           url: '/admin-panel/invoice/create'
         },
         {
-          id: 'details',
+          id: 'invoice-details',
           title: 'details',
           type: 'item',
           url: '/admin-panel/invoice/details'
         },
         {
-          id: 'list',
+          id: 'invoice-list',
           title: 'list',
           type: 'item',
           url: '/admin-panel/invoice/list'
         },
         {
-          id: 'edit',
+          id: 'invoice-edit',
           title: 'edit',
           type: 'item',
           url: '/admin-panel/invoice/edit'

@@ -1,7 +1,7 @@
 // third-party
 import { sub } from 'date-fns';
 import { Chance } from 'chance';
-import lodash from 'lodash';
+import { sampleSize } from 'lodash-es';
 
 const chance = new Chance();
 
@@ -31,6 +31,8 @@ const skills: string[] = [
 ];
 
 const time = ['just now', '1 day ago', '2 min ago', '2 days ago', '1 week ago', '1 year ago', '5 months ago', '3 hours ago', '1 hour ago'];
+
+// ==============================|| CUSTOM FUNCTION - TABLE DATA ||============================== //
 
 export default function mockData(index: number) {
   return {
@@ -63,14 +65,14 @@ export default function mockData(index: number) {
       percentage: chance.integer({ min: 0, max: 100 }),
       rating: chance.floating({ min: 0, max: 5, fixed: 2 }),
       status: (min: number, max: number) => chance.integer({ min, max }),
-      age: chance.age({ type: 'adult' }),
+      age: chance.age(),
       amount: chance.integer({ min: 1, max: 10000 })
     },
     image: {
-      product: `product_${index}`,
-      avatar: `avatar_${index}`
+      product: (index: number) => `product_${index}`,
+      avatar: (index: number) => `avatar_${index}`
     },
-    skill: lodash.sampleSize(skills, chance.integer({ min: 2, max: 6 })),
-    time: lodash.sampleSize(time)
+    skill: sampleSize(skills, chance.integer({ min: 2, max: 6 })),
+    time: sampleSize(time)
   };
 }

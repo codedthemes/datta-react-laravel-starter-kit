@@ -1,9 +1,9 @@
 // react-bootstrap
-import ComponentHeader from 'components/cards/ComponentHeader';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 // project-imports
+import ReferenceHeader from 'components/ReferenceHeader';
 import AnimationSpeed from 'sections/forms/form-plugins/bootstrap-switch/AnimationSpeed';
 import Color from 'sections/forms/form-plugins/bootstrap-switch/Color';
 import CustomText from 'sections/forms/form-plugins/bootstrap-switch/CustomText';
@@ -19,7 +19,7 @@ import StackedCheckboxes from 'sections/forms/form-plugins/bootstrap-switch/Stac
 export default function BootstrapSwitchPage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="Bootstrap Switch Button is a widget that converts plain checkboxes into responsive switch buttons."
         link="https://gitbrent.github.io/bootstrap-switch-button/"
       />

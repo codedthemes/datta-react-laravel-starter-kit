@@ -24,11 +24,11 @@
   --pc-active-background: #{lighten($dark-layout-color, 3%)};
 
   // card
-  --pc-card-box-shadow: none;
+  --pc-card-box-shadow: 0 0px 2px 0 rgba(69, 90, 100, 0.5);
 
   // horizontal menu
-  --pc-header-submenu-background: #{lighten($dark-layout-color, 10%)};
-  --pc-header-submenu-color: var(--bs-body-color);
+  // --pc-header-submenu-background: #{lighten($dark-layout-color, 10%)};
+  // --pc-header-submenu-color: var(--bs-body-color);
 
   --bs-heading-color: #fafafa;
   --bs-body-color: #bfbfbf;
@@ -44,8 +44,11 @@
 }
 
 .card {
-  --bs-card-border-color: #{lighten($dark-layout-color, 10%)};
   --bs-card-bg: #{lighten($dark-layout-color, 4%)};
+  --bs-card-border-color: #{lighten($dark-layout-color, 10%)};
+  &[class*='bg-'] {
+    --bs-card-border-color: rgba(255, 255, 255, 0.5);
+  }
 }
 
 .offcanvas,
@@ -98,7 +101,6 @@
   --bs-dropdown-link-color: var(--bs-body-color);
   --bs-dropdown-bg: #{lighten($dark-layout-color, 10%)};
   --bs-dropdown-link-hover-bg: #{lighten($dark-layout-color, 3%)};
-  --bs-dropdown-divider-bg: #{lighten($dark-layout-color, 5%)};
 }
 
 .pagination {
@@ -242,7 +244,7 @@ select.datatable-input,
   background-color: rgba($dark-layout-color, 0.5);
 }
 
-.text-dark {
+.text-dark:not(.badge) {
   color: var(--bs-body-color) !important;
 }
 
@@ -374,10 +376,6 @@ select.datatable-input,
       color: map-get($value, 'primary');
       border-color: transparentize(map-get($value, 'primary'), 0.8);
 
-      .material-icons-two-tone {
-        background-color: map-get($value, 'primary');
-      }
-
       &:hover {
         background: map-get($value, 'primary');
         color: #fff;
@@ -413,10 +411,6 @@ select.datatable-input,
       background: transparent;
       color: map-get($value, 'primary');
       border-color: transparent;
-
-      .material-icons-two-tone {
-        background-color: map-get($value, 'primary');
-      }
 
       &:hover {
         background: transparentize(map-get($value, 'primary'), 0.8);
@@ -456,7 +450,10 @@ select.datatable-input,
     background: #{lighten($dark-layout-color, 10%)};
   }
 
-  .bg-light,
+  .bg-light:not(.badge) {
+    background-color: rgba(0, 0, 0, 0.15) !important;
+  }
+
   .card-footer.bg-light {
     background-color: rgba(0, 0, 0, 0.15) !important;
   }
@@ -500,13 +497,22 @@ select.datatable-input,
   border-color: rgba(0, 0, 0, 0.3);
 }
 
-.material-icons-two-tone:not([class*='text']) {
-  background-color: var(--bs-body-color);
-}
-
 .flatpickr-calendar {
   background: var(--bs-body-bg);
   box-shadow: none;
+
+  .flatpickr-days {
+    border-left: 1px solid var(--bs-body-bg);
+    border-right: 1px solid var(--bs-body-bg);
+  }
+
+  .flatpickr-innerContainer {
+    border-bottom: 1px solid var(--bs-body-bg);
+  }
+
+  .dayContainer {
+    background: var(--bs-body-bg);
+  }
 
   .flatpickr-month,
   .flatpickr-months .flatpickr-prev-month,
@@ -515,7 +521,39 @@ select.datatable-input,
     fill: var(--bs-body-color);
   }
 
-  span.flatpickr-weekday {
+  .flatpickr-weekdays {
+    background: var(--bs-body-bg);
+  }
+
+  span.flatpickr-weekday,
+  .flatpickr-current-month {
+    background: var(--bs-body-bg);
+    color: var(--bs-body-color);
+  }
+
+  .flatpickr-current-month {
+    .flatpickr-monthDropdown-months,
+    .flatpickr-monthDropdown-months .flatpickr-monthDropdown-month {
+      background: var(--bs-body-bg);
+      color: var(--bs-body-color);
+    }
+    .flatpickr-monthDropdown-months .flatpickr-monthDropdown-month {
+      border-color: var(--bs-border-color);
+    }
+  }
+
+  .flatpickr-current-month .numInputWrapper {
+    span.arrowUp:after {
+      border-bottom-color: var(--bs-border-color);
+    }
+
+    span.arrowDown:after {
+      border-top-color: var(--bs-border-color);
+    }
+  }
+
+  .flatpickr-months .flatpickr-month {
+    background: var(--bs-body-bg);
     color: var(--bs-body-color);
   }
 
@@ -564,13 +602,15 @@ select.datatable-input,
   }
 
   &.hasTime .flatpickr-time {
-    border-top: none;
+    border: none;
   }
 }
 
 .flatpickr-time {
   input,
-  .flatpickr-am-pm {
+  .flatpickr-am-pm,
+  .flatpickr-time-separator {
+    background-color: var(--bs-body-bg);
     color: var(--bs-body-color);
 
     &:focus,
@@ -897,7 +937,25 @@ text {
 .apexcharts-canvas line {
   stroke: transparent !important;
 }
-
+.apexcharts-menu {
+  background: var(--bs-body-bg);
+  border-color: #{lighten($dark-layout-color, 15%)};
+}
+.apexcharts-theme-light {
+  .apexcharts-menu-item {
+    &:hover {
+      background: var(--bs-card-bg);
+    }
+  }
+  .apexcharts-menu-icon:hover svg,
+  .apexcharts-reset-icon:hover svg,
+  .apexcharts-selection-icon:not(.apexcharts-selected):hover svg,
+  .apexcharts-zoom-icon:not(.apexcharts-selected):hover svg,
+  .apexcharts-zoomin-icon:hover svg,
+  .apexcharts-zoomout-icon:hover svg {
+    fill: var(--bs-body-color);
+  }
+}
 .apexcharts-tooltip.apexcharts-theme-light {
   background: var(--bs-body-bg);
   border-color: #{lighten($dark-layout-color, 15%)};
@@ -907,7 +965,18 @@ text {
     border-bottom-color: #{lighten($dark-layout-color, 15%)};
   }
 }
-
+.apexcharts-xaxistooltip,
+.apexcharts-yaxistooltip {
+  background: var(--bs-body-bg);
+  border-color: #{lighten($dark-layout-color, 15%)};
+  color: var(--bs-body-color);
+}
+.apexcharts-xaxistooltip-bottom {
+  &::after,
+  &::before {
+    border-bottom-color: var(--bs-body-bg);
+  }
+}
 .fc .fc-list-sticky .fc-list-day>*,
 .fc .fc-scrollgrid-section-sticky>*,
 // .auth-main .auth-wrapper.v3,
@@ -972,27 +1041,15 @@ text {
 @each $color, $value in $theme-colors {
   // light color start
   .btn-light-#{$color} {
-    .material-icons-two-tone {
-      background-color: $value;
-    }
-
     &:hover {
       background: $value;
       border-color: $value;
-
-      .material-icons-two-tone {
-        background-color: #fff;
-      }
     }
 
     &.focus,
     &:focus {
       background: $value;
       border-color: $value;
-
-      .material-icons-two-tone {
-        background-color: #fff;
-      }
     }
 
     &:not(:disabled):not(.disabled).active,
@@ -1000,10 +1057,6 @@ text {
     .show > &.dropdown-toggle {
       background: $value;
       border-color: $value;
-
-      .material-icons-two-tone {
-        background-color: #fff;
-      }
     }
   }
 }
@@ -1075,6 +1128,12 @@ div:where(.swal2-container) .swal2-range {
 
   &::after {
     border-bottom-color: lighten($dark-layout-color, 8%);
+  }
+}
+
+.chat-wrapper {
+  .chat-body {
+    background: var(--bs-body-bg);
   }
 }
 

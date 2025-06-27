@@ -5,6 +5,9 @@ export const handleFileInput = async () => {
   const { value: file } = await Swal.fire({
     title: 'Select image',
     input: 'file',
+    customClass: {
+      input: 'form-control border'
+    },
     inputAttributes: {
       accept: 'image/*',
       'aria-label': 'Upload your profile picture'

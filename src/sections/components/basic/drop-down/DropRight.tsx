@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 // react-bootstrap
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
@@ -18,15 +16,9 @@ export default function DropRightDropdown() {
       <Dropdown>
         <Stack direction="horizontal" gap={1} className="flex-wrap">
           <DropdownButton className="dropdown-menu-dark" title="Dropright" drop="end">
-            <Dropdown.Item as={Link} to="#/#!">
-              #!
-            </Dropdown.Item>
-            <Dropdown.Item as={Link} to="#/#!">
-              Another #!
-            </Dropdown.Item>
-            <Dropdown.Item as={Link} to="#/#!">
-              Something else
-            </Dropdown.Item>
+            <Dropdown.Item href="#/#!">#!</Dropdown.Item>
+            <Dropdown.Item href="#/#!">Another #!</Dropdown.Item>
+            <Dropdown.Item href="#/#!">Something else</Dropdown.Item>
           </DropdownButton>
           <Dropdown className="dropend" as={ButtonGroup} drop="end">
             <Button variant="light-primary">Split dropright</Button>
@@ -34,15 +26,9 @@ export default function DropRightDropdown() {
             <Dropdown.Toggle variant="light-primary" split />
 
             <Dropdown.Menu>
-              <Dropdown.Item as={Link} to="#/#!">
-                #!
-              </Dropdown.Item>
-              <Dropdown.Item as={Link} to="#/#!">
-                Another #!
-              </Dropdown.Item>
-              <Dropdown.Item as={Link} to="#/#!">
-                Something else
-              </Dropdown.Item>
+              <Dropdown.Item href="#/#!">#!</Dropdown.Item>
+              <Dropdown.Item href="#/#!">Another #!</Dropdown.Item>
+              <Dropdown.Item href="#/#!">Something else</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Stack>

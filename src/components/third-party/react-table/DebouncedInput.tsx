@@ -10,11 +10,20 @@ interface Props {
   debounce?: number;
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   type?: string;
+  inputStyle?: string;
 }
 
 // ==============================|| REACT TABLE - DEBOUNCED INPUT ||============================== //
 
-export default function DebouncedInput({ value: initialValue, onFilterChange, debounce = 500, ...props }: Props) {
+export default function DebouncedInput({
+  value: initialValue,
+  onFilterChange,
+  debounce = 500,
+  type = 'text',
+  inputStyle,
+  inputProps = {},
+  ...props
+}: Props) {
   const [value, setValue] = useState<number | string>(initialValue);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -34,8 +43,8 @@ export default function DebouncedInput({ value: initialValue, onFilterChange, de
   }, [value, onFilterChange, debounce]);
 
   return (
-    <InputGroup className="w-auto">
-      <Form.Control className="datatable-input" type="text" value={value} onChange={handleInputChange} placeholder="Search..." {...props} />
+    <InputGroup className={` ${inputStyle || 'w-auto'}`}>
+      <Form.Control className="datatable-input" type={type} value={value} onChange={handleInputChange} placeholder="Search..." {...props} />
     </InputGroup>
   );
 }

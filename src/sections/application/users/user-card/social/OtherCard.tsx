@@ -17,8 +17,8 @@ import UserCard4 from 'sections/application/users/user-card/social/UserCard4';
 import MainCard from 'components/MainCard';
 
 // assets
-import avatar1 from 'assets/images/user/avatar-1.jpg';
-import avatar2 from 'assets/images/user/avatar-2.jpg';
+import avatar1 from 'assets/images/user/avatar-1.png';
+import avatar2 from 'assets/images/user/avatar-2.png';
 import Image from 'react-bootstrap/Image';
 
 // ==============================|| SOCIAL -  OTHER CARD ||============================== //

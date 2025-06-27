@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 // react-bootstrap
 import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -38,13 +36,9 @@ export default function FormsDropdown() {
               </Button>
             </Stack>
           </Form>
-          <Dropdown.Divider />
-          <Dropdown.Item as={Link} to="#">
-            New around here? Sign up
-          </Dropdown.Item>
-          <Dropdown.Item as={Link} to="#">
-            Forgot password?
-          </Dropdown.Item>
+          <hr className="m-0 my-2" />
+          <Dropdown.Item>New around here? Sign up</Dropdown.Item>
+          <Dropdown.Item>Forgot password?</Dropdown.Item>
         </DropdownButton>
       </Dropdown>
     </MainCard>

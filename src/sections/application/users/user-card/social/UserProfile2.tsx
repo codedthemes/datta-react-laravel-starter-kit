@@ -14,7 +14,12 @@ export default function UserProfile2() {
     <>
       <h6 className="text-center mb-3">User profile 2</h6>
       <Card className="text-center">
-        <div className="widget-profile-card-3">
+        <div
+          className="widget-profile-card-3"
+          style={{
+            backgroundImage: `url('/src/assets/images/widget/slider5.jpg')`
+          }}
+        >
           <Image className=" img-thumbnail" src={imgRound1} alt="Profile-user" fluid />
         </div>
         <Card.Body>

@@ -15,7 +15,7 @@ export default function ScrollingLongContent() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   return (
-    <MainCard title="Scrolling long content">
+    <MainCard title="Scrolling Long Content">
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Modal title</Modal.Title>

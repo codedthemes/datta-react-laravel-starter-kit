@@ -3,39 +3,36 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 // project-imports
-import UserActivityTable from 'sections/widgets/tables/UserActivityTable';
-import LeaderBoard from 'sections/widgets/tables/LeaderBoard';
-import ApplicationListTable from 'sections/widgets/tables/ApplicationListTable';
-import UserProjectListTable from 'sections/widgets/tables/UserProjectListTable';
-import UserWebListTable from 'sections/widgets/tables/UserWebList';
-import FullWidthTable from 'sections/widgets/tables/FullWidthTable';
-import RecentUsersTable from 'sections/widgets/tables/RecentUsersTable';
+import ProductOrderList from 'sections/dashboard/ProductOrderList';
+import RecentUsersCard from 'sections/dashboard/RecentUsersCard';
+import UserActivityCard from 'sections/dashboard/UserActivityCard';
+import { ApplicationPerformanceTable, TeamMemberActivityList, UserActivityTable, UserProjectProgressTable } from 'sections/widgets/tables';
 
-// ==============================|| BOOTSTRAP TABLE - BASIC ||============================== //
+// ==============================|| WIDGET - TABLE PAGE ||============================== //
 
 export default function BasicTablePage() {
   return (
     <Row>
-      <Col sm={8}>
+      <Col md={12} xl={8}>
         <UserActivityTable />
       </Col>
-      <Col sm={4}>
-        <LeaderBoard />
+      <Col md={12} xl={4}>
+        <UserActivityCard />
       </Col>
       <Col xs={12}>
-        <ApplicationListTable />
+        <ApplicationPerformanceTable />
       </Col>
-      <Col sm={8}>
-        <UserProjectListTable />
+      <Col md={12} xl={8}>
+        <UserProjectProgressTable />
       </Col>
-      <Col sm={4}>
-        <UserWebListTable />
-      </Col>
-      <Col xs={12}>
-        <FullWidthTable />
+      <Col md={12} xl={4}>
+        <TeamMemberActivityList />
       </Col>
       <Col xs={12}>
-        <RecentUsersTable />
+        <ProductOrderList />
+      </Col>
+      <Col xs={12}>
+        <RecentUsersCard />
       </Col>
     </Row>
   );

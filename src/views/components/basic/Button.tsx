@@ -24,14 +24,14 @@ import ToolbarButton from 'sections/components/basic/button/ToolbarButton';
 import ToolbarInputButton from 'sections/components/basic/button/ToolbarInputButton';
 import ToolbarSizeButton from 'sections/components/basic/button/ToolbarSizeButton';
 import VerticalButton from 'sections/components/basic/button/VerticalButton';
-import ComponentHeader from 'components/cards/ComponentHeader';
+import ReferenceHeader from 'components/ReferenceHeader';
 
 // ==============================|| BASIC - BUTTON ||============================== //
 
 export default function ButtonPage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="Use React-Bootstrap’s custom button styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more."
         link="https://react-bootstrap.netlify.app/docs/components/buttons"
       />

@@ -1,9 +1,8 @@
-import { Link } from 'react-router-dom';
-
 // react-bootstrap
 import Badge from 'react-bootstrap/Badge';
 import Image from 'react-bootstrap/Image';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Stack from 'react-bootstrap/Stack';
 
 // project-imports
 import MainCard from 'components/MainCard';
@@ -21,118 +20,70 @@ export default function TicketCategories() {
   return (
     <MainCard title="Ticket Categories" bodyClassName="p-0">
       <ListGroup className="list-group-flush pb-2">
-        <ListGroup.Item>
-          <div className="d-inline-block">
-            <Image src={Avatar} alt="" className="wid-20 rounded me-1 " />
-            <Link to="#" className="link-secondary">
+        <ListGroup.Item className="d-flex align-item-center justify-content-between flex-wrap">
+          <Stack direction="horizontal" className="align-item-center gap-2">
+            <Image src={Avatar} alt="img" className="wid-20 rounded" />
+            <a href="#!" className="link-secondary">
               Piaf able
-            </Link>
-          </div>
-          <div className="float-end">
-            <Badge
-              bg="light-danger"
-              className="rounded-circle me-1"
-              data-bs-toggle="tooltip"
-              data-bs-placement="top"
-              title="tooltip on top"
-            >
+            </a>
+          </Stack>
+          <Stack direction="horizontal" className="align-item-center gap-1">
+            <Badge bg="light-danger" className="rounded-circle">
               1
             </Badge>
-            <Badge
-              bg="light-secondary"
-              className="rounded-circle me-0"
-              data-bs-toggle="tooltip"
-              data-bs-placement="top"
-              title="tooltip on top"
-            >
+            <Badge bg="light-secondary" className="rounded-circle ">
               3
             </Badge>
-          </div>
+          </Stack>
         </ListGroup.Item>
-        <ListGroup.Item>
-          <div className="d-inline-block">
-            <Image src={Avatar1} alt="" className="wid-20 rounded me-1 " />
-            <Link to="#" className="link-secondary">
+        <ListGroup.Item className="d-flex align-item-center justify-content-between flex-wrap">
+          <Stack direction="horizontal" className="align-item-center gap-2">
+            <Image src={Avatar1} alt="img" className="wid-20 rounded" />
+            <a href="#!" className="link-secondary">
               Pro able
-            </Link>
-          </div>
-          <div className="float-end">
-            <Badge
-              bg="light-secondary"
-              className="rounded-circle me-0"
-              data-bs-toggle="tooltip"
-              data-bs-placement="top"
-              title="tooltip on top"
-            >
-              3
-            </Badge>
-          </div>
+            </a>
+          </Stack>
+          <Badge bg="light-secondary" className="rounded-circle ">
+            3
+          </Badge>
         </ListGroup.Item>
-        <ListGroup.Item>
-          <div className="d-inline-block">
-            <Image src={Avatar2} alt="" className="wid-20 rounded me-1 " />
-            <Link to="#" className="link-secondary">
-              CRM admin
-            </Link>
-          </div>
-          <div className="float-end">
-            <Badge
-              bg="light-danger"
-              className="rounded-circle me-1"
-              data-bs-toggle="tooltip"
-              data-bs-placement="top"
-              title="tooltip on top"
-            >
+        <ListGroup.Item className="d-flex align-item-center justify-content-between flex-wrap">
+          <Stack direction="horizontal" className="align-item-center gap-2">
+            <Image src={Avatar2} alt="img" className="wid-20 rounded" />
+            <a href="#!" className="link-secondary">
+              CRM Admin
+            </a>
+          </Stack>
+          <Stack direction="horizontal" className="align-item-center gap-1">
+            <Badge bg="light-danger" className="rounded-circle">
               1
             </Badge>
-            <Badge
-              bg="light-secondary"
-              className="rounded-circle me-0"
-              data-bs-toggle="tooltip"
-              data-bs-placement="top"
-              title="tooltip on top"
-            >
+            <Badge bg="light-secondary" className="rounded-circle ">
               3
             </Badge>
-          </div>
+          </Stack>
         </ListGroup.Item>
-        <ListGroup.Item>
-          <div className="d-inline-block">
-            <Image src={Avatar3} alt="" className="wid-20 rounded me-1 " />
-            <Link to="#" className="link-secondary">
+        <ListGroup.Item className="d-flex align-item-center justify-content-between flex-wrap">
+          <Stack direction="horizontal" className="align-item-center gap-2">
+            <Image src={Avatar3} alt="img" className="wid-20 rounded" />
+            <a href="#!" className="link-secondary">
               Alpha pro
-            </Link>
-          </div>
-          <div className="float-end">
-            <Badge
-              bg="light-secondary"
-              className="rounded-circle me-0"
-              data-bs-toggle="tooltip"
-              data-bs-placement="top"
-              title="tooltip on top"
-            >
-              3
-            </Badge>
-          </div>
+            </a>
+          </Stack>
+          <Badge bg="light-secondary" className="rounded-circle ">
+            3
+          </Badge>
         </ListGroup.Item>
-        <ListGroup.Item>
-          <div className="d-inline-block">
-            <Image src={Avatar4} alt="" className="wid-20 rounded me-1 " />
-            <Link to="#" className="link-secondary">
-              Carbon able
-            </Link>
-          </div>
-          <div className="float-end">
-            <Badge
-              bg="light-secondary"
-              className="rounded-circle me-0"
-              data-bs-toggle="tooltip"
-              data-bs-placement="top"
-              title="tooltip on top"
-            >
-              3
-            </Badge>
-          </div>
+        <ListGroup.Item className="d-flex align-item-center justify-content-between flex-wrap">
+          <Stack direction="horizontal" className="align-item-center gap-2">
+            <Image src={Avatar4} alt="img" className="wid-20 rounded" />
+            <a href="#!" className="link-secondary">
+              Carbon Able
+            </a>
+          </Stack>
+          <Badge bg="light-secondary" className="rounded-circle ">
+            3
+          </Badge>
         </ListGroup.Item>
       </ListGroup>
     </MainCard>

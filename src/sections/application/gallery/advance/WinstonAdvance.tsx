@@ -22,14 +22,14 @@ export default function WinstonAdvance() {
               Jolly <span>Winston</span>
             </h2>
             <p>
-              <a href="#!">
-                <i className="far fa-star" />
+              <a>
+                <i className="ti ti-star" />
               </a>
-              <a href="#!">
-                <i className="far fa-comments" />
+              <a>
+                <i className="ti ti-message-circle" />
               </a>
-              <a href="#!">
-                <i className="far fa-envelope-open" />
+              <a>
+                <i className="ti ti-mail-opened" />
               </a>
             </p>
           </FigureCaption>
@@ -41,14 +41,14 @@ export default function WinstonAdvance() {
               Jolly <span>Winston</span>
             </h2>
             <p>
-              <a href="#!">
-                <i className="far fa-star" />
+              <a>
+                <i className="ti ti-star" />
               </a>
-              <a href="#!">
-                <i className="far fa-comments" />
+              <a>
+                <i className="ti ti-message-circle" />
               </a>
-              <a href="#!">
-                <i className="far fa-envelope-open" />
+              <a>
+                <i className="ti ti-mail-opened" />
               </a>
             </p>
           </FigureCaption>

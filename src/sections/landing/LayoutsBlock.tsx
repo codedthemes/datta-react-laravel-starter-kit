@@ -16,8 +16,6 @@ import { MenuOrientation } from 'config';
 
 // assets
 import VerticalImg from 'assets/images/landing/vertical.jpg';
-import HorizontalImg from 'assets/images/landing/horizontal.jpg';
-import CollapseImg from 'assets/images/landing/collapsed.jpg';
 import TabImg from 'assets/images/landing/tab.jpg';
 import Layout2Img from 'assets/images/landing/layout-2.jpg';
 import Layout3Img from 'assets/images/landing/layout-3.jpg';
@@ -28,7 +26,7 @@ interface LayoutCardProps {
   title: string;
   description: string;
   delay: string;
-  url: string;
+  url?: string;
 }
 
 const layouts = [
@@ -39,22 +37,6 @@ const layouts = [
     description: 'Default theme layout',
     delay: '0.2s',
     url: 'dashboard/default'
-  },
-  {
-    id: 'horizontal',
-    imgSrc: HorizontalImg,
-    title: 'Horizontal',
-    description: 'Menu display in Horizontal',
-    delay: '0.4s',
-    url: 'layouts/horizontal'
-  },
-  {
-    id: 'compact',
-    imgSrc: CollapseImg,
-    title: 'Compact',
-    description: 'Menu display in small Compact size',
-    delay: '0.6s',
-    url: 'layouts/compact'
   },
   {
     id: 'tab',
@@ -84,7 +66,7 @@ const layouts = [
 
 // ==============================|| LAYOUT CARD ||============================== //
 
-function LayoutCard({ url, imgSrc, title, description, delay, id }: LayoutCardProps) {
+function LayoutCard({ id, url, imgSrc, title, description, delay }: LayoutCardProps) {
   const { onChangeMenuOrientation } = useConfig();
   return (
     <Col lg={4} md={6}>
@@ -95,7 +77,7 @@ function LayoutCard({ url, imgSrc, title, description, delay, id }: LayoutCardPr
         transition={{ delay: parseFloat(delay), duration: 0.8, ease: 'easeOut' }}
       >
         <Card className="mb-0">
-          <Link to={url}>
+          <Link to={`/${url}`}>
             <Card.Img src={imgSrc} alt={title} className="img-fluid card-img-top p-2" />
           </Link>
           <Card.Body>
@@ -103,11 +85,15 @@ function LayoutCard({ url, imgSrc, title, description, delay, id }: LayoutCardPr
             <p>{description}</p>
             <Stack
               direction="horizontal"
-              as={Link}
+              as="a"
               gap={2}
-              to={url}
-              className="link-primary align-items-center"
-              onClick={() => onChangeMenuOrientation(id as MenuOrientation)}
+              href={url}
+              className="link-primary h6  align-items-center mb-0"
+              onClick={() => {
+                if (id) {
+                  onChangeMenuOrientation(id as MenuOrientation);
+                }
+              }}
             >
               <strong>Preview</strong> <i className="ti ti-arrow-narrow-right f-18" />
             </Stack>
@@ -134,7 +120,7 @@ export default function LayoutsBlock() {
             </p>
           </Col>
         </Row>
-        <Row className="g-3">
+        <Row className="g-3 justify-content-center">
           {layouts.map((layout, index) => (
             <LayoutCard key={index} {...layout} />
           ))}

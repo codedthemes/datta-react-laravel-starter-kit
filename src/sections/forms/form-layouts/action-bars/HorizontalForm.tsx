@@ -16,7 +16,7 @@ export default function HorizontalFormPage() {
       title="Horizontal Form"
       footerClassName="bg-light"
       footer={
-        <Stack gap={2} direction="horizontal" className="justify-content-center  ">
+        <Stack gap={2} direction="horizontal" className="justify-content-center">
           <Button type="submit">Submit</Button>
           <Button variant="secondary" type="reset">
             Clear

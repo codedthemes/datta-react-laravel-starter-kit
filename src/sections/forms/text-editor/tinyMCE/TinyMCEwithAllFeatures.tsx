@@ -1,8 +1,13 @@
+import { useEffect, useState } from 'react';
+
 // third-party
 import { Editor } from '@tinymce/tinymce-react';
 
 // project-imports
 import MainCard from 'components/MainCard';
+import { getResolvedTheme, setResolvedTheme } from 'components/setResolvedTheme';
+import { ThemeMode } from 'config';
+import useConfig from 'hooks/useConfig';
 
 const initialValues = `<p style="text-align: center;">
 <img title="TinyMCE Logo" src="//www.tiny.cloud/images/glyph-tinymce@2x.png" alt="TinyMCE Logo" width="110" height="97" />
@@ -62,9 +67,19 @@ Thanks for supporting TinyMCE! We hope it helps you and your users create great 
 // =============================|| TINY MCE - ALL FEATURES ||============================== //
 
 export default function TinyMCEwithAllFeatures() {
+  const { mode } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
+  const [editorKey, setEditorKey] = useState(0);
+
+  useEffect(() => {
+    setEditorKey((prevKey) => prevKey + 1);
+  }, [resolvedTheme]);
+
   return (
-    <MainCard>
+    <MainCard title="TinyMCE with All Features">
       <Editor
+        key={editorKey}
         initialValue={initialValues}
         init={{
           height: 500,
@@ -72,6 +87,8 @@ export default function TinyMCEwithAllFeatures() {
           toolbar: 'undo redo | cut copy paste | bold italic | link image | alignleft aligncenter alignright alignjustify',
           plugins: 'link image code',
           statusbar: false,
+          skin: resolvedTheme === ThemeMode.DARK ? 'oxide-dark' : 'oxide',
+          content_css: resolvedTheme === ThemeMode.DARK ? 'dark' : 'default',
           content_style: 'body { font-family: Arial, sans-serif; font-size: 14px; }'
         }}
       />

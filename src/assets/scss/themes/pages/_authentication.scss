@@ -44,10 +44,9 @@
       align-items: center;
       justify-content: center;
       flex-grow: 1;
-      overflow: hidden;
 
       .card {
-        width: 350px;
+        width: 335px;
         max-width: 100%;
       }
 
@@ -73,7 +72,7 @@
         padding: 24px;
         position: relative;
         justify-content: center;
-        width: 100%;
+        overflow: hidden;
 
         .card-body {
           padding: 40px;
@@ -174,10 +173,11 @@
       align-items: center;
 
       .auth-form {
-        width: 100%;
         .card {
-          width: 750px;
           max-width: 100%;
+          @include media-breakpoint-up(md) {
+            width: 750px;
+          }
 
           .card-body {
             padding: 40px;

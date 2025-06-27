@@ -1,9 +1,9 @@
 // third-party
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-import ComponentHeader from 'components/cards/ComponentHeader';
 
 // project-imports
 import MainCard from 'components/MainCard';
+import ReferenceHeader from 'components/ReferenceHeader';
 
 const containerStyle = {
   width: '100%',
@@ -20,7 +20,7 @@ const center = {
 export default function GoogleMapPage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="Converts an elements content into a svg mini pie donut line or bar chart and is compatible with any browser that supports svg"
         link="https://developers.google.com/maps/documentation/javascript/libraries"
       />

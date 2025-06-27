@@ -26,7 +26,7 @@ export default function JuliaAdvance() {
               <p>She loves the smell of the ocean</p>
               <p>And dives into the morning light</p>
             </div>
-            <a href="#!">View more</a>
+            <a>View more</a>
           </FigureCaption>
         </Figure>
         <Figure className="effect-julia">
@@ -40,7 +40,7 @@ export default function JuliaAdvance() {
               <p>She loves the smell of the ocean</p>
               <p>And dives into the morning light</p>
             </div>
-            <a href="#!">View more</a>
+            <a>View more</a>
           </FigureCaption>
         </Figure>
       </div>

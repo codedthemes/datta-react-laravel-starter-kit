@@ -56,7 +56,7 @@ export default function Time() {
     <MainCard
       title="Phone No."
       subheader={
-        <p className="mb-0 mt-1 ">
+        <p className="mb-0 mt-1">
           Add class of <code>.hour </code> with <code>data-mask</code> attribute
         </p>
       }

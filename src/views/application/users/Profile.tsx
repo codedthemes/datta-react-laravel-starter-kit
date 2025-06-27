@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-// assets
+// project-imports
 import MainProfile from 'sections/application/users/profile/MainProfile';
 import UserProfile from 'sections/application/users/profile/UserProfile';
 

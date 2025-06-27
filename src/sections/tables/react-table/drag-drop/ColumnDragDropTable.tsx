@@ -99,15 +99,15 @@ function ReactTable({ defaultColumns, data }: ReactTableProps) {
   };
 
   return (
-    <MainCard title="Column Drag & Drop (Ordering)" className="mb-0">
-      <Stack direction="horizontal" className="justify-content-between align-items-center pb-4">
+    <MainCard title="Column Drag & Drop (Ordering)" className="mb-0 table-card">
+      <Stack direction="horizontal" className="justify-content-between align-items-center flex-wrap p-4" gap={2}>
         <SortingData getState={table.getState} setPageSize={table.setPageSize} />
         <div className="datatable-search">
           <DebouncedInput value={globalFilter ?? ''} onFilterChange={(value) => setGlobalFilter(String(value))} />
         </div>
       </Stack>
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-        <Table responsive hover className="mb-0">
+        <Table responsive hover className="mb-0 border-top">
           <thead>
             {table.getHeaderGroups().map((headerGroup: HeaderGroup<any>) => (
               <tr key={headerGroup.id}>
@@ -143,7 +143,7 @@ function ReactTable({ defaultColumns, data }: ReactTableProps) {
         getState={table.getState}
         getPageCount={table.getPageCount}
         initialPageSize={10}
-        totalEntries={100}
+        totalEntries={10}
       />
     </MainCard>
   );

@@ -9,42 +9,42 @@ const tableComponents: NavItemType = {
   type: 'group',
   children: [
     {
-      id: '/bootstrap-table',
-      title: 'bootstrap-table',
+      id: 'bootstrap-table',
+      title: 'bootstrap table',
       type: 'collapse',
-      icon: <i className="ti ti-server" />,
+      icon: <i className="ph ph-table" />,
       children: [
         {
           id: 'basic-table',
-          title: 'basic-table',
+          title: 'basic table',
           type: 'item',
-          url: '/bootstrap-table/basic-table'
+          url: '/tables/bootstrap-table/basic-table'
         },
         {
           id: 'sizing-table',
           title: 'sizing-table',
           type: 'item',
-          url: '/bootstrap-table/sizing-table'
+          url: '/tables/bootstrap-table/sizing-table'
         },
         {
           id: 'border-table',
-          title: 'border-table',
+          title: 'border table',
           type: 'item',
-          url: '/bootstrap-table/border-table'
+          url: '/tables/bootstrap-table/border-table'
         },
         {
           id: 'styling-table',
-          title: 'styling-table',
+          title: 'styling table',
           type: 'item',
-          url: '/bootstrap-table/styling-table'
+          url: '/tables/bootstrap-table/styling-table'
         }
       ]
     },
     {
       id: 'react-table',
-      title: 'react-table',
+      title: 'react table',
       type: 'collapse',
-      icon: <i className="ti ti-server" />,
+      icon: <i className="ph ph-grid-nine" />,
       children: [
         {
           id: 'basic',
@@ -84,7 +84,7 @@ const tableComponents: NavItemType = {
         },
         {
           id: 'row-selection',
-          title: 'row-selection',
+          title: 'row selection',
           type: 'item',
           url: '/tables/react-table/row-selection'
         },
@@ -96,19 +96,19 @@ const tableComponents: NavItemType = {
         },
         {
           id: 'drag-drop',
-          title: 'drag-drop',
+          title: 'drag drop',
           type: 'item',
           url: '/tables/react-table/drag-drop'
         },
         {
           id: 'column-visibility',
-          title: 'column-visibility',
+          title: 'column visibility',
           type: 'item',
           url: '/tables/react-table/column-visibility'
         },
         {
           id: 'column-resizing',
-          title: 'column-resizing',
+          title: 'column resizing',
           type: 'item',
           url: '/tables/react-table/column-resizing'
         },
@@ -138,7 +138,7 @@ const tableComponents: NavItemType = {
         },
         {
           id: 'edit-table',
-          title: 'edit-table',
+          title: 'edit table',
           type: 'item',
           url: '/tables/react-table/edit-table'
         }

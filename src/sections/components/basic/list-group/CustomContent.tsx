@@ -31,7 +31,7 @@ export default function CustomContentPage() {
 
         <ListGroup.Item action>
           <Stack direction="horizontal" className="justify-content-between align-items-start">
-            <h5 className="mb-1 ">List group item heading</h5>
+            <h5 className="mb-1">List group item heading</h5>
             <small>3 days ago</small>
           </Stack>
           <p className="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>

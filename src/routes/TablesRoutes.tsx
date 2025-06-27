@@ -4,29 +4,31 @@ import { lazy } from 'react';
 import DashboardLayout from 'layout/Dashboard';
 import Loadable from 'components/Loadable';
 
-// render - Tables components page
-const BasicTablePage = Loadable(lazy(() => import('views/table/bootstrap-table/BasicTable')));
-const BorderTablePage = Loadable(lazy(() => import('views/table/bootstrap-table/BorderTable')));
-const EditTable = Loadable(lazy(() => import('views/table/reactTable/EditTable')));
-const ReactTablesBasic = Loadable(lazy(() => import('views/table/reactTable/BasicTable')));
-const ReactTablesDense = Loadable(lazy(() => import('views/table/reactTable/DenseTable')));
-const ReactTablesSorting = Loadable(lazy(() => import('views/table/reactTable/SortingTable')));
-const ReactTablesFiltering = Loadable(lazy(() => import('views/table/reactTable/FilteringTable')));
-const ReactTablesGrouping = Loadable(lazy(() => import('views/table/reactTable/GroupingTable')));
-const ReactTablesPagination = Loadable(lazy(() => import('views/table/reactTable/Pagination')));
-const ReactTablesRowSelection = Loadable(lazy(() => import('views/table/reactTable/RowSelectionTable')));
-const ReactTablesExpanding = Loadable(lazy(() => import('views/table/reactTable/ExpandingTable')));
-const ReactTablesStickyHeader = Loadable(lazy(() => import('views/table/reactTable/StickyHeader')));
-const ReactTablesDragDrop = Loadable(lazy(() => import('views/table/reactTable/DragDropTable')));
-const ReactTablesColumnVisibility = Loadable(lazy(() => import('views/table/reactTable/ColumnVisibility')));
-const ReactTablesColumnResizing = Loadable(lazy(() => import('views/table/reactTable/ColumnResizing')));
-const ReactTablesUmbrella = Loadable(lazy(() => import('views/table/reactTable/UmbrellaTable')));
-const ReactTablesEmpty = Loadable(lazy(() => import('views/table/reactTable/EmptyTable')));
-const ReactTablesVirtualized = Loadable(lazy(() => import('views/table/reactTable/Virtualized')));
-const SizingTablePage = Loadable(lazy(() => import('views/table/bootstrap-table/SizingTable')));
-const StylingTablePage = Loadable(lazy(() => import('views/table/bootstrap-table/StylingTable')));
+// render - bootstrap table pages
+const BootstrapTableBasic = Loadable(lazy(() => import('views/table/bootstrap-table/BasicTable')));
+const BootstrapTableSizing = Loadable(lazy(() => import('views/table/bootstrap-table/SizingTable')));
+const BootstrapTableBorder = Loadable(lazy(() => import('views/table/bootstrap-table/BorderTable')));
+const BootstrapTableStyling = Loadable(lazy(() => import('views/table/bootstrap-table/StylingTable')));
 
-// ==============================|| ROUTES - TABLES ROUTES ||============================== //
+// render - react table pages
+const ReactTablesBasic = Loadable(lazy(() => import('views/table/react-table/Basic')));
+const ReactTablesDense = Loadable(lazy(() => import('views/table/react-table/Dense')));
+const ReactTablesSorting = Loadable(lazy(() => import('views/table/react-table/Sorting')));
+const ReactTablesFiltering = Loadable(lazy(() => import('views/table/react-table/Filtering')));
+const ReactTablesGrouping = Loadable(lazy(() => import('views/table/react-table/Grouping')));
+const ReactTablesPagination = Loadable(lazy(() => import('views/table/react-table/Pagination')));
+const ReactTablesRowSelection = Loadable(lazy(() => import('views/table/react-table/RowSelection')));
+const ReactTablesExpanding = Loadable(lazy(() => import('views/table/react-table/Expanding')));
+const ReactTableEditable = Loadable(lazy(() => import('views/table/react-table/EditTable')));
+const ReactTablesStickyHeader = Loadable(lazy(() => import('views/table/react-table/StickyHeader')));
+const ReactTablesDragDrop = Loadable(lazy(() => import('views/table/react-table/DragDrop')));
+const ReactTablesColumnVisibility = Loadable(lazy(() => import('views/table/react-table/ColumnVisibility')));
+const ReactTablesColumnResizing = Loadable(lazy(() => import('views/table/react-table/ColumnResizing')));
+const ReactTablesUmbrella = Loadable(lazy(() => import('views/table/react-table/Umbrella')));
+const ReactTablesEmpty = Loadable(lazy(() => import('views/table/react-table/Empty')));
+const ReactTablesVirtualized = Loadable(lazy(() => import('views/table/react-table/Virtualized')));
+
+// ==============================|| TABLES ROUTING ||============================== //
 
 const TablesRoutes = {
   path: '/',
@@ -36,23 +38,23 @@ const TablesRoutes = {
       element: <DashboardLayout />,
       children: [
         {
-          path: 'bootstrap-table',
+          path: 'tables/bootstrap-table',
           children: [
             {
               path: 'basic-table',
-              element: <BasicTablePage />
+              element: <BootstrapTableBasic />
             },
             {
               path: 'sizing-table',
-              element: <SizingTablePage />
+              element: <BootstrapTableSizing />
             },
             {
               path: 'border-table',
-              element: <BorderTablePage />
+              element: <BootstrapTableBorder />
             },
             {
               path: 'styling-table',
-              element: <StylingTablePage />
+              element: <BootstrapTableStyling />
             }
           ]
         },
@@ -93,6 +95,10 @@ const TablesRoutes = {
               element: <ReactTablesExpanding />
             },
             {
+              path: 'edit-table',
+              element: <ReactTableEditable />
+            },
+            {
               path: 'drag-drop',
               element: <ReactTablesDragDrop />
             },
@@ -119,10 +125,6 @@ const TablesRoutes = {
             {
               path: 'virtualized',
               element: <ReactTablesVirtualized />
-            },
-            {
-              path: 'edit-table',
-              element: <EditTable />
             }
           ]
         }

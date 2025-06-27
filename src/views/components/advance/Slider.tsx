@@ -1,10 +1,10 @@
 // react-bootstrap
-import ComponentHeader from 'components/cards/ComponentHeader';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 // project-imports
 import Customize from 'sections/components/advance/slider/Customize';
+import ReferenceHeader from 'components/ReferenceHeader';
 import Slider1 from 'sections/components/advance/slider/Slider1';
 import Vertical from 'sections/components/advance/slider/Vertical';
 
@@ -13,7 +13,7 @@ import Vertical from 'sections/components/advance/slider/Vertical';
 export default function SliderPage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="rc-slider works with static content and runs in the browser. If the HTML is loaded dynamically, it may require reinitialization."
         link="https://react-slick.neostack.com/"
       />

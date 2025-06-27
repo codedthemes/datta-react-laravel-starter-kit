@@ -25,7 +25,7 @@ export default function TextAreas() {
           <h5>Custom height</h5>
           <hr />
           <FloatingLabel controlId="floatingTextarea" label="Comments">
-            <Form.Control as="textarea" placeholder="Leave a comment here" className="hei-100" />
+            <Form.Control as="textarea" placeholder="Leave a comment here" style={{ height: '100px' }} />
           </FloatingLabel>
         </Col>
       </Row>

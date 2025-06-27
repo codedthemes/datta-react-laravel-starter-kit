@@ -1,4 +1,4 @@
-// react-botstrap
+// react-bootstrap
 import Image from 'react-bootstrap/Image';
 
 // project-imports
@@ -7,7 +7,7 @@ import SocialLinksList from './SocialLinksList';
 import MainCard from 'components/MainCard';
 
 // assets
-import avatar1 from 'assets/images/user/avatar-1.jpg';
+import avatar1 from 'assets/images/user/avatar-1.png';
 
 // ==============================|| SOCIAL - SOCIAL LINK 1 ||============================== //
 

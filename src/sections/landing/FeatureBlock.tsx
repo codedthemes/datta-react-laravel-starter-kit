@@ -1,10 +1,11 @@
-import { Link } from 'react-router-dom';
-
 // react-bootstrap
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Stack from 'react-bootstrap/Stack';
+
+// project-imports
+import branding from 'branding.json';
 
 // third-party
 import { motion } from 'framer-motion';
@@ -19,7 +20,7 @@ const features = [
   {
     icon: 'ti ti-dashboard',
     title: 'Made for Performance',
-    description: 'Speed, Easy to customize, Flexible to use are 3 top most key factors for Datta Able Admin Template.',
+    description: `Speed, Easy to customize, Flexible to use are 3 top most key factors for ${branding.brandName} Admin Template.`,
     delay: '0.4s'
   },
   {
@@ -34,9 +35,9 @@ const features = [
     description: (
       <>
         Problem? Write to us – using{' '}
-        <Link to="https://codedthemes.support-hub.io" target="_blank" rel="noopener noreferrer">
+        <a href="https://codedthemes.support-hub.io" target="_blank" rel="noopener noreferrer">
           our support desk
-        </Link>
+        </a>
         . 99% query resolution in the first response.
       </>
     ),
@@ -92,7 +93,7 @@ export default function FeatureBlock() {
         <Row className="title justify-content-center text-center">
           <Col lg={6} md={10}>
             <h2>
-              Why <strong className="landing-background-image">Datta Able?</strong>
+              Why <strong className="landing-background-image">{branding.brandName}?</strong>
             </h2>
             <p className="mb-0">
               Made using Bootstrap framework with high-end flexible code and well-structured documentation helper file.

@@ -32,7 +32,7 @@ export default function BasicMap() {
 
   return (
     <MainCard title="Basic Map With Markers">
-      <div id="basic-map" className="set-map h-400" />
+      <div id="basic-map" className="set-map" style={{ height: '400px' }} />
     </MainCard>
   );
 }

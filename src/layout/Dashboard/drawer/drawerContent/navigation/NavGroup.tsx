@@ -1,8 +1,7 @@
 import { Fragment, useEffect, useState } from 'react';
-import { matchPath, useLocation } from 'react-router-dom';
+import { Link, matchPath, useLocation } from 'react-router-dom';
 
 // react-bootstrap
-import ListGroup from 'react-bootstrap/ListGroup';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 
@@ -12,9 +11,9 @@ import { FormattedMessage } from 'react-intl';
 // project-imports
 import NavItem from './NavItem';
 import NavCollapse from './NavCollapse';
+import useConfig from 'hooks/useConfig';
 import { useGetMenuMaster } from 'api/menu';
 import { MenuOrientation } from 'config';
-import useConfig from 'hooks/useConfig';
 
 // types
 import { NavItemType } from 'types/menu';
@@ -34,7 +33,7 @@ interface Props {
 }
 
 type VirtualElement = {
-  getBoundingClientRect: () => ClientRect | DOMRect;
+  getBoundingClientRect: () => DOMRect;
   contextElement?: Element;
 };
 
@@ -56,7 +55,7 @@ export default function NavGroup({
   const [currentItem, setCurrentItem] = useState(item);
   const [state, setState] = useState<any>();
   const { pathname } = useLocation();
-  const { menuOrientation } = useConfig();
+  const { menuOrientation, onChangeMenuOrientation } = useConfig();
 
   const openMini = Boolean(anchorEl);
 
@@ -71,7 +70,6 @@ export default function NavGroup({
         setCurrentItem(item);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [item, lastItem]);
 
   const checkOpenForParent = (child: NavItemType[], id: string) => {
@@ -87,8 +85,8 @@ export default function NavGroup({
   };
 
   const checkSelectedOnload = (data: NavItemType) => {
-    const childrens = data.children ?? []; // Use Nullish Coalescing (??) instead of Ternary (?:)
-    childrens.forEach((itemCheck: NavItemType | undefined) => {
+    const children = data.children ?? []; // Use Nullish Coalescing (??) instead of Ternary (?:)
+    children.forEach((itemCheck: NavItemType | undefined) => {
       if (!itemCheck) return;
 
       if (itemCheck.children?.length) {
@@ -104,7 +102,6 @@ export default function NavGroup({
   useEffect(() => {
     checkSelectedOnload(currentItem);
     if (openMini) setAnchorEl(null);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname, currentItem]);
 
   useEffect(() => {
@@ -114,11 +111,12 @@ export default function NavGroup({
   }, [item.children]);
 
   const navCollapse = item.children?.map((menuItem, index) => {
+    const key = menuItem.id || `${menuItem.type}-${index}`;
     switch (menuItem.type) {
       case 'collapse':
         return (
           <NavCollapse
-            key={menuItem.id}
+            key={key}
             menu={menuItem}
             setSelectedItems={setSelectedItems}
             setSelectedLevel={setSelectedLevel}
@@ -129,15 +127,16 @@ export default function NavGroup({
           />
         );
       case 'item':
-        return <NavItem key={menuItem.id} item={menuItem} level={1} />;
+        return <NavItem key={key} item={menuItem} level={1} />;
       default:
         return (
-          <h6 key={index} color="error" className="align-center">
+          <h6 key={`fix-${index}`} color="error" className="align-center">
             Fix - Group Collapse or Items
           </h6>
         );
     }
   });
+
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<string | null | undefined>(null);
 
@@ -148,63 +147,48 @@ export default function NavGroup({
   const handleClick = () => {
     const isMobile = window.innerWidth <= 1024;
     setSelectedLevel(1);
-    if (menuOrientation !== MenuOrientation.HORIZONTAL) {
-      setSelectTab(item);
-    }
+    setSelectTab(item);
     if (isMobile || !drawerOpen) {
       setOpen(!open);
       setSelected(!selected ? state.id : null);
       setSelectedItems(!selected ? state : null);
     }
   };
-  menuOrientation === MenuOrientation.TAB;
   return (
     <>
-      {menuOrientation === MenuOrientation.HORIZONTAL ? (
-        <ListGroup className={`pc-item pc-hasmenu ${open && menuOrientation !== MenuOrientation.HORIZONTAL ? 'pc-trigger' : ''}`}>
-          <a className="pc-link " onClick={handleClick}>
-            {state?.icon && (
-              <span className="pc-micon">
-                <i className={typeof state?.icon === 'string' ? state?.icon : state?.icon?.props.className} />
-              </span>
-            )}
-            <span className="pc-mtext">
-              <FormattedMessage id={item.title?.toString()} />
-            </span>
-            <span className="pc-arrow">
-              <i className={`ti ti-chevron-right`} />
-            </span>
-          </a>
-          {open === true && <ul className="pc-submenu">{navCollapse}</ul>}
-        </ListGroup>
+      {menuOrientation !== MenuOrientation.TAB ? (
+        <Fragment>
+          <li className="pc-item pc-caption" key={item.id}>
+            <label>
+              <FormattedMessage id={item.title as string} />
+            </label>
+          </li>
+          {navCollapse}
+        </Fragment>
       ) : (
-        <>
-          {menuOrientation !== MenuOrientation.TAB ? (
-            <Fragment>
-              <li className="pc-item pc-caption" key={item.id}>
-                <label>
-                  <FormattedMessage id={item.title?.toString()} />
-                </label>
-              </li>
-              {navCollapse}
-            </Fragment>
-          ) : (
-            <li className="nav-item">
-              <OverlayTrigger
-                placement="right"
-                overlay={
-                  <Tooltip id={`tooltip-${item?.title ?? ''}`}>
-                    <FormattedMessage id={item.title?.toString()} />
-                  </Tooltip>
+        <li className="nav-item">
+          <OverlayTrigger
+            placement="right"
+            overlay={
+              <Tooltip id={`tooltip-${item?.title ?? ''}`}>
+                <FormattedMessage id={item.title as string} />
+              </Tooltip>
+            }
+          >
+            <Link
+              to="#!"
+              className={`nav-link ${item.id === selected ? 'active' : ''}`}
+              onClick={() => {
+                handleClick();
+                if (item?.layout === item?.title) {
+                  onChangeMenuOrientation(item?.layout as MenuOrientation);
                 }
-              >
-                <a className={`nav-link ${item.id === selected ? 'active' : ''}`} onClick={handleClick}>
-                  {state?.icon && <i className={`f-20  ${typeof state?.icon === 'string' ? state?.icon : state?.icon?.props.className}`} />}
-                </a>
-              </OverlayTrigger>
-            </li>
-          )}
-        </>
+              }}
+            >
+              {state?.icon && <i className={`f-20  ${typeof state?.icon === 'string' ? state?.icon : state?.icon?.props.className}`} />}
+            </Link>
+          </OverlayTrigger>
+        </li>
       )}
     </>
   );

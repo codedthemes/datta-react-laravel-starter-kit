@@ -1,5 +1,5 @@
-// react-bootstrap
-import Dashboard from 'sections/admin-panel/membership/dashboard/Dashboard';
+// project-imports
+import Dashboard from 'sections/admin-panel/membership/dashboard';
 
 // =============================|| MEMBERSHIP - DASHBOARD ||============================== //
 

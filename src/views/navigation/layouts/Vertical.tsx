@@ -3,9 +3,9 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 // project-imports
-import LayoutCard from 'components/layout/LayoutCard';
+import LayoutCard from 'sections/layouts/LayoutCard';
 
-// ==============================|| NAVIGATION - VERTICAL ||============================== //
+// ==============================|| LAYOUT - VERTICAL ||============================== //
 
 export default function VerticalPage() {
   return (

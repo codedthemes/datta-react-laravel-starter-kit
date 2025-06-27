@@ -1,13 +1,12 @@
 // react-bootstrap
 import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 import Stack from 'react-bootstrap/Stack';
-
-// project-imports
-import DebouncedInput from './DebouncedInput';
 
 // third-party
 import { Column, RowData, Table } from '@tanstack/react-table';
+
+// project-imports
+import DebouncedInput from './DebouncedInput';
 
 type NumberInputProps = {
   columnFilterValue: [number, number];
@@ -27,19 +26,21 @@ function NumberInput({ columnFilterValue, getFacetedMinMaxValues, setFilterValue
   return (
     <Stack direction="horizontal" className="align-items-center g-2">
       <DebouncedInput
+        inputStyle="wid-120"
         type="number"
         value={columnFilterValue?.[0] ?? ''}
         onFilterChange={(value) => setFilterValue((old: [number, number]) => [value, old?.[1]])}
-        inputProps={{ min: min, max: max }}
+        inputProps={{ ...(min !== undefined ? { min } : {}), ...(max !== undefined ? { max } : {}) }}
       />
 
       <i className="ti ti-minus" style={{ marginLeft: 8, marginRight: 8 }} />
 
       <DebouncedInput
+        inputStyle="wid-120"
         type="number"
         value={columnFilterValue?.[1] ?? ''}
         onFilterChange={(value) => setFilterValue((old: [number, number]) => [old?.[0], value])}
-        inputProps={{ min: min, max: max }}
+        inputProps={{ ...(min !== undefined ? { min } : {}), ...(max !== undefined ? { max } : {}) }}
       />
     </Stack>
   );
@@ -58,15 +59,13 @@ function TextInput({ columnId, columnFilterValue, header, setFilterValue }: Text
   const dataListId = columnId + 'list';
 
   return (
-    <InputGroup size="sm">
-      <Form.Control
-        type="text"
-        value={columnFilterValue ?? ''}
-        onChange={(e) => setFilterValue(e.target.value)}
-        placeholder={`Search ${header}`}
-        list={dataListId}
-      />
-    </InputGroup>
+    <Form.Control
+      type="text"
+      value={columnFilterValue ?? ''}
+      onChange={(e) => setFilterValue(e.target.value)}
+      placeholder={`Search ${header}`}
+      list={dataListId}
+    />
   );
 }
 

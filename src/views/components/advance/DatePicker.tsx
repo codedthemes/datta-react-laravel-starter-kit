@@ -12,7 +12,7 @@ import DatePickerDisabled from 'sections/components/advance/date-picker/Disabled
 import DateRange from 'sections/components/advance/date-picker/DateRange';
 import DatesDisabled from 'sections/components/advance/date-picker/DatesDisabled';
 import TodayHighlight from 'sections/components/advance/date-picker/TodayHighLight';
-import ComponentHeader from 'components/cards/ComponentHeader';
+import ReferenceHeader from 'components/ReferenceHeader';
 
 // ==============================|| ADVANCED - DATE PICKER ||============================== //
 
@@ -33,7 +33,7 @@ export default function DatePickerPage() {
 
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="React-Bootstrap datepicker provides a flexible datepicker widget in the React-Bootstrap style."
         link="https://projects.wojtekmaj.pl/react-calendar/"
       />

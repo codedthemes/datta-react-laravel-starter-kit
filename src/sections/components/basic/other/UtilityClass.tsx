@@ -170,7 +170,7 @@ export default function UtilityClass() {
       </Row>
 
       <Row>
-        <Col md={6} className="mt-4 ">
+        <Col md={6} className="mt-4">
           <h6 className="mt-3 mb-0">Width</h6>
           <hr className="my-2" />
           <Stack direction="horizontal" gap={1} className="flex-wrap">
@@ -183,7 +183,7 @@ export default function UtilityClass() {
             ))}
           </Stack>
         </Col>
-        <Col md={6} className="mt-4 ">
+        <Col md={6} className="mt-4">
           <h6 className="mt-3 mb-0">Height</h6>
           <hr className="my-2" />
           <Stack direction="horizontal" gap={1} className="flex-wrap">
@@ -215,7 +215,7 @@ export default function UtilityClass() {
       </Row>
 
       <Row>
-        <Col md={6} className="mt-4 ">
+        <Col md={6} className="mt-4">
           <h6 className="mb-0 mt-3">Font weight</h6>
           <hr className="my-2" />
           <Stack direction="horizontal" gap={1} className="flex-wrap">

@@ -6,6 +6,7 @@ import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 // ==============================|| INVOICE LIST - AREA CHART ||============================== //
 
 export default function InvoiceChart({ series, chartColor }: { series: number[]; chartColor: string }) {
+  // chart-options
   const chartOptions: ChartProps = {
     chart: {
       sparkline: {

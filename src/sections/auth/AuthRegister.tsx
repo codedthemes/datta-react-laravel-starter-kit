@@ -14,19 +14,21 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 // project-imports
 import MainCard from 'components/MainCard';
+import useConfig from 'hooks/useConfig';
 import { confirmPasswordSchema, emailSchema, firstNameSchema, lastNameSchema, passwordSchema } from 'utils/validationSchema';
+import { ThemeMode } from 'config';
+import { getResolvedTheme, setResolvedTheme } from 'components/setResolvedTheme';
 
 // assets
-import WhiteLogo from 'assets/images/logo-white.svg';
-import Logo from 'assets/images/logo-dark.svg';
-import { Link } from 'react-router-dom';
+import LightLogo from 'assets/images/logo-white.svg';
+import DarkLogo from 'assets/images/logo-dark.svg';
 
 interface RegisterFormInput {
   email: string;
   password: string;
-  confirmpassword: string;
-  firstname: string;
-  lastname: string;
+  confirmPassword: string;
+  firstName: string;
+  lastName: string;
 }
 
 interface FormProps {
@@ -37,11 +39,18 @@ interface FormProps {
 // ==============================|| AUTH REGISTER FORM ||============================== //
 
 export default function AuthRegisterForm({ className, link }: FormProps) {
+  const { mode } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
+
+  const logo = resolvedTheme === ThemeMode.DARK ? LightLogo : DarkLogo;
+
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
-    reset,
+    // reset,
+    // post,
     formState: { errors },
     setError,
     clearErrors
@@ -52,23 +61,26 @@ export default function AuthRegisterForm({ className, link }: FormProps) {
   };
 
   const onSubmit: SubmitHandler<RegisterFormInput> = (data: RegisterFormInput) => {
-    if (data.password !== data.confirmpassword) {
-      setError('confirmpassword', {
+    if (data.password !== data.confirmPassword) {
+      setError('confirmPassword', {
         type: 'manual',
         message: 'Both Password must be match!'
       });
     } else {
-      clearErrors('confirmpassword');
-      reset();
+      // post(route('register'), {
+      //   onFinish: () => reset()
+      // })
+      clearErrors('confirmPassword');
+      
     }
   };
 
   return (
-    <MainCard className={window.location.pathname === '/auth/register-v4' ? 'my-0' : 'my-5'}>
+    <MainCard className="mb-0">
       <div className="text-center">
-        <Link to="#">
-          <Image src={className === 'text-white' ? WhiteLogo : Logo} alt="img" />
-        </Link>
+        <a>
+          <Image src={logo} alt="img" />
+        </a>
       </div>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <h4 className={`text-center f-w-500 mt-4 mb-3 ${className}`}>Sign up</h4>
@@ -78,11 +90,11 @@ export default function AuthRegisterForm({ className, link }: FormProps) {
               <Form.Control
                 type="text"
                 placeholder="First Name"
-                {...register('firstname', firstNameSchema)}
-                isInvalid={!!errors.firstname}
+                {...register('firstName', firstNameSchema)}
+                isInvalid={!!errors.firstName}
                 className={className && 'bg-transparent border-white text-white border-opacity-25 '}
               />
-              <Form.Control.Feedback type="invalid">{errors.firstname?.message}</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">{errors.firstName?.message}</Form.Control.Feedback>
             </Form.Group>
           </Col>
           <Col sm={6}>
@@ -90,11 +102,11 @@ export default function AuthRegisterForm({ className, link }: FormProps) {
               <Form.Control
                 type="text"
                 placeholder="Last Name"
-                {...register('lastname', lastNameSchema)}
+                {...register('lastName', lastNameSchema)}
                 isInvalid={!!errors.email}
                 className={className && 'bg-transparent border-white text-white border-opacity-25 '}
               />
-              <Form.Control.Feedback type="invalid">{errors.lastname?.message}</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">{errors.lastName?.message}</Form.Control.Feedback>
             </Form.Group>
           </Col>
         </Row>
@@ -127,11 +139,11 @@ export default function AuthRegisterForm({ className, link }: FormProps) {
           <Form.Control
             type="password"
             placeholder="Confirm Password"
-            {...register('confirmpassword', confirmPasswordSchema)}
-            isInvalid={!!errors.confirmpassword}
+            {...register('confirmPassword', confirmPasswordSchema)}
+            isInvalid={!!errors.confirmPassword}
             className={className && 'bg-transparent border-white text-white border-opacity-25 '}
           />
-          <Form.Control.Feedback type="invalid">{errors.confirmpassword?.message}</Form.Control.Feedback>
+          <Form.Control.Feedback type="invalid">{errors.confirmPassword?.message}</Form.Control.Feedback>
         </Form.Group>
         <Stack direction="horizontal" className="mt-1 justify-content-between">
           <Form.Group controlId="customCheckc1">
@@ -150,9 +162,9 @@ export default function AuthRegisterForm({ className, link }: FormProps) {
         </div>
         <Stack direction="horizontal" className="justify-content-between align-items-end mt-4">
           <h6 className={`f-w-500 mb-0 ${className}`}>Already have an Account?</h6>
-          <Link to={link} className="link-primary">
+          <a href={link} className="link-primary">
             Login
-          </Link>
+          </a>
         </Stack>
       </Form>
     </MainCard>

@@ -12,7 +12,7 @@ import MainCard from 'components/MainCard';
 export default function TooltipPage() {
   return (
     <MainCard title="Tooltip">
-      <Stack direction="horizontal" gap={2}>
+      <Stack direction="horizontal" className="flex-wrap" gap={2}>
         <OverlayTrigger placement="top" overlay={<Tooltip>Tooltip on top</Tooltip>}>
           <Button variant="danger">Top</Button>
         </OverlayTrigger>

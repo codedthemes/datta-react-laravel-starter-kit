@@ -18,14 +18,14 @@ import ListGroupRadios from 'sections/components/basic/list-group/ListGroupRadio
 import ListGroupCheckboxes from 'sections/components/basic/list-group/ListGroupCheckboxes';
 import Numbered from 'sections/components/basic/list-group/Numbered';
 import WithBadges from 'sections/components/basic/list-group/WithBadges';
-import ComponentHeader from 'components/cards/ComponentHeader';
+import ReferenceHeader from 'components/ReferenceHeader';
 
 // ==============================|| BASIC - LIST GROUP ||============================== //
 
 export default function ListGroupPage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="List groups are a flexible and powerful component for displaying a series of content. Modify and extend them to support just about any content within."
         link="https://react-bootstrap.netlify.app/docs/components/list-group/"
       />

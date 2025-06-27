@@ -8,11 +8,9 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import Stack from 'react-bootstrap/Stack';
 import Table from 'react-bootstrap/Table';
 
-// third-party
-import SimpleBar from 'simplebar-react';
-
 // project-imports
 import MainCard from 'components/MainCard';
+import SimpleBarScroll from 'components/third-party/SimpleBar';
 
 // =============================|| OFFCANVAS - LIVE DEMO ||============================== //
 
@@ -50,207 +48,205 @@ export default function LiveDemoPage() {
           <Offcanvas.Header closeButton>
             <Offcanvas.Title>Offcanvas</Offcanvas.Title>
           </Offcanvas.Header>
-          <SimpleBar forceVisible="y" className="max-height-adjust">
-            <Offcanvas.Body>
-              <h5 className="mb-2">
+          <SimpleBarScroll style={{ maxHeight: 'calc(100vh - 60px)' }}>
+            <Offcanvas.Body className="p-0">
+              <h5 className="mb-2 px-3">
                 $746.5k{' '}
                 <small className="text-success f-w-400">
                   +20.6 <i className="ti ti-arrow-up" />
                 </small>
               </h5>
-              <p className="text-muted mb-3">Past 30 days</p>
+              <p className="text-muted mb-3 px-3">Past 30 days</p>
 
               <div className="table-body">
-                <div className="table-responsive">
-                  <Table className="table-hover">
-                    <thead>
-                      <tr>
-                        <th>customer</th>
-                        <th className="text-end">plan</th>
-                        <th className="text-end">mrp</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <Stack direction="horizontal">
-                            <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
-                              <i className="ti ti-arrow-down f-16" />
-                            </div>
-                            <span>Logicoma</span>
-                          </Stack>
-                        </td>
-                        <td className="text-end">
-                          <Badge bg="light-success ">Team</Badge>
-                        </td>
-                        <td className="text-end f-w-600">
-                          <span className="text-danger">-$72</span>
-                        </td>
-                      </tr>
+                <Table responsive hover className="border-bottom">
+                  <thead>
+                    <tr>
+                      <th>customer</th>
+                      <th className="text-end">plan</th>
+                      <th className="text-end">mrp</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <Stack direction="horizontal">
+                          <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
+                            <i className="ti ti-arrow-down f-16" />
+                          </div>
+                          <span>Logicoma</span>
+                        </Stack>
+                      </td>
+                      <td className="text-end">
+                        <Badge bg="light-success">Team</Badge>
+                      </td>
+                      <td className="text-end f-w-600">
+                        <span className="text-danger">-$72</span>
+                      </td>
+                    </tr>
 
-                      <tr>
-                        <td>
-                          <Stack direction="horizontal">
-                            <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
-                              <i className="ti ti-star f-16" />
-                            </div>
-                            <span>UAC</span>
-                          </Stack>
-                        </td>
-                        <td className="text-end">
-                          <Badge bg="light-success ">Team</Badge>
-                        </td>
-                        <td className="text-end f-w-600">
-                          <span>$199</span>
-                        </td>
-                      </tr>
+                    <tr>
+                      <td>
+                        <Stack direction="horizontal">
+                          <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
+                            <i className="ti ti-star f-16" />
+                          </div>
+                          <span>UAC</span>
+                        </Stack>
+                      </td>
+                      <td className="text-end">
+                        <Badge bg="light-success">Team</Badge>
+                      </td>
+                      <td className="text-end f-w-600">
+                        <span>$199</span>
+                      </td>
+                    </tr>
 
-                      <tr>
-                        <td>
-                          <Stack direction="horizontal">
-                            <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
-                              <i className="ti ti-wallet f-16" />
-                            </div>
-                            <span>Biffco</span>
-                          </Stack>
-                        </td>
-                        <td className="text-end">
-                          <Badge bg="light-success">Team</Badge>
-                        </td>
-                        <td className="text-end f-w-600">
-                          <span className="text-danger">-$72</span>
-                        </td>
-                      </tr>
+                    <tr>
+                      <td>
+                        <Stack direction="horizontal">
+                          <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
+                            <i className="ti ti-wallet f-16" />
+                          </div>
+                          <span>Biffco</span>
+                        </Stack>
+                      </td>
+                      <td className="text-end">
+                        <Badge bg="light-success">Team</Badge>
+                      </td>
+                      <td className="text-end f-w-600">
+                        <span className="text-danger">-$72</span>
+                      </td>
+                    </tr>
 
-                      <tr>
-                        <td>
-                          <Stack direction="horizontal">
-                            <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
-                              <i className="ti ti-arrow-down f-16" />
-                            </div>
-                            <span>Matsumura</span>
-                          </Stack>
-                        </td>
-                        <td className="text-end">
-                          <Badge bg="light-success ">Team</Badge>
-                        </td>
-                        <td className="text-end f-w-600">
-                          <span className="text-danger">-$72</span>
-                        </td>
-                      </tr>
+                    <tr>
+                      <td>
+                        <Stack direction="horizontal">
+                          <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
+                            <i className="ti ti-arrow-down f-16" />
+                          </div>
+                          <span>Matsumura</span>
+                        </Stack>
+                      </td>
+                      <td className="text-end">
+                        <Badge bg="light-success">Team</Badge>
+                      </td>
+                      <td className="text-end f-w-600">
+                        <span className="text-danger">-$72</span>
+                      </td>
+                    </tr>
 
-                      <tr>
-                        <td>
-                          <Stack direction="horizontal">
-                            <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
-                              <i className="ti ti-wallet f-16" />
-                            </div>
-                            <span>Biffco</span>
-                          </Stack>
-                        </td>
-                        <td className="text-end">
-                          <Badge bg="light-success ">Team</Badge>
-                        </td>
-                        <td className="text-end f-w-600">
-                          <span className="text-danger">-$72</span>
-                        </td>
-                      </tr>
+                    <tr>
+                      <td>
+                        <Stack direction="horizontal">
+                          <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
+                            <i className="ti ti-wallet f-16" />
+                          </div>
+                          <span>Biffco</span>
+                        </Stack>
+                      </td>
+                      <td className="text-end">
+                        <Badge bg="light-success">Team</Badge>
+                      </td>
+                      <td className="text-end f-w-600">
+                        <span className="text-danger">-$72</span>
+                      </td>
+                    </tr>
 
-                      <tr>
-                        <td>
-                          <Stack direction="horizontal">
-                            <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
-                              <i className="ti ti-arrow-down f-16" />
-                            </div>
-                            <span>Logicoma</span>
-                          </Stack>
-                        </td>
-                        <td className="text-end">
-                          <Badge bg="light-success ">Team</Badge>
-                        </td>
-                        <td className="text-end f-w-600">
-                          <span className="text-danger">-$72</span>
-                        </td>
-                      </tr>
+                    <tr>
+                      <td>
+                        <Stack direction="horizontal">
+                          <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
+                            <i className="ti ti-arrow-down f-16" />
+                          </div>
+                          <span>Logicoma</span>
+                        </Stack>
+                      </td>
+                      <td className="text-end">
+                        <Badge bg="light-success">Team</Badge>
+                      </td>
+                      <td className="text-end f-w-600">
+                        <span className="text-danger">-$72</span>
+                      </td>
+                    </tr>
 
-                      <tr>
-                        <td>
-                          <Stack direction="horizontal">
-                            <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
-                              <i className="ti ti-star f-16" />
-                            </div>
-                            <span>UAC</span>
-                          </Stack>
-                        </td>
-                        <td className="text-end">
-                          <Badge bg="light-success ">Team</Badge>
-                        </td>
-                        <td className="text-end f-w-600">
-                          <span>$199</span>
-                        </td>
-                      </tr>
+                    <tr>
+                      <td>
+                        <Stack direction="horizontal">
+                          <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
+                            <i className="ti ti-star f-16" />
+                          </div>
+                          <span>UAC</span>
+                        </Stack>
+                      </td>
+                      <td className="text-end">
+                        <Badge bg="light-success">Team</Badge>
+                      </td>
+                      <td className="text-end f-w-600">
+                        <span>$199</span>
+                      </td>
+                    </tr>
 
-                      <tr>
-                        <td>
-                          <Stack direction="horizontal">
-                            <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
-                              <i className="ti ti-wallet f-16" />
-                            </div>
-                            <span>Biffco</span>
-                          </Stack>
-                        </td>
-                        <td className="text-end">
-                          <Badge bg="light-success ">Team</Badge>
-                        </td>
-                        <td className="text-end f-w-600">
-                          <span className="text-danger">-$72</span>
-                        </td>
-                      </tr>
+                    <tr>
+                      <td>
+                        <Stack direction="horizontal">
+                          <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
+                            <i className="ti ti-wallet f-16" />
+                          </div>
+                          <span>Biffco</span>
+                        </Stack>
+                      </td>
+                      <td className="text-end">
+                        <Badge bg="light-success">Team</Badge>
+                      </td>
+                      <td className="text-end f-w-600">
+                        <span className="text-danger">-$72</span>
+                      </td>
+                    </tr>
 
-                      <tr>
-                        <td>
-                          <Stack direction="horizontal">
-                            <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
-                              <i className="ti ti-arrow-down f-16" />
-                            </div>
-                            <span>Matsumura</span>
-                          </Stack>
-                        </td>
-                        <td className="text-end">
-                          <Badge bg="light-success ">Team</Badge>
-                        </td>
-                        <td className="text-end f-w-600">
-                          <span className="text-danger">-$72</span>
-                        </td>
-                      </tr>
+                    <tr>
+                      <td>
+                        <Stack direction="horizontal">
+                          <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
+                            <i className="ti ti-arrow-down f-16" />
+                          </div>
+                          <span>Matsumura</span>
+                        </Stack>
+                      </td>
+                      <td className="text-end">
+                        <Badge bg="light-success">Team</Badge>
+                      </td>
+                      <td className="text-end f-w-600">
+                        <span className="text-danger">-$72</span>
+                      </td>
+                    </tr>
 
-                      <tr>
-                        <td>
-                          <Stack direction="horizontal">
-                            <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
-                              <i className="ti ti-wallet f-16" />
-                            </div>
-                            <span>Biffco</span>
-                          </Stack>
-                        </td>
-                        <td className="text-end">
-                          <Badge bg="light-success ">Team</Badge>
-                        </td>
-                        <td className="text-end f-w-600">
-                          <span className="text-danger">-$72</span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </Table>
-                  <div className="text-end">
-                    <Button className="btn-light-danger btn-sm" onClick={handleCloseFirstOffcanvas}>
-                      Close
-                    </Button>
-                  </div>
+                    <tr>
+                      <td>
+                        <Stack direction="horizontal">
+                          <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
+                            <i className="ti ti-wallet f-16" />
+                          </div>
+                          <span>Biffco</span>
+                        </Stack>
+                      </td>
+                      <td className="text-end">
+                        <Badge bg="light-success">Team</Badge>
+                      </td>
+                      <td className="text-end f-w-600">
+                        <span className="text-danger">-$72</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </Table>
+                <div className="text-end px-3">
+                  <Button className="btn-light-danger btn-sm" onClick={handleCloseFirstOffcanvas}>
+                    Close
+                  </Button>
                 </div>
               </div>
             </Offcanvas.Body>
-          </SimpleBar>
+          </SimpleBarScroll>
         </Offcanvas>
 
         <Button onClick={handleShowSecondOffcanvas}>Button with data-bs-target</Button>
@@ -259,207 +255,205 @@ export default function LiveDemoPage() {
           <Offcanvas.Header closeButton>
             <Offcanvas.Title>Offcanvas</Offcanvas.Title>
           </Offcanvas.Header>
-          <SimpleBar forceVisible="y" className="max-height-adjust">
-            <Offcanvas.Body className="simplebar-content">
-              <h5 className="mb-2">
+          <SimpleBarScroll style={{ maxHeight: 'calc(100vh - 60px)' }}>
+            <Offcanvas.Body className="p-0">
+              <h5 className="mb-2 px-3">
                 $746.5k{' '}
                 <small className="text-success f-w-400">
                   +20.6 <i className="ti ti-arrow-up" />
                 </small>
               </h5>
-              <p className="text-muted mb-3">Past 30 days</p>
+              <p className="text-muted mb-3 px-3">Past 30 days</p>
 
               <div className="table-body">
-                <div className="table-responsive">
-                  <Table className="table-hover">
-                    <thead>
-                      <tr>
-                        <th>customer</th>
-                        <th className="text-end">plan</th>
-                        <th className="text-end">mrp</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <Stack direction="horizontal">
-                            <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
-                              <i className="ti ti-arrow-down f-16" />
-                            </div>
-                            <span>Logicoma</span>
-                          </Stack>
-                        </td>
-                        <td className="text-end">
-                          <Badge bg="light-success ">Team</Badge>
-                        </td>
-                        <td className="text-end f-w-600">
-                          <span className="text-danger">-$72</span>
-                        </td>
-                      </tr>
+                <Table responsive hover className="border-bottom">
+                  <thead>
+                    <tr>
+                      <th>customer</th>
+                      <th className="text-end">plan</th>
+                      <th className="text-end">mrp</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <Stack direction="horizontal">
+                          <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
+                            <i className="ti ti-arrow-down f-16" />
+                          </div>
+                          <span>Logicoma</span>
+                        </Stack>
+                      </td>
+                      <td className="text-end">
+                        <Badge bg="light-success">Team</Badge>
+                      </td>
+                      <td className="text-end f-w-600">
+                        <span className="text-danger">-$72</span>
+                      </td>
+                    </tr>
 
-                      <tr>
-                        <td>
-                          <Stack direction="horizontal">
-                            <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
-                              <i className="ti ti-star f-16" />
-                            </div>
-                            <span>UAC</span>
-                          </Stack>
-                        </td>
-                        <td className="text-end">
-                          <Badge bg="light-success ">Team</Badge>
-                        </td>
-                        <td className="text-end f-w-600">
-                          <span>$199</span>
-                        </td>
-                      </tr>
+                    <tr>
+                      <td>
+                        <Stack direction="horizontal">
+                          <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
+                            <i className="ti ti-star f-16" />
+                          </div>
+                          <span>UAC</span>
+                        </Stack>
+                      </td>
+                      <td className="text-end">
+                        <Badge bg="light-success">Team</Badge>
+                      </td>
+                      <td className="text-end f-w-600">
+                        <span>$199</span>
+                      </td>
+                    </tr>
 
-                      <tr>
-                        <td>
-                          <Stack direction="horizontal">
-                            <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
-                              <i className="ti ti-wallet f-16" />
-                            </div>
-                            <span>Biffco</span>
-                          </Stack>
-                        </td>
-                        <td className="text-end">
-                          <Badge bg="light-success">Team</Badge>
-                        </td>
-                        <td className="text-end f-w-600">
-                          <span className="text-danger">-$72</span>
-                        </td>
-                      </tr>
+                    <tr>
+                      <td>
+                        <Stack direction="horizontal">
+                          <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
+                            <i className="ti ti-wallet f-16" />
+                          </div>
+                          <span>Biffco</span>
+                        </Stack>
+                      </td>
+                      <td className="text-end">
+                        <Badge bg="light-success">Team</Badge>
+                      </td>
+                      <td className="text-end f-w-600">
+                        <span className="text-danger">-$72</span>
+                      </td>
+                    </tr>
 
-                      <tr>
-                        <td>
-                          <Stack direction="horizontal">
-                            <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
-                              <i className="ti ti-arrow-down f-16" />
-                            </div>
-                            <span>Matsumura</span>
-                          </Stack>
-                        </td>
-                        <td className="text-end">
-                          <Badge bg="light-success ">Team</Badge>
-                        </td>
-                        <td className="text-end f-w-600">
-                          <span className="text-danger">-$72</span>
-                        </td>
-                      </tr>
+                    <tr>
+                      <td>
+                        <Stack direction="horizontal">
+                          <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
+                            <i className="ti ti-arrow-down f-16" />
+                          </div>
+                          <span>Matsumura</span>
+                        </Stack>
+                      </td>
+                      <td className="text-end">
+                        <Badge bg="light-success">Team</Badge>
+                      </td>
+                      <td className="text-end f-w-600">
+                        <span className="text-danger">-$72</span>
+                      </td>
+                    </tr>
 
-                      <tr>
-                        <td>
-                          <Stack direction="horizontal">
-                            <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
-                              <i className="ti ti-wallet f-16" />
-                            </div>
-                            <span>Biffco</span>
-                          </Stack>
-                        </td>
-                        <td className="text-end">
-                          <Badge bg="light-success ">Team</Badge>
-                        </td>
-                        <td className="text-end f-w-600">
-                          <span className="text-danger">-$72</span>
-                        </td>
-                      </tr>
+                    <tr>
+                      <td>
+                        <Stack direction="horizontal">
+                          <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
+                            <i className="ti ti-wallet f-16" />
+                          </div>
+                          <span>Biffco</span>
+                        </Stack>
+                      </td>
+                      <td className="text-end">
+                        <Badge bg="light-success">Team</Badge>
+                      </td>
+                      <td className="text-end f-w-600">
+                        <span className="text-danger">-$72</span>
+                      </td>
+                    </tr>
 
-                      <tr>
-                        <td>
-                          <Stack direction="horizontal">
-                            <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
-                              <i className="ti ti-arrow-down f-16" />
-                            </div>
-                            <span>Logicoma</span>
-                          </Stack>
-                        </td>
-                        <td className="text-end">
-                          <Badge bg="light-success ">Team</Badge>
-                        </td>
-                        <td className="text-end f-w-600">
-                          <span className="text-danger">-$72</span>
-                        </td>
-                      </tr>
+                    <tr>
+                      <td>
+                        <Stack direction="horizontal">
+                          <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
+                            <i className="ti ti-arrow-down f-16" />
+                          </div>
+                          <span>Logicoma</span>
+                        </Stack>
+                      </td>
+                      <td className="text-end">
+                        <Badge bg="light-success">Team</Badge>
+                      </td>
+                      <td className="text-end f-w-600">
+                        <span className="text-danger">-$72</span>
+                      </td>
+                    </tr>
 
-                      <tr>
-                        <td>
-                          <Stack direction="horizontal">
-                            <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
-                              <i className="ti ti-star f-16" />
-                            </div>
-                            <span>UAC</span>
-                          </Stack>
-                        </td>
-                        <td className="text-end">
-                          <Badge bg="light-success ">Team</Badge>
-                        </td>
-                        <td className="text-end f-w-600">
-                          <span>$199</span>
-                        </td>
-                      </tr>
+                    <tr>
+                      <td>
+                        <Stack direction="horizontal">
+                          <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
+                            <i className="ti ti-star f-16" />
+                          </div>
+                          <span>UAC</span>
+                        </Stack>
+                      </td>
+                      <td className="text-end">
+                        <Badge bg="light-success">Team</Badge>
+                      </td>
+                      <td className="text-end f-w-600">
+                        <span>$199</span>
+                      </td>
+                    </tr>
 
-                      <tr>
-                        <td>
-                          <Stack direction="horizontal">
-                            <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
-                              <i className="ti ti-wallet f-16" />
-                            </div>
-                            <span>Biffco</span>
-                          </Stack>
-                        </td>
-                        <td className="text-end">
-                          <Badge bg="light-success ">Team</Badge>
-                        </td>
-                        <td className="text-end f-w-600">
-                          <span className="text-danger">-$72</span>
-                        </td>
-                      </tr>
+                    <tr>
+                      <td>
+                        <Stack direction="horizontal">
+                          <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
+                            <i className="ti ti-wallet f-16" />
+                          </div>
+                          <span>Biffco</span>
+                        </Stack>
+                      </td>
+                      <td className="text-end">
+                        <Badge bg="light-success">Team</Badge>
+                      </td>
+                      <td className="text-end f-w-600">
+                        <span className="text-danger">-$72</span>
+                      </td>
+                    </tr>
 
-                      <tr>
-                        <td>
-                          <Stack direction="horizontal">
-                            <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
-                              <i className="ti ti-arrow-down f-16" />
-                            </div>
-                            <span>Matsumura</span>
-                          </Stack>
-                        </td>
-                        <td className="text-end">
-                          <Badge bg="light-success ">Team</Badge>
-                        </td>
-                        <td className="text-end f-w-600">
-                          <span className="text-danger">-$72</span>
-                        </td>
-                      </tr>
+                    <tr>
+                      <td>
+                        <Stack direction="horizontal">
+                          <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
+                            <i className="ti ti-arrow-down f-16" />
+                          </div>
+                          <span>Matsumura</span>
+                        </Stack>
+                      </td>
+                      <td className="text-end">
+                        <Badge bg="light-success">Team</Badge>
+                      </td>
+                      <td className="text-end f-w-600">
+                        <span className="text-danger">-$72</span>
+                      </td>
+                    </tr>
 
-                      <tr>
-                        <td>
-                          <Stack direction="horizontal">
-                            <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
-                              <i className="ti ti-wallet f-16" />
-                            </div>
-                            <span>Biffco</span>
-                          </Stack>
-                        </td>
-                        <td className="text-end">
-                          <Badge bg="light-success ">Team</Badge>
-                        </td>
-                        <td className="text-end f-w-600">
-                          <span className="text-danger">-$72</span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </Table>
-                  <div className="text-end">
-                    <Button className="btn-light-danger btn-sm" onClick={handleCloseSecondOffcanvas}>
-                      Close
-                    </Button>
-                  </div>
+                    <tr>
+                      <td>
+                        <Stack direction="horizontal">
+                          <div className="avatar avatar-xs bg-light-secondary flex-shrink-0 me-2">
+                            <i className="ti ti-wallet f-16" />
+                          </div>
+                          <span>Biffco</span>
+                        </Stack>
+                      </td>
+                      <td className="text-end">
+                        <Badge bg="light-success">Team</Badge>
+                      </td>
+                      <td className="text-end f-w-600">
+                        <span className="text-danger">-$72</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </Table>
+                <div className="text-end px-3">
+                  <Button className="btn-light-danger btn-sm" onClick={handleCloseSecondOffcanvas}>
+                    Close
+                  </Button>
                 </div>
               </div>
             </Offcanvas.Body>
-          </SimpleBar>
+          </SimpleBarScroll>
         </Offcanvas>
       </Stack>
     </MainCard>

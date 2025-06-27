@@ -2,6 +2,10 @@
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
+// project-imports
+import { ThemeMode } from 'config';
+import useConfig from 'hooks/useConfig';
+
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
 
 const labels = [0, 1, 2, 3, 4, 5, 6];
@@ -48,6 +52,7 @@ const data = {
 // =============================|| CHART JS - LINE BASIC CHART ||============================== //
 
 export default function LineBasicChart() {
+  const { mode } = useConfig();
   const options = {
     barValueSpacing: 20,
     maintainAspectRatio: false,
@@ -57,9 +62,9 @@ export default function LineBasicChart() {
         position: 'top' as const
       },
       tooltip: {
-        backgroundColor: 'rgba(255, 255, 255, 1)',
-        titleColor: 'rgba(0, 0, 0, 0.85)',
-        bodyColor: 'rgba(0, 0, 0, 0.65)'
+        backgroundColor: mode === ThemeMode.DARK ? '#000000' : '#fff',
+        titleColor: mode === ThemeMode.DARK ? '#ffffff' : '#000000',
+        bodyColor: mode === ThemeMode.DARK ? '#ffffff' : '#000000'
       }
     }
   };

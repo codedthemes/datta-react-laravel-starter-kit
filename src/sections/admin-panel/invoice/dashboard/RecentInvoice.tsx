@@ -9,16 +9,17 @@ import Stack from 'react-bootstrap/Stack';
 import MainCard from 'components/MainCard';
 
 // assets
-import Avatar1 from 'assets/images/user/avatar-10.jpg';
-import Avatar2 from 'assets/images/user/avatar-2.jpg';
-import Avatar3 from 'assets/images/user/avatar-3.jpg';
+import Avatar1 from 'assets/images/user/avatar-10.png';
+import Avatar2 from 'assets/images/user/avatar-2.png';
+import Avatar3 from 'assets/images/user/avatar-3.png';
 
+// invoice data
 const invoices = [
   { id: '#790841', name: 'David Jone', avatar: Avatar1, amount: '$329.20', time: '5 min ago' },
-  { id: '#790841', name: 'Jenny Jones', avatar: Avatar2, amount: '$329.20', time: '1 day ago' },
-  { id: '#790841', name: 'Harry Ben', avatar: Avatar3, amount: '3 week ago  ', time: '3 weeks ago' },
-  { id: '#790841', name: 'Jenifer Vintage', avatar: Avatar2, amount: '$329.20', time: '3 weeks ago' },
-  { id: '#790841', name: 'Stebin Ben', avatar: Avatar3, amount: '$329.20', time: '1 month ago' }
+  { id: '#790842', name: 'Jenny Jones', avatar: Avatar2, amount: '$329.20', time: '1 day ago' },
+  { id: '#790843', name: 'Harry Ben', avatar: Avatar3, amount: '3 week ago  ', time: '3 weeks ago' },
+  { id: '#790844', name: 'Jenifer Vintage', avatar: Avatar2, amount: '$329.20', time: '3 weeks ago' },
+  { id: '#790845', name: 'Stebin Ben', avatar: Avatar3, amount: '$329.20', time: '1 month ago' }
 ];
 
 // ==============================|| ADMIN PANEL - DASHBOARD RECENT INVOICE ||============================== //
@@ -29,8 +30,8 @@ export default function RecentInvoice() {
       <Stack direction="horizontal" className="align-items-center justify-content-between p-4 pb-0">
         <h5 className="mb-0">Recent Invoice</h5>
         <Dropdown>
-          <Dropdown.Toggle as="span" variant="link-secondary" className="avatar avatar-s dropdown-toggle arrow-none show">
-            <i className="ti ti-dots-vertical f-18 cursor-pointer" />
+          <Dropdown.Toggle variant="link-secondary" className="avatar avatar-s arrow-none border-0">
+            <i className="ti ti-dots-vertical f-18" />
           </Dropdown.Toggle>
           <Dropdown.Menu align="end">
             {['Today', 'Weekly', 'Monthly'].map((filter) => (

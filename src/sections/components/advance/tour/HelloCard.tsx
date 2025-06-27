@@ -3,6 +3,9 @@ import { useEffect, useRef } from 'react';
 // react-bootstrap
 import Card from 'react-bootstrap/Card';
 
+// project-imports
+import branding from 'branding.json';
+
 // third-party
 import IntroJs from 'intro.js';
 
@@ -51,14 +54,14 @@ export default function HelloCardPage() {
         <Card.Title ref={step3}>Hello card</Card.Title>
       </Card.Header>
       <Card.Body ref={step4}>
-        <h1>H1 Datta able</h1>
-        <h2>H2 Datta able</h2>
-        <h3>H3 Datta able</h3>
-        <h4>H4 Datta able</h4>
-        <h5>H5 Datta able</h5>
-        <h6>H6 Datta able</h6>
-        <p>p Datta able</p>
-        <strong>p Datta able</strong>
+        <h1>H1 {branding.brandName}</h1>
+        <h2>H2 {branding.brandName}</h2>
+        <h3>H3 {branding.brandName}</h3>
+        <h4>H4 {branding.brandName}</h4>
+        <h5>H5 {branding.brandName}</h5>
+        <h6>H6 {branding.brandName}</h6>
+        <p>p {branding.brandName}</p>
+        <strong>p {branding.brandName}</strong>
       </Card.Body>
     </Card>
   );

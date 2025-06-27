@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row';
 import MainCard from 'components/MainCard';
 
 //assets
-import avatar1 from 'assets/images/user/avatar-1.jpg';
+import avatar1 from 'assets/images/user/avatar-1.png';
 import coverImage from 'assets/images/profile/cover.jpg';
 
 // ==============================|| SOCIAL - SOCIAL PROFILE 1 ||============================== //
@@ -24,24 +24,24 @@ export default function SocialProfile1() {
         title={
           <div className="cover-img-block">
             <Image src={coverImage} alt="Cover" className="img-fluid" />
-            <div className="overlay " />
+            <div className="overlay" />
             <div className="change-cover">
               <Dropdown>
                 <Dropdown.Toggle as="a" className="arrow-none" id="dropdown-custom-components">
-                  <i className="ti ti-camera" />
+                  <i className="ph ph-camera" />
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item href="#">
-                    <i className="ti ti-cloud-upload me-2" /> Upload new
+                    <i className="ph ph-cloud-arrow-up me-2" /> Upload new
                   </Dropdown.Item>
                   <Dropdown.Item href="#">
-                    <i className="ti ti-photo me-2" /> From photos
+                    <i className="ph ph-image me-2" /> From photos
                   </Dropdown.Item>
                   <Dropdown.Item href="#">
-                    <i className="ti ti-movie me-2" /> Upload video
+                    <i className="ph ph-film-strip me-2" /> Upload video
                   </Dropdown.Item>
                   <Dropdown.Item href="#">
-                    <i className="ti ti-trash  me-2" /> Remove
+                    <i className="ph ph-trash me-2" /> Remove
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>

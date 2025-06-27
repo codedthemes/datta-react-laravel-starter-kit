@@ -17,7 +17,7 @@ export default function TwoColumnsFormLayoutPage() {
           <Col lg={6}>
             <Form.Group className="mb-3">
               <Form.Label>Name:</Form.Label>
-              <Form.Control type="text" placeholder="Enter full name " />
+              <Form.Control type="text" placeholder="Enter full name" />
               <Form.Text>Please enter your full name</Form.Text>
             </Form.Group>
           </Col>
@@ -25,7 +25,7 @@ export default function TwoColumnsFormLayoutPage() {
           <Col lg={6}>
             <Form.Group className="mb-3">
               <Form.Label>Email:</Form.Label>
-              <Form.Control type="email" placeholder="Enter email " />
+              <Form.Control type="email" placeholder="Enter email" />
               <Form.Text>Please enter your Email id</Form.Text>
             </Form.Group>
           </Col>

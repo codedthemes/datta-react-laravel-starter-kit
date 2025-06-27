@@ -191,14 +191,14 @@ function ReactTable({ columns, data }: ReactTableProps) {
   });
 
   return (
-    <MainCard title="Expanding Table">
-      <Stack direction="horizontal" className="justify-content-between align-items-center pb-4 ">
+    <MainCard title="Expanding Table" className="table-card">
+      <Stack direction="horizontal" className="justify-content-between align-items-center flex-wrap p-4" gap={2}>
         <SortingData getState={table.getState} setPageSize={table.setPageSize} />
         <div className="datatable-search">
           <DebouncedInput value={globalFilter ?? ''} onFilterChange={(value) => setGlobalFilter(String(value))} />
         </div>
       </Stack>
-      <Table responsive className="mb-0">
+      <Table responsive className="mb-0 border-top">
         <thead>
           {table.getHeaderGroups().map((headerGroup: HeaderGroup<any>) => (
             <tr key={headerGroup.id}>
@@ -229,7 +229,7 @@ function ReactTable({ columns, data }: ReactTableProps) {
         getState={table.getState}
         getPageCount={table.getPageCount}
         initialPageSize={10}
-        totalEntries={100}
+        totalEntries={50}
       />
     </MainCard>
   );

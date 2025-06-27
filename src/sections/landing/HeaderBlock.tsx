@@ -1,9 +1,13 @@
+import { Link } from 'react-router-dom';
+
 // react-bootstrap
-import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import Row from 'react-bootstrap/Row';
+
+// project-imports
+import branding from 'branding.json';
 
 // third-party
 import { motion } from 'framer-motion';
@@ -27,7 +31,7 @@ export default function HeaderBlock() {
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.8, ease: 'easeOut' }}
             >
-              Explore One of the <strong className="hero-text-gradient">Featured Dashboard</strong> Template in Codedthemes
+              Explore One of the <strong className="hero-text-gradient">Featured Dashboard</strong> Template in CodedThemes
             </motion.h1>
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -38,8 +42,8 @@ export default function HeaderBlock() {
               <Row className="justify-content-center">
                 <Col md={8}>
                   <p className="text-white text-opacity-75 f-16 mb-0">
-                    Datta able is the one of the Featured admin dashboard template in Envato Marketplace and used by over 2.5K+ Customers
-                    wordwide.
+                    {branding.brandName} is the one of the Featured admin dashboard template in Envato Marketplace and used by over 2.5K+
+                    Customers wordwide.
                   </p>
                 </Col>
               </Row>
@@ -51,12 +55,12 @@ export default function HeaderBlock() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
             >
-              <Button href="/basic/alert" variant="outline-light" className=" me-2">
+              <Link to="/basic/alert" target="_blank" className="btn btn-outline-light me-2">
                 Explore Components
-              </Button>
-              <Button href="/dashboard/default" variant="light">
+              </Link>
+              <Link to="/dashboard/default" target="_blank" className="btn btn-light">
                 Live Preview
-              </Button>
+              </Link>
             </motion.div>
             <motion.div
               className="mt-4 mt-sm-5"

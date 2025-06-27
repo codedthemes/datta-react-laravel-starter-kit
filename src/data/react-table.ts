@@ -72,9 +72,12 @@ const newPerson = (index: number) => {
     about: tempData.text.sentence,
     avatar: tempData.number.status(1, 10),
     skills: tempData.skill,
-    time: tempData.time
+    time: tempData.time,
+    date: tempData.datetime.toLocaleDateString()
   };
 };
+
+// ===========================|| TABLE - USERS ||=========================== //
 
 export default function makeData(...lens: any[]) {
   const makeDataLevel: any = (depth: number = 0) => {

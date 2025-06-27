@@ -22,7 +22,7 @@ export default function MosesAdvance() {
               Cute <span>Moses</span>
             </h2>
             <p>Moses loves to run after butterflies.</p>
-            <a href="#!">View more</a>
+            <a>View more</a>
           </FigureCaption>
         </Figure>
         <Figure className="effect-moses">
@@ -32,8 +32,8 @@ export default function MosesAdvance() {
               Cute <span>Moses</span>
             </h2>
             <p>Moses loves to run after butterflies.</p>
-            <a href="#!">View more</a>
-            <a href="#!">View more</a>
+            <a>View more</a>
+            <a>View more</a>
           </FigureCaption>
         </Figure>
       </div>

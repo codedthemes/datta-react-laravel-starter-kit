@@ -9,7 +9,7 @@ import Stack from 'react-bootstrap/Stack';
 
 // project-imports
 import MainCard from 'components/MainCard';
-import ComponentHeader from 'components/cards/ComponentHeader';
+import ReferenceHeader from 'components/ReferenceHeader';
 
 // ==============================|| ADVANCED - MODAL ||============================== //
 
@@ -24,7 +24,7 @@ export default function ModalPage() {
 
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="Use React-Bootstrap’s modal component to add dialogs to your site as a replacement for Bootstrap’s JavaScript modal plugin."
         link="https://react-bootstrap.netlify.app/docs/components/modal/"
       />
@@ -96,7 +96,7 @@ export default function ModalPage() {
         show={modalOpen}
         onHide={() => setModalOpen(false)}
       >
-        <Modal.Header className=" bg-dark " closeButton closeVariant="white">
+        <Modal.Header className="bg-dark" closeButton closeVariant="white">
           <Modal.Title as="h5" className="text-white">
             Animate Modal : {animation}
           </Modal.Title>

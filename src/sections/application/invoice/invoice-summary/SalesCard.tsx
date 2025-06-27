@@ -4,6 +4,7 @@ import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 // project-imports
 import MainCard from 'components/MainCard';
 
+// chart-options
 const options: ChartProps = {
   chart: {
     toolbar: { show: false }

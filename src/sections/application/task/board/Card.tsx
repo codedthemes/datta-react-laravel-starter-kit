@@ -17,18 +17,10 @@ import Stack from 'react-bootstrap/Stack';
 import MainCard from 'components/MainCard';
 
 // assets
-import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
-import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
-import CalendarTodayTwoTone from '@mui/icons-material/CalendarTodayTwoTone';
-import CreditCardTwoTone from '@mui/icons-material/CreditCardTwoTone';
-import MoreVertTwoTone from '@mui/icons-material/MoreVertTwoTone';
-import ReceiptTwoTone from '@mui/icons-material/ReceiptTwoTone';
-import PlaylistAddCheckTwoToneIcon from '@mui/icons-material/PlaylistAddCheckTwoTone';
-import ChatBubbleTwoToneIcon from '@mui/icons-material/ChatBubbleTwoTone';
-import Avatar1 from 'assets/images/user/avatar-1.jpg';
-import Avatar2 from 'assets/images/user/avatar-2.jpg';
-import Avatar3 from 'assets/images/user/avatar-3.jpg';
-import Avatar4 from 'assets/images/user/avatar-4.jpg';
+import Avatar1 from 'assets/images/user/avatar-1.png';
+import Avatar2 from 'assets/images/user/avatar-2.png';
+import Avatar3 from 'assets/images/user/avatar-3.png';
+import Avatar4 from 'assets/images/user/avatar-4.png';
 
 interface TaskData {
   id: number;
@@ -50,6 +42,7 @@ interface TaskData {
   avatarNumber?: number;
 }
 
+// cara data
 const cardData: TaskData[] = [
   {
     id: 24,
@@ -117,30 +110,35 @@ const boardList: TaskData[] = [
   }))
 ];
 
+// ==============================|| BOARD CARD ||============================== //
+
 const BoardCard: React.FC<{ data: TaskData }> = ({ data }) => {
   return (
     <Col md={6} sm={12} className="mb-3">
       <MainCard
         bodyClassName="p-0"
+        headerClassName="py-3"
         title={
           <Stack direction="horizontal" gap={2} className="justify-content-between align-items-center">
-            <span>
+            <h5>
               #{data.id}. {data.title}
-            </span>
+            </h5>
             <Dropdown>
-              <Dropdown.Toggle as="div" bsPrefix="false" variant="link" className="text-secondary p-0 border-0">
-                <MoreVertTwoTone className="wid-20" />
+              <Dropdown.Toggle as="a" href="#!" bsPrefix="false" className="text-secondary p-0 border-0">
+                <i className="ph ph-dots-three-outline-vertical" />
               </Dropdown.Toggle>
               <Dropdown.Menu align="end">
                 <Dropdown.Item href="#">
-                  <EditTwoToneIcon className="wid-20" /> Pending
+                  <i className="ph ph-pencil-simple-line" />
+                  Pending
                 </Dropdown.Item>
                 <Dropdown.Item href="#">
-                  <DeleteTwoToneIcon className="wid-20" /> Paid
+                  <i className="ph ph-trash" />
+                  Paid
                 </Dropdown.Item>
-                <Dropdown.Divider />
+                <hr className="m-0 my-2" />
                 <Dropdown.Item active href="#">
-                  <FormCheck.Input className="input-secondary me-1" type="checkbox" />
+                  <FormCheck.Input className="input-secondary me-2" type="checkbox" onClick={(e) => e.stopPropagation()} />
                   Mark as Done
                 </Dropdown.Item>
               </Dropdown.Menu>
@@ -150,14 +148,17 @@ const BoardCard: React.FC<{ data: TaskData }> = ({ data }) => {
       >
         <Card.Body className="py-3 border-bottom d-flex align-items-center justify-content-between">
           <p className="mb-0">
-            <CalendarTodayTwoTone className="f-18 text-danger" /> {data.date}
+            <i className="ph ph-calendar-blank align-middle f-18 text-danger me-1" />
+            {data.date}
           </p>
           <div>
             <p className="d-inline-block mb-0">
-              <PlaylistAddCheckTwoToneIcon className="f-18 text-primary" /> {data.playlistN0}
+              <i className="ph ph-list-checks align-middle f-18 text-primary me-1" />
+              {data.playlistN0}
             </p>
             <p className="d-inline-block mb-0 ms-2">
-              <ChatBubbleTwoToneIcon className="f-18 text-success" /> {data.message}
+              <i className="ph ph-chat align-middle f-18 text-success me-1" />
+              {data.message}
             </p>
           </div>
         </Card.Body>
@@ -167,7 +168,8 @@ const BoardCard: React.FC<{ data: TaskData }> = ({ data }) => {
             <tbody>
               <tr>
                 <td className="pl-0 pb-0">
-                  <ReceiptTwoTone className="f-16 text-info" /> Priority:
+                  <i className="ph ph-chart-bar align-middle text-primary f-16 me-1" />
+                  Priority:
                 </td>
                 <td className="pb-0">
                   <Badge bg={data.priorityColor}>{data.priority}</Badge>
@@ -175,7 +177,8 @@ const BoardCard: React.FC<{ data: TaskData }> = ({ data }) => {
               </tr>
               <tr>
                 <td className="pl-0 pb-0">
-                  <CalendarTodayTwoTone className="f-16 text-info" /> Assign to::
+                  <i className="ph ph-user-circle align-middle text-primary f-16 me-1" />
+                  Assign to:
                 </td>
                 <td className="pb-0">
                   <Image src={data.avatar} alt={data.name} width="30" height="30" className="rounded-circle" /> {data.name}
@@ -183,7 +186,8 @@ const BoardCard: React.FC<{ data: TaskData }> = ({ data }) => {
               </tr>
               <tr>
                 <td className="pl-0 pb-0">
-                  <CreditCardTwoTone className="f-16 text-info" /> Method:
+                  <i className="ph ph-timer align-middle text-primary f-16 me-1" />
+                  Method:
                 </td>
                 <td className="pb-0">
                   <Badge bg={data.dueColor}>{data.due}</Badge>

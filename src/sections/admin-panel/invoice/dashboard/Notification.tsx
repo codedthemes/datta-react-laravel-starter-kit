@@ -15,8 +15,8 @@ export default function Notification() {
       <Stack direction="horizontal" className="align-items-center justify-content-between p-4 pb-0">
         <h5 className="mb-0">Notification</h5>
         <Dropdown>
-          <Dropdown.Toggle variant="link-secondary" className="avatar avatar-s dropdown-toggle arrow-none show" as="span">
-            <i className="ti ti-dots-vertical f-18 cursor-pointer" />
+          <Dropdown.Toggle variant="link-secondary" className="avatar avatar-s arrow-none border-0">
+            <i className="ti ti-dots-vertical f-18" />
           </Dropdown.Toggle>
           <Dropdown.Menu align="end">
             <Dropdown.Item href="#/action-1">Today</Dropdown.Item>
@@ -40,9 +40,9 @@ export default function Notification() {
               <p className="mb-0 text-sm">2 August</p>
             </div>
             <div className="flex-shrink-0">
-              <div className="avatar avatar-s btn-link-secondary">
-                <i className="ti ti-link cursor-pointer" />
-              </div>
+              <a href="#!" className="avatar avatar-s btn-link-secondary">
+                <i className="ti ti-link" />
+              </a>
             </div>
           </Stack>
         </ListGroup.Item>
@@ -60,9 +60,9 @@ export default function Notification() {
               <p className="mb-0 text-sm">7 hours ago</p>
             </div>
             <div className="flex-shrink-0">
-              <div className="avatar avatar-s btn-link-secondary">
-                <i className="ti ti-link cursor-pointer" />
-              </div>
+              <a href="#!" className="avatar avatar-s btn-link-secondary">
+                <i className="ti ti-link" />
+              </a>
             </div>
           </Stack>
         </ListGroup.Item>
@@ -78,9 +78,9 @@ export default function Notification() {
               <p className="mb-0 text-sm">7 hours ago</p>
             </div>
             <div className="flex-shrink-0">
-              <div className="avatar avatar-s btn-link-secondary">
-                <i className="ti ti-link cursor-pointer" />
-              </div>
+              <a href="#!" className="avatar avatar-s btn-link-secondary">
+                <i className="ti ti-link" />
+              </a>
             </div>
           </Stack>
         </ListGroup.Item>
@@ -96,9 +96,9 @@ export default function Notification() {
               <p className="mb-0 text-sm">7 hours ago</p>
             </div>
             <div className="flex-shrink-0">
-              <div className="avatar avatar-s btn-link-secondary">
-                <i className="ti ti-link cursor-pointer" />
-              </div>
+              <a href="#!" className="avatar avatar-s btn-link-secondary">
+                <i className="ti ti-link" />
+              </a>
             </div>
           </Stack>
         </ListGroup.Item>
@@ -114,9 +114,9 @@ export default function Notification() {
               <p className="mb-0 text-sm">7 hours ago</p>
             </div>
             <div className="flex-shrink-0">
-              <div className="avatar avatar-s btn-link-secondary">
-                <i className="ti ti-link cursor-pointer" />
-              </div>
+              <a href="#!" className="avatar avatar-s btn-link-secondary">
+                <i className="ti ti-link " />
+              </a>
             </div>
           </Stack>
         </ListGroup.Item>

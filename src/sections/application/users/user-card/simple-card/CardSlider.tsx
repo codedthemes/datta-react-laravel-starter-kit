@@ -9,7 +9,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import MainCard from 'components/MainCard';
 
 // assets
-import avatar4 from 'assets/images/user/avatar-4.jpg';
+import avatar4 from 'assets/images/user/avatar-4.png';
 import slider6 from 'assets/images/widget/slider6.jpg';
 import slider5 from 'assets/images/widget/slider5.jpg';
 import slider7 from 'assets/images/widget/slider7.jpg';
@@ -43,7 +43,7 @@ export default function CardSlider({ title }: { title: string }) {
         <div className="user-about-block text-center">
           <Row className="align-items-end justify-content-center">
             <Col className="pb-3">
-              <i className="ti ti-star text-muted fs-4" />
+              <i className="ph ph-star align-middle text-muted f-20" />
             </Col>
             <Col>
               <Image src={avatar4} className="img-fluid img-radius wid-80" />
@@ -51,7 +51,7 @@ export default function CardSlider({ title }: { title: string }) {
             <Col className="text-end pb-3">
               <Dropdown>
                 <Dropdown.Toggle as="div" variant="link" className="arrow-none p-0">
-                  <i className="ti ti-dots" />
+                  <i className="ph ph-dots-three-outline align-middle" />
                 </Dropdown.Toggle>
                 <Dropdown.Menu align="end">
                   <Dropdown.Item href="#">Action</Dropdown.Item>

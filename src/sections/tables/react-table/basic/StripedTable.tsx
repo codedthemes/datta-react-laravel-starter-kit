@@ -6,7 +6,15 @@ import Stack from 'react-bootstrap/Stack';
 import Table from 'react-bootstrap/Table';
 
 // third-party
-import { flexRender, useReactTable, ColumnDef, HeaderGroup, getCoreRowModel, getPaginationRowModel } from '@tanstack/react-table';
+import {
+  flexRender,
+  useReactTable,
+  ColumnDef,
+  HeaderGroup,
+  getCoreRowModel,
+  getPaginationRowModel,
+  getFilteredRowModel
+} from '@tanstack/react-table';
 
 // project-imports
 import MainCard from 'components/MainCard';
@@ -37,8 +45,10 @@ function ReactTable({ columns, data, striped }: ReactTableProps) {
 
   const table = useReactTable({
     data,
+    state: { globalFilter },
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel()
   });
 
@@ -52,14 +62,14 @@ function ReactTable({ columns, data, striped }: ReactTableProps) {
   );
 
   return (
-    <MainCard title="Striped Table">
-      <Stack direction="horizontal" className="justify-content-between align-items-center pb-4 ">
+    <MainCard title="Striped Table" className="table-card">
+      <Stack direction="horizontal" className="justify-content-between align-items-center p-4 flex-wrap gap-2">
         <SortingData getState={table.getState} setPageSize={table.setPageSize} />
         <div className="datatable-search">
           <DebouncedInput value={globalFilter ?? ''} onFilterChange={(value) => setGlobalFilter(String(value))} />
         </div>
       </Stack>
-      <Table striped hover responsive className="mb-0">
+      <Table striped hover responsive className="mb-0 border-top">
         <thead>
           {table.getHeaderGroups().map((headerGroup: HeaderGroup<any>) => (
             <tr key={headerGroup.id}>
@@ -89,7 +99,7 @@ function ReactTable({ columns, data, striped }: ReactTableProps) {
         getState={table.getState}
         getPageCount={table.getPageCount}
         initialPageSize={10}
-        totalEntries={100}
+        totalEntries={25}
       />
     </MainCard>
   );

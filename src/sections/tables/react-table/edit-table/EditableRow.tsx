@@ -6,11 +6,10 @@ import Table from 'react-bootstrap/Table';
 // third-party
 import { ColumnDef, useReactTable, getCoreRowModel, flexRender, HeaderGroup } from '@tanstack/react-table';
 
-// project imports
+// project-imports
 import MainCard from 'components/MainCard';
 import EditRow from 'components/third-party/react-table/EditRow';
 import CSVExport from 'components/third-party/react-table/CSVExport';
-
 import makeData from 'data/react-table';
 
 // types
@@ -47,13 +46,13 @@ function ReactTable({ columns, data, setData }: ReactTableProps) {
 
   return (
     <MainCard
-      content={false}
       title="Editable Row"
       secondary={
         <CSVExport {...{ data: table.getRowModel().flatRows.map((row) => row.original), headers, filename: 'editable-row.csv' }} />
       }
+      className="table-card"
     >
-      <Table bordered hover responsive>
+      <Table hover responsive className="mb-0">
         <thead>
           {table.getHeaderGroups().map((headerGroup: HeaderGroup<any>) => (
             <tr key={headerGroup.id}>

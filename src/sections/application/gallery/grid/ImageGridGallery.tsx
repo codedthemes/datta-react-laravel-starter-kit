@@ -45,18 +45,18 @@ export default function ImageGridGallery() {
         <Row>
           {galleryImages.map((image, index) => (
             <Col key={index} lg={4} sm={6}>
-              <div className="thumbnail mb-4 cursor-pointer" onClick={() => handleShow(image.full)}>
+              <a href="#!" className="thumbnail mb-4" onClick={() => handleShow(image.full)}>
                 <Image src={image.src} alt={`Gallery Image ${index + 1}`} fluid thumbnail />
-              </div>
+              </a>
             </Col>
           ))}
         </Row>
       </MainCard>
-      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered className="modal-lightbox">
         <Modal.Body className="p-0">
           <CloseButton
             variant="white"
-            className="btn-close-white grid-gallery-close bottom-100 start-100 translate-middle1"
+            className="position-absolute bottom-100 start-100 translate-middle"
             onClick={() => setShowModal(false)}
           />
           {selectedImage && <Image src={selectedImage} alt="Lightbox Preview" fluid />}

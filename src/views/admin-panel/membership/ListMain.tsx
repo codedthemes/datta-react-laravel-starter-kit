@@ -1,5 +1,5 @@
-// react-bootstrap
-import MembershipList from 'sections/admin-panel/membership/list/MembershipList';
+// project-imports
+import MembershipList from 'sections/admin-panel/membership/List';
 
 // =============================|| MEMBERSHIP - LIST ||============================== //
 

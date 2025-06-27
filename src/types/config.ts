@@ -1,11 +1,13 @@
-import { MenuOrientation, ThemeMode, ThemeDirection } from 'config';
+import { MenuOrientation, ThemeDirection, ThemeMode } from 'config';
 
+export type FontFamily = "'Public Sans', sans-serif";
 export type PresetColor = 'default' | 'theme1' | 'theme2' | 'theme3' | 'theme4' | 'theme5' | 'theme6' | 'theme7' | 'theme8';
-export type I18n = 'en' | 'fr' | 'ro' | 'zh'; // 'en' - English, 'fr' - French, 'ro' - Romanian, 'zh' - Chinese
+export type I18n = 'en' | 'fr' | 'ro' | 'zh';
 
 // ==============================|| CONFIG TYPES ||============================== //
 
 export type DefaultConfigProps = {
+  fontFamily: FontFamily;
   /**
    * The props used for display menu-items with multi-language.
    * We provide static below languages according to 'react-intl' options - https://www.npmjs.com/package/react-intl
@@ -25,13 +27,6 @@ export type DefaultConfigProps = {
   menuOrientation: MenuOrientation;
 
   /**
-   * the props used for show mini variant drawer
-   * the mini variant is recommended for apps sections that need quick selection access alongside content.
-   * default - false
-   */
-  miniDrawer: boolean;
-
-  /**
    * the props used for theme container.
    * the container centers your content horizontally. It's the most basic layout element.
    * default - true which show container
@@ -43,8 +38,8 @@ export type DefaultConfigProps = {
    * the props used for default theme palette mode
    * explore the default theme
    * below theme options -
-   * 'light' (default) - ThemeMode.LIGHT
-   * 'dark' - ThemeMode.DARK
+   * 'light' (default)
+   * 'dark'
    */
   mode: ThemeMode;
 
@@ -71,11 +66,42 @@ export type DefaultConfigProps = {
    * 'rtl' - ThemeDirection.RTL
    */
   themeDirection: ThemeDirection;
+  caption: boolean;
+  sidebarTheme: boolean;
+  customColor: string;
+  headerColor: string;
+  navbarColor: string;
+  logoColor: string;
+  navbarCaptionColor: string;
+  navbarImg: string;
+  menuIcon: string;
+  menuLinkIcon: string;
 };
 
 export type CustomizationProps = {
   i18n: I18n;
   menuOrientation: MenuOrientation;
+  themeDirection: ThemeDirection;
+  container: boolean;
+  mode: ThemeMode;
+  caption: boolean;
+  sidebarTheme: boolean;
+  customColor: string;
+  headerColor: string;
+  navbarColor: string;
+  logoColor: string;
+  navbarCaptionColor: string;
+  navbarImg: string;
+  menuIcon: string;
+  menuLinkIcon: string;
   onChangeLocalization: (lang: I18n) => void;
+  onChangeDirection: (direction: ThemeDirection) => void;
   onChangeMenuOrientation: (menuOrientation: MenuOrientation) => void;
+  onChangeCaption: (caption: boolean) => void;
+  onChangeSideTheme: (sidebarTheme: boolean) => void;
+  onChangeMode: (mode: ThemeMode) => void;
+  onChangeContainer: (container: boolean) => void;
+  onChangeThemePreset: (key: string, value: string) => void;
+  onChangeMenuIcon: (key: string, value: string) => void;
+  onReset: () => void;
 };

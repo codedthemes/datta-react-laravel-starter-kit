@@ -50,7 +50,7 @@ export default function WithInputGroup({ useClickOutside }: DatePickerDisabledPr
         <InputGroup>
           <Form.Control
             type="text"
-            className="datepicker-input "
+            className="datepicker-input"
             placeholder="Select date"
             id="d_week_1"
             value={withinputgroup ? formatDate(withinputgroup) : ''}
@@ -58,7 +58,7 @@ export default function WithInputGroup({ useClickOutside }: DatePickerDisabledPr
             readOnly
           />
           <InputGroup.Text>
-            <i className="ti ti-calendar f-18" />
+            <i className="ph ph-calendar-blank f-18" />
           </InputGroup.Text>
         </InputGroup>
         {isWithinputgroup && (

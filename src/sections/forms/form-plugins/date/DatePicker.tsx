@@ -57,7 +57,7 @@ export default function DatePickerPreview({ useClickOutside }: DatePickerDisable
         <Col lg={4} md={9} sm={12}>
           <Form.Control
             type="text"
-            className="datepicker-input "
+            className="datepicker-input"
             placeholder="Select date"
             id="d_week_1"
             value={datepicker ? formatDate(datepicker) : ''}

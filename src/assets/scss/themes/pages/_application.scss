@@ -25,9 +25,6 @@
       i {
         font-size: 18px;
       }
-      .material-icons-two-tone {
-        font-size: 20px;
-      }
       &:after {
         content: '';
         background: var(--bs-primary);
@@ -46,9 +43,6 @@
     border-color: transparent;
     background: transparent;
     color: var(--bs-primary);
-    .material-icons-two-tone {
-      background-color: var(--bs-primary);
-    }
   }
 
   .nav-item.show .nav-link,
@@ -56,9 +50,6 @@
     border-color: transparent;
     color: var(--bs-primary);
     background: transparent;
-    .material-icons-two-tone {
-      background-color: var(--bs-primary);
-    }
     &:after {
       left: 0;
       right: 0;

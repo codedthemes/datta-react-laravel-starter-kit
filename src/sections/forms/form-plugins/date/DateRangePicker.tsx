@@ -22,6 +22,7 @@ export default function DateRangePicker() {
           </Col>
 
           <Col lg={4} md={9} sm={12}>
+            {/* @ts-ignore */}
             <Flatpickr
               options={{
                 mode: 'range'
@@ -39,6 +40,7 @@ export default function DateRangePicker() {
 
           <Col lg={4} md={9} sm={12}>
             <InputGroup>
+              {/* @ts-ignore */}
               <Flatpickr
                 options={{
                   mode: 'range'
@@ -47,7 +49,7 @@ export default function DateRangePicker() {
                 className="form-control"
               />
               <InputGroup.Text>
-                <i className="ti ti-calendar f-16" />
+                <i className="ph ph-calendar-blank   f-16" />
               </InputGroup.Text>
             </InputGroup>
           </Col>
@@ -59,6 +61,7 @@ export default function DateRangePicker() {
           </Col>
 
           <Col lg={4} md={9} sm={12}>
+            {/* @ts-ignore */}
             <Flatpickr
               options={{
                 mode: 'range',
@@ -79,6 +82,7 @@ export default function DateRangePicker() {
           </Col>
 
           <Col lg={4} md={9} sm={12}>
+            {/* @ts-ignore */}
             <Flatpickr
               options={{
                 mode: 'range'

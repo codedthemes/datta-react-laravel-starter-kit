@@ -41,35 +41,6 @@ export default function BackgroundColor() {
           </div>
         </Col>
         <Col md={4}>
-          <div className="p-3 color-block bg-indigo-100" data-clipboard-text="bg-indigo-100">
-            bg-indigo-100
-          </div>
-          <div className="p-3 color-block bg-indigo-200" data-clipboard-text="bg-indigo-200">
-            bg-indigo-200
-          </div>
-          <div className="p-3 color-block bg-indigo-300" data-clipboard-text="bg-indigo-300">
-            bg-indigo-300
-          </div>
-          <div className="p-3 color-block bg-indigo-400" data-clipboard-text="bg-indigo-400">
-            bg-indigo-400
-          </div>
-          <div className="p-3 color-block bg-indigo-500" data-clipboard-text="bg-indigo-500">
-            bg-indigo-500
-          </div>
-          <div className="p-3 color-block bg-indigo-600" data-clipboard-text="bg-indigo-600">
-            bg-indigo-600
-          </div>
-          <div className="p-3 color-block bg-indigo-700" data-clipboard-text="bg-indigo-700">
-            bg-indigo-700
-          </div>
-          <div className="p-3 color-block bg-indigo-800" data-clipboard-text="bg-indigo-800">
-            bg-indigo-800
-          </div>
-          <div className="p-3 color-block bg-indigo-900" data-clipboard-text="bg-indigo-900">
-            bg-indigo-900
-          </div>
-        </Col>
-        <Col md={4}>
           <div className="p-3 color-block bg-purple-100" data-clipboard-text="bg-purple-100">
             bg-purple-100
           </div>
@@ -241,35 +212,6 @@ export default function BackgroundColor() {
           </div>
           <div className="p-3 color-block bg-green-900" data-clipboard-text="bg-green-900">
             bg-green-900
-          </div>
-        </Col>
-        <Col md={4}>
-          <div className="p-3 color-block bg-teal-100" data-clipboard-text="bg-teal-100">
-            bg-teal-100
-          </div>
-          <div className="p-3 color-block bg-teal-200" data-clipboard-text="bg-teal-200">
-            bg-teal-200
-          </div>
-          <div className="p-3 color-block bg-teal-300" data-clipboard-text="bg-teal-300">
-            bg-teal-300
-          </div>
-          <div className="p-3 color-block bg-teal-400" data-clipboard-text="bg-teal-400">
-            bg-teal-400
-          </div>
-          <div className="p-3 color-block bg-teal-500" data-clipboard-text="bg-teal-500">
-            bg-teal-500
-          </div>
-          <div className="p-3 color-block bg-teal-600" data-clipboard-text="bg-teal-600">
-            bg-teal-600
-          </div>
-          <div className="p-3 color-block bg-teal-700" data-clipboard-text="bg-teal-700">
-            bg-teal-700
-          </div>
-          <div className="p-3 color-block bg-teal-800" data-clipboard-text="bg-teal-800">
-            bg-teal-800
-          </div>
-          <div className="p-3 color-block bg-teal-900" data-clipboard-text="bg-teal-900">
-            bg-teal-900
           </div>
         </Col>
         <Col md={4}>

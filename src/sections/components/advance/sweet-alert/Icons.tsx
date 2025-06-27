@@ -5,14 +5,8 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
 // project-imports
+import { showErrorModal, showInfoModal, showQuestionModal, showSuccessModal, showWarningModal } from './utils/Alert';
 import MainCard from 'components/MainCard';
-import {
-  showErrorModal,
-  showInfoModal,
-  showQuestionModal,
-  showSuccessModal,
-  showWarningModal
-} from 'sections/components/advance/sweet-alert/utils/Alert';
 
 const IconsData = [
   { title: 'Success icons', function: showSuccessModal, color: 'btn-light-success' },

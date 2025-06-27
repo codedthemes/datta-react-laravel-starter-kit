@@ -12,9 +12,9 @@ export default function LineHeight() {
   return (
     <MainCard
       title={
-        <>
+        <h5>
           Line Height <Badge bg="danger">NEW</Badge>
-        </>
+        </h5>
       }
       subheader={
         <p className="mb-0 mt-2">

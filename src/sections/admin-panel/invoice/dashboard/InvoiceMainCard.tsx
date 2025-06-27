@@ -3,7 +3,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 // project-imports
-import InvoiceCard from 'components/cards/online-panel/InvoiceCard';
+import InvoiceCard from '../InvoiceCard';
 import InvoiceChart from './InvoiceChart';
 import MainCard from 'components/MainCard';
 

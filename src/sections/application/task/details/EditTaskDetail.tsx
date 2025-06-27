@@ -9,12 +9,6 @@ import Stack from 'react-bootstrap/Stack';
 // project-imports
 import MainCard from 'components/MainCard';
 
-// assets
-import DesignServicesTwoToneIcon from '@mui/icons-material/DesignServicesTwoTone';
-import SettingsInputCompositeTwoToneIcon from '@mui/icons-material/SettingsInputCompositeTwoTone';
-import HourglassTopTwoToneIcon from '@mui/icons-material/HourglassTopTwoTone';
-import EmojiFlagsTwoToneIcon from '@mui/icons-material/EmojiFlagsTwoTone';
-
 // ===========================|| DETAILS - EDIT TASK DETAILS ||=========================== //
 
 export default function EditTaskDetail() {
@@ -23,15 +17,15 @@ export default function EditTaskDetail() {
   return (
     <MainCard
       title={
-        <h5>
-          <DesignServicesTwoToneIcon className="w-20 text-primary" /> Edit task details
-        </h5>
+        <Stack direction="horizontal" className="align-items-center gap-1">
+          <i className="ph ph-pencil-ruler align-middle f-20 text-primary" /> Edit task details
+        </Stack>
       }
     >
       <Row>
         <Col md={4} className="d-flex align-items-center my-1">
           <div className="h6 mb-0 me-2">
-            <SettingsInputCompositeTwoToneIcon className="w-20 text-primary" /> Priority:
+            <i className="ph ph-chart-bar align-middle f-20 text-primary" /> Priority:
           </div>
           <Dropdown>
             <Dropdown.Toggle variant="light-success" size="sm">
@@ -39,17 +33,17 @@ export default function EditTaskDetail() {
             </Dropdown.Toggle>
             <Dropdown.Menu align="end">
               <Dropdown.Item onClick={() => setPriority('Highest Priority')}>
-                <span className="fas fa-circle text-danger f-10 me-2" />
+                <span className="ti ti-circle-filled text-danger f-10 me-2" />
                 Highest Priority
               </Dropdown.Item>
               <Dropdown.Item onClick={() => setPriority('High Priority')}>
-                <span className="fas fa-circle text-warning f-10 me-2"></span> High Priority
+                <span className="ti ti-circle-filled text-warning f-10 me-2"></span> High Priority
               </Dropdown.Item>
               <Dropdown.Item active onClick={() => setPriority('Normal')}>
-                <span className="fas fa-circle text-success f-10 me-2" /> Normal Priority
+                <span className="ti ti-circle-filled text-success f-10 me-2" /> Normal Priority
               </Dropdown.Item>
               <Dropdown.Item onClick={() => setPriority('Low Priority')}>
-                <span className="fas fa-circle text-success f-10 me-2" /> Low Priority
+                <span className="ti ti-circle-filled text-success f-10 me-2" /> Low Priority
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
@@ -58,7 +52,7 @@ export default function EditTaskDetail() {
         <Col md={4}>
           <Stack direction="horizontal" className="align-items-center my-1">
             <div className="h6 mb-0 me-2">
-              <HourglassTopTwoToneIcon className="w-20 text-primary" /> Status:
+              <i className="ph ph-hourglass-high align-middle f-20 text-primary" /> Status:
             </div>
             <Dropdown>
               <Dropdown.Toggle variant="light-primary" size="sm">
@@ -71,7 +65,7 @@ export default function EditTaskDetail() {
                 </Dropdown.Item>
                 <Dropdown.Item onClick={() => setStatus('Resolved')}>Resolved</Dropdown.Item>
                 <Dropdown.Item onClick={() => setStatus('Closed')}>Closed</Dropdown.Item>
-                <Dropdown.Divider />
+                <hr className="m-0 my-2" />
                 <Dropdown.Item onClick={() => setStatus('Duplicate')}>Duplicate</Dropdown.Item>
                 <Dropdown.Item onClick={() => setStatus('Invalid')}>Invalid</Dropdown.Item>
                 <Dropdown.Item onClick={() => setStatus('Wontfix')}>Wontfix</Dropdown.Item>
@@ -83,17 +77,18 @@ export default function EditTaskDetail() {
         <Col md={4}>
           <Stack direction="horizontal" className="align-items-center my-1">
             <div className="h6 mb-0 me-2">
-              <EmojiFlagsTwoToneIcon className="w-20 text-primary" /> Action:
+              <i className="ph ph-flag-checkered align-middle f-20 text-primary me-1" />
+              Action:
             </div>
             <Dropdown>
               <Dropdown.Toggle variant="light-primary" size="sm">
-                <i className="fas fa-bars" />
+                <i className="ti ti-menu-2" />
               </Dropdown.Toggle>
               <Dropdown.Menu align="end">
                 <Dropdown.Item href="#!">Check In</Dropdown.Item>
                 <Dropdown.Item href="#!">Attach Screenshot</Dropdown.Item>
                 <Dropdown.Item href="#!">Reassign</Dropdown.Item>
-                <Dropdown.Divider />
+                <hr className="m-0 my-2" />
                 <Dropdown.Item href="#!">Edit Task</Dropdown.Item>
                 <Dropdown.Item href="#!">Remove</Dropdown.Item>
               </Dropdown.Menu>

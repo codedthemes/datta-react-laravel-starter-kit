@@ -4,6 +4,7 @@ import Stack from 'react-bootstrap/Stack';
 
 // project-imports
 import AuthChangePasswordForm from 'sections/auth/AuthChangePassword';
+import branding from 'branding.json';
 
 // assets
 import BackgroundImg2 from 'assets/images/authentication/img-auth-bg-2.jpg';
@@ -17,7 +18,7 @@ export default function ChangePasswordV2Page() {
         <div className="auth-sidecontent">
           <Stack className="align-items-center w-100 justify-content-center">
             <Col md={8}>
-              <h1 className="text-white mb-5">Reset Password in Datta Able</h1>
+              <h1 className="text-white mb-5">Reset Password in {branding.brandName}</h1>
               <p className="text-white">
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
                 dummy text ever.

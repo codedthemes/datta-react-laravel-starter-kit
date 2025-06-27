@@ -18,7 +18,7 @@ export default function TopBottomActionsBarsPage() {
       title="Top & Bottom Actions Bars"
       footerClassName="bg-light"
       footer={
-        <Stack gap={2} direction="horizontal" className="justify-content-center  ">
+        <Stack gap={2} direction="horizontal" className="justify-content-center">
           <Button type="submit" variant="success">
             Submit
           </Button>
@@ -29,9 +29,9 @@ export default function TopBottomActionsBarsPage() {
       }
     >
       <Card.Body className=" border-bottom">
-        <Row className="align-items-center ">
+        <Row className="align-items-center">
           <Col sm={6}>Top Actions:</Col>
-          <Col sm={6} className=" mt-3 mt-sm-0 ">
+          <Col sm={6} className=" mt-3 mt-sm-0">
             <Stack gap={1} direction="horizontal" className="justify-content-sm-end">
               <Button type="submit" variant="success">
                 Submit

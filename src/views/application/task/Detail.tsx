@@ -2,7 +2,7 @@
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-// project-import
+// project-imports
 import AssignedUsers from 'sections/application/task/details/AssignedUsers';
 import AttachedFiles from 'sections/application/task/details/AttachedFiles';
 import Comments from 'sections/application/task/details/Comments';

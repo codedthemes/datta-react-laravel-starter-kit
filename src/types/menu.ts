@@ -3,10 +3,9 @@ import { ReactElement, ReactNode } from 'react';
 // ==============================|| MENU TYPES ||============================== //
 
 export type NavItemType = {
+  badge?: number;
   breadcrumbs?: boolean;
-  caption?: ReactNode | string;
   children?: NavItemType[];
-  elements?: NavItemType[];
   icon?: ReactElement | string;
   id?: string;
   link?: string;

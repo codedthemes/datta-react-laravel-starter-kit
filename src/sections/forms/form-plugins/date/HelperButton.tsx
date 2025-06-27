@@ -57,7 +57,7 @@ export default function HelperButton({ useClickOutside }: DatePickerDisabledProp
             readOnly
           />
           <InputGroup.Text>
-            <i className="ti ti-calendar f-18" />
+            <i className="ph ph-calendar-blank f-18" />
           </InputGroup.Text>
         </InputGroup>
         {isHelperButton && (

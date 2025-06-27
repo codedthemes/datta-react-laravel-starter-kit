@@ -8,11 +8,12 @@ import Table from 'react-bootstrap/Table';
 import MainCard from 'components/MainCard';
 
 // assets
-import Avatar from 'assets/images/user/avatar-1.jpg';
-import Avatar1 from 'assets/images/user/avatar-2.jpg';
-import Avatar2 from 'assets/images/user/avatar-3.jpg';
-import Avatar3 from 'assets/images/user/avatar-4.jpg';
+import Avatar from 'assets/images/user/avatar-1.png';
+import Avatar1 from 'assets/images/user/avatar-2.png';
+import Avatar2 from 'assets/images/user/avatar-3.png';
+import Avatar3 from 'assets/images/user/avatar-4.png';
 
+// user data
 const users = [
   {
     name: 'Airi Satou',
@@ -51,7 +52,6 @@ const users = [
 export default function LatestSignupList() {
   return (
     <MainCard
-      bodyClassName="p-0"
       title={
         <Stack direction="horizontal" className="align-items-center justify-content-between">
           <h5 className="m-0">Latest Signup List</h5>
@@ -60,32 +60,31 @@ export default function LatestSignupList() {
           </Button>
         </Stack>
       }
+      className="table-card"
     >
-      <div className="table-responsive">
-        <Table hover responsive className="mb-0">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Joining Date</th>
+      <Table hover responsive className="mb-0">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Joining Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user, index) => (
+            <tr key={index}>
+              <td>
+                <Stack direction="horizontal" className="align-items-center">
+                  <Image src={user.imgSrc} alt="user" className="rounded-circle wid-40 hei-40 me-3" />
+                  <span>{user.name}</span>
+                </Stack>
+              </td>
+              <td>{user.email}</td>
+              <td>{user.joiningDate}</td>
             </tr>
-          </thead>
-          <tbody>
-            {users.map((user, index) => (
-              <tr key={index}>
-                <td>
-                  <Stack direction="horizontal" className="align-items-center">
-                    <Image src={user.imgSrc} alt="user" className="rounded-circle wid-40 hei-40 me-3" />
-                    <span>{user.name}</span>
-                  </Stack>
-                </td>
-                <td>{user.email}</td>
-                <td>{user.joiningDate}</td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      </div>
+          ))}
+        </tbody>
+      </Table>
     </MainCard>
   );
 }

@@ -18,18 +18,18 @@ import ResponsiveAlignmentDropdown from 'sections/components/basic/drop-down/Res
 import SplitDropdownPage from 'sections/components/basic/drop-down/Spilt';
 import SplitOutlineDropdown from 'sections/components/basic/drop-down/SplitOutline';
 import TextDropdown from 'sections/components/basic/drop-down/Text';
-import ComponentHeader from 'components/cards/ComponentHeader';
+import ReferenceHeader from 'components/ReferenceHeader';
 
 // ==============================|| BASIC - DROPDOWN ||============================== //
 
 export default function DropdownPage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="Toggle contextual overlays for displaying lists of links and more with the React-Bootstrap dropdown plugin."
         link="https://react-bootstrap.netlify.app/docs/components/dropdowns/"
       />
-      <Row className="btn-page">
+      <Row>
         <Col md={6}>
           <BasicDropdown />
         </Col>

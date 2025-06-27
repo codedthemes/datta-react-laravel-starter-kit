@@ -1,5 +1,5 @@
 // project-imports
-import ComponentHeader from 'components/cards/ComponentHeader';
+import ReferenceHeader from 'components/ReferenceHeader';
 import HelloCard from 'sections/components/advance/tour/HelloCard';
 
 // =============================|| ADVANCED - TOUR ||============================== //
@@ -7,7 +7,7 @@ import HelloCard from 'sections/components/advance/tour/HelloCard';
 export default function TourPage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="Intro.js is a lightweight JavaScript library for creating step-by-step and powerful onboarding tours"
         link="https://introjs.com/"
       />

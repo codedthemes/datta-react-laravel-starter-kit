@@ -5,7 +5,6 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
 // project-imports
-import MainCard from 'components/MainCard';
 import {
   showMessage,
   showTitleAndText,
@@ -14,14 +13,16 @@ import {
   showCustomPosition,
   handleCustomImage,
   handleRtlLanguage
-} from 'sections/components/advance/sweet-alert/utils/Alert';
-import { showCustomHtml } from 'sections/components/advance/sweet-alert/utils/ShowCustomHTML';
-import { showThreeButtons } from 'sections/components/advance/sweet-alert/utils/ShowThreeButtons';
-import { showCustomAnimation } from 'sections/components/advance/sweet-alert/utils/CustomAnimation';
-import { handleConfirmDialog } from 'sections/components/advance/sweet-alert/utils/ConfirmDialog';
-import { handleAutoClose } from 'sections/components/advance/sweet-alert/utils/AutoClose';
-import { handleAjaxRequest } from 'sections/components/advance/sweet-alert/utils/AjaxRequest';
+} from './utils/Alert';
+import { showCustomHtml } from './utils/ShowCustomHTML';
+import { showThreeButtons } from './utils/ShowThreeButtons';
+import { showCustomAnimation } from './utils/CustomAnimation';
+import { handleConfirmDialog } from './utils/ConfirmDialog';
+import { handleAutoClose } from './utils/AutoClose';
+import { handleAjaxRequest } from './utils/AjaxRequest';
+import MainCard from 'components/MainCard';
 
+// alert data
 const AlertData = [
   { title: 'Basic message', function: showMessage },
   { title: 'Title with a text under', function: showTitleAndText },

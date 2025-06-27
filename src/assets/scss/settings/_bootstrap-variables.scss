@@ -22,14 +22,12 @@ $grays: (
 // scss-docs-start colors-map
 $colors: (
   'blue': $blue,
-  'indigo': $indigo,
   'purple': $purple,
   'pink': $pink,
   'red': $red,
   'orange': $orange,
   'yellow': $yellow,
   'green': $green,
-  'teal': $teal,
   'cyan': $cyan,
   'black': $black,
   'white': $white,
@@ -81,18 +79,6 @@ $blues: (
   'blue-700': $blue-700,
   'blue-800': $blue-800,
   'blue-900': $blue-900
-);
-
-$indigos: (
-  'indigo-100': $indigo-100,
-  'indigo-200': $indigo-200,
-  'indigo-300': $indigo-300,
-  'indigo-400': $indigo-400,
-  'indigo-500': $indigo-500,
-  'indigo-600': $indigo-600,
-  'indigo-700': $indigo-700,
-  'indigo-800': $indigo-800,
-  'indigo-900': $indigo-900
 );
 
 $purples: (
@@ -165,18 +151,6 @@ $greens: (
   'green-700': $green-700,
   'green-800': $green-800,
   'green-900': $green-900
-);
-
-$teals: (
-  'teal-100': $teal-100,
-  'teal-200': $teal-200,
-  'teal-300': $teal-300,
-  'teal-400': $teal-400,
-  'teal-500': $teal-500,
-  'teal-600': $teal-600,
-  'teal-700': $teal-700,
-  'teal-800': $teal-800,
-  'teal-900': $teal-900
 );
 
 $cyans: (
@@ -764,7 +738,7 @@ $form-select-padding-y: $input-padding-y;
 $form-select-padding-x: $input-padding-x;
 $form-select-font-family: $input-font-family;
 $form-select-font-size: $input-font-size;
-$form-select-indicator-padding: 2rem; // Extra padding to account for the presence of the background-image based indicator
+$form-select-indicator-padding: 2.2rem; // Extra padding to account for the presence of the background-image based indicator
 $form-select-font-weight: $input-font-weight;
 $form-select-line-height: $input-line-height;
 $form-select-color: $input-color;
@@ -885,7 +859,7 @@ $zindex-offcanvas: 1045;
 $zindex-modal-backdrop: 1050;
 $zindex-modal: 1055;
 $zindex-popover: 1070;
-$zindex-tooltip: 1080;
+$zindex-tooltip: 1081;
 $zindex-toast: 1090;
 // scss-docs-end zindex-stack
 
@@ -1149,29 +1123,26 @@ $form-feedback-tooltip-border-radius: $tooltip-border-radius;
 // Popovers
 
 $popover-font-size: $font-size-sm;
-$popover-bg: $white;
+$popover-bg: var(--#{$prefix}body-bg);
 $popover-max-width: 276px;
-$popover-border-width: $border-width;
-$popover-border-color: rgba($black, 0.2);
-$popover-border-radius: $border-radius-lg;
-$popover-inner-border-radius: subtract($popover-border-radius, $popover-border-width);
-$popover-box-shadow: $box-shadow;
+$popover-border-width: var(--#{$prefix}border-width);
+$popover-border-color: var(--#{$prefix}border-color-translucent);
+$popover-border-radius: var(--#{$prefix}border-radius-lg);
+$popover-inner-border-radius: calc(#{$popover-border-radius} - #{$popover-border-width}); // stylelint-disable-line function-disallowed-list
+$popover-box-shadow: var(--#{$prefix}box-shadow);
 
-$popover-header-bg: darken($popover-bg, 3%);
-$popover-header-color: $headings-color;
+$popover-header-font-size: $font-size-base;
+$popover-header-bg: var(--#{$prefix}body-bg);
+$popover-header-color: var(--#{$prefix}body-color);
 $popover-header-padding-y: 0.5rem;
-$popover-header-padding-x: 0.75rem;
+$popover-header-padding-x: $spacer;
 
-$popover-body-color: $body-color;
+$popover-body-color: var(--#{$prefix}body-color);
 $popover-body-padding-y: $spacer;
 $popover-body-padding-x: $spacer;
 
 $popover-arrow-width: 1rem;
 $popover-arrow-height: 0.5rem;
-$popover-arrow-color: $popover-bg;
-
-$popover-arrow-outer-color: fade-in($popover-border-color, 0.05);
-
 // Toasts
 
 $toast-max-width: 350px;

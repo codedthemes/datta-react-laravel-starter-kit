@@ -5,7 +5,7 @@ import TreeView, { flattenTree, NodeId } from 'react-accessible-treeview';
 
 // project-imports
 import MainCard from 'components/MainCard';
-import ComponentHeader from 'components/cards/ComponentHeader';
+import ReferenceHeader from 'components/ReferenceHeader';
 
 const folder = {
   name: '',
@@ -36,7 +36,7 @@ export default function AdvanceTreeViewPage() {
 
   return (
     <>
-      <ComponentHeader caption="Standalone tree view library" link="https://www.npmjs.com/package/react-accessible-treeview" />
+      <ReferenceHeader caption="Standalone tree view library" link="https://www.npmjs.com/package/react-accessible-treeview" />
       <MainCard title="HTML Demo">
         <TreeView
           data={data}

@@ -196,7 +196,7 @@ export default function Europe() {
   }, [isLayoutReady]);
 
   return (
-    <div ref={editorRef} className="border ">
+    <div ref={editorRef} className="border">
       {editorConfig && (
         <CKEditor
           onReady={(editor) => {

@@ -1,4 +1,4 @@
-// react-bootstrap
+// project-imports
 import Create from 'sections/admin-panel/helpdesk/tickets/Create';
 
 // =============================|| TICKET - CREATE ||============================== //

@@ -11,19 +11,19 @@ export default function IconsAlert() {
   return (
     <MainCard title="Icons Alert">
       <Stack direction="horizontal" as={Alert} className=" align-items-center gap-2">
-        <i className="fa fa-info-circle f-24" />
+        <i className="ti ti-info-circle-filled f-24" />
         An example alert with an icon
       </Stack>
       <Stack direction="horizontal" as={Alert} variant="success" className="align-items-center gap-2">
-        <i className="fa fa-check-circle f-24" />
+        <i className="ti ti-circle-check-filled f-24" />
         An example success alert with an icon
       </Stack>
       <Stack direction="horizontal" as={Alert} variant="warning" className=" align-items-center gap-2">
-        <i className="fa fa-exclamation-triangle f-24" />
+        <i className="ti ti-alert-triangle-filled f-24" />
         An example warning alert with an icon
       </Stack>
       <Stack direction="horizontal" as={Alert} variant="danger" className=" align-items-center gap-2">
-        <i className="fa fa-exclamation-triangle f-24" />
+        <i className="ti ti-alert-triangle-filled f-24" />
         An example danger alert with an icon
       </Stack>
     </MainCard>

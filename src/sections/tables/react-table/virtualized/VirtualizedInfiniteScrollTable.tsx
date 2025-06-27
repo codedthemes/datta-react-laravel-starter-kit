@@ -24,7 +24,6 @@ import { keepPreviousData, useInfiniteQuery, QueryClient, QueryClientProvider } 
 // project-imports
 import HeaderSort from '../sorting/HeaderSort';
 import MainCard from 'components/MainCard';
-import ScrollX from 'components/ScrollX';
 import LinearWithLabel from 'components/@extended/progress/LinearWithLabel';
 import DebouncedInput from 'components/third-party/react-table/DebouncedInput';
 import makeData from 'data/react-table';
@@ -187,75 +186,74 @@ function ReactTable() {
   return (
     <MainCard
       title={
-        <Stack direction="horizontal" className="justify-content-between align-items-center">
+        <Stack direction="horizontal" className="justify-content-between align-items-center flex-wrap" gap={2}>
           <h5>Virtualized Infinite Scroll</h5>
           <DebouncedInput value={globalFilter ?? ''} onFilterChange={(value) => setGlobalFilter(String(value))} />
         </Stack>
       }
+      className="table-card"
     >
-      <ScrollX>
-        <div
-          ref={tableContainerRef}
-          onScroll={(e) => fetchMoreOnBottomReached(e.target as HTMLDivElement)}
-          className="overflow-auto"
-          style={{ height: '544px' }}
-        >
-          <Table hover>
-            <thead>
-              {table.getHeaderGroups().map((headerGroup: HeaderGroup<any>) => (
-                <tr key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => {
-                    if (header.column.columnDef.meta !== undefined && header.column.getCanSort()) {
-                      Object.assign(header.column.columnDef.meta, {
-                        className: `cursor-pointer prevent-select`
-                      });
-                    }
+      <div
+        ref={tableContainerRef}
+        onScroll={(e) => fetchMoreOnBottomReached(e.target as HTMLDivElement)}
+        className="overflow-auto custom-scrollbar"
+        style={{ height: '544px' }}
+      >
+        <Table hover>
+          <thead>
+            {table.getHeaderGroups().map((headerGroup: HeaderGroup<any>) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  if (header.column.columnDef.meta !== undefined && header.column.getCanSort()) {
+                    Object.assign(header.column.columnDef.meta, {
+                      className: `cursor-pointer prevent-select`
+                    });
+                  }
 
-                    return (
-                      <th
-                        key={header.id}
-                        onClick={header.column.getToggleSortingHandler()}
-                        className={`${header.column.getCanSort() ? 'cursor-pointer prevent-select' : ''} `}
-                      >
-                        {header.isPlaceholder ? null : (
-                          <Stack direction="horizontal">
-                            <span>{flexRender(header.column.columnDef.header, header.getContext())}</span>
-                            {header.column.getCanSort() && <HeaderSort column={header.column} />}
-                          </Stack>
-                        )}
-                      </th>
-                    );
-                  })}
+                  return (
+                    <th
+                      key={header.id}
+                      onClick={header.column.getToggleSortingHandler()}
+                      className={`${header.column.getCanSort() ? 'cursor-pointer prevent-select' : ''} `}
+                    >
+                      {header.isPlaceholder ? null : (
+                        <Stack direction="horizontal">
+                          <span>{flexRender(header.column.columnDef.header, header.getContext())}</span>
+                          {header.column.getCanSort() && <HeaderSort column={header.column} />}
+                        </Stack>
+                      )}
+                    </th>
+                  );
+                })}
+              </tr>
+            ))}
+          </thead>
+          <tbody>
+            {paddingTop > 0 && (
+              <tr>
+                <td className="text-wrap" style={{ height: `${paddingTop}px` }} />
+              </tr>
+            )}
+            {virtualRows.map((virtualRow) => {
+              const row = rows[virtualRow.index] as Row<TableDataProps>;
+              return (
+                <tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => (
+                    <td key={cell.id} {...cell.column.columnDef.meta}>
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </td>
+                  ))}
                 </tr>
-              ))}
-            </thead>
-            <tbody>
-              {paddingTop > 0 && (
-                <tr>
-                  <td className="text-wrap" style={{ height: `${paddingTop}px` }} />
-                </tr>
-              )}
-              {virtualRows.map((virtualRow) => {
-                const row = rows[virtualRow.index] as Row<TableDataProps>;
-                return (
-                  <tr key={row.id}>
-                    {row.getVisibleCells().map((cell) => (
-                      <td key={cell.id} {...cell.column.columnDef.meta}>
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                      </td>
-                    ))}
-                  </tr>
-                );
-              })}
-              {paddingBottom > 0 && (
-                <tr>
-                  <td style={{ height: `${paddingBottom}px`, whiteSpace: 'nowrap' }} />
-                </tr>
-              )}
-            </tbody>
-          </Table>
-        </div>
-      </ScrollX>
+              );
+            })}
+            {paddingBottom > 0 && (
+              <tr>
+                <td style={{ height: `${paddingBottom}px`, whiteSpace: 'nowrap' }} />
+              </tr>
+            )}
+          </tbody>
+        </Table>
+      </div>
     </MainCard>
   );
 }

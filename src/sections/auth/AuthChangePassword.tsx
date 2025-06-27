@@ -11,22 +11,30 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 // project-imports
 import MainCard from 'components/MainCard';
+import useConfig from 'hooks/useConfig';
 import { confirmPasswordSchema, passwordSchema } from 'utils/validationSchema';
+import { getResolvedTheme, setResolvedTheme } from 'components/setResolvedTheme';
+import { ThemeMode } from 'config';
 
 // assets
-import WhiteLogo from 'assets/images/logo-white.svg';
-import Logo from 'assets/images/logo-dark.svg';
-import { Link } from 'react-router-dom';
+import LightLogo from 'assets/images/logo-white.svg';
+import DarkLogo from 'assets/images/logo-dark.svg';
 
 interface ChangePasswordFormInput {
   password: string;
-  confirmpassword: string;
+  confirmPassword: string;
 }
 
 // ==============================|| AUTH CHANGE PASSWORD FORM ||============================== //
 
 export default function AuthChangePasswordForm({ className }: { className?: string }) {
   const [showPassword, setShowPassword] = useState(false);
+
+  const { mode } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
+
+  const logo = resolvedTheme === ThemeMode.DARK ? LightLogo : DarkLogo;
 
   const {
     register,
@@ -42,23 +50,23 @@ export default function AuthChangePasswordForm({ className }: { className?: stri
   };
 
   const onSubmit: SubmitHandler<ChangePasswordFormInput> = (data: ChangePasswordFormInput) => {
-    if (data.password !== data.confirmpassword) {
-      setError('confirmpassword', {
+    if (data.password !== data.confirmPassword) {
+      setError('confirmPassword', {
         type: 'manual',
         message: 'Both Password must be match!'
       });
     } else {
-      clearErrors('confirmpassword');
+      clearErrors('confirmPassword');
       reset();
     }
   };
 
   return (
-    <MainCard className={window.location.pathname === '/auth/register-v4' ? 'my-0' : 'my-5'}>
+    <MainCard className="mb-0">
       <div className="text-center">
-        <Link to="#">
-          <Image src={className === 'text-white' ? WhiteLogo : Logo} alt="img" />
-        </Link>
+        <a>
+          <Image src={logo} alt="img" />
+        </a>
       </div>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <h4 className={`text-center f-w-500 mt-4 mb-3 ${className}`}>Change Password</h4>
@@ -83,11 +91,11 @@ export default function AuthChangePasswordForm({ className }: { className?: stri
           <Form.Control
             type="password"
             placeholder="Confirm Password"
-            {...register('confirmpassword', confirmPasswordSchema)}
-            isInvalid={!!errors.confirmpassword}
+            {...register('confirmPassword', confirmPasswordSchema)}
+            isInvalid={!!errors.confirmPassword}
             className={className && 'bg-transparent border-white text-white border-opacity-25 '}
           />
-          <Form.Control.Feedback type="invalid">{errors.confirmpassword?.message}</Form.Control.Feedback>
+          <Form.Control.Feedback type="invalid">{errors.confirmPassword?.message}</Form.Control.Feedback>
         </Form.Group>
         <div className="text-center mt-4">
           <Button type="submit" className="shadow px-sm-4">

@@ -9,11 +9,11 @@ import Table from 'react-bootstrap/Table';
 import Stack from 'react-bootstrap/Stack';
 
 // assets
-import avtar1 from 'assets/images/user/avatar-1.jpg';
-import avtar2 from 'assets/images/user/avatar-2.jpg';
-import avtar3 from 'assets/images/user/avatar-3.jpg';
-import avtar4 from 'assets/images/user/avatar-4.jpg';
-import avtar5 from 'assets/images/user/avatar-5.jpg';
+import avatar1 from 'assets/images/user/avatar-1.png';
+import avatar2 from 'assets/images/user/avatar-2.png';
+import avatar3 from 'assets/images/user/avatar-3.png';
+import avatar4 from 'assets/images/user/avatar-4.png';
+import avatar5 from 'assets/images/user/avatar-5.png';
 
 const users = [
   {
@@ -24,7 +24,7 @@ const users = [
     age: 61,
     startDate: '2011/04/25',
     status: 'Active',
-    image: avtar1
+    image: avatar1
   },
   {
     name: 'Garrett Winters',
@@ -34,7 +34,7 @@ const users = [
     age: 63,
     startDate: '2011/07/25',
     status: 'Disabled',
-    image: avtar2
+    image: avatar2
   },
   {
     name: 'Ashton Cox',
@@ -44,7 +44,7 @@ const users = [
     age: 66,
     startDate: '2009/01/12',
     status: 'Disabled',
-    image: avtar3
+    image: avatar3
   },
   {
     name: 'Cedric Kelly',
@@ -54,7 +54,7 @@ const users = [
     age: 22,
     startDate: '2012/03/29',
     status: 'Active',
-    image: avtar4
+    image: avatar4
   },
   {
     name: 'Airi Satou',
@@ -64,7 +64,7 @@ const users = [
     age: 33,
     startDate: '2008/11/28',
     status: 'Active',
-    image: avtar4
+    image: avatar4
   },
   {
     name: 'Brielle Williamson',
@@ -74,7 +74,7 @@ const users = [
     age: 61,
     startDate: '2012/12/02',
     status: 'Disabled',
-    image: avtar5
+    image: avatar5
   }
 ];
 
@@ -86,8 +86,8 @@ export default function UserListPage() {
       <Col lg={12}>
         <Card className="user-profile-list">
           <Card.Body className="p-0">
-            <div className="dt-responsive table-responsive">
-              <Table hover className="nowrap">
+            <div className="dt-responsive">
+              <Table responsive hover className="nowrap">
                 <thead>
                   <tr>
                     <th>Name</th>
@@ -116,12 +116,12 @@ export default function UserListPage() {
                       <td>{user.startDate}</td>
                       <td>
                         <Badge bg={user.status === 'Active' ? 'light-success' : 'light-danger'}>{user.status}</Badge>
-                        <div className="overlay-edit ">
+                        <div className="overlay-edit">
                           <Button variant="success" className="btn-icon">
-                            <i className="ti ti-circle-check" />
+                            <i className="ph ph-check-circle align-middle" />
                           </Button>
                           <Button variant="danger" className="btn-icon">
-                            <i className="ti ti-trash" />
+                            <i className="ph ph-trash align-middle" />
                           </Button>
                         </div>
                       </td>

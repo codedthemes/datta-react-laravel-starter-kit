@@ -1,5 +1,5 @@
 // project-imports
-import ComponentHeader from 'components/cards/ComponentHeader';
+import ReferenceHeader from 'components/ReferenceHeader';
 import BalloonEditor from 'sections/forms/text-editor/class-editor/BalloonEditor';
 
 // =================|| CK EDITOR - BALLOON EDITOR MAIN ||============================== //
@@ -7,7 +7,7 @@ import BalloonEditor from 'sections/forms/text-editor/class-editor/BalloonEditor
 export default function BalloonEditorPage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="CKEditor 5 allows users to create any type of content in your application, be it documents, reports, emails, notes or chat messages."
         link="https://ckeditor.com/"
       />

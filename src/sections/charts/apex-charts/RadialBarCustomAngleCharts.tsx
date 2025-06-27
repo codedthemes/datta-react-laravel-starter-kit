@@ -12,6 +12,7 @@ type FormatterOptions = {
   };
 };
 
+// chart-options
 const chartOptions: ChartProps = {
   plotOptions: {
     radialBar: {

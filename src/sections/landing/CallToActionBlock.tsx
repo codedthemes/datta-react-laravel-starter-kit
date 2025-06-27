@@ -7,6 +7,7 @@ import Stack from 'react-bootstrap/Stack';
 
 // project-imports
 import MainCard from 'components/MainCard';
+import branding from 'branding.json';
 
 // ==============================|| LANDING - CALL TO ACTION BLOCK ||============================== //
 
@@ -22,9 +23,9 @@ export default function CallToActionBlock() {
               <Col md={7} className="text-center text-md-start">
                 <div className="title mb-0">
                   <h3 className="mb-3">
-                    Want <strong className="landing-background-image">trial version</strong> of <strong>Datta Able</strong>?
+                    Want <strong className="landing-background-image">trial version</strong> of <strong>{branding.brandName}</strong>?
                   </h3>
-                  <p className="mb-3 mb-sm-0">Download free version of Datta Able before making your purchase decision.</p>
+                  <p className="mb-3 mb-sm-0">Download free version of {branding.brandName} before making your purchase decision.</p>
                 </div>
               </Col>
               <Col md={3}>

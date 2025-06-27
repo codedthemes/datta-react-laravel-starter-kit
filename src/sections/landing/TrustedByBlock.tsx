@@ -45,8 +45,7 @@ export default function TrustedBySection() {
             { src: EagamesImg, delay: '0.3s' },
             { src: HaswentImg, delay: '0.4s' },
             { src: CrystalImg, delay: '0.5s' },
-            { src: VodafoneImg, delay: '0.6s' },
-            { src: EagamesImg, delay: '0.7s' }
+            { src: VodafoneImg, delay: '0.6s' }
           ].map((client, index) => (
             <Col key={index} className="col-auto">
               <motion.div

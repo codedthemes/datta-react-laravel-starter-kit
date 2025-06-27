@@ -22,7 +22,7 @@ export default function JazzAdvance() {
               Dynamic <span>Jazz</span>
             </h2>
             <p>When Jazz starts to chase cars, the whole world stands still.</p>
-            <a href="#!">View more</a>
+            <a>View more</a>
           </FigureCaption>
         </Figure>
         <Figure className="effect-jazz">
@@ -32,8 +32,8 @@ export default function JazzAdvance() {
               Dynamic <span>Jazz</span>
             </h2>
             <p>When Jazz starts to chase cars, the whole world stands still.</p>
-            <a href="#!">View more</a>
-            <a href="#!">View more</a>
+            <a>View more</a>
+            <a>View more</a>
           </FigureCaption>
         </Figure>
       </div>

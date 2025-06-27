@@ -22,14 +22,14 @@ export default function PhoebeAdvance() {
               Plain <span>Phoebe</span>
             </h2>
             <p>
-              <a href="#!">
-                <i className="fa fa-fw fa-user" />
+              <a>
+                <i className="ti ti-user" />
               </a>
-              <a href="#!">
-                <i className="fa fa-fw fa-heart" />
+              <a>
+                <i className="ti ti-heart-filled" />
               </a>
-              <a href="#!">
-                <i className="fa fa-fw fa-cog" />
+              <a>
+                <i className="ti ti-settings" />
               </a>
             </p>
           </FigureCaption>
@@ -41,14 +41,14 @@ export default function PhoebeAdvance() {
               Plain <span>Phoebe</span>
             </h2>
             <p>
-              <a href="#!">
-                <i className="fa fa-fw fa-user" />
+              <a>
+                <i className="ti ti-user" />
               </a>
-              <a href="#!">
-                <i className="fa fa-fw fa-heart" />
+              <a>
+                <i className="ti ti-heart-filled" />
               </a>
-              <a href="#!">
-                <i className="fa fa-fw fa-cog" />
+              <a>
+                <i className="ti ti-settings" />
               </a>
             </p>
           </FigureCaption>

@@ -1,5 +1,5 @@
-// react-bootstrap
-import List from 'sections/admin-panel/helpdesk/tickets/list/List';
+// project-imports
+import List from 'sections/admin-panel/helpdesk/tickets/list';
 
 // ==============================|| TICKET - LIST ||============================== //
 

@@ -17,7 +17,7 @@ export default function RegisterV4Page() {
     <div className="auth-main">
       <div className="auth-wrapper v4">
         <div className="auth-form">
-          <Card className="my-5">
+          <Card className="my-2">
             <Row className="g-0">
               <Col md={6} sm={12} className="bg-brand-color-1 d-none d-md-flex d-lg-flex align-items-center justify-content-center">
                 <Image src={userImg} alt="lock images" className="img-fluid" />

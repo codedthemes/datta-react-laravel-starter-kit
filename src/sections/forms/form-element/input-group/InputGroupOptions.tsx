@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 // react-bootstrap
 import Alert from 'react-bootstrap/Alert';
@@ -63,19 +62,11 @@ export default function InputgroupOptions() {
       <Form.Label>Button with Dropdown</Form.Label>
       <InputGroup className="mb-3">
         <DropdownButton variant="secondary" title="Dropdown" id="input-group-dropdown-1">
-          <Dropdown.Item as={Link} to="#">
-            Action
-          </Dropdown.Item>
-          <Dropdown.Item as={Link} to="#">
-            Another action
-          </Dropdown.Item>
-          <Dropdown.Item as={Link} to="#">
-            Something else here
-          </Dropdown.Item>
-          <Dropdown.Divider />
-          <Dropdown.Item as={Link} to="#">
-            Separated link
-          </Dropdown.Item>
+          <Dropdown.Item href="#">Action</Dropdown.Item>
+          <Dropdown.Item href="#">Another action</Dropdown.Item>
+          <Dropdown.Item href="#">Something else here</Dropdown.Item>
+          <hr className="m-0 my-2" />
+          <Dropdown.Item href="#">Separated link</Dropdown.Item>
         </DropdownButton>
         <Form.Control placeholder="Left Dropdown" />
       </InputGroup>
@@ -83,19 +74,11 @@ export default function InputgroupOptions() {
       <InputGroup className="mb-3">
         <Form.Control placeholder="Right Dropdown" />
         <DropdownButton variant="secondary" title="Dropdown" id="input-group-dropdown-1">
-          <Dropdown.Item as={Link} to="#">
-            Action
-          </Dropdown.Item>
-          <Dropdown.Item as={Link} to="#">
-            Another action
-          </Dropdown.Item>
-          <Dropdown.Item as={Link} to="#">
-            Something else here
-          </Dropdown.Item>
-          <Dropdown.Divider />
-          <Dropdown.Item as={Link} to="#">
-            Separated link
-          </Dropdown.Item>
+          <Dropdown.Item href="#">Action</Dropdown.Item>
+          <Dropdown.Item href="#">Another action</Dropdown.Item>
+          <Dropdown.Item href="#">Something else here</Dropdown.Item>
+          <hr className="m-0 my-2" />
+          <Dropdown.Item href="#">Separated link</Dropdown.Item>
         </DropdownButton>
       </InputGroup>
 
@@ -103,7 +86,7 @@ export default function InputgroupOptions() {
 
       <InputGroup className="mb-3">
         <Button variant="outline-primary" id="button-addon1">
-          <i className="ti ti-aperture" />
+          <i className="ph ph-aperture me-1" />
           Outline color
         </Button>
         <Form.Control aria-label="Example text with button addon" aria-describedby="basic-addon1" placeholder="Left Button" />
@@ -112,7 +95,7 @@ export default function InputgroupOptions() {
       <InputGroup className="mb-4">
         <Form.Control aria-label="Example text with button addon" aria-describedby="basic-addon1" placeholder="Right Button" />
         <Button variant="success">
-          <i className="ti ti-download" /> Fill color
+          <i className="ph ph-cloud-arrow-down" /> Fill color
         </Button>
       </InputGroup>
 
@@ -132,7 +115,7 @@ export default function InputgroupOptions() {
       <CardFooter className="px-0 pb-0">
         <Stack direction="horizontal" gap={2}>
           <Button>Submit</Button>
-          <Button variant="light">Reset</Button>
+          <Button className="btn-link-danger">Reset</Button>
         </Stack>
       </CardFooter>
     </MainCard>

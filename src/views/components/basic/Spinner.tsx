@@ -9,14 +9,14 @@ import ColorGrowingSpinner from 'sections/components/basic/spinner/ColorGrowingS
 import GrowingSpinner from 'sections/components/basic/spinner/GrowingSpinner';
 import Placement from 'sections/components/basic/spinner/Placement';
 import SizeSpinner from 'sections/components/basic/spinner/SizeSpinner';
-import ComponentHeader from 'components/cards/ComponentHeader';
+import ReferenceHeader from 'components/ReferenceHeader';
 
 // ==============================|| BASIC - SPINNER ||============================== //
 
 export default function SpinnerPage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="Indicate the loading state of a component or page with React-Bootstrap spinners, built entirely with HTML, CSS, and no JavaScript."
         link="https://react-bootstrap.netlify.app/docs/components/spinners/"
       />

@@ -14,6 +14,7 @@ const generateDayWiseTimeSeries = (baseval: number, count: number, yrange: { min
   return series;
 };
 
+// chart-options
 const chartOptions: ChartProps = {
   chart: {
     zoom: {

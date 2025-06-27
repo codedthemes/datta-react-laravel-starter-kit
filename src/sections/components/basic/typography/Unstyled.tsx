@@ -16,7 +16,7 @@ export default function Unstyled() {
 
       <h5>Inline</h5>
       <hr />
-      <ul className="list-inline m-b-0">
+      <ul className="list-inline mb-0">
         <li className="list-inline-item">Lorem ipsum</li>
         <li className="list-inline-item">Phasellus iaculis</li>
         <li className="list-inline-item">Nulla volutpat</li>

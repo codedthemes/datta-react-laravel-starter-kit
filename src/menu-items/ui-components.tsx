@@ -5,13 +5,13 @@ import { NavItemType } from 'types/menu';
 
 const uiComponents: NavItemType = {
   id: 'group-ui-components',
-  title: 'ui-components',
+  title: 'ui components',
   type: 'group',
   children: [
     {
       id: 'basic',
       title: 'basic',
-      icon: <i className="ti ti-box" />,
+      icon: <i className="ph ph-pencil-ruler" />,
       type: 'collapse',
       children: [
         {
@@ -87,8 +87,8 @@ const uiComponents: NavItemType = {
           url: '/basic/progress'
         },
         {
-          id: 'list-group',
-          title: 'list-group',
+          id: 'list group',
+          title: 'list group',
           type: 'item',
           url: '/basic/list-group'
         },
@@ -139,18 +139,18 @@ const uiComponents: NavItemType = {
     {
       id: 'advanced',
       title: 'advanced',
-      icon: <i className="ti ti-brand-gitlab" />,
+      icon: <i className="ph ph-briefcase" />,
       type: 'collapse',
       children: [
         {
           id: 'sweet-alert',
-          title: 'sweet-alert',
+          title: 'sweet alert',
           type: 'item',
           url: '/advance/sweet-alert'
         },
         {
           id: 'date-picker',
-          title: 'date-picker',
+          title: 'date picker',
           type: 'item',
           url: '/advance/date-picker'
         },
@@ -174,7 +174,7 @@ const uiComponents: NavItemType = {
         },
         {
           id: 'range-slider',
-          title: 'range-slider',
+          title: 'range slider',
           type: 'item',
           url: '/advance/range-slider'
         },
@@ -186,7 +186,7 @@ const uiComponents: NavItemType = {
         },
         {
           id: 'syntax-highlighter',
-          title: 'syntax-highlighter',
+          title: 'syntax highlighter',
           type: 'item',
           url: '/advance/syntax-highlighter'
         },
@@ -198,7 +198,7 @@ const uiComponents: NavItemType = {
         },
         {
           id: 'tree-view',
-          title: 'tree-view',
+          title: 'tree view',
           type: 'item',
           url: '/advance/tree-view'
         }
@@ -207,14 +207,14 @@ const uiComponents: NavItemType = {
     {
       id: 'animation',
       title: 'animation',
-      icon: <i className="ti ti-command" />,
+      icon: <i className="ph ph-vinyl-record" />,
       type: 'item',
       url: '/animation'
     },
     {
       id: 'icons',
       title: 'icons',
-      icon: <i className="ti ti-feather" />,
+      icon: <i className="ph ph-feather" />,
       type: 'item',
       url: '/icons'
     }

@@ -12,7 +12,7 @@ import MainCard from 'components/MainCard';
 export default function PopoverPage() {
   return (
     <MainCard title="Popovers">
-      <Stack direction="horizontal" gap={2}>
+      <Stack direction="horizontal" className="flex-wrap" gap={2}>
         <OverlayTrigger
           trigger="click"
           placement="top"

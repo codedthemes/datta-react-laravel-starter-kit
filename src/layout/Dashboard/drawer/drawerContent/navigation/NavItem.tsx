@@ -25,22 +25,20 @@ interface Props {
 
 export default function NavItem({ item }: Props) {
   const { pathname } = useLocation();
-  const { onChangeMenuOrientation } = useConfig();
+  const { menuOrientation, onChangeMenuOrientation } = useConfig();
   const itemPath = item?.link || item?.url;
 
   let itemTarget: LinkTarget = '_self';
   if (item.target) {
     itemTarget = '_blank';
   }
-
-  const isSelected = itemPath ? !!matchPath({ path: itemPath, end: false }, pathname) : false;
-
+  const isSelected = itemPath ? !!matchPath({ path: itemPath, end: true }, pathname) : false;
   return (
     <li className={`pc-item ${isSelected ? 'active' : ''} `}>
-      {window.location.pathname !== '/layouts/compact' && window.location.pathname !== '/layouts/tab' ? (
+      {menuOrientation !== MenuOrientation.TAB ? (
         <Link
           className="pc-link"
-          to={item?.url || ''}
+          to={item?.url || '#'}
           target={itemTarget}
           onClick={() => {
             handlerDrawerOpen(false);
@@ -54,16 +52,16 @@ export default function NavItem({ item }: Props) {
               <i className={typeof item.icon === 'string' ? item.icon : item.icon?.props.className} />
             </span>
           )}
-          <FormattedMessage id={item.title?.toString()} />
+          <FormattedMessage id={item.title as string} />
         </Link>
       ) : (
         <>
-          {window.location.pathname !== '/layouts/tab' && (
+          {menuOrientation !== MenuOrientation.TAB && (
             <OverlayTrigger
               placement="right"
               overlay={
-                <Tooltip id={`tooltip-${item.title?.toString()}`}>
-                  <FormattedMessage id={item.title?.toString()} />
+                <Tooltip id={`tooltip-${item.title as string}`}>
+                  <FormattedMessage id={item.title as string} />
                 </Tooltip>
               }
             >

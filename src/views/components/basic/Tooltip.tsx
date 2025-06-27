@@ -5,14 +5,14 @@ import Row from 'react-bootstrap/Row';
 // project-imports
 import PopoverPage from 'sections/components/basic/tooltip/Popover';
 import TooltipPage from 'sections/components/basic/tooltip/Tooltip';
-import ComponentHeader from 'components/cards/ComponentHeader';
+import ReferenceHeader from 'components/ReferenceHeader';
 
 // ==============================|| BASIC - TOOLTIP ||============================== //
 
 export default function TooltipMainPage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="Documentation and examples for adding custom React-Bootstrap tooltips with CSS and JavaScript using CSS3 for animations and data-bs-attributes for local title storage."
         link="https://react-bootstrap.netlify.app/docs/components/overlays/#overlaytrigger"
       />

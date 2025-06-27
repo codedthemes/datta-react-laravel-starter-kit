@@ -1,5 +1,5 @@
-// react-bootstrap
-import Customers from 'sections/admin-panel/helpdesk/customers/Customers';
+// project-imports
+import Customers from 'sections/admin-panel/helpdesk/Customers';
 
 // =============================|| HELP DESK - CUSTOMERS ||============================== //
 

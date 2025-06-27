@@ -22,17 +22,17 @@ export default function TerryAdvance() {
               Noisy <span>Terry</span>
             </h2>
             <p>
-              <a href="#!">
-                <i className="fa fa-fw fa-download" />
+              <a>
+                <i className="ti ti-download" />
               </a>
-              <a href="#!">
-                <i className="fa fa-fw fa-heart" />
+              <a>
+                <i className="ti ti-heart-filled" />
               </a>
-              <a href="#!">
-                <i className="fa fa-fw fa-share" />
+              <a>
+                <i className="ti ti-brand-stackshare" />
               </a>
-              <a href="#!">
-                <i className="fa fa-fw fa-tags" />
+              <a>
+                <i className="ti ti-tags" />
               </a>
             </p>
           </FigureCaption>
@@ -44,17 +44,17 @@ export default function TerryAdvance() {
               Noisy <span>Terry</span>
             </h2>
             <p>
-              <a href="#!">
-                <i className="fa fa-fw fa-download" />
+              <a>
+                <i className="ti ti-download" />
               </a>
-              <a href="#!">
-                <i className="fa fa-fw fa-heart" />
+              <a>
+                <i className="ti ti-heart-filled" />
               </a>
-              <a href="#!">
-                <i className="fa fa-fw fa-share" />
+              <a>
+                <i className="ti ti-brand-stackshare" />
               </a>
-              <a href="#!">
-                <i className="fa fa-fw fa-tags" />
+              <a>
+                <i className="ti ti-tags" />
               </a>
             </p>
           </FigureCaption>

@@ -20,7 +20,7 @@ const initialValues = `<h1 class="ql-align-center">Quill Rich Text Editor</h1>
 export default function MyComponent() {
   return (
     <MainCard title="bubble Theme">
-      <ReactQuill theme="bubble" readOnly value={initialValues} className="hei-325" />
+      <ReactQuill theme="bubble" readOnly value={initialValues} style={{ height: 325 }} />
     </MainCard>
   );
 }

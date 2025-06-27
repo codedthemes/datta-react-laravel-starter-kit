@@ -1,17 +1,18 @@
 // react-bootstrap
 import Image from 'react-bootstrap/Image';
-import Stack from 'react-bootstrap/Stack';
 import Table from 'react-bootstrap/Table';
 
 // project-imports
 import MainCard from 'components/MainCard';
 
 // assets
-import Image1 from 'assets/images/user/avatar-1.jpg';
-import Image2 from 'assets/images/user/avatar-2.jpg';
-import Image3 from 'assets/images/user/avatar-3.jpg';
+import Image1 from 'assets/images/user/avatar-1.png';
+import Image2 from 'assets/images/user/avatar-2.png';
+import Image3 from 'assets/images/user/avatar-3.png';
 
-const userActivities = [
+// ==============================|| USERACTIVITY TABLE - DATA ||============================== //
+
+const userActivityData = [
   {
     name: 'Ida Jorgensen',
     image: Image1,
@@ -47,14 +48,23 @@ const userActivities = [
     status: 'Done',
     statusClass: 'text-success',
     iconClass: 'text-success'
+  },
+  {
+    name: 'Silje Larsen',
+    image: Image3,
+    activity: 'Dog the quick brown',
+    time: '10:23 PM',
+    status: 'Delayed',
+    statusClass: 'text-c-purple',
+    iconClass: 'text-c-purple'
   }
 ];
 
-// ==============================|| WIDGETS TABLES - USERACTIVITY TABLE ||============================== //
+// ==============================|| WIDGETS - USERACTIVITY TABLE ||============================== //
 
 export default function UserActivityTable() {
   return (
-    <MainCard title="User Activity" bodyClassName="pb-0">
+    <MainCard title="User Activity" className="User-Activity table-card" bodyClassName="p-0">
       <Table responsive hover>
         <thead>
           <tr>
@@ -66,12 +76,13 @@ export default function UserActivityTable() {
           </tr>
         </thead>
         <tbody>
-          {userActivities.map((user, index) => (
+          {userActivityData.map((user, index) => (
             <tr key={index}>
               <td>
-                <Stack gap={2} direction="horizontal">
-                  <Image src={user.image} width="40px" />
-                </Stack>
+                <h6 className="m-0">
+                  <Image className="m-r-10" src={user.image} width="40px" />
+                  {user.name}
+                </h6>
               </td>
               <td>
                 <h6>{user.activity}</h6>
@@ -81,7 +92,7 @@ export default function UserActivityTable() {
               </td>
               <td className={user.statusClass}>{user.status}</td>
               <td className="text-end">
-                <i className={`fas fa-circle f-10 ${user.iconClass}`} />
+                <i className={`ti ti-circle-filled f-10 ${user.iconClass}`} />
               </td>
             </tr>
           ))}

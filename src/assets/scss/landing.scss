@@ -1,6 +1,6 @@
 /**======================================================================
 =========================================================================
-Template Name: Datta able - React Admin Template
+Template Name: Datta able - Admin Template
 Author: Codedthemes
 Support: https://codedthemes.support-hub.io/
 File: style.css
@@ -8,9 +8,13 @@ File: style.css
 =================================================================================== */
 
 // main framework
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
 @import 'settings/color-variables';
 @import 'settings/bootstrap-variables';
 @import 'settings/theme-variables';
+
+@import 'bootstrap/scss/mixins';
 
 section {
   padding: 100px 0;
@@ -87,7 +91,7 @@ section {
   }
 }
 
-.landing-header {
+header {
   overflow: hidden;
   position: relative;
   padding: 180px 0 0;
@@ -425,14 +429,15 @@ section {
       left: 20px;
       background: var(--bs-primary);
       color: #fff;
-      box-shadow: 0 5px 25px rgba(var(--bs-primary-rgb), 0.5);
+      box-shadow: 0 -5px 25px rgba(var(--bs-primary-rgb), 0.5);
       border-radius: 50%;
       width: 60px;
       height: 60px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
+      font-size: 30px;
+      transform: rotate(180deg);
     }
   }
 }
@@ -500,6 +505,9 @@ section {
   section {
     padding: 40px 0;
   }
+  .call-to-action .cta-block .gift-icon {
+    display: none;
+  }
 }
 
 @media (max-width: 767.98px) {
@@ -511,15 +519,11 @@ section {
     padding: 14px 0;
   }
 
-  .call-to-action .cta-block .gift-icon {
-    display: none;
-  }
-
   .title strong {
     background-size: 95px;
   }
 
-  .landing-header {
+  header {
     text-align: center;
     padding: 120px 0 0;
     min-height: auto;
@@ -545,7 +549,7 @@ section {
     }
   }
 
-  .landing-header {
+  header {
     &:after {
       background: rgba(var(--bs-dark-rgb), 0.95);
     }

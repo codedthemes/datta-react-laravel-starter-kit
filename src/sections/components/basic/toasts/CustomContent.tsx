@@ -19,14 +19,14 @@ export default function CustomContent() {
   return (
     <MainCard title="Custom Content">
       <ToastContainer className="bg-body p-4 mb-2">
-        <Toast className="mb-4" bg="white" show={showSecondary} onClose={() => setShowSecondary(false)}>
+        <Toast className="mb-4" show={showSecondary} onClose={() => setShowSecondary(false)}>
           <Toast.Body className=" d-flex align-items-start justify-content-between">
             Hello, world! This is a toast message.
             <CloseButton onClick={() => setShowSecondary(false)} />
           </Toast.Body>
         </Toast>
 
-        <Toast bg="white" show={showDanger} onClose={() => setShowSecondary(false)}>
+        <Toast show={showDanger} onClose={() => setShowSecondary(false)}>
           <Toast.Body>
             Hello, world! This is a toast message.
             <Stack direction="horizontal" gap={2} className="border-top pt-2 mt-2">

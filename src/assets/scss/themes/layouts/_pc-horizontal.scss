@@ -99,7 +99,6 @@
 
           .pc-submenu {
             position: absolute;
-            z-index: 1000;
 
             &:after {
               display: none;
@@ -181,6 +180,9 @@
         .pc-item {
           display: block;
           position: relative;
+          .pc-link {
+            display: block;
+          }
 
           .pc-submenu > .pc-item:before,
           &::before {

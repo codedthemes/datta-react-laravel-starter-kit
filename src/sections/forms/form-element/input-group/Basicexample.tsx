@@ -76,7 +76,7 @@ export default function BasicExample() {
       <CardFooter className="px-0 pb-0">
         <Stack direction="horizontal" gap={2}>
           <Button>Submit</Button>
-          <Button variant="light">Reset</Button>
+          <Button className="btn-link-danger">Reset</Button>
         </Stack>
       </CardFooter>
     </MainCard>

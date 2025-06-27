@@ -40,7 +40,7 @@ export default function EmailSettings() {
       title={
         <Stack direction="horizontal" className="justify-content-between align-items-center">
           <h5>
-            <i className="ti ti-at text-primary f-20" /> Email Settings
+            <i className="ph ph-envelope-open align-text-bottom text-primary f-20" /> Email Settings
           </h5>
           <Dropdown align="end">
             <Dropdown.Toggle as="div" bsPrefix="toggle" className="p-0 border-0 bg-transparent shadow-none" id="dropdown-custom">

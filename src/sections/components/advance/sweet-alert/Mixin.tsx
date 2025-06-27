@@ -5,8 +5,8 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
 // project-imports
+import { showToastMessage } from './utils/ShowToastMsg';
 import MainCard from 'components/MainCard';
-import { showToastMessage } from 'sections/components/advance/sweet-alert/utils/ShowToastMsg';
 
 // ==============================|| SWEET ALERT - MIXIN ||============================== //
 

@@ -9,9 +9,9 @@ export function showCustomHtml() {
     showCloseButton: true,
     showCancelButton: true,
     focusConfirm: false,
-    confirmButtonText: '<i class="fa fa-thumbs-up"/> Great!',
+    confirmButtonText: '<i class="ti ti-thumb-up-filled"/> Great!',
     confirmButtonAriaLabel: 'Thumbs up, great!',
-    cancelButtonText: '<i class="fa fa-thumbs-down"/>',
+    cancelButtonText: '<i class="ti ti-thumb-down-filled"/>',
     cancelButtonAriaLabel: 'Thumbs down'
   });
 }

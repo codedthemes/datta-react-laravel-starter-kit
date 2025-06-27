@@ -68,9 +68,7 @@ export default function AdvanceInputAttributes() {
 
       <Stack direction="horizontal" gap={2} className="pt-4">
         <Button type="submit">Submit</Button>
-        <Button type="reset" variant="light">
-          Reset
-        </Button>
+        <Button className="btn-link-danger">Reset</Button>
       </Stack>
     </MainCard>
   );

@@ -25,6 +25,35 @@ function CustomArrow({ className, onClick }: CustomArrowProps) {
   return <div className={className} onClick={onClick} />;
 }
 
+const settings = {
+  customPaging: function (i: number) {
+    return (
+      <a>
+        <Image src={images[i]} alt={`Thumbnail ${i + 1}`} className="dot-btn wid-46 hei-30" />
+      </a>
+    );
+  },
+  dots: true,
+  dotsClass: 'slick-dots slick-thumb',
+  speed: 100,
+  slidesToShow: 3,
+  centerMode: true,
+  slidesToScroll: 1,
+  autoplay: true,
+  infinite: true,
+  cssEase: 'linear',
+  nextArrow: <CustomArrow />,
+  prevArrow: <CustomArrow />,
+  responsive: [
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 1
+      }
+    }
+  ]
+};
+
 // ==============================|| SLIDER - CUSTOMIZE ||============================== //
 
 export default function Customize() {
@@ -40,38 +69,10 @@ export default function Customize() {
     setIsPlaying(!isPlaying);
   };
 
-  const settings = {
-    customPaging: function (i: number) {
-      return (
-        <a>
-          <Image src={images[i]} alt={`Thumbnail ${i + 1}`} className="dot-btn wid-46 hei-30" />
-        </a>
-      );
-    },
-    dots: true,
-    dotsClass: 'slick-dots slick-thumb',
-    speed: 100,
-    slidesToShow: 3,
-    centerMode: true,
-    slidesToScroll: 1,
-    autoplay: true,
-    infinite: true,
-    cssEase: 'linear',
-    nextArrow: <CustomArrow />,
-    prevArrow: <CustomArrow />,
-    responsive: [
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1
-        }
-      }
-    ]
-  };
-
   return (
     <MainCard title="Customize" className="position-relative">
       <div className="slider-container">
+        {/* @ts-ignore https://github.com/akiran/react-slick/issues/2336 */}
         <Slider ref={sliderRef} {...settings}>
           {images.map((image, index) => (
             <div key={index}>

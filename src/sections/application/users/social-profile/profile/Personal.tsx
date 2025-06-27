@@ -17,6 +17,7 @@ interface InfoField {
   type: string;
 }
 
+// profile data
 const profileData: InfoField[] = [
   { label: 'Full Name', value: 'Lary Doe', type: 'text' },
   { label: 'Gender', value: 'Male', type: 'radio' },
@@ -40,7 +41,7 @@ export default function Personal() {
       <Card.Body className="d-flex align-items-center justify-content-between">
         <h5 className="mb-0">Personal details</h5>
         <Button variant="primary" size="sm" className="rounded m-0 float-end" onClick={toggleCollapse}>
-          <i className="ti ti-edit" /> {isCollapsed}
+          <i className="ph ph-note-pencil align-middle" /> {isCollapsed}
         </Button>
       </Card.Body>
       <Collapse in={isCollapsed}>

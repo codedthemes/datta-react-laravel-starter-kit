@@ -66,7 +66,7 @@ export default function InputAttributes() {
 
         <Stack direction="horizontal" gap={2} className="pt-4">
           <Button>Submit</Button>
-          <Button variant="light">Reset</Button>
+          <Button className="btn-link-danger">Reset</Button>
         </Stack>
       </Form>
     </MainCard>

@@ -4,27 +4,29 @@ import { lazy } from 'react';
 import Loadable from 'components/Loadable';
 import DashboardLayout from 'layout/Dashboard';
 
-// render - Basic components page
-const AnalyticsPages = Loadable(lazy(() => import('views/navigation/dashboard/Analytics')));
-const ChartPage = Loadable(lazy(() => import('views/navigation/widgets/Charts')));
-const CompactPage = Loadable(lazy(() => import('views/navigation/layouts/Compact')));
-const CrmPages = Loadable(lazy(() => import('views/navigation/dashboard/CRM')));
-const CryptoPages = Loadable(lazy(() => import('views/navigation/dashboard/Crypto')));
+// render - dashboard pages
 const DefaultPages = Loadable(lazy(() => import('views/navigation/dashboard/Default')));
-const DataPage = Loadable(lazy(() => import('views/navigation/widgets/DataPages')));
 const EcommercePages = Loadable(lazy(() => import('views/navigation/dashboard/Ecommerce')));
+const CrmPages = Loadable(lazy(() => import('views/navigation/dashboard/CRM')));
+const AnalyticsPages = Loadable(lazy(() => import('views/navigation/dashboard/Analytics')));
+const CryptoPages = Loadable(lazy(() => import('views/navigation/dashboard/Crypto')));
 const FinancePages = Loadable(lazy(() => import('views/navigation/dashboard/Finance')));
-const HorizontalPage = Loadable(lazy(() => import('views/navigation/layouts/Horizontal')));
 const ProjectPages = Loadable(lazy(() => import('views/navigation/dashboard/Project')));
+
+// render - layout pages
+const VerticalPage = Loadable(lazy(() => import('views/navigation/layouts/Vertical')));
+const TabPage = Loadable(lazy(() => import('views/navigation/layouts/Tab')));
 const LayoutTwoPage = Loadable(lazy(() => import('views/navigation/layouts/LayoutTwoPage')));
 const LayoutThreePage = Loadable(lazy(() => import('views/navigation/layouts/LayoutThreePage')));
-const StatisticsPage = Loadable(lazy(() => import('views/navigation/widgets/StatisticsPages')));
-const TabPage = Loadable(lazy(() => import('views/navigation/layouts/Tab')));
+
+// render - widgets pages
+const StatisticsPage = Loadable(lazy(() => import('views/navigation/widgets/statistics')));
+const DataPage = Loadable(lazy(() => import('views/navigation/widgets/DataPages')));
 const TablePage = Loadable(lazy(() => import('views/navigation/widgets/TablePages')));
 const UserPage = Loadable(lazy(() => import('views/navigation/widgets/UserPage')));
-const VerticalPage = Loadable(lazy(() => import('views/navigation/layouts/Vertical')));
+const ChartPage = Loadable(lazy(() => import('views/navigation/widgets/Charts')));
 
-// ==============================|| NAVIGATION ROUTES ||============================== //
+// ==============================|| NAVIGATION ROUTING ||============================== //
 
 const NavigationRoutes = {
   path: '/',
@@ -72,14 +74,6 @@ const NavigationRoutes = {
             {
               path: 'vertical',
               element: <VerticalPage />
-            },
-            {
-              path: 'horizontal',
-              element: <HorizontalPage />
-            },
-            {
-              path: 'compact',
-              element: <CompactPage />
             },
             {
               path: 'tab',

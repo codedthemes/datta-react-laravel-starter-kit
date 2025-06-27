@@ -1,23 +1,19 @@
 import React from 'react';
 
 // react-bootstrap
+import Badge from 'react-bootstrap/Badge';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import FormCheck from 'react-bootstrap/FormCheck';
 import Image from 'react-bootstrap/Image';
 import Row from 'react-bootstrap/Row';
-
-// icons
-import PlaylistAddCheckTwoToneIcon from '@mui/icons-material/PlaylistAddCheckTwoTone';
-import ChatBubbleTwoToneIcon from '@mui/icons-material/ChatBubbleTwoTone';
+import Stack from 'react-bootstrap/Stack';
 
 // assets
-import avatar1 from 'assets/images/user/avatar-1.jpg';
-import avatar2 from 'assets/images/user/avatar-2.jpg';
-import avatar3 from 'assets/images/user/avatar-5.jpg';
-import Badge from 'react-bootstrap/Badge';
-import Stack from 'react-bootstrap/Stack';
+import avatar1 from 'assets/images/user/avatar-1.png';
+import avatar2 from 'assets/images/user/avatar-2.png';
+import avatar3 from 'assets/images/user/avatar-5.png';
 
 interface TaskData {
   id: number;
@@ -31,6 +27,7 @@ interface TaskData {
   avatarNumber?: number;
 }
 
+// list data
 const ListData: TaskData[] = [
   {
     id: 24,
@@ -68,6 +65,8 @@ const ListData: TaskData[] = [
 
 const boardData: TaskData[] = Array(2).fill(ListData).flat();
 
+// =================|| BOARD LIST ITEM ||============================== //
+
 const BoardListItem: React.FC<{ data: TaskData }> = ({ data }) => {
   return (
     <Card.Body className="py-3 border-bottom">
@@ -90,10 +89,12 @@ const BoardListItem: React.FC<{ data: TaskData }> = ({ data }) => {
             </div>
             <div>
               <p className="d-inline-block mb-0">
-                <PlaylistAddCheckTwoToneIcon className="f-18 text-primary" /> {data.playlistN0}
+                <i className="ph ph-list-checks align-middle f-18 text-primary" />
+                {data.playlistN0}
               </p>
               <p className="d-inline-block mb-0 ms-2">
-                <ChatBubbleTwoToneIcon className="f-18 text-success" /> {data.message}
+                <i className="ph ph-chat align-middle f-18 text-success" />
+                {data.message}
               </p>
             </div>
           </Stack>

@@ -14,23 +14,9 @@ import Table from 'react-bootstrap/Table';
 import MainCard from 'components/MainCard';
 
 // assets
-import avatar1 from 'assets/images/user/avatar-1.jpg';
-import avatar2 from 'assets/images/user/avatar-2.jpg';
-import avatar5 from 'assets/images/user/avatar-5.jpg';
-import AccountBalanceWalletTwoTone from '@mui/icons-material/AccountBalanceWalletTwoTone';
-import CalendarTodayTwoTone from '@mui/icons-material/CalendarTodayTwoTone';
-import CancelTwoTone from '@mui/icons-material/CancelTwoTone';
-import CloudDownloadTwoTone from '@mui/icons-material/CloudDownloadTwoTone';
-import CreditCardTwoTone from '@mui/icons-material/CreditCardTwoTone';
-import DeleteTwoTone from '@mui/icons-material/DeleteTwoTone';
-import EditTwoTone from '@mui/icons-material/EditTwoTone';
-import HourglassFullTwoTone from '@mui/icons-material/HourglassFullTwoTone';
-import MoreVertTwoTone from '@mui/icons-material/MoreVertTwoTone';
-import PrintTwoTone from '@mui/icons-material/PrintTwoTone';
-import ReceiptTwoTone from '@mui/icons-material/ReceiptTwoTone';
-import DoneAllTwoToneIcon from '@mui/icons-material/DoneAllTwoTone';
-import WarningTwoToneIcon from '@mui/icons-material/WarningTwoTone';
-import TimerTwoToneIcon from '@mui/icons-material/TimerTwoTone';
+import avatar1 from 'assets/images/user/avatar-1.png';
+import avatar2 from 'assets/images/user/avatar-2.png';
+import avatar5 from 'assets/images/user/avatar-5.png';
 
 interface InvoiceData {
   id: number;
@@ -44,6 +30,7 @@ interface InvoiceData {
   description: string;
 }
 
+// invoice data
 const invoices: InvoiceData[] = [
   {
     id: 1,
@@ -88,6 +75,8 @@ const invoice: InvoiceData[] = [
   }))
 ];
 
+// ==============================|| INVOICE CARD ||============================== //
+
 const InvoiceCard: React.FC<{ data: InvoiceData }> = ({ data }) => {
   return (
     <Col md={6} sm={12} className="mb-3">
@@ -101,22 +90,25 @@ const InvoiceCard: React.FC<{ data: InvoiceData }> = ({ data }) => {
               {data.name}
             </Stack>
             <Dropdown>
-              <Dropdown.Toggle as="div" bsPrefix="false" variant="link" className="text-secondary p-0 border-0">
-                <MoreVertTwoTone className="wid-20" />
+              <Dropdown.Toggle as="a" href="#!" bsPrefix="false" className="text-secondary p-0 border-0">
+                <i className="ph ph-dots-three-outline-vertical align-middle" />
               </Dropdown.Toggle>
               <Dropdown.Menu align="end">
                 <Dropdown.Item href="#">
-                  <WarningTwoToneIcon className="wid-20" /> Pending
+                  <i className="ph ph-info align-middle" />
+                  Pending
                 </Dropdown.Item>
                 <Dropdown.Item href="#">
-                  <DoneAllTwoToneIcon className="wid-20" /> Paid
+                  <i className="ph ph-checks align-middle" />
+                  Paid
                 </Dropdown.Item>
-                <Dropdown.Divider />
+                <hr className="m-0 my-2" />
                 <Dropdown.Item active href="#">
-                  <HourglassFullTwoTone className="wid-20" /> On Hold
+                  <i className="ph ph-hourglass-medium align-middle" /> On Hold
                 </Dropdown.Item>
                 <Dropdown.Item href="#">
-                  <CancelTwoTone className="wid-20" /> Canceled
+                  <i className="ph ph-x-circle align-middle" />
+                  Canceled
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
@@ -125,10 +117,11 @@ const InvoiceCard: React.FC<{ data: InvoiceData }> = ({ data }) => {
       >
         <Card.Body className="py-3 border-bottom d-flex align-items-center justify-content-between">
           <p className="mb-0">
-            <TimerTwoToneIcon className="text-danger wid-18" /> Due: {data.due}
+            <i className="ph ph-timer align-middle f-18 text-danger me-1" />
+            Due : {data.due}
           </p>
           <p className="mb-0 h4">
-            <AccountBalanceWalletTwoTone className="text-info " /> {data.amount}
+            <i className="ph ph-wallet align-middle f-18 text-primary" /> {data.amount}
           </p>
         </Card.Body>
         <Card.Body>
@@ -136,19 +129,20 @@ const InvoiceCard: React.FC<{ data: InvoiceData }> = ({ data }) => {
             <tbody>
               <tr>
                 <td className="pl-0 pb-0">
-                  <ReceiptTwoTone className="text-info wid-18" /> Invoice no:
+                  <i className="ph ph-invoice align-middle text-primary f-16 me-1" />
+                  Invoice no:
                 </td>
                 <td className="pb-0">{data.invoiceNo}</td>
               </tr>
               <tr>
                 <td className="pl-0 pb-0">
-                  <CalendarTodayTwoTone className="text-info wid-18" /> Issued on:
+                  <i className="ph ph-calendar-blank align-middle text-primary f-16" /> Issued on:
                 </td>
                 <td className="pb-0">{data.issuedOn}</td>
               </tr>
               <tr>
                 <td className="pl-0 pb-0">
-                  <CreditCardTwoTone className="text-info wid-18" /> Method:
+                  <i className="ph ph-credit-card align-middle text-primary f-16" /> Method:
                 </td>
                 <td className="pb-0">{data.method}</td>
               </tr>
@@ -158,7 +152,7 @@ const InvoiceCard: React.FC<{ data: InvoiceData }> = ({ data }) => {
         </Card.Body>
         <Card.Footer className="bg-light py-3 border-bottom d-flex align-items-center justify-content-between">
           <Button className=" btn-light-success" size="sm">
-            <i className="fas fa-eye me-1" />
+            <i className="ph ph-eye align-baseline me-1" />
             View
           </Button>
           <Dropdown>
@@ -167,17 +161,20 @@ const InvoiceCard: React.FC<{ data: InvoiceData }> = ({ data }) => {
             </Dropdown.Toggle>
             <Dropdown.Menu align="end">
               <Dropdown.Item href="#">
-                <PrintTwoTone className="wid-20" /> Print Invoice
+                <i className="ph ph-printer align-middle" />
+                Print Invoice
               </Dropdown.Item>
               <Dropdown.Item href="#">
-                <CloudDownloadTwoTone className="wid-20" /> Download Invoice
+                <i className="ph ph-download-simple align-middle" />
+                Download Invoice
               </Dropdown.Item>
-              <Dropdown.Divider />
+              <hr className="m-0 my-2" />
               <Dropdown.Item href="#">
-                <EditTwoTone className="wid-20" /> Edit Invoice
+                <i className="ph ph-pencil-simple-line align-middle" /> Edit Invoice
               </Dropdown.Item>
               <Dropdown.Item href="#">
-                <DeleteTwoTone className="wid-20" /> Remove Invoice
+                <i className="ph ph-trash align-middle" />
+                Remove Invoice
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
@@ -187,7 +184,7 @@ const InvoiceCard: React.FC<{ data: InvoiceData }> = ({ data }) => {
   );
 };
 
-// ==============================|| USER INVOICE CARD - INVOICE LIST ||============================== //
+// ==============================|| INVOICE LIST - USER INVOICE CARD ||============================== //
 
 export default function UserInvoiceCard() {
   return (

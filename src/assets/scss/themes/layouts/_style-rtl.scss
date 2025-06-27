@@ -62,7 +62,7 @@ dd {
   margin-right: 0;
 }
 
-.ph-duotone {
+.ph {
   direction: ltr;
 }
 
@@ -128,12 +128,6 @@ dd {
   }
 }
 
-.pct-c-btn {
-  a {
-    padding: 12px 12px 12px 16px;
-  }
-}
-
 .pc-sidebar {
   border-left: var(--pc-sidebar-border);
   border-right: none;
@@ -195,7 +189,7 @@ dd {
     }
 
     .pc-link {
-      padding: 12px 60px 12px 30px;
+      padding: 7px 60px 7px 30px;
 
       &:after {
         left: auto;
@@ -210,7 +204,7 @@ dd {
       }
 
       .pc-link {
-        padding: 12px 80px 12px 30px;
+        padding: 7px 80px 7px 30px;
 
         &:after {
           left: auto;
@@ -225,7 +219,7 @@ dd {
         }
 
         .pc-link {
-          padding: 12px 95px 12px 30px;
+          padding: 7px 95px 7px 30px;
 
           &:after {
             left: auto;
@@ -492,7 +486,7 @@ select.dataTable-input,
 
 .address-check {
   .form-check {
-    padding-right: 0;
+    padding-right: 1.75rem;
   }
 }
 
@@ -811,11 +805,6 @@ div.dt-container {
   transform-origin: left;
 }
 
-.mail-wrapper .mail-menulist .list-group-item-action .material-icons-two-tone {
-  margin-left: 8px;
-  margin-right: 0;
-}
-
 .mail-wrapper {
   .mail-menulist {
     .list-group-item-action {
@@ -1066,6 +1055,35 @@ textarea.is-valid.dataTable-input {
     left: 0;
   }
 }
+.card-social,
+.Active-visitor {
+  .card-active > div + div {
+    border-left: none;
+    border-right: 1px solid var(--bs-border-color);
+  }
+
+  @media screen and (max-width: 767px) {
+    .card-active [class*='col-']:last-child {
+      border-right: 0;
+    }
+  }
+}
+
+.task-list {
+  &:after {
+    left: auto;
+    right: 30px;
+  }
+
+  li {
+    padding-left: 0;
+    padding-right: 55px;
+    .task-icon {
+      right: 22px;
+      left: auto;
+    }
+  }
+}
 
 .acc-feeds-list {
   .feed-title {
@@ -1114,7 +1132,7 @@ textarea.is-valid.dataTable-input {
 .offcanvas-header {
   .btn-close {
     margin-left: calc(-0.5 * var(--bs-offcanvas-padding-x));
-    margin-right: 0;
+    margin-right: auto;
   }
 }
 
@@ -1223,14 +1241,15 @@ textarea.is-valid.dataTable-input {
 }
 
 .pct-c-btn {
-  border-right-width: 4px;
+  border-right: 4px solid var(--bs-primary);
   border-left-width: 0px;
-  border-radius: 4px 50% 50% 4px;
+  border-radius: 0px 50% 50% 0px;
   right: auto;
   left: 0;
-
-  a {
-    padding: 12px 16px 12px 12px;
+}
+.pct-offcanvas {
+  .row.justify-content-end {
+    justify-content: flex-end !important;
   }
 }
 

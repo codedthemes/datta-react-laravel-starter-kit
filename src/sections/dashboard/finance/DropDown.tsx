@@ -3,10 +3,10 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 // ===============================|| DROPDOWN - CUSTOM COMPONENTS ||============================== //
 
-export default function DropDown() {
+export default function DropDown({ className }: { className?: string }) {
   return (
     <Dropdown align="end">
-      <Dropdown.Toggle className=" btn-sm btn-link-secondary arrow-none" id="dropdown-custom-components">
+      <Dropdown.Toggle as="a" className={`avatar ${className}  btn-link-secondary arrow-none`} id="dropdown-custom-components">
         <i className="ti ti-dots-vertical  f-18" />
       </Dropdown.Toggle>
 

@@ -1,70 +1,52 @@
-// types
-// import { DefaultConfigProps } from 'types/config';
+import { DefaultConfigProps } from 'types/config';
 
 // ==============================|| THEME CONSTANT ||============================== //
 
-export const APP_DEFAULT_PATH = '/dashboard/analytics';
-export const HORIZONTAL_MAX_ITEM = 7;
+export const APP_DEFAULT_PATH = '/dashboard/default';
 export const DRAWER_WIDTH = 260;
 
-export type FontFamily = "'Public Sans', sans-serif";
-
-export type I18n = 'en' | 'fr' | 'ro' | 'zh';
-
-export type PresetColor = 'default'; // Add all valid options
-
-export enum SimpleLayoutType {
-  SIMPLE = 'simple',
-  LANDING = 'landing'
+export enum MenuOrientation {
+  VERTICAL = 'vertical',
+  TAB = 'tab',
+  LAYOUT2 = 'layout 2',
+  LAYOUT3 = 'layout 3'
 }
 
 export enum ThemeMode {
   LIGHT = 'light',
-  DARK = 'dark'
-}
-
-export enum MenuOrientation {
-  VERTICAL = 'vertical',
-  HORIZONTAL = 'horizontal',
-  COMPACT = 'compact',
-  TAB = 'tab',
-  LAYOUT2 = 'layout-2',
-  LAYOUT3 = 'layout-3'
-}
-
-export enum ThemeDirection {
-  LTR = 'ltr',
-  RTL = 'rtl'
-}
-
-export enum NavActionType {
-  FUNCTION = 'function',
-  LINK = 'link'
+  DARK = 'dark',
+  AUTO = 'auto'
 }
 
 export enum Gender {
   MALE = 'Male',
   FEMALE = 'Female'
 }
-
-export enum DropzopType {
-  DEFAULT = 'default',
-  STANDARD = 'standard'
+export enum ThemeDirection {
+  LTR = 'ltr',
+  RTL = 'rtl'
 }
-
-// export const APP_AUTH: AuthProvider = AuthProvider.JWT;
 
 // ==============================|| THEME CONFIG ||============================== //
 
-const config = {
-  fontFamily: `'Public Sans', sans-serif` as FontFamily,
-  i18n: 'en' as I18n,
+const config: DefaultConfigProps = {
+  fontFamily: `'Public Sans', sans-serif`,
+  i18n: 'en',
   menuOrientation: MenuOrientation.VERTICAL,
-  miniDrawer: false,
-  container: true,
+  container: false,
   mode: ThemeMode.LIGHT,
-  presetColor: 'default' as PresetColor,
-  themeDirection: ThemeDirection.LTR
+  presetColor: 'default',
+  caption: true,
+  sidebarTheme: false,
+  themeDirection: ThemeDirection.LTR,
+  customColor: 'preset-1',
+  headerColor: '',
+  navbarColor: '',
+  logoColor: '',
+  navbarCaptionColor: '',
+  navbarImg: '',
+  menuIcon: 'preset-1',
+  menuLinkIcon: 'preset-1'
 };
 
 export default config;

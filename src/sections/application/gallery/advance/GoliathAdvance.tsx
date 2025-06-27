@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 // react-bootstrap
 import Figure from 'react-bootstrap/Figure';
 import FigureCaption from 'react-bootstrap/FigureCaption';
@@ -24,7 +22,7 @@ export default function GoliathAdvance() {
               Thoughtful <span>Goliath</span>
             </h2>
             <p>When Goliath comes out, you should run.</p>
-            <Link to="#!">View more</Link>
+            <a>View more</a>
           </FigureCaption>
         </Figure>
         <Figure className="effect-goliath">
@@ -34,8 +32,8 @@ export default function GoliathAdvance() {
               Thoughtful <span>Goliath</span>
             </h2>
             <p>When Goliath comes out, you should run.</p>
-            <Link to="#!">View more</Link>
-            <Link to="#!">View more</Link>
+            <a>View more</a>
+            <a>View more</a>
           </FigureCaption>
         </Figure>
       </div>

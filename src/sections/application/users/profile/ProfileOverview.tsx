@@ -29,6 +29,7 @@ interface Skill {
   color: string;
 }
 
+// personal data
 const personalDetails = [
   { label: 'Full Name', value: 'Akshay Handge' },
   { label: "Father's Name", value: 'Mr. Deepak Handge' },
@@ -42,6 +43,7 @@ const personalDetails = [
   }
 ];
 
+// education data
 const educationData: Education[] = [
   {
     year: '2014-2017',
@@ -53,6 +55,7 @@ const educationData: Education[] = [
   { year: '2009-2011', title: 'School', degree: 'Higher Secondary Education', institution: 'School of London, England' }
 ];
 
+// employment data
 const employmentData: Employment[] = [
   {
     year: 'Current',
@@ -70,6 +73,7 @@ const employmentData: Employment[] = [
   }
 ];
 
+// skills data
 const skillsData: Skill[] = [
   { name: 'Web Designer', percentage: 70, color: 'primary' },
   { name: 'Graphic Designer', percentage: 80, color: 'success' },
@@ -86,22 +90,19 @@ export default function ProfileOverview() {
     <>
       <Alert variant="danger" dismissible>
         <h5 className="alert-heading">
-          <i className="ti ti-alert-circle me-2" /> Email Verification
+          <i className="ph ph-warning-circle me-2" /> Email Verification
         </h5>
         <p className="mb-0">
-          Your email is not confirmed. Please check your inbox.{' '}
-          <a href="#!" className="text-danger">
-            Resend confirmation
-          </a>
+          Your email is not confirmed. Please check your inbox. <a className="text-danger">Resend confirmation</a>
         </p>
       </Alert>
       {/* About Me */}
       <MainCard
         title={
-          <>
-            <i className="ti ti-user f-20 text-primary me-2" />
-            About Me
-          </>
+          <h5>
+            <i className="ph ph-user align-text-bottom text-primary f-20" />
+            <span className="p-l-5">About me</span>
+          </h5>
         }
       >
         <p>
@@ -110,19 +111,17 @@ export default function ProfileOverview() {
         </p>
         {/* Personal Details */}
         <h5 className="mt-4 mb-3">Personal Details</h5>
-        <div className="table-responsive">
-          <Table borderless>
-            <tbody>
-              {personalDetails.map((detail, index) => (
-                <tr key={index}>
-                  <td>{detail.label}</td>
-                  <td>:</td>
-                  <td>{detail.value}</td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </div>
+        <Table responsive borderless>
+          <tbody>
+            {personalDetails.map((detail, index) => (
+              <tr key={index}>
+                <td>{detail.label}</td>
+                <td>:</td>
+                <td>{detail.value}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
         {/* Education Section */}
         <h5 className="mt-5 mb-4 pb-3 border-bottom">Education</h5>
         {educationData.map((edu, index) => (
@@ -163,7 +162,7 @@ export default function ProfileOverview() {
                   <ProgressBar now={skill.percentage} variant={skill.color} style={{ height: '8px' }} />
                 </Col>
                 <Col xs="auto">
-                  <h6 className="m-b-0">{skill.percentage}%</h6>
+                  <h6 className="mb-0">{skill.percentage}%</h6>
                 </Col>
               </Row>
             </Col>

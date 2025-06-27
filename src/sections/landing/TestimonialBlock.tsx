@@ -14,7 +14,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import MainCard from 'components/MainCard';
 
 // assets
-import UserAvatar1 from 'assets/images/user/avatar-1.jpg';
+import UserAvatar1 from 'assets/images/user/avatar-1.png';
 
 const testimonials = [
   {
@@ -52,15 +52,37 @@ const testimonials = [
 export default function ClientTestimonials() {
   const settings = {
     dots: false,
-    className: 'center',
-    centerMode: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 2,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
-    arrows: false
+    arrows: false,
+    centerMode: true,
+    responsive: [
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 2,
+          centerMode: false
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          centerMode: false
+        }
+      },
+      {
+        breakpoint: 0,
+        settings: {
+          slidesToShow: 1,
+          centerMode: false
+        }
+      }
+    ]
   };
 
   return (
@@ -93,18 +115,19 @@ export default function ClientTestimonials() {
         </Row>
       </Container>
       <motion.div
-        className="slider-container testimonial-slider"
+        className="slider-container position-relative z-3"
         initial={{ opacity: 0, y: 50 }}
         viewport={{ once: true }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.8, ease: 'easeOut' }}
       >
-        <Slider {...settings}>
+        {/* @ts-ignore https://github.com/akiran/react-slick/issues/2336 */}
+        <Slider {...settings} className="comminuties-slides">
           {testimonials.map((testimonial, index) => (
             <div key={index}>
-              <MainCard className="testimonial-card">
+              <MainCard className="mx-2">
                 <div className="quote-icon">
-                  <i className="fas fa-quote-left" />
+                  <i className="ti ti-quote-filled" />
                 </div>
                 <h3 className="h5">{testimonial.quote}</h3>
                 <div className="text-end">

@@ -25,7 +25,7 @@ export default function SpainMap() {
 
   return (
     <MainCard title="spain Map">
-      <div id="spain" className="h-400" />
+      <div id="spain" style={{ height: '400px' }} />
     </MainCard>
   );
 }

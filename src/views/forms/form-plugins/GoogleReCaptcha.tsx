@@ -1,5 +1,5 @@
 // project-imports
-import ComponentHeader from 'components/cards/ComponentHeader';
+import ReferenceHeader from 'components/ReferenceHeader';
 import ReCaptcha from 'sections/forms/form-plugins/ReCaptcha';
 
 // =============================|| FORM PLUGIN - GOOGLE RECAPTCHA ||============================== //
@@ -7,7 +7,7 @@ import ReCaptcha from 'sections/forms/form-plugins/ReCaptcha';
 export default function GoogleReCaptchaPage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="A vanilla JavaScript remake of bootstrap-datepicker is written from scratch as ECMAScript modules/Sass stylesheets to reproduce similar usability to bootstrap-datepicker."
         link="https://mymth.github.io/vanillajs-datepicker/#/"
       />

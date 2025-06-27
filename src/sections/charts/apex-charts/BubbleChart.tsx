@@ -15,6 +15,7 @@ function generateBubbleData(baseval: number, count: number, yrange: { min: numbe
   return series;
 }
 
+// chart-options
 const options: ChartProps = {
   dataLabels: {
     enabled: false

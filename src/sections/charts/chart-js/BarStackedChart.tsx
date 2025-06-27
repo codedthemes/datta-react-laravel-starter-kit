@@ -2,6 +2,10 @@
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 
+// project-imports
+import { ThemeMode } from 'config';
+import useConfig from 'hooks/useConfig';
+
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const labels = [0, 1, 2, 3];
@@ -25,6 +29,7 @@ const data = {
 // ==============================|| CHART JS - BAR STACKED CHART ||============================== //
 
 export default function BarStackedChart() {
+  const { mode } = useConfig();
   const options = {
     responsive: true,
     scales: {
@@ -37,9 +42,9 @@ export default function BarStackedChart() {
     },
     plugins: {
       tooltip: {
-        backgroundColor: 'rgba(255, 255, 255, 1)',
-        titleColor: 'rgba(0, 0, 0, 0.85)',
-        bodyColor: 'rgba(0, 0, 0, 0.65)'
+        backgroundColor: mode === ThemeMode.DARK ? '#000000' : '#fff',
+        titleColor: mode === ThemeMode.DARK ? '#ffffff' : '#000000',
+        bodyColor: mode === ThemeMode.DARK ? '#ffffff' : '#000000'
       }
     }
   };

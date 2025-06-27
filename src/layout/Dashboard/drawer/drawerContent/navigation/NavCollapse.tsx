@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { matchPath, useLocation, useNavigate } from 'react-router-dom';
+import { Link, matchPath, useLocation, useNavigate } from 'react-router-dom';
 
 // react-bootstrap
+import Badge from 'react-bootstrap/Badge';
 import ListGroup from 'react-bootstrap/ListGroup';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
@@ -12,6 +13,8 @@ import { FormattedMessage } from 'react-intl';
 // project-imports
 import NavItem from './NavItem';
 import { useGetMenuMaster } from 'api/menu';
+import useConfig from 'hooks/useConfig';
+import { MenuOrientation, ThemeDirection } from 'config';
 
 // types
 import { NavItemType } from 'types/menu';
@@ -21,7 +24,7 @@ interface Props {
   level: number;
   parentId: string;
   setSelectedItems: React.Dispatch<React.SetStateAction<NavItemType | undefined>>;
-  selectedItems: any;
+  selectedItems: NavItemType | undefined;
   setSelectedLevel: React.Dispatch<React.SetStateAction<number>>;
   selectedLevel: number;
 }
@@ -35,6 +38,21 @@ export default function NavCollapse({ menu, level, parentId, setSelectedItems, s
 
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<string | null | undefined>(null);
+  const { menuOrientation, themeDirection } = useConfig();
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  const isMenuActive = (menu: NavItemType, currentPath: string): boolean => {
+    if (menu.type === 'item') {
+      return menu.url === currentPath;
+    }
+    if (menu.type === 'collapse' && Array.isArray(menu.children)) {
+      return menu.children.some((child) => isMenuActive(child, currentPath));
+    }
+    return false;
+  };
+
+  const active = isMenuActive(menu, currentPath);
 
   const handleClick = (isRedirect: boolean) => {
     const isMobile = window.innerWidth <= 1024;
@@ -43,7 +61,7 @@ export default function NavCollapse({ menu, level, parentId, setSelectedItems, s
     if (isMobile || !drawerOpen) {
       setOpen(!open);
       setSelected(!selected ? menu.id : null);
-      setSelectedItems(!selected && menu ? menu : selectedItems);
+      setSelectedItems(!selected ? menu : selectedItems);
       if (menu.url && isRedirect) navigation(`${menu.url}`);
     }
   };
@@ -70,7 +88,6 @@ export default function NavCollapse({ menu, level, parentId, setSelectedItems, s
     if (pathname === menu.url) {
       setSelected(menu.id);
     }
-    // eslint-disable-next-line
   }, [pathname]);
 
   const checkOpenForParent = (child: NavItemType[], id: string) => {
@@ -102,8 +119,6 @@ export default function NavCollapse({ menu, level, parentId, setSelectedItems, s
         }
       });
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname, menu.children]);
 
   useEffect(() => {
@@ -141,42 +156,49 @@ export default function NavCollapse({ menu, level, parentId, setSelectedItems, s
 
   return (
     <>
-      {window.location.pathname !== '/layouts/compact' && window.location.pathname !== '/layouts/tab' ? (
-        <ListGroup className={`pc-item pc-hasmenu ${open && window.location.pathname !== '/layouts/horizontal' ? 'pc-trigger' : ''}`}>
-          <a className="pc-link " onClick={() => handleClick(true)}>
+      {menuOrientation !== MenuOrientation.TAB ? (
+        <ListGroup className={`pc-item pc-hasmenu ${open && 'pc-trigger'}`}>
+          <a className="pc-link" href="#!" onClick={() => handleClick(true)}>
             {menu.icon && (
               <span className="pc-micon">
                 <i className={typeof menu.icon === 'string' ? menu.icon : menu.icon?.props.className} />
               </span>
             )}
             <span className="pc-mtext">
-              <FormattedMessage id={menu.title?.toString()} />
+              <FormattedMessage id={menu.title as string} />
             </span>
             <span className="pc-arrow">
               <i className={`ti ti-chevron-right`} />
             </span>
+            {menu.badge && <Badge className="pc-badge">{menu.badge}</Badge>}
           </a>
-          {open === true && <ul className="pc-submenu">{navCollapse}</ul>}
+          {open === true && <ul className={`pc-submenu ${themeDirection === ThemeDirection.RTL && 'edge'}`}>{navCollapse}</ul>}
         </ListGroup>
       ) : (
         <>
-          {window.location.pathname !== '/layouts/tab' && (
-            <ListGroup className={`pc-item pc-hasmenu ${(open && window.location.pathname === '/layouts/compact') ?? 'pc-trigger'}`}>
+          {menuOrientation !== MenuOrientation.TAB && (
+            <ListGroup className={`pc-item pc-hasmenu ${open ?? 'pc-trigger'} ${active ? 'active' : ''}`}>
               <OverlayTrigger
                 placement="right"
                 overlay={
-                  <Tooltip id={`tooltip-${menu.title?.toString()}`}>
-                    <FormattedMessage id={menu.title?.toString()} />
+                  <Tooltip id={`tooltip-${menu.title as string}`}>
+                    <FormattedMessage id={menu.title as string} />
                   </Tooltip>
                 }
               >
-                <a className="pc-link " onClick={() => handleClick(true)}>
+                <Link
+                  to="#!"
+                  className="pc-link"
+                  onClick={() => {
+                    handleClick(!open);
+                  }}
+                >
                   {menu.icon && (
                     <span className="pc-micon">
                       <i className={typeof menu.icon === 'string' ? menu.icon : menu.icon?.props.className} />
                     </span>
                   )}
-                </a>
+                </Link>
               </OverlayTrigger>
             </ListGroup>
           )}

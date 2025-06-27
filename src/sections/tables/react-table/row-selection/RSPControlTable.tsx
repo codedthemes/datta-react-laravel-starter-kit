@@ -94,14 +94,14 @@ function ReactTable() {
   useEffect(() => setRowSelection({ 1: true, 5: true, 7: true }), []);
 
   return (
-    <MainCard title="Row Selection (Pagination Control)">
-      <Stack direction="horizontal" className="justify-content-between align-items-center pb-4 ">
+    <MainCard title="Row Selection (Pagination Control)" className="table-card">
+      <Stack direction="horizontal" className="justify-content-between align-items-center flex-wrap p-4" gap={2}>
         <SortingData getState={table.getState} setPageSize={table.setPageSize} />
         <div className="datatable-search">
           <DebouncedInput value={globalFilter ?? ''} onFilterChange={(value) => setGlobalFilter(String(value))} />
         </div>
       </Stack>
-      <Table hover responsive className="mb-0">
+      <Table hover responsive className="mb-0 border-top">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
@@ -121,7 +121,6 @@ function ReactTable() {
           ))}
         </tbody>
       </Table>
-      <hr className="mb-0 mt-0" />
       <TablePagination
         setPageSize={table.setPageSize}
         setPageIndex={table.setPageIndex}

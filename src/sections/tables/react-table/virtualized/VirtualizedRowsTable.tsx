@@ -11,7 +11,6 @@ import { useVirtualizer } from '@tanstack/react-virtual';
 // project-imports
 import LinearWithLabel from 'components/@extended/progress/LinearWithLabel';
 import MainCard from 'components/MainCard';
-import ScrollX from 'components/ScrollX';
 import DebouncedInput from 'components/third-party/react-table/DebouncedInput';
 import makeData from 'data/react-table';
 
@@ -69,44 +68,43 @@ function ReactTable({ columns, data }: ReactTableProps) {
           <DebouncedInput value={globalFilter ?? ''} onFilterChange={(value) => setGlobalFilter(String(value))} />
         </Stack>
       }
+      className="table-card"
     >
-      <ScrollX>
-        <div ref={tableContainerRef} className="p-0table-responsive overflow-auto" style={{ maxHeight: 544 }}>
-          <Table hover>
-            <thead className="sticky-header">
-              {table.getHeaderGroups().map((headerGroup: HeaderGroup<any>) => (
-                <tr key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => (
-                    <th key={header.id}>{header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}</th>
+      <div ref={tableContainerRef} className="p-0 table-responsive overflow-auto custom-scrollbar" style={{ maxHeight: 544 }}>
+        <Table hover>
+          <thead className="position-sticky top-0 bg-white z-1">
+            {table.getHeaderGroups().map((headerGroup: HeaderGroup<any>) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <th key={header.id}>{header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}</th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody>
+            {paddingTop > 0 && (
+              <tr>
+                <td className="text-wrap" style={{ height: `${paddingTop}px` }} />
+              </tr>
+            )}
+            {virtualRows.map((virtualRow) => {
+              const row = rows[virtualRow.index] as Row<TableDataProps>;
+              return (
+                <tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => (
+                    <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
                   ))}
                 </tr>
-              ))}
-            </thead>
-            <tbody>
-              {paddingTop > 0 && (
-                <tr>
-                  <td className="text-wrap" style={{ height: `${paddingTop}px` }} />
-                </tr>
-              )}
-              {virtualRows.map((virtualRow) => {
-                const row = rows[virtualRow.index] as Row<TableDataProps>;
-                return (
-                  <tr key={row.id}>
-                    {row.getVisibleCells().map((cell) => (
-                      <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
-                    ))}
-                  </tr>
-                );
-              })}
-              {paddingBottom > 0 && (
-                <tr>
-                  <td className="text-wrap" style={{ height: `${paddingBottom}px` }} />
-                </tr>
-              )}
-            </tbody>
-          </Table>
-        </div>
-      </ScrollX>
+              );
+            })}
+            {paddingBottom > 0 && (
+              <tr>
+                <td className="text-wrap" style={{ height: `${paddingBottom}px` }} />
+              </tr>
+            )}
+          </tbody>
+        </Table>
+      </div>
     </MainCard>
   );
 }

@@ -9,7 +9,7 @@ import Slider from 'rc-slider';
 
 // project-imports
 import MainCard from 'components/MainCard';
-import ComponentHeader from 'components/cards/ComponentHeader';
+import ReferenceHeader from 'components/ReferenceHeader';
 
 type pushableType = boolean | number | undefined;
 
@@ -56,7 +56,7 @@ function ControlledRangeDisableAcross(props: ControlledRangeProps) {
 export default function AdvanceRangeSliderPage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="Create an input element in the DOM, and then create an instance of Slider"
         link="https://www.npmjs.com/package/rc-slider"
       />
@@ -72,7 +72,7 @@ export default function AdvanceRangeSliderPage() {
           <MainCard>
             <h6>Slider with fixed values</h6>
             <hr />
-            <Slider className="pc-range-slider" min={10} defaultValue={40} marks={{ 10: 10, 40: 40, 75: 75, 100: 100 }} step={null} />
+            <Slider className="pc-range-slider mb-3" min={10} defaultValue={40} marks={{ 10: 10, 40: 40, 75: 75, 100: 100 }} step={null} />
           </MainCard>
         </Col>
         <Col sm={12} md={6} xl={4}>
@@ -81,7 +81,7 @@ export default function AdvanceRangeSliderPage() {
               Slider with <code>marks</code>, <code>step=null</code>{' '}
             </h6>
             <hr />
-            <Slider className="pc-range-slider" min={-10} marks={marks} step={null} defaultValue={20} />
+            <Slider className="pc-range-slider mb-3" min={-10} marks={marks} step={null} defaultValue={20} />
           </MainCard>
         </Col>
         <Col sm={12} md={6} xl={4}>
@@ -90,7 +90,7 @@ export default function AdvanceRangeSliderPage() {
               Slider with <code>marks</code>, <code>step</code>
             </h6>
             <hr />
-            <Slider className="pc-range-slider" min={-10} marks={marks} step={10} defaultValue={20} />
+            <Slider className="pc-range-slider mb-3" min={-10} marks={marks} step={10} defaultValue={20} />
           </MainCard>
         </Col>
         <Col sm={12} md={6} xl={4}>
@@ -99,7 +99,7 @@ export default function AdvanceRangeSliderPage() {
               Slider with <code>marks</code>, <code>included=false</code>{' '}
             </h6>
             <hr />
-            <Slider className="pc-range-slider" min={-10} marks={marks} included={false} defaultValue={20} />
+            <Slider className="pc-range-slider mb-3" min={-10} marks={marks} included={false} defaultValue={20} />
           </MainCard>
         </Col>
         <Col sm={12} md={6} xl={4}>
@@ -108,7 +108,7 @@ export default function AdvanceRangeSliderPage() {
               Slider with <code>marks</code>, <code>step</code>, <code>included=false</code>
             </h6>
             <hr />
-            <Slider className="pc-range-slider" min={-10} marks={marks} step={10} included={false} defaultValue={20} />
+            <Slider className="pc-range-slider mb-3" min={-10} marks={marks} step={10} included={false} defaultValue={20} />
           </MainCard>
         </Col>
         <Col sm={12} md={6} xl={4}>
@@ -157,7 +157,7 @@ export default function AdvanceRangeSliderPage() {
               Range with <code>marks</code>
             </h6>
             <hr />
-            <Slider range className="pc-range-slider" min={-10} marks={marks} defaultValue={[20, 25, 30, 40]} />
+            <Slider range className="pc-range-slider mb-3" min={-10} marks={marks} defaultValue={[20, 25, 30, 40]} />
           </MainCard>
         </Col>
         <Col sm={12} md={6} xl={4}>
@@ -166,7 +166,7 @@ export default function AdvanceRangeSliderPage() {
               Range with <code>marks</code>, <code>step</code>
             </h6>
             <hr />
-            <Slider range className="pc-range-slider" min={-10} marks={marks} step={10} defaultValue={[20, 25, 30, 40]} />
+            <Slider range className="pc-range-slider mb-3" min={-10} marks={marks} step={10} defaultValue={[20, 25, 30, 40]} />
           </MainCard>
         </Col>
         <Col sm={12} md={6} xl={4}>

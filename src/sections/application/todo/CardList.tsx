@@ -14,17 +14,17 @@ interface Task {
   completed: boolean;
 }
 
+const staticData: Task[] = [
+  { id: 1, text: 'Lorem Ipsum Dolor Sit Amet', completed: false },
+  { id: 2, text: 'Lorem Ipsum Dolor Sit Amet', completed: false },
+  { id: 3, text: 'Lorem Ipsum Dolor Sit Amet', completed: false },
+  { id: 4, text: 'Lorem Ipsum Dolor Sit Amet', completed: false }
+];
+
 // ==============================|| TODO - CARD LIST ||============================== //
 
 export default function CardList() {
-  const INITIAL_STATIC_TASKS: Task[] = [
-    { id: 1, text: 'Lorem Ipsum Dolor Sit Amet', completed: false },
-    { id: 2, text: 'Lorem Ipsum Dolor Sit Amet', completed: false },
-    { id: 3, text: 'Lorem Ipsum Dolor Sit Amet', completed: false },
-    { id: 4, text: 'Lorem Ipsum Dolor Sit Amet', completed: false }
-  ];
-
-  const [tasks, setTasks] = useState<Task[]>(INITIAL_STATIC_TASKS);
+  const [tasks, setTasks] = useState<Task[]>(staticData);
   const [newTask, setNewTask] = useState<string>('');
 
   const addTask = () => {
@@ -60,7 +60,7 @@ export default function CardList() {
             onChange={(e) => setNewTask(e.target.value)}
           />
           <Button variant="secondary" id="create-task" onClick={addTask}>
-            <i className="fa fa-plus" />
+            <i className="ti ti-plus" />
           </Button>
         </InputGroup>
       </CardBody>
@@ -74,7 +74,7 @@ export default function CardList() {
             ))}
           </ul>
           <div className="text-center">
-            <Button className="m-b-0" onClick={clearAllTasks}>
+            <Button className="mb-0" onClick={clearAllTasks}>
               Clear All Tasks
             </Button>
           </div>

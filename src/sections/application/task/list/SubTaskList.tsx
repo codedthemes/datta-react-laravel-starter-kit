@@ -15,7 +15,7 @@ interface Task {
   completed: boolean;
 }
 
-const INITIAL_STATIC_TASKS: Task[] = [
+const statisticsData: Task[] = [
   { id: 1, task: 'Lorem Ipsum Dolor Sit Amet', completed: false },
   { id: 2, task: "Industry's standard dummy text ever since the 1500s", completed: false },
   { id: 3, task: 'The point of using Lorem Ipsum is that it has a more-or-less', completed: false },
@@ -28,7 +28,7 @@ const INITIAL_STATIC_TASKS: Task[] = [
 // ==============================|| APPLICATION TASK - SUB TASK LIST ||============================== //
 
 export default function SubTaskList() {
-  const [tasks, setTasks] = useState<Task[]>(INITIAL_STATIC_TASKS);
+  const [tasks, setTasks] = useState<Task[]>(statisticsData);
   const [newTask, setNewTask] = useState<string>('');
 
   const addTask = () => {
@@ -67,7 +67,7 @@ export default function SubTaskList() {
             aria-describedby="basic-addon2"
           />
           <Button variant="secondary" onClick={addTask}>
-            <i className="fa fa-plus" />
+            <i className="ti ti-plus" />
           </Button>
         </InputGroup>
       </div>
@@ -75,8 +75,8 @@ export default function SubTaskList() {
         {tasks.map((task) => (
           <div key={task.id} className="to-do-list mb-3">
             <div className="float-end">
-              <a href="#!" onClick={() => deleteTask(task.id)} className="delete_todolist">
-                <i className="far fa-trash-alt" />
+              <a onClick={() => deleteTask(task.id)} className="delete_todolist">
+                <i className="ti ti-trash" />
               </a>
             </div>
             <div className="d-inline-block">

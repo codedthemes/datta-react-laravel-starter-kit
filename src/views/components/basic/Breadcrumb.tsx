@@ -5,16 +5,16 @@ import Row from 'react-bootstrap/Row';
 // project-imports
 import BreadcrumbBasic from 'sections/components/basic/breadcrumb/BreadcrumbBasic';
 import BreadcrumbCharacter from 'sections/components/basic/breadcrumb/BreadcrumbCharacter';
-import BreadcrumEmbedded from 'sections/components/basic/breadcrumb/BreadcrumEmbedded ';
+import BreadcrumbEmbedded from 'sections/components/basic/breadcrumb/BreadcrumbEmbedded';
 import BreadcrumbIcon from 'sections/components/basic/breadcrumb/BreadcrumbIcon';
-import ComponentHeader from 'components/cards/ComponentHeader';
+import ReferenceHeader from 'components/ReferenceHeader';
 
 // ==============================|| BASIC - BREADCRUMB ||============================== //
 
 export default function BreadcrumbPage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="Indicate the current page’s location within a navigational hierarchy that automatically adds separators via CSS."
         link="https://react-bootstrap.netlify.app/docs/components/breadcrumb"
       />
@@ -29,7 +29,7 @@ export default function BreadcrumbPage() {
           <BreadcrumbCharacter />
         </Col>
         <Col sm={6}>
-          <BreadcrumEmbedded />
+          <BreadcrumbEmbedded />
         </Col>
       </Row>
     </>

@@ -20,14 +20,13 @@ export default function SortingData({
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setPageSize(Number(event.target.value));
   };
+
   return (
     <div className="datatable-dropdown">
       <label>
         <Form.Select className="datatable-selector" name="per-page" value={getState().pagination.pageSize} onChange={handleChange}>
           <option value="5">5</option>
-          <option value="10" selected>
-            10
-          </option>
+          <option value="10">10</option>
           <option value="15">15</option>
           <option value="20">20</option>
           <option value="25">25</option>

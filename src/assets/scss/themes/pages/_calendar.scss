@@ -7,9 +7,7 @@
   th {
     border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
   }
-  .fc-scrollgrid-section > * {
-    border-bottom: 1px solid #f1f1f1 !important;
-  }
+
   .fc-toolbar {
     h2 {
       font-size: 16px;
@@ -292,7 +290,7 @@
 
       &.fc-h-event {
         .fc-event-main {
-          color: $value;
+          color: $value !important;
         }
 
         &:focus,

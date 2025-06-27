@@ -9,7 +9,7 @@ import Row from 'react-bootstrap/Row';
 import MainCard from 'components/MainCard';
 
 // assets
-import avatar1 from 'assets/images/user/avatar-1.jpg';
+import avatar1 from 'assets/images/user/avatar-1.png';
 import slider7 from 'assets/images/widget/slider7.jpg';
 
 // ==============================|| SIMPLE CARD - CARD HOVER ||============================== //
@@ -64,10 +64,10 @@ export default function CardHover({ title }: { title: string }) {
             <p className="mb-1">Lorem Ipsum is simply dummy text</p>
             <p className="mb-3">been the industry's standard</p>
             <Button variant="warning" className="me-1">
-              <i className="ti ti-link" /> Meeting
+              <i className="ph ph-link align-middle" /> Meeting
             </Button>
             <Button variant="danger">
-              <i className="ti ti-download" /> Resume
+              <i className="ph ph-trash align-middle" /> Resume
             </Button>
           </div>
         </Card.Body>

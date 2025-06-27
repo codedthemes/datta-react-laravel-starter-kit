@@ -19,7 +19,7 @@ import image3 from 'assets/images/light-box/sl3.jpg';
 import image4 from 'assets/images/light-box/sl4.jpg';
 import image5 from 'assets/images/light-box/sl5.jpg';
 import image6 from 'assets/images/light-box/sl6.jpg';
-import ComponentHeader from 'components/cards/ComponentHeader';
+import ReferenceHeader from 'components/ReferenceHeader';
 
 const images = [image1, image2, image3, image4, image5, image6];
 
@@ -36,7 +36,7 @@ export default function LightBoxPage() {
 
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="Use React-Bootstrap’s modal component to add dialogs to your site as a replacement for Bootstrap’s JavaScript modal plugin."
         link="https://fslightbox.com/react"
       />

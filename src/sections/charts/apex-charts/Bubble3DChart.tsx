@@ -14,6 +14,7 @@ function generateDatasehratheatbubble3d(baseval: number, count: number, yrange: 
   return series;
 }
 
+// chart-options
 const options: ChartProps = {
   dataLabels: {
     enabled: false

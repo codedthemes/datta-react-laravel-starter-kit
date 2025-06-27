@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 // third-party
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
+// chart-options
 const chartOptions: ChartProps = {
   chart: {
     stacked: true,

@@ -17,6 +17,7 @@ interface InfoField {
   type: string;
 }
 
+// field data
 const infoFields: InfoField[] = [
   { label: 'Occupation', value: 'Designer', type: 'text' },
   { label: 'Skills', value: 'C#, Javascript, Scss', type: 'text' },
@@ -41,7 +42,7 @@ export default function Other() {
       <Card.Body className="d-flex align-items-center justify-content-between">
         <h5 className="mb-0">Other Information</h5>
         <Button variant="primary" size="sm" className="rounded m-0 float-end" onClick={toggleCollapse}>
-          <i className="ti ti-edit text-white f-20" />
+          <i className="ph ph-note-pencil align-middle" />
         </Button>
       </Card.Body>
       <Collapse in={isCollapsed}>

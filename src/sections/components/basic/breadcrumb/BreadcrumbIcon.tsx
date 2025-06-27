@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 // react-bootstrap
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 
@@ -17,13 +15,13 @@ export default function BreadcrumbIcon() {
         </Breadcrumb.Item>
       </Breadcrumb>
       <Breadcrumb className="breadcrumb-default-icon">
-        <Breadcrumb.Item as={Link} to="#">
+        <Breadcrumb.Item href="#">
           <i className="ti ti-home-2 fs-6" />
         </Breadcrumb.Item>
         <Breadcrumb.Item active>Library</Breadcrumb.Item>
       </Breadcrumb>
       <Breadcrumb className="breadcrumb-default-icon">
-        <Breadcrumb.Item as={Link} to="#">
+        <Breadcrumb.Item href="#">
           <i className="ti ti-home-2" />
         </Breadcrumb.Item>
         <Breadcrumb.Item>Library</Breadcrumb.Item>

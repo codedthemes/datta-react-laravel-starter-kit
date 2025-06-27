@@ -26,7 +26,7 @@ export default function VaryingModalContent() {
   const handleShowBootstrap = () => setBootstrap(true);
 
   return (
-    <MainCard title="Varying modal content">
+    <MainCard title="Varying Modal Content">
       <Stack direction="horizontal" gap={2} className="flex-wrap">
         <Button onClick={handleShow}>Open modal for @mdo</Button>
         <Modal show={show} onHide={handleClose}>

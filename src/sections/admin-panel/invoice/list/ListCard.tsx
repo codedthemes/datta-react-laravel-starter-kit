@@ -3,7 +3,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 // project-imports
-import InvoiceCard from 'components/cards/online-panel/InvoiceCard';
+import InvoiceCard from '../InvoiceCard';
 
 // ==============================|| ADMIN PANEL - INVOICE LIST CARD ||============================== //
 
@@ -19,6 +19,7 @@ export default function InvoiceListCard() {
           color="text-success"
           series={[0, 20, 10, 45, 30, 55, 20, 30]}
           chartColor="#1de9b6"
+          className="p-4"
         />
       </Col>
       <Col md={6} lg={4}>
@@ -30,6 +31,7 @@ export default function InvoiceListCard() {
           color="text-warning"
           series={[30, 20, 55, 30, 45, 10, 20, 0]}
           chartColor="#f4c22b"
+          className="p-4"
         />
       </Col>
       <Col md={6} lg={4}>
@@ -41,6 +43,7 @@ export default function InvoiceListCard() {
           color="text-danger"
           series={[0, 20, 10, 45, 30, 55, 20, 30]}
           chartColor="#f44236"
+          className="p-4"
         />
       </Col>
     </Row>

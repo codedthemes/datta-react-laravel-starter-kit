@@ -44,7 +44,7 @@ const MainCard = forwardRef<HTMLDivElement, MainCardProps>(
           <Card.Header className={headerClassName}>
             <Stack direction="horizontal" gap={2} className="flex-wrap justify-content-between">
               <Stack className="align-self-center">
-                <h5>{title}</h5>
+                {typeof title === 'string' ? <h5>{title}</h5> : title}
                 {subheader && <small className="text-muted">{subheader}</small>}
               </Stack>
               {secondary}

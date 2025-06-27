@@ -1,8 +1,18 @@
 // react-bootstrap
-import LayoutTwo from 'sections/navigation/layouts/LayOutTwo';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+
+// project-imports
+import LayoutTwo from 'sections/layouts/LayoutTwo';
 
 // ==============================|| LAYOUT - LAYOUT TWO ||============================== //
 
 export default function LayoutTwoMain() {
-  return <LayoutTwo />;
+  return (
+    <Row>
+      <Col xs={12}>
+        <LayoutTwo />
+      </Col>
+    </Row>
+  );
 }

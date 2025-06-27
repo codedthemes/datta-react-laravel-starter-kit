@@ -8,7 +8,6 @@ import Row from 'react-bootstrap/Row';
 
 // third-party
 import Choices from 'choices.js';
-import FeatherIcon from 'feather-icons-react';
 
 // project-imports
 import MainCard from 'components/MainCard';
@@ -66,7 +65,7 @@ export default function FormInteraction() {
           <Form.Label column lg={4} sm={12} className="text-lg-end" />
           <Col lg={6} md={11} sm={12}>
             <Button variant="light-warning" type="reset">
-              <FeatherIcon className="me-2" icon="alert-triangle" /> Reset
+              <i className="ph ph-warning me-2" /> Reset
             </Button>
           </Col>
         </Form.Group>

@@ -3,7 +3,7 @@ import Row from 'react-bootstrap/Row';
 
 // project-imports
 import AccountInformation from './AccountInformation';
-import ChangePassword from './ChangePassoword';
+import ChangePassword from './ChangePassword';
 import EmailSettings from './EmailSettings';
 import ProfileOverview from './ProfileOverview';
 import PersonalInformation from './PersonalInformation';
@@ -11,11 +11,12 @@ import PersonalInformation from './PersonalInformation';
 // types
 import { UserProfileProps } from 'types/userProfile';
 
+const profilePanClass = 'tab-pane fade';
+const profilePanActiveClass = 'tab-pane fade show active';
+
 // ==============================|| PROFILE - MAIN PROFILE ||============================== //
 
 export default function MainProfile({ activeProfileTab }: UserProfileProps) {
-  const profilePanClass = 'tab-pane fade';
-  const profilePanActiveClass = 'tab-pane fade show active';
   return (
     <Row>
       <div className="tab-content">

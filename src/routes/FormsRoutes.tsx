@@ -3,12 +3,9 @@ import { lazy } from 'react';
 // project-imports
 import DashboardLayout from 'layout/Dashboard';
 import Loadable from 'components/Loadable';
-import GoogleReCaptcha from 'views/forms/form-plugins/GoogleReCaptcha';
-import NouiSliderMain from 'views/forms/form-plugins/NouiSliderMain';
-import RatingMai1n from 'views/forms/form-plugins/Rating';
 
-// render - Forms page
-const FormBasic = Loadable(lazy(() => import('views/components/formElement/FormBasic')));
+// render - forms element pages
+const FormBasic = Loadable(lazy(() => import('views/forms/form-element/FormBasic')));
 const FormFloating = Loadable(lazy(() => import('views/forms/form-element/FormFloating')));
 const FormOptions = Loadable(lazy(() => import('views/forms/form-element/FormOption')));
 const FormInputGroup = Loadable(lazy(() => import('views/forms/form-element/InputGroup')));
@@ -16,32 +13,45 @@ const FormCheckbox = Loadable(lazy(() => import('views/forms/form-element/Checkb
 const FormRadio = Loadable(lazy(() => import('views/forms/form-element/Radio')));
 const FormSwitch = Loadable(lazy(() => import('views/forms/form-element/Switch')));
 const FormMegaOptions = Loadable(lazy(() => import('views/forms/form-element/MegaOptions')));
-const FormSelectChoice = Loadable(lazy(() => import('views/forms/form-plugins/Choices')));
-const FormClipBoardMain = Loadable(lazy(() => import('views/forms/form-plugins/ClipboardMain')));
-const FormInputMask = Loadable(lazy(() => import('views/forms/form-plugins/InputMask')));
-const FormBootstrapSwitch = Loadable(lazy(() => import('views/forms/form-plugins/BootstrapSwitch')));
-const FormTypeaHeadMain = Loadable(lazy(() => import('views/forms/form-plugins/TypeaHeadMain')));
+
+// render - forms plugin pages
 const FormDatePicker = Loadable(lazy(() => import('views/forms/form-plugins/date/DatePicker')));
 const FormDateRangePickerMain = Loadable(lazy(() => import('views/forms/form-plugins/date/DateRangePicker')));
 const FormTimePickerMain = Loadable(lazy(() => import('views/forms/form-plugins/date/TimePickerMain')));
+const FormSelectChoice = Loadable(lazy(() => import('views/forms/form-plugins/Choices')));
+const FormRating = Loadable(lazy(() => import('views/forms/form-plugins/Rating')));
+const FormGoogleReCaptcha = Loadable(lazy(() => import('views/forms/form-plugins/GoogleReCaptcha')));
+const FormInputMask = Loadable(lazy(() => import('views/forms/form-plugins/InputMask')));
+const FormClipBoardMain = Loadable(lazy(() => import('views/forms/form-plugins/ClipboardMain')));
+const FormNouiSlider = Loadable(lazy(() => import('views/forms/form-plugins/NouiSliderMain')));
+const FormBootstrapSwitch = Loadable(lazy(() => import('views/forms/form-plugins/BootstrapSwitch')));
+const FormTypeaHeadMain = Loadable(lazy(() => import('views/forms/form-plugins/TypeaHeadMain')));
+
+// render - forms editor pages
+const FormTinyMCEPage = Loadable(lazy(() => import('views/forms/text-editor/TinyMCE')));
+const FormQuill = Loadable(lazy(() => import('views/forms/text-editor/Quill')));
+const FormClassic = Loadable(lazy(() => import('views/forms/text-editor/ck-editor/ClassicMain')));
+const FormDocument = Loadable(lazy(() => import('views/forms/text-editor/ck-editor/DocumentMain')));
+const FormInlineMain = Loadable(lazy(() => import('views/forms/text-editor/ck-editor/InlineMain')));
+const FormBalloonEditorMain = Loadable(lazy(() => import('views/forms/text-editor/ck-editor/BalloonEditorMain')));
+const FormMarkDown = Loadable(lazy(() => import('views/forms/text-editor/MarkDown')));
+
+// render - forms layout pages
 const FormLayoutMain = Loadable(lazy(() => import('views/forms/forms-layouts/SimpleLayout')));
 const FormMultiLayouts = Loadable(lazy(() => import('views/forms/forms-layouts/MultiLayouts')));
 const FormActionBars = Loadable(lazy(() => import('views/forms/forms-layouts/ActionBars')));
 const FormStickyActionBarMain = Loadable(lazy(() => import('views/forms/forms-layouts/StickyActionBarMain')));
-const FormValidationMain = Loadable(lazy(() => import('views/forms/FormValidationMain')));
-const FormWizard = Loadable(lazy(() => import('views/forms/WizardMain')));
-const FormQuill = Loadable(lazy(() => import('views/forms/text-editor/Quill')));
-const FormClassic = Loadable(lazy(() => import('views/forms/text-editor/ck-editor/ClassicMain')));
-const FormDocument = Loadable(lazy(() => import('views/forms/text-editor/ck-editor/DocumentMain')));
+
+// render - forms upload pages
 const FileUploadDropZone = Loadable(lazy(() => import('views/forms/form-upload/DropZone')));
 const FileUploadUppy = Loadable(lazy(() => import('views/forms/form-upload/Uppy')));
-const FormImageCrop = Loadable(lazy(() => import('views/forms/image-crop/ImageCrop')));
-const FormTinyMCEPage = Loadable(lazy(() => import('views/forms/text-editor/TinyMCE')));
-const FormInlineMain = Loadable(lazy(() => import('views/forms/text-editor/ck-editor/InlineMain')));
-const FormMarkDown = Loadable(lazy(() => import('views/forms/text-editor/MarkDown')));
-const FormBalloonEditorMain = Loadable(lazy(() => import('views/forms/text-editor/ck-editor/BalloonEditorMain')));
 
-// ==============================|| ROUTES - FORMS ROUTES ||============================== //
+// render - forms validation, wizard, image-cropper pages
+const FormValidationMain = Loadable(lazy(() => import('views/forms/FormValidationMain')));
+const FormWizard = Loadable(lazy(() => import('views/forms/WizardMain')));
+const FormImageCrop = Loadable(lazy(() => import('views/forms/ImageCrop')));
+
+// ==============================|| FORMS ROUTING ||============================== //
 
 const FormsRoutes = {
   path: '/',
@@ -77,12 +87,12 @@ const FormsRoutes = {
                     { path: 'time-picker', element: <FormTimePickerMain /> }
                   ]
                 },
-                { path: 'rating', element: <RatingMai1n /> },
-                { path: 'recaptcha', element: <GoogleReCaptcha /> },
-                { path: 'nouislider', element: <NouiSliderMain /> },
                 { path: 'select/choice-js', element: <FormSelectChoice /> },
-                { path: 'clipboard', element: <FormClipBoardMain /> },
+                { path: 'rating', element: <FormRating /> },
+                { path: 'recaptcha', element: <FormGoogleReCaptcha /> },
                 { path: 'input-mask', element: <FormInputMask /> },
+                { path: 'clipboard', element: <FormClipBoardMain /> },
+                { path: 'nouislider', element: <FormNouiSlider /> },
                 { path: 'bootstrap-switch', element: <FormBootstrapSwitch /> },
                 { path: 'typeahead', element: <FormTypeaHeadMain /> }
               ]

@@ -22,7 +22,7 @@ export default function Loader() {
   }, []);
 
   return (
-    <div className="w-100 t-0 l-0 position-fixed">
+    <div className="w-100 t-0 l-0 fixed-top">
       <ProgressBar animated now={progress} />
     </div>
   );

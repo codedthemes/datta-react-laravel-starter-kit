@@ -4,12 +4,20 @@ import { createRoot } from 'react-dom/client';
 import './index.scss';
 
 // project-imports
-import App from './App.tsx';
-import { ConfigProvider } from 'contexts/ConfigContext.tsx';
+import App from './App';
+import { ConfigProvider } from 'contexts/ConfigContext';
+
+import '@fontsource/open-sans/300.css';
+import '@fontsource/open-sans/400.css';
+import '@fontsource/open-sans/500.css';
+import '@fontsource/open-sans/600.css';
+
+const container = document.getElementById('root');
+const root = createRoot(container!);
 
 // ==============================|| MAIN - REACT DOM RENDER ||============================== //
 
-createRoot(document.getElementById('root')!).render(
+root.render(
   <ConfigProvider>
     <App />
   </ConfigProvider>

@@ -218,7 +218,7 @@
 
       .cr-icon {
         color: #fff;
-        font-size: 0.8em;
+        font-size: 1.3em;
         left: 0;
         line-height: 0;
         position: absolute;
@@ -302,6 +302,30 @@ new-task {
         padding-left: 0;
         width: 80px;
       }
+    }
+  }
+}
+
+.invoice-total {
+  background: transparent;
+  border-radius: 6px;
+  padding: 14px 0;
+  margin-bottom: 20px;
+  .table {
+    margin-bottom: 0;
+    th {
+      border: 0;
+      padding: 4px 0;
+      text-align: right;
+    }
+
+    td {
+      text-align: right;
+    }
+
+    tbody {
+      padding-right: 20px;
+      float: right;
     }
   }
 }

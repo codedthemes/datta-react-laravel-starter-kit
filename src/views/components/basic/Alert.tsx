@@ -1,9 +1,9 @@
 // react-bootstrap
-import ComponentHeader from 'components/cards/ComponentHeader';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 // project-imports
+import ReferenceHeader from 'components/ReferenceHeader';
 import Additional_Content from 'sections/components/basic/alert/AdditionalContent';
 import BasicAlert from 'sections/components/basic/alert/BasicAlert';
 import DismissingAlert from 'sections/components/basic/alert/DismissingAlert';
@@ -15,7 +15,7 @@ import LinksAlert from 'sections/components/basic/alert/LinksAlert';
 export default function AlertPage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages."
         link="https://react-bootstrap.netlify.app/docs/components/alerts/"
       />

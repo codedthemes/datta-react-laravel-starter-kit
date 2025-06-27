@@ -10,55 +10,55 @@ const formComponents: NavItemType = {
   children: [
     {
       id: 'form-elements',
-      title: 'form-elements',
+      title: 'form elements',
       type: 'collapse',
-      icon: <i className="ti ti-file-text" />,
+      icon: <i className="ph ph-textbox" />,
       children: [
         {
-          id: 'basic',
-          title: 'basic',
+          id: 'form-basic',
+          title: 'form basic',
           type: 'item',
-          url: 'forms/form-elements/basic'
+          url: '/forms/form-elements/basic'
         },
         {
-          id: 'floating',
+          id: 'form-floating',
           title: 'floating',
           type: 'item',
           url: '/forms/form-elements/floating'
         },
         {
-          id: 'options',
+          id: 'form-options',
           title: 'options',
           type: 'item',
           url: '/forms/form-elements/options'
         },
         {
-          id: 'input-group',
-          title: 'input-group',
+          id: 'form-input-group',
+          title: 'input group',
           type: 'item',
           url: '/forms/form-elements/input-group'
         },
         {
-          id: 'checkbox',
+          id: 'form-checkbox',
           title: 'checkbox',
           type: 'item',
           url: '/forms/form-elements/checkbox'
         },
         {
-          id: 'radio',
+          id: 'form-radio',
           title: 'radio',
           type: 'item',
           url: '/forms/form-elements/radio'
         },
         {
-          id: 'switch',
+          id: 'form-switch',
           title: 'switch',
           type: 'item',
           url: '/forms/form-elements/switch'
         },
         {
-          id: 'mega-options',
-          title: 'mega-options',
+          id: 'form-mega-options',
+          title: 'mega options',
           type: 'item',
           url: '/forms/form-elements/mega-options'
         }
@@ -66,9 +66,9 @@ const formComponents: NavItemType = {
     },
     {
       id: 'form-plugins',
-      title: 'form-plugins',
+      title: 'form plugins',
       type: 'collapse',
-      icon: <i className="ti ti-file-text" />,
+      icon: <i className="ph ph-plug-charging" />,
       children: [
         {
           id: 'date',
@@ -77,32 +77,32 @@ const formComponents: NavItemType = {
           children: [
             {
               id: 'date-picker',
-              title: 'date-picker',
+              title: 'date picker',
               type: 'item',
               url: '/forms/form-plugins/date/date-picker'
             },
             {
               id: 'date-range-picker',
-              title: 'date-range-picker',
+              title: 'date range picker',
               type: 'item',
               url: '/forms/form-plugins/date/date-range-picker'
             },
             {
               id: 'time-picker',
-              title: 'time-picker',
+              title: 'time picker',
               type: 'item',
               url: '/forms/form-plugins/date/time-picker'
             }
           ]
         },
         {
-          id: 'select',
+          id: 'form select',
           title: 'select',
           type: 'collapse',
           children: [
             {
               id: 'choice-js',
-              title: 'choice-js',
+              title: 'choice js',
               type: 'item',
               url: '/forms/form-plugins/select/choice-js'
             }
@@ -122,7 +122,7 @@ const formComponents: NavItemType = {
         },
         {
           id: 'input-mask',
-          title: 'input-mask',
+          title: 'input mask',
           type: 'item',
           url: '/forms/form-plugins/input-mask'
         },
@@ -140,7 +140,7 @@ const formComponents: NavItemType = {
         },
         {
           id: 'bootstrap-switch',
-          title: 'bootstrap-switch',
+          title: 'bootstrap switch',
           type: 'item',
           url: '/forms/form-plugins/bootstrap-switch'
         },
@@ -154,9 +154,9 @@ const formComponents: NavItemType = {
     },
     {
       id: 'text-editor',
-      title: 'text-editor',
+      title: 'text editor',
       type: 'collapse',
-      icon: <i className="ti ti-file-text" />,
+      icon: <i className="ph ph-pen-nib" />,
       children: [
         {
           id: 'tinymce',
@@ -172,7 +172,7 @@ const formComponents: NavItemType = {
         },
         {
           id: 'ck-editor',
-          title: 'ck-editor',
+          title: 'ck editor',
           type: 'collapse',
           children: [
             {
@@ -211,31 +211,31 @@ const formComponents: NavItemType = {
     },
     {
       id: 'form-layouts',
-      title: 'form-layouts',
+      title: 'form layouts',
       type: 'collapse',
-      icon: <i className="ti ti-file-text" />,
+      icon: <i className="ph ph-windows-logo" />,
       children: [
         {
-          id: 'layouts',
+          id: 'form-layouts',
           title: 'layouts',
           type: 'item',
           url: '/forms/form-layouts/default-layouts'
         },
         {
           id: 'multi-layouts',
-          title: 'multi-layouts',
+          title: 'multi layouts',
           type: 'item',
           url: '/forms/form-layouts/multi-layouts'
         },
         {
           id: 'action-bar',
-          title: 'action-bar',
+          title: 'action bar',
           type: 'item',
           url: '/forms/form-layouts/action-bar'
         },
         {
           id: 'sticky-action-bar',
-          title: 'sticky-action-bar',
+          title: 'sticky action bar',
           type: 'item',
           url: '/forms/form-layouts/sticky-action-bar'
         }
@@ -243,9 +243,9 @@ const formComponents: NavItemType = {
     },
     {
       id: 'form-upload',
-      title: 'form-upload',
+      title: 'form upload',
       type: 'collapse',
-      icon: <i className="ti ti-file-text" />,
+      icon: <i className="ph ph-cloud-arrow-up" />,
       children: [
         {
           id: 'dropzone',
@@ -266,21 +266,21 @@ const formComponents: NavItemType = {
       id: 'wizard',
       title: 'wizard',
       type: 'item',
-      icon: <i className="ti ti-copy" />,
+      icon: <i className="ph ph-tabs" />,
       url: '/forms/wizard'
     },
     {
       id: 'form-validation',
-      title: 'form-validation',
+      title: 'form validation',
       type: 'item',
-      icon: <i className="ti ti-layout-grid" />,
+      icon: <i className="ph ph-password" />,
       url: '/forms/form-validation'
     },
     {
       id: 'image-cropper',
-      title: 'image-cropper',
+      title: 'image cropper',
       type: 'item',
-      icon: <i className="ti ti-scissors" />,
+      icon: <i className="ph ph-crop" />,
       url: '/forms/image-cropper'
     }
   ]

@@ -6,14 +6,14 @@ import Row from 'react-bootstrap/Row';
 import Backdrop from 'sections/components/basic/off-canvas/Backdrop';
 import LiveDemo from 'sections/components/basic/off-canvas/LiveDemo';
 import Placement from 'sections/components/basic/off-canvas/Placement';
-import ComponentHeader from 'components/cards/ComponentHeader';
+import ReferenceHeader from 'components/ReferenceHeader';
 
 // =============================|| BASIC - OFFCANVAS ||============================== //
 
 export default function OffCanvasPage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="Build hidden sidebars into your project for navigation, shopping carts, and more with a few classes and our JavaScript plugin."
         link="https://react-bootstrap.netlify.app/docs/components/offcanvas/"
       />

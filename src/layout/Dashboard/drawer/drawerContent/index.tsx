@@ -1,18 +1,19 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 // react-bootstrap
 import ListGroup from 'react-bootstrap/ListGroup';
 
 // third-party
-import SimpleBar from 'simplebar-react';
 import { FormattedMessage } from 'react-intl';
 
 // project-imports
-import Navigation from './navigation';
+import Navigation from './Navigation';
 import { useGetMenuMaster } from 'api/menu';
-import useConfig from 'hooks/useConfig';
+import SimpleBarScroll from 'components/third-party/SimpleBar';
 import { MenuOrientation } from 'config';
+import useConfig from 'hooks/useConfig';
+import menuItems from 'menu-items';
 
 // types
 import { NavItemType } from 'types/menu';
@@ -22,79 +23,111 @@ interface Props {
   setSelectedItems: React.Dispatch<React.SetStateAction<NavItemType | undefined>>;
 }
 
-// Function to check if a menu item is selected
-const isSelected = (item: NavItemType, selectedItem: NavItemType | undefined) => {
-  return selectedItem?.id === item.id;
-};
-
-// ==============================|| DRAWER CONTENT ||============================== //
+// ==============================|| DRAWER CONTENT - NAVIGATION ||============================== //
 
 export default function DrawerContent({ selectedItems, setSelectedItems }: Props) {
-  const { pathname } = useLocation();
   const { onChangeMenuOrientation, menuOrientation } = useConfig();
-  const [selectTab, setSelectTab] = useState<NavItemType | undefined>();
+  const [selectTab, setSelectTab] = useState<NavItemType | undefined>(menuItems.items[0]);
   const { menuMaster } = useGetMenuMaster();
+  const { pathname } = useLocation();
   const drawerOpen = menuMaster?.isDashboardDrawerOpened;
 
-  const [open, setOpen] = useState<{ [key: string]: boolean }>({});
+  const [open, setOpen] = useState<Record<string, boolean>>({});
 
   const handleClick = (item: NavItemType) => {
     if (!item.id) return;
+
     const isMobile = window.innerWidth <= 1024;
 
-    if (isMobile || !drawerOpen) {
-      setOpen((prev) => ({
-        ...prev,
-        [item.id as string]: !prev[item.id as string]
-      }));
-    }
+    setOpen((prev) => ({
+      ...prev,
+      [item.id as string]: !prev[item.id as string]
+    }));
 
-    setSelectedItems(item);
+    if (isMobile || !drawerOpen) {
+      setSelectedItems(item);
+    }
   };
 
+  const isActive = useCallback(
+    (item: NavItemType) => {
+      if (!item.url) return false;
+      return pathname.toLowerCase().includes(item.url.toLowerCase());
+    },
+    [pathname]
+  );
+
+  const autoOpenParents = useCallback(
+    (items?: NavItemType[]) => {
+      const openMap: Record<string, boolean> = {};
+
+      const findAndMark = (entries: NavItemType[] = []) => {
+        entries.forEach((item) => {
+          if (item.children) {
+            const match = item.children.find((child) => isActive(child) || child.children?.some(isActive));
+            if (match) openMap[item.id as string] = true;
+
+            findAndMark(item.children);
+          }
+        });
+      };
+
+      findAndMark(items);
+      setOpen(openMap);
+    },
+    [isActive, setOpen]
+  );
+
+  useEffect(() => {
+    autoOpenParents(selectTab?.children);
+  }, [autoOpenParents, selectTab]);
   return (
     <>
-      {menuOrientation !== MenuOrientation.HORIZONTAL ? (
-        <div className={`${menuOrientation === MenuOrientation.TAB ? 'tab-sidemenu' : ''}`}>
-          <SimpleBar style={{ height: 'calc(100vh - 74px)' }}>
-            <Navigation selectedItems={selectedItems} setSelectedItems={setSelectedItems} setSelectTab={setSelectTab} />
-          </SimpleBar>
-        </div>
-      ) : (
-        <Navigation selectedItems={selectedItems} setSelectedItems={setSelectedItems} />
-      )}
-
-      {['/layouts/tab'].includes(pathname) && (
+      <div className={`${menuOrientation === MenuOrientation.TAB ? 'tab-sidemenu' : ''}`}>
+        <SimpleBarScroll style={{ height: 'calc(100vh - 74px)' }}>
+          <Navigation selectedItems={selectedItems} setSelectedItems={setSelectedItems} setSelectTab={setSelectTab} />
+        </SimpleBarScroll>
+      </div>
+      {menuOrientation === MenuOrientation.TAB && (
         <div className="tab-link">
-          <div className={`navbar-content pc-trigger`}>
-            <SimpleBar style={{ height: 'calc(100vh - 74px)' }}>
+          <div className="navbar-content pc-trigger">
+            <SimpleBarScroll style={{ height: 'calc(100vh - 74px)' }}>
               <ul className="pc-navbar">
-                {selectTab?.children?.map((item: NavItemType, index: number) => (
-                  <ListGroup key={index} className={`pc-item pc-hasmenu ${open[item?.id as string] ? 'pc-trigger' : ''}`}>
-                    <a className={`pc-link ${isSelected(item, selectedItems) ? 'active' : ''}`} onClick={() => handleClick(item)}>
+                {selectTab?.children?.map((item) => (
+                  <ListGroup
+                    key={item.id}
+                    className={`pc-item pc-hasmenu ${open[item.id as string] ? 'pc-trigger' : ''} ${isActive(item) ? 'active' : ''}`}
+                  >
+                    <Link to={item.url || '#'} className="pc-link" onClick={() => handleClick(item)}>
                       {item.icon && (
                         <span className="pc-micon">
                           <i className={typeof item.icon === 'string' ? item.icon : item.icon?.props.className} />
                         </span>
                       )}
                       <span className="pc-mtext">
-                        <FormattedMessage id={item.title?.toString()} />
+                        <FormattedMessage id={item.title as string} />
                       </span>
-                      <span className="pc-arrow">
-                        <i className="ti ti-chevron-right" />
-                      </span>
-                    </a>
-                    {open[item.id as string] && (
+                      {item.type === 'collapse' && (
+                        <span className="pc-arrow">
+                          <i className="ti ti-chevron-right" />
+                        </span>
+                      )}
+                    </Link>
+
+                    {open[item.id as string] && item.children && (
                       <ul className="pc-submenu">
-                        {item.children?.map((child: NavItemType) => (
-                          <li key={child.id} className={`pc-item ${isSelected(child, selectedItems) ? 'active' : ''}`}>
+                        {item.children.map((child) => (
+                          <li
+                            key={child.id}
+                            className={`pc-item ${open[child.id as string] ? 'pc-trigger' : ''} ${isActive(child) ? 'active' : ''}`}
+                          >
                             <Link
+                              to={child.url || '#'}
                               className="pc-link"
-                              to={child?.url || ''}
                               onClick={() => {
                                 handleClick(child);
-                                if (child.layout === child.title) {
-                                  onChangeMenuOrientation(child.layout as MenuOrientation);
+                                if (child?.layout === child?.title) {
+                                  onChangeMenuOrientation(child?.layout as MenuOrientation);
                                 }
                               }}
                             >
@@ -103,8 +136,38 @@ export default function DrawerContent({ selectedItems, setSelectedItems }: Props
                                   <i className={typeof child.icon === 'string' ? child.icon : child.icon?.props.className} />
                                 </span>
                               )}
-                              <FormattedMessage id={child.title?.toString()} />
+                              <FormattedMessage id={child.title as string} />
+                              {child.type === 'collapse' && (
+                                <span className="pc-arrow">
+                                  <i className="ti ti-chevron-right" />
+                                </span>
+                              )}
                             </Link>
+
+                            {open[child.id as string] && child.children && (
+                              <ul className="pc-submenu">
+                                {child.children.map((value) => (
+                                  <li key={value.id} className={`pc-item ${isActive(value) ? 'active' : ''}`}>
+                                    <Link
+                                      className="pc-link"
+                                      to={value.url || ''}
+                                      onClick={() => {
+                                        if (value?.layout === value?.title) {
+                                          onChangeMenuOrientation(value?.layout as MenuOrientation);
+                                        }
+                                      }}
+                                    >
+                                      {value.icon && (
+                                        <span className="pc-micon">
+                                          <i className={typeof value.icon === 'string' ? value.icon : value.icon?.props.className} />
+                                        </span>
+                                      )}
+                                      <FormattedMessage id={value.title as string} />
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
                           </li>
                         ))}
                       </ul>
@@ -112,7 +175,7 @@ export default function DrawerContent({ selectedItems, setSelectedItems }: Props
                   </ListGroup>
                 ))}
               </ul>
-            </SimpleBar>
+            </SimpleBarScroll>
           </div>
         </div>
       )}

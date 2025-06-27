@@ -1,7 +1,7 @@
-import ComponentHeader from 'components/cards/ComponentHeader';
 import { useEffect } from 'react';
 
 // project-imports
+import ReferenceHeader from 'components/ReferenceHeader';
 import DatePickerPreview from 'sections/forms/form-plugins/date/DatePicker';
 
 // =============================|| DATE - DATE PICKER ||============================== //
@@ -22,7 +22,7 @@ export default function DatePickerPage() {
   };
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="A vanilla JavaScript remake of bootstrap-datepicker is written from scratch as ECMAScript modules/Sass stylesheets to reproduce similar usability to bootstrap-datepicker."
         link="https://mymth.github.io/vanillajs-datepicker/#/"
       />

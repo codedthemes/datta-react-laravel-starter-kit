@@ -15,10 +15,13 @@ interface CSVExportProps {
 
 export default function CSVExport({ data, filename, headers }: CSVExportProps) {
   return (
-    <CSVLink data={data} filename={filename} headers={headers}>
-      <OverlayTrigger overlay={<Tooltip>CSV Export</Tooltip>}>
-        <i className="ti ti-download me-1 text-secondary f-20" />
-      </OverlayTrigger>
-    </CSVLink>
+    <>
+      {/* @ts-ignore https://github.com/react-csv/react-csv/issues/335 */}
+      <CSVLink data={data} filename={filename} headers={headers}>
+        <OverlayTrigger overlay={<Tooltip>CSV Export</Tooltip>}>
+          <i className="ti ti-download me-1 text-secondary f-20" />
+        </OverlayTrigger>
+      </CSVLink>
+    </>
   );
 }

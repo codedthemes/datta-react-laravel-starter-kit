@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 // react-bootstrap
 import Badge from 'react-bootstrap/Badge';
 import Card from 'react-bootstrap/Card';
@@ -17,7 +15,7 @@ import MainCard from 'components/MainCard';
 import { UserProfileProps } from 'types/userProfile';
 
 // assets
-import avtar5 from 'assets/images/user/avatar-5.jpg';
+import avatar5 from 'assets/images/user/avatar-5.png';
 
 interface ProfileData {
   id: string;
@@ -25,12 +23,13 @@ interface ProfileData {
   label: string;
 }
 
+// profile tabs
 const profileTabs: ProfileData[] = [
-  { id: 'profile-overview', icon: 'ti ti-user', label: 'Profile Overview' },
-  { id: 'personal-information', icon: 'ti ti-file-text', label: 'Personal Information' },
-  { id: 'account-information', icon: 'ti ti-book', label: 'Account Information' },
-  { id: 'change-password', icon: 'ti ti-shield', label: 'Change Password' },
-  { id: 'email-settings', icon: 'ti ti-mail', label: 'Email Settings' }
+  { id: 'profile-overview', icon: 'ph ph-user', label: 'Profile Overview' },
+  { id: 'personal-information', icon: 'ph ph-file-text', label: 'Personal Information' },
+  { id: 'account-information', icon: 'ph ph-book', label: 'Account Information' },
+  { id: 'change-password', icon: 'ph ph-shield', label: 'Change Password' },
+  { id: 'email-settings', icon: 'ph ph-envelope-simple', label: 'Email Settings' }
 ];
 
 // =============================|| PROFILE - USER PROFILE ||============================== //
@@ -46,10 +45,9 @@ export default function UserProfile({ activeProfileTab, handleActiveProfileTab }
           <Stack direction="horizontal" className="user-about-block align-items-center mt-0 mb-3">
             <div className="flex-shrink-0">
               <div className="position-relative d-inline-block">
-                <Image fluid className="img-radius wid-80" src={avtar5} alt="User" />
+                <Image fluid className="img-radius wid-80" src={avatar5} alt="User" />
                 <div className="certificated-badge">
-                  <i className="fas fa-certificate text-primary bg-icon" />
-                  <i className="fas fa-check front-icon text-white" />
+                  <i className="ti ti-rosette-discount-check-filled text-primary bg-icon" />
                 </div>
               </div>
             </div>
@@ -61,19 +59,20 @@ export default function UserProfile({ activeProfileTab, handleActiveProfileTab }
         </Card.Body>
         <ListGroup variant="flush">
           <ListGroup.Item>
-            <i className="ti ti-mail me-2" /> Email
-            <Link to="mailto:demo@sample" className="float-end text-body">
+            <i className="ph ph-envelope-simple m-r-10" />
+            Email
+            <a href="mailto:demo@sample" className="float-end text-body">
               demo@sample.com
-            </Link>
+            </a>
           </ListGroup.Item>
           <ListGroup.Item>
-            <i className="ti ti-phone-call me-2" /> Phone
-            <Link to="#" className="float-end text-body">
-              (+99) 9999 999 999
-            </Link>
+            <i className="ph ph-phone-call m-r-10" />
+            Phone
+            <a className="float-end text-body">(+99) 9999 999 999</a>
           </ListGroup.Item>
           <ListGroup.Item>
-            <i className="ti ti-map-pin me-2" /> Location
+            <i className="ph ph-map-pin-line m-r-10" />
+            Location
             <span className="float-end">Melbourne</span>
           </ListGroup.Item>
         </ListGroup>
@@ -95,17 +94,16 @@ export default function UserProfile({ activeProfileTab, handleActiveProfileTab }
         </Card.Body>
         <ListGroup variant="flush" as="div" className="nav flex-column nav-pills list-pills" role="tablist" aria-orientation="vertical">
           {profileTabs.map(({ id, icon, label }) => (
-            <Link
+            <a
               key={id}
-              to="#"
               className={`nav-link list-group-item list-group-item-action ${activeProfileTab === id ? 'active' : ''}`}
               onClick={() => handleActiveProfileTab && handleActiveProfileTab(id)}
             >
               <i className={`${icon} m-r-10 h5`} /> {label}
               <span className="float-end">
-                <i className="ti ti-chevron-right" />
+                <i className="ph ph-caret-right" />
               </span>
-            </Link>
+            </a>
           ))}
         </ListGroup>
       </MainCard>
@@ -117,16 +115,16 @@ export default function UserProfile({ activeProfileTab, handleActiveProfileTab }
               <i className="ti ti-dots" />
             </Dropdown.Toggle>
             <Dropdown.Menu className="card-option">
-              <Dropdown.Item href="#!" className="full-card text-primary">
+              <Dropdown.Item href="#" className="full-card text-primary">
                 <i className="ti ti-maximize me-2" /> Maximize
               </Dropdown.Item>
-              <Dropdown.Item href="#!" className="minimize-card text-primary">
+              <Dropdown.Item href="#" className="minimize-card text-primary">
                 <i className="ti ti-minus me-2" /> Collapse
               </Dropdown.Item>
-              <Dropdown.Item href="#!" className="reload-card text-primary">
+              <Dropdown.Item href="#" className="reload-card text-primary">
                 <i className="ti ti-refresh me-2" /> Reload
               </Dropdown.Item>
-              <Dropdown.Item href="#!" className="close-card text-primary">
+              <Dropdown.Item href="#" className="close-card text-primary">
                 <i className="ti ti-trash me-2" /> Remove
               </Dropdown.Item>
             </Dropdown.Menu>

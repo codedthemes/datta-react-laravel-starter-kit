@@ -62,14 +62,14 @@ function ReactTable({ columns, data, striped }: ReactTableProps) {
   );
 
   return (
-    <MainCard title="Basic Table">
-      <Stack direction="horizontal" className="justify-content-between align-items-center pb-4 ">
+    <MainCard title="Basic Table" className="table-card">
+      <Stack direction="horizontal" className="justify-content-between align-items-center p-4 flex-wrap gap-2">
         <SortingData getState={table.getState} setPageSize={table.setPageSize} />
         <div className="datatable-search">
           <DebouncedInput value={globalFilter ?? ''} onFilterChange={(value) => setGlobalFilter(String(value))} />
         </div>
       </Stack>
-      <Table className="mb-0" hover responsive>
+      <Table className="mb-0 border-top" hover responsive>
         <thead>
           {table.getHeaderGroups().map((headerGroup: HeaderGroup<any>) => (
             <tr key={headerGroup.id}>
@@ -99,7 +99,7 @@ function ReactTable({ columns, data, striped }: ReactTableProps) {
         getState={table.getState}
         getPageCount={table.getPageCount}
         initialPageSize={10}
-        totalEntries={100}
+        totalEntries={25}
       />
     </MainCard>
   );

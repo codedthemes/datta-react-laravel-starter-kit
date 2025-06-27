@@ -32,7 +32,7 @@ export default function SocialProfilePage() {
               <Tab.Pane eventKey="profile">
                 <Profile />
               </Tab.Pane>
-              <Tab.Pane eventKey="contact">
+              <Tab.Pane eventKey="mycontacts">
                 <MyContacts />
               </Tab.Pane>
               <Tab.Pane eventKey="gallery">

@@ -22,7 +22,7 @@ export default function DukeAdvance() {
               Messy <span>Duke</span>
             </h2>
             <p>Duke is very bored. When he looks at the sky, he feels to run.</p>
-            <a href="#!">View more</a>
+            <a>View more</a>
           </FigureCaption>
         </Figure>
         <Figure className="effect-duke">
@@ -32,7 +32,7 @@ export default function DukeAdvance() {
               Messy <span>Duke</span>
             </h2>
             <p>Duke is very bored. When he looks at the sky, he feels to run.</p>
-            <a href="#!">View more</a>
+            <a>View more</a>
           </FigureCaption>
         </Figure>
       </div>

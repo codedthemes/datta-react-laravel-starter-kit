@@ -12,14 +12,14 @@ import InlineTextElement from 'sections/components/basic/typography/InlineTextEl
 import Ordered from 'sections/components/basic/typography/Ordered';
 import Unordered from 'sections/components/basic/typography/Unordered';
 import Unstyled from 'sections/components/basic/typography/Unstyled';
-import ComponentHeader from 'components/cards/ComponentHeader';
+import ReferenceHeader from 'components/ReferenceHeader';
 
 // ==============================|| BASIC - TYPOGRAPHY ||============================== //
 
 export default function TypographyPage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="Documentation and examples for React-Bootstrap typography, including global settings, headings, body text, lists, and more."
         link="https://react-bootstrap.netlify.app/docs/components/modal/"
       />

@@ -11,7 +11,7 @@ export default function CheckboxButton() {
   return (
     <MainCard title="Checkbox button groups">
       <ToggleButtonGroup type="checkbox" name="checkbox-1">
-        <ToggleButton id="tbg-check-1" value={1} variant="outline-secondary" className="border-end-0">
+        <ToggleButton id="tbg-check-1" value={1} variant="outline-secondary">
           Checkbox 1
         </ToggleButton>
         <ToggleButton id="tbg-check-2" value={2} variant="outline-secondary">

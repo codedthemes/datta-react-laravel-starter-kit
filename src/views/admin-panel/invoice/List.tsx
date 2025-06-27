@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 // project-imports
 import InvoiceListCard from 'sections/admin-panel/invoice/list/ListCard';
 import ListTable from 'sections/admin-panel/invoice/list/ListTable';
-import InvoiceReceiveableCard from 'sections/admin-panel/invoice/list/ReceiveableCard';
+import InvoiceReceivableCard from 'sections/admin-panel/invoice/list/ReceivablesCard';
 
 // ==============================|| ADMIN PANEL - INVOICE LIST ||============================== //
 
@@ -16,7 +16,7 @@ export default function InvoiceListPage() {
         <InvoiceListCard />
       </Col>
       <Col xxl={4}>
-        <InvoiceReceiveableCard />
+        <InvoiceReceivableCard />
       </Col>
       <Col xs={12}>
         <ListTable />

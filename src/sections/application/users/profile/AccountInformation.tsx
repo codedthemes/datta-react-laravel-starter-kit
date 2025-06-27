@@ -18,16 +18,6 @@ interface AccountFormData {
   signinMethod: string;
 }
 
-const languageOptions = ['Washington', 'India', 'Africa', 'New York', 'Malaysia'];
-const signinOptions = ['Password', 'Face Recognition', 'Thumb Impression', 'Key', 'Pin'];
-
-const initialData: AccountFormData = {
-  username: 'Ashoka_Tano_16',
-  email: 'demo@sample.com',
-  language: 'Washington',
-  signinMethod: 'Password'
-};
-
 interface InputProps {
   label: string;
   name: keyof AccountFormData;
@@ -44,17 +34,29 @@ interface DeviceData {
   lastActive: string;
 }
 
+const languageOptions = ['Washington', 'India', 'Africa', 'New York', 'Malaysia'];
+const signinOptions = ['Password', 'Face Recognition', 'Thumb Impression', 'Key', 'Pin'];
+
+// initial data
+const initialData: AccountFormData = {
+  username: 'Ashoka_Tano_16',
+  email: 'demo@sample.com',
+  language: 'Washington',
+  signinMethod: 'Password'
+};
+
+// device data
 const devices: DeviceData[] = [
-  { icon: 'device-desktop', name: 'Cett Desktop', location: '4351 Deans Lane, Elmsford', active: true, lastActive: 'Current Active' },
+  { icon: 'monitor', name: 'Cett Desktop', location: '4351 Deans Lane, Elmsford', active: true, lastActive: 'Current Active' },
   {
-    icon: 'device-tablet',
+    icon: 'device-tablet-camera',
     name: 'Imoon Tablet',
     location: '4185 Michigan Avenue, SHIPPINGPORT',
     active: false,
     lastActive: 'Active 5 days ago'
   },
   {
-    icon: 'device-mobile',
+    icon: 'ph ph-device-mobile-camera ',
     name: 'Asbs Mobile',
     location: '3462 Fairfax Drive, Montclair',
     active: false,
@@ -94,11 +96,13 @@ export default function AccountInformation() {
   return (
     <MainCard
       title={
-        <h5>
-          <i className="ti ti-target text-primary f-20" />
-          <span className="ms-1">Account Information</span>
+        <>
+          <Stack direction="horizontal" className="h5 align-items-center">
+            <i className="ph ph-target text-primary f-20" />
+            <span className="ms-1">Account Information</span>
+          </Stack>
           <small className="text-muted d-block m-l-25 mt-1">Change your account settings</small>
-        </h5>
+        </>
       }
       footerClassName="text-end"
       footer={
@@ -143,16 +147,16 @@ export default function AccountInformation() {
       {devices.map((device, index) => (
         <Stack direction="horizontal" className="mb-2" key={index}>
           <div className="flex-shrink-0">
-            <i className={`ti ti-${device.icon} f-20 h3 wid-30 text-center`} />
+            <i className={`ph ph-${device.icon} f-20 h3 wid-30 text-center`} />
           </div>
           <div className="flex-grow-1 ms-3">
             <div className="float-end">
               <div className={device.active ? 'text-success d-inline-block me-2' : 'text-muted d-inline-block me-2'}>
-                <i className="fas fa-circle f-10 me-2" />
+                <i className="ti ti-circle-filled f-10 me-2" />
                 {device.active ? 'Current Active' : `Active ${device.lastActive}`}
               </div>
-              <a href="#" className="text-danger">
-                <i className="ti ti-circle-x" />
+              <a className="text-danger">
+                <i className="ph ph-x-circle" />
               </a>
             </div>
             <span className="font-weight-bold">{device.name}</span>
@@ -164,11 +168,11 @@ export default function AccountInformation() {
       <h5 className="mb-4">Active Sessions</h5>
       <Stack direction="horizontal" className="mb-2">
         <div className="flex-shrink-0">
-          <i className="ti ti-device-desktop f-20 h3 wid-30 text-center text-success"></i>
+          <i className="ph ph-monitor f-20 h3 wid-30 text-center text-success"></i>
         </div>
         <div className="flex-grow-1 ms-3">
           <div className="float-end">
-            <Badge className="bg-light-danger">Logout</Badge>
+            <Badge bg="light-danger">Logout</Badge>
           </div>
           <span className="fw-bold">Cett Desktop</span>
           <span className="text-muted">| 4351 Deans Lane, Elmsford</span>
@@ -176,11 +180,11 @@ export default function AccountInformation() {
       </Stack>
       <Stack direction="horizontal" className="mb-2">
         <div className="flex-shrink-0">
-          <i className="ti ti-device-tablet f-20 h3 wid-30 text-center text-success"></i>
+          <i className="ph ph-device-tablet-camera f-20 h3 wid-30 text-center text-success"></i>
         </div>
         <div className="flex-grow-1 ms-3">
           <div className="float-end">
-            <Badge className="bg-light-danger">Logout</Badge>
+            <Badge bg="light-danger">Logout</Badge>
           </div>
           <span className="fw-bold">Imoon Tablet</span>
           <span className="text-muted">| 4185 Michigan Avenue, SHIPPINGPORT</span>

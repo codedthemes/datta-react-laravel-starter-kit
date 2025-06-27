@@ -15,7 +15,7 @@ export default function OptionalSizes() {
   const [lgShow, setLgShow] = useState(false);
 
   return (
-    <MainCard title="Optional sizes">
+    <MainCard title="Optional Sizes">
       <Stack direction="horizontal" gap={2}>
         <Button onClick={() => setLgShow(true)}>Large modal</Button>
         <Button onClick={() => setSmShow(true)}>Small modal</Button>

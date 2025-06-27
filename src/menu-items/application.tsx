@@ -12,36 +12,36 @@ const application: NavItemType = {
       id: 'calendar',
       title: 'calendar',
       type: 'item',
-      icon: <i className="ti ti-calendar" />,
+      icon: <i className="ph ph-calendar-blank" />,
       url: '/application/calendar'
     },
     {
       id: 'message',
       title: 'message',
       type: 'item',
-      icon: <i className="ti ti-message" />,
+      icon: <i className="ph ph-chats-circle" />,
       url: '/application/message'
     },
     {
       id: 'task',
       title: 'task',
       type: 'collapse',
-      icon: <i className="ti ti-clipboard" />,
+      icon: <i className="ph ph-list-bullets" />,
       children: [
         {
-          id: 'list',
+          id: 'task-list',
           title: 'list',
           type: 'item',
           url: '/application/task/list'
         },
         {
-          id: 'board',
+          id: 'task-board',
           title: 'board',
           type: 'item',
           url: '/application/task/board'
         },
         {
-          id: 'details',
+          id: 'task-details',
           title: 'details',
           type: 'item',
           url: '/application/task/detail'
@@ -52,45 +52,14 @@ const application: NavItemType = {
       id: 'todo',
       title: 'todo',
       type: 'item',
-      icon: <i className="ti ti-checkbox" />,
+      icon: <i className="ph ph-list-checks" />,
       url: '/application/todo'
-    },
-    {
-      title: 'users',
-      type: 'collapse',
-      icon: <i className="ti ti-server" />,
-      children: [
-        {
-          id: 'profile',
-          title: 'profile',
-          type: 'item',
-          url: '/application/users/profile'
-        },
-        {
-          id: 'social-profile',
-          title: 'social-profile',
-          type: 'item',
-          url: '/application/users/social-profile'
-        },
-        {
-          id: 'user-card',
-          title: 'user-card',
-          type: 'item',
-          url: '/application/users/user-card'
-        },
-        {
-          id: 'user-list',
-          title: 'user-list',
-          type: 'item',
-          url: '/application/users/user-list'
-        }
-      ]
     },
     {
       id: 'gallery',
       title: 'gallery',
       type: 'collapse',
-      icon: <i className="ti ti-photo" />,
+      icon: <i className="ph ph-images" />,
       children: [
         {
           id: 'grid',
@@ -113,10 +82,10 @@ const application: NavItemType = {
       ]
     },
     {
-      id: 'invoice',
+      id: 'application-invoice',
       title: 'invoice',
       type: 'collapse',
-      icon: <i className="ti ti-file-invoice" />,
+      icon: <i className="ph ph-printer" />,
       children: [
         {
           id: 'invoice',
@@ -126,15 +95,47 @@ const application: NavItemType = {
         },
         {
           id: 'invoice-summary',
-          title: 'invoice-summary',
+          title: 'invoice summary',
           type: 'item',
           url: '/application/invoice/summary'
         },
         {
           id: 'invoice-list',
-          title: 'invoice-list',
+          title: 'invoice list',
           type: 'item',
           url: '/application/invoice/list'
+        }
+      ]
+    },
+    {
+      title: 'users',
+      type: 'collapse',
+      icon: <i className="ph ph-user-circle" />,
+      children: [
+        {
+          id: 'users-profile',
+          title: 'profile',
+          type: 'item',
+          url: '/application/users/profile'
+        },
+        {
+          id: 'social-profile',
+          title: 'social profile',
+          breadcrumbs: false,
+          type: 'item',
+          url: '/application/users/social-profile'
+        },
+        {
+          id: 'user-card',
+          title: 'user card',
+          type: 'item',
+          url: '/application/users/user-card'
+        },
+        {
+          id: 'user-list',
+          title: 'user list',
+          type: 'item',
+          url: '/application/users/user-list'
         }
       ]
     }

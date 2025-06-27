@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 // react-bootstrap
 import Badge from 'react-bootstrap/Badge';
 import Col from 'react-bootstrap/Col';
@@ -14,9 +12,9 @@ export default function PointerEvents() {
   return (
     <MainCard
       title={
-        <>
+        <h5>
           Pointer Events <Badge bg="danger">NEW</Badge>
-        </>
+        </h5>
       }
       subheader={
         <p className="mb-0">
@@ -30,7 +28,7 @@ export default function PointerEvents() {
         </Col>
         <Col sm={12} md={10} lg={6}>
           <p>
-            <Link to="#">This link </Link>can not be clicked.
+            <a>This link </a>can not be clicked.
           </p>
         </Col>
       </Row>
@@ -41,7 +39,7 @@ export default function PointerEvents() {
         </Col>
         <Col sm={12} md={10} lg={6}>
           <p>
-            <Link to="#">This link </Link>can be clicked (this is default behaviour).
+            <a>This link </a>can be clicked (this is default behaviour).
           </p>
         </Col>
       </Row>
@@ -52,11 +50,8 @@ export default function PointerEvents() {
         </Col>
         <Col sm={12} md={10} lg={6}>
           <p className="pe-none lh-base">
-            <Link to="#">This link </Link> can not be clicked because the <code>pointer-events </code> property is inherited from its
-            parent. However,{' '}
-            <Link to="#" className="pe-auto">
-              this link
-            </Link>
+            <a>This link </a> can not be clicked because the <code>pointer-events </code> property is inherited from its parent. However,{' '}
+            <a className="pe-auto">this link</a>
             has a <code>pe-auto</code> class and can be clicked.
           </p>
         </Col>

@@ -22,7 +22,7 @@ export default function MingAdvance() {
               Funny <span>Ming</span>
             </h2>
             <p>Ming sits in the corner the whole day. She's into crochet.</p>
-            <a href="#!">View more</a>
+            <a>View more</a>
           </FigureCaption>
         </Figure>
         <Figure className="effect-ming">
@@ -32,7 +32,7 @@ export default function MingAdvance() {
               Funny <span>Ming</span>
             </h2>
             <p>Ming sits in the corner the whole day. She's into crochet.</p>
-            <a href="#!">View more</a>
+            <a>View more</a>
           </FigureCaption>
         </Figure>
       </div>

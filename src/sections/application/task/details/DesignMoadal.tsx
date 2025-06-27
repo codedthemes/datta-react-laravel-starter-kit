@@ -13,13 +13,7 @@ import Table from 'react-bootstrap/Table';
 import MainCard from 'components/MainCard';
 
 // assets
-import Avatar2 from 'assets/images/user/avatar-2.jpg';
-import DevicesTwoToneIcon from '@mui/icons-material/DevicesTwoTone';
-import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
-import CalendarTodayTwoToneIcon from '@mui/icons-material/CalendarTodayTwoTone';
-import LeaderboardTwoToneIcon from '@mui/icons-material/LeaderboardTwoTone';
-import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
-import TimerTwoToneIcon from '@mui/icons-material/TimerTwoTone';
+import Avatar2 from 'assets/images/user/avatar-2.png';
 
 // ===========================|| DETAILS - DESIGN MODAL ||=========================== //
 
@@ -29,10 +23,11 @@ export default function DesignModal() {
       title={
         <Stack direction="horizontal" gap={2} className="align-items-center justify-content-between">
           <h5>
-            <DevicesTwoToneIcon className="w-20 text-primary" /> #24. Create UI design model
+            <i className="ph ph-devices align-middle f-20 text-primary" /> #24. Create UI design model
           </h5>
           <Button variant="light-primary" size="sm">
-            <NotificationsNoneOutlinedIcon className="w-20 text-primary m-r-5" /> Check in
+            <i className="ph ph-bell align-middle me-1 " />
+            Check in
           </Button>
         </Stack>
       }
@@ -48,27 +43,28 @@ export default function DesignModal() {
         <Row>
           <Col sm={6} className="my-1">
             <div className="h6 d-inline-block">
-              <CalendarTodayTwoToneIcon className="f-18 text-primary" /> Date: 28 January, 2020
+              <i className="ph ph-calendar-blank text-primary f-18 align-middle" /> Date: 28 January, 2020
             </div>
           </Col>
           <Col sm={6} className="my-1">
             <div className="h6 d-inline-block">
-              <LeaderboardTwoToneIcon className="f-18 text-primary" /> Priority:{' '}
-            </div>
+              <i className="ph ph-chart-bar align-middle f-18 text-primary me-1" />
+              Priority:
+            </div>{' '}
             <Badge bg="light-danger">Highest</Badge>
           </Col>
           <Col sm={6} className="my-1">
             <div className="h6 d-inline-block">
-              <AccountCircleTwoToneIcon className="text-primary f-18" /> Assign to:{' '}
-            </div>
+              <i className="ph ph-user-circle align-middle f-18 text-primary" /> Assign to:{' '}
+            </div>{' '}
             <Image className="img-fluid img-radius wid-20 me-2" src={Avatar2} />
             Joseph William
           </Col>
           <Col sm={6} className="my-1">
             <div className="h6 d-inline-block">
-              <TimerTwoToneIcon className="text-primary f-18" />
+              <i className="ph ph-timer align-middle f-18 text-primary me-1" />
               Due:
-            </div>
+            </div>{' '}
             <Badge bg="light-warning">23 hours</Badge>
           </Col>
         </Row>
@@ -117,10 +113,10 @@ export default function DesignModal() {
         </p>
       </Card.Body>
       <Card.Body className="pb-3">
-        <div className="h6 mb-0">Sub task directory:</div>
+        <h6 className="mb-0">Sub task directory:</h6>
       </Card.Body>
       <Card.Body className="table-body pb-0">
-        <Table hover responsive className="mb-0">
+        <Table hover responsive className="mb-0 border-top">
           <thead>
             <tr>
               <th>
@@ -132,18 +128,19 @@ export default function DesignModal() {
           </thead>
           <tbody>
             {[
-              { id: 1, name: 'Design mockup', date: '22 December, 20' },
-              { id: 2, name: 'Software Engineer', date: '01 December, 20' },
-              { id: 3, name: 'Photoshop & Illustrator', date: '15 December, 20' },
-              { id: 4, name: 'Allocated Resource', date: '28 December, 20' },
-              { id: 5, name: 'Financial Controller', date: '20 December, 20' }
+              { id: 1, name: 'Design mockup', date: ' 22 December, 20' },
+              { id: 2, name: 'Software Engineer', date: ' 01 December, 20' },
+              { id: 3, name: 'Photoshop & Illustrator', date: ' 15 December, 20' },
+              { id: 4, name: 'Allocated Resource', date: ' 28 December, 20' },
+              { id: 5, name: 'Financial Controller', date: ' 20 December, 20' }
             ].map((task) => (
               <tr key={task.id}>
                 <td>
                   <Form.Check type="checkbox" label={<h6>{task.name}</h6>} />
                 </td>
                 <td>
-                  <CalendarTodayTwoToneIcon className="f-18 text-primary me-2" /> {task.date}
+                  <i className="ph ph-calendar-blank align-middle f-18 text-primary" />
+                  {task.date}
                 </td>
                 <td className="text-muted">The standard Lorem Ipsum</td>
               </tr>

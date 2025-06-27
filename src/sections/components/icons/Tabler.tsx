@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 // react-bootstrap
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
@@ -92,9 +91,9 @@ export default function TablerIcons() {
             </div>
           </OverlayTrigger>
         ))}
-        <Link to="https://tabler.io/icons" target="_blank" className="text-primary">
+        <a href="https://tabler.io/icons" target="_blank" className="text-primary">
           more ...
-        </Link>
+        </a>
       </Stack>
     </MainCard>
   );

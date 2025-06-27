@@ -8,6 +8,7 @@ import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 // project-imports
 import MainCard from 'components/MainCard';
 
+// chart-options
 const chartOptions: ChartProps = {
   chart: {
     type: 'line',
@@ -74,10 +75,10 @@ export default function Activity() {
     <MainCard>
       <Stack direction="horizontal" className="align-items-center justify-content-between mb-3">
         <h5 className="mb-0">Activity</h5>
-        <Form.Select className="rounded-3 w-auto" size="sm" defaultValue="Monthly">
-          <option>Today</option>
-          <option>Weekly</option>
-          <option>Monthly</option>
+        <Form.Select size="sm" className="rounded-3 w-auto" defaultValue="Monthly">
+          <option value="Today">Today</option>
+          <option value="Weekly">Weekly</option>
+          <option value="Monthly">Monthly</option>
         </Form.Select>
       </Stack>
 

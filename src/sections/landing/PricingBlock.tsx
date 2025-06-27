@@ -46,7 +46,7 @@ function PricingCard({ title, price, features, link, buttonClass = 'btn-outline-
         {label && <div className="price-label text-white bg-primary">{label}</div>}
         <h3 className="h4 f-w-400 mb-0 text-white text-opacity-75">{title}</h3>
         <span className="price text-white">{price}</span>
-        <ul className="list-unstyled text-start text-white text-opacity-50 ">
+        <ul className="list-unstyled text-start text-white text-opacity-50">
           {features.map((feature, index) => (
             <ListGroup.Item key={index} className="my-2">
               <i className="me-1 ti ti-check text-success" /> {feature}

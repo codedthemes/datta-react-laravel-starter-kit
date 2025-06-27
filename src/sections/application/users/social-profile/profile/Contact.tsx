@@ -18,6 +18,7 @@ interface InfoField {
   type: string;
 }
 
+// contact data
 const contactFields: InfoField[] = [
   { label: 'Mobile Number', value: '+1 9999-999-999', type: 'text' },
   { label: 'Email Address', value: 'Demo@domain.com', type: 'text' },
@@ -36,7 +37,7 @@ export default function Contact() {
       <Stack direction="horizontal" className="align-items-center justify-content-between">
         <h5 className="mb-0">Contact Information</h5>
         <Button variant="primary" size="sm" className="rounded m-0 float-end" onClick={toggleCollapse}>
-          <i className="ti ti-edit text-white f-20" />
+          <i className="ph ph-note-pencil align-middle" />
         </Button>
       </Stack>
       <Collapse in={isCollapsed}>

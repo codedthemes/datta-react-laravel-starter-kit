@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 // react-bootstrap
 import Alert from 'react-bootstrap/Alert';
@@ -58,22 +57,16 @@ export default function BackdropPage() {
             </p>
 
             <Dropdown>
-              <Dropdown.Toggle className="btn-light-secondary me-1 " id="dropdown-basic" size="sm">
+              <Dropdown.Toggle className="btn-light-secondary me-1" id="dropdown-basic" size="sm">
                 Top offcanvas
               </Dropdown.Toggle>
               <Button size="sm" className="btn-light-danger" onClick={handleCloseCanvas1}>
                 Close
               </Button>
               <Dropdown.Menu>
-                <Dropdown.Item as={Link} to="#/action-1">
-                  Action
-                </Dropdown.Item>
-                <Dropdown.Item as={Link} to="#/action-2">
-                  Another action
-                </Dropdown.Item>
-                <Dropdown.Item as={Link} to="#/action-3">
-                  Something else
-                </Dropdown.Item>
+                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </Offcanvas.Body>
@@ -107,22 +100,16 @@ export default function BackdropPage() {
             </p>
 
             <Dropdown>
-              <Dropdown.Toggle className="btn-light-secondary me-1 " id="dropdown-basic" size="sm">
+              <Dropdown.Toggle className="btn-light-secondary me-1" id="dropdown-basic" size="sm">
                 Top offcanvas
               </Dropdown.Toggle>
               <Button size="sm" className="btn-light-danger" onClick={handleCloseCanvas2}>
                 Close
               </Button>
               <Dropdown.Menu>
-                <Dropdown.Item as={Link} to="#/action-1">
-                  Action
-                </Dropdown.Item>
-                <Dropdown.Item as={Link} to="#/action-2">
-                  Another action
-                </Dropdown.Item>
-                <Dropdown.Item as={Link} to="#/action-3">
-                  Something else
-                </Dropdown.Item>
+                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </Offcanvas.Body>
@@ -156,22 +143,16 @@ export default function BackdropPage() {
             </p>
 
             <Dropdown>
-              <Dropdown.Toggle className="btn-light-secondary me-1 " id="dropdown-basic" size="sm">
+              <Dropdown.Toggle className="btn-light-secondary me-1" id="dropdown-basic" size="sm">
                 Top offcanvas
               </Dropdown.Toggle>
               <Button size="sm" className="btn-light-danger" onClick={handleCloseCanvas3}>
                 Close
               </Button>
               <Dropdown.Menu>
-                <Dropdown.Item as={Link} to="#/action-1">
-                  Action
-                </Dropdown.Item>
-                <Dropdown.Item as={Link} to="#/action-2">
-                  Another action
-                </Dropdown.Item>
-                <Dropdown.Item as={Link} to="#/action-3">
-                  Something else
-                </Dropdown.Item>
+                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </Offcanvas.Body>

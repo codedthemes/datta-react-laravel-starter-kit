@@ -1,11 +1,12 @@
+import { Link } from 'react-router-dom';
+
 // react-bootstrap
-import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 // project-imports
 import MainCard from 'components/MainCard';
-import CourseListcard from 'sections/online-courses/CourseListCard';
+import CourseListCard from 'sections/admin-panel/online-courses/courses/CourseListCard';
 
 // assets
 import Course1 from 'assets/images/admin/img-course-1.png';
@@ -101,14 +102,25 @@ const courseList: Course[] = [
 
 export default function CourseViewPage() {
   return (
-    <MainCard title="Course" secondary={<Button href="/online-course/course/add">Add Student</Button>}>
-      <Row>
-        {courseList.map((course, index) => (
-          <Col sm={6} lg={4} xxl={3} key={index}>
-            <CourseListcard {...course} />
-          </Col>
-        ))}
-      </Row>
-    </MainCard>
+    <Row>
+      <Col xs={12}>
+        <MainCard
+          title="Course"
+          secondary={
+            <Link className="btn btn-primary" to="/admin-panel/online-course/course/add">
+              Add Courses
+            </Link>
+          }
+        >
+          <Row>
+            {courseList.map((course, index) => (
+              <Col sm={6} lg={4} xxl={3} key={index}>
+                <CourseListCard {...course} />
+              </Col>
+            ))}
+          </Row>
+        </MainCard>
+      </Col>
+    </Row>
   );
 }

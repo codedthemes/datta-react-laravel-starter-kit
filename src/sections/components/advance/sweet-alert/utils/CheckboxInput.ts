@@ -7,7 +7,7 @@ export const handleCheckboxInput = async () => {
     input: 'checkbox',
     inputValue: 1,
     inputPlaceholder: 'I agree with the terms and conditions',
-    confirmButtonText: 'Continue<i class="fa fa-arrow-right"/>',
+    confirmButtonText: 'Continue<i class="ti ti-arrow-right"/>',
     inputValidator: (result) => {
       return !result && 'You need to agree with T&C';
     }

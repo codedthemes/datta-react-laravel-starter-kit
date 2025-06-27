@@ -6,7 +6,17 @@ import Stack from 'react-bootstrap/Stack';
 import Table from 'react-bootstrap/Table';
 
 // third-party
-import { ColumnDef, flexRender, getCoreRowModel, getSortedRowModel, HeaderGroup, SortingState, useReactTable } from '@tanstack/react-table';
+import {
+  ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  HeaderGroup,
+  SortingState,
+  useReactTable
+} from '@tanstack/react-table';
 
 // project-imports
 import HeaderSort from './HeaderSort';
@@ -49,12 +59,12 @@ function ReactTable({ columns, data, striped }: ReactTableProps) {
   const table = useReactTable({
     data,
     columns,
-    state: {
-      sorting
-    },
+    state: { sorting, globalFilter },
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel()
+    getFilteredRowModel: getFilteredRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel()
   });
 
   let headers: LabelKeyObject[] = [];
@@ -74,14 +84,15 @@ function ReactTable({ columns, data, striped }: ReactTableProps) {
           <SelectColumnSorting {...{ getState: table.getState, getAllColumns: table.getAllColumns, setSorting }} />
         </Stack>
       }
+      className="table-card"
     >
-      <Stack direction="horizontal" className="justify-content-between align-items-center pb-4 ">
+      <Stack direction="horizontal" className="justify-content-between align-items-center flex-wrap p-4" gap={2}>
         <SortingData getState={table.getState} setPageSize={table.setPageSize} />
         <div className="datatable-search">
           <DebouncedInput value={globalFilter ?? ''} onFilterChange={(value) => setGlobalFilter(String(value))} />
         </div>
       </Stack>
-      <Table hover responsive className="mb-0">
+      <Table hover responsive className="mb-0 border-top">
         <thead>
           {table.getHeaderGroups().map((headerGroup: HeaderGroup<any>) => (
             <tr key={headerGroup.id}>
@@ -120,7 +131,7 @@ function ReactTable({ columns, data, striped }: ReactTableProps) {
         getState={table.getState}
         getPageCount={table.getPageCount}
         initialPageSize={10}
-        totalEntries={100}
+        totalEntries={50}
       />
     </MainCard>
   );

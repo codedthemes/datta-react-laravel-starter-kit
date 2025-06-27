@@ -3,10 +3,10 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 // project-imports
-import BorderBottomColorTable from 'sections/table/bootstrap-table/border-table/BorderBottomColorTable';
-import BorderLessTable from 'sections/table/bootstrap-table/border-table/BorderLessTable';
-import BothBordersTable from 'sections/table/bootstrap-table/border-table/BothBorders';
-import DefaultBorderTable from 'sections/table/bootstrap-table/border-table/DefaultBorderTable';
+import BorderBottomColorTable from 'sections/tables/bootstrap-table/border-table/BorderBottomColorTable';
+import BorderLessTable from 'sections/tables/bootstrap-table/border-table/BorderLessTable';
+import BothBordersTable from 'sections/tables/bootstrap-table/border-table/BothBorders';
+import DefaultBorderTable from 'sections/tables/bootstrap-table/border-table/DefaultBorderTable';
 
 // ==============================|| BOOTSTRAP TABLE - BORDER TABLE ||============================== //
 

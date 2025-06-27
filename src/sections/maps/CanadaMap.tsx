@@ -25,7 +25,7 @@ export default function CanadaMap() {
 
   return (
     <MainCard title="Canada Map">
-      <div id="canada" className="h-400" />
+      <div id="canada" style={{ height: '400px' }} />
     </MainCard>
   );
 }

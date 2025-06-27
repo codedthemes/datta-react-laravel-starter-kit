@@ -25,7 +25,7 @@ export default function WorldMap() {
 
   return (
     <MainCard title="world [merc] Map">
-      <div id="world-map" className="h-400" />
+      <div id="world-map" style={{ height: '400px' }} />
     </MainCard>
   );
 }

@@ -25,7 +25,7 @@ export default function IraqMap() {
 
   return (
     <MainCard title="iraq Map">
-      <div id="iraq" className="h-400" />
+      <div id="iraq" style={{ height: '400px' }} />
     </MainCard>
   );
 }

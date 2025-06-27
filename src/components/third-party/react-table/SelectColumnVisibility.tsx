@@ -37,31 +37,28 @@ export default function SelectColumnVisibility({
   };
 
   return (
-    <div className="w-200">
-      <Dropdown show={showDropdown} onToggle={handleToggleDropdown}>
-        <Dropdown.Toggle as={Button} id="dropdown-basic">
-          {getIsAllColumnsVisible() ? 'All columns visible' : `${getVisibleLeafColumns().length} column(s) visible`}
-        </Dropdown.Toggle>
-
-        <Dropdown.Menu>
-          <Dropdown.Item as="button">
-            <Form.Check type="checkbox" label="All Columns" checked={getIsAllColumnsVisible()} onChange={handleSelectAll} />
-          </Dropdown.Item>
-          {getAllColumns().map((column) => {
-            const accessorKey = (column.columnDef as CustomColumnDef<any>)?.accessorKey;
-            return accessorKey ? (
-              <Dropdown.Item key={column.id} as="button" onClick={column.getToggleVisibilityHandler()}>
-                <Form.Check
-                  type="checkbox"
-                  label={column.columnDef.header as string}
-                  checked={column.getIsVisible()}
-                  onChange={column.getToggleVisibilityHandler()}
-                />
-              </Dropdown.Item>
-            ) : null;
-          })}
-        </Dropdown.Menu>
-      </Dropdown>
-    </div>
+    <Dropdown show={showDropdown} onToggle={handleToggleDropdown}>
+      <Dropdown.Toggle as={Button} id="dropdown-basic">
+        {getIsAllColumnsVisible() ? 'All columns visible' : `${getVisibleLeafColumns().length} column(s) visible`}
+      </Dropdown.Toggle>
+      <Dropdown.Menu>
+        <Dropdown.Item as="button">
+          <Form.Check type="checkbox" label="All Columns" checked={getIsAllColumnsVisible()} onChange={handleSelectAll} />
+        </Dropdown.Item>
+        {getAllColumns().map((column) => {
+          const accessorKey = (column.columnDef as CustomColumnDef<any>)?.accessorKey;
+          return accessorKey ? (
+            <Dropdown.Item key={column.id} as="button" onClick={column.getToggleVisibilityHandler()}>
+              <Form.Check
+                type="checkbox"
+                label={column.columnDef.header as string}
+                checked={column.getIsVisible()}
+                onChange={column.getToggleVisibilityHandler()}
+              />
+            </Dropdown.Item>
+          ) : null;
+        })}
+      </Dropdown.Menu>
+    </Dropdown>
   );
 }

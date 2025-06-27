@@ -18,27 +18,27 @@ import image1 from 'assets/images/slider/img-slide-1.jpg';
 import image2 from 'assets/images/slider/img-slide-2.jpg';
 import image3 from 'assets/images/slider/img-slide-3.jpg';
 
+const settings = {
+  dots: true,
+  arrows: false,
+  autoplay: true,
+  infinite: true,
+  speed: 300,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  vertical: true,
+  appendDots: (dots: React.ReactNode) => (
+    <div className="slick-dots">
+      <ul> {dots} </ul>
+    </div>
+  )
+};
+
 // ==============================|| SLIDER - VERTICAL ||============================== //
 
 export default function Vertical() {
   const sliderRef = useRef<Slider | null>(null);
   const [isPlaying, setIsPlaying] = useState(true);
-
-  const settings = {
-    dots: true,
-    arrows: false,
-    autoplay: true,
-    infinite: true,
-    speed: 300,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    vertical: true,
-    appendDots: (dots: React.ReactNode) => (
-      <div className="slick-dots">
-        <ul> {dots} </ul>
-      </div>
-    )
-  };
 
   const handlePause = () => {
     if (isPlaying) {
@@ -72,7 +72,7 @@ export default function Vertical() {
           {isPlaying ? 'Stop' : 'Start'}
         </Button>
       </Stack>
-
+      {/* @ts-ignore https://github.com/akiran/react-slick/issues/2336 */}
       <Slider ref={sliderRef} {...settings}>
         <Image src={image1} />
         <Image src={image2} />

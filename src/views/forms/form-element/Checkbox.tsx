@@ -1,3 +1,7 @@
+// react-bootstrap
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+
 // project-imports
 import ColorOptions from 'sections/forms/form-element/checkbox/ColorOptions';
 import CustomCheckbox from 'sections/forms/form-element/checkbox/CustomCheckbox';
@@ -6,9 +10,11 @@ import CustomCheckbox from 'sections/forms/form-element/checkbox/CustomCheckbox'
 
 export default function CheckboxPage() {
   return (
-    <>
-      <CustomCheckbox />
-      <ColorOptions />
-    </>
+    <Row>
+      <Col xs={12}>
+        <CustomCheckbox />
+        <ColorOptions />
+      </Col>
+    </Row>
   );
 }

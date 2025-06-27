@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 // react-bootstrap
 import Badge from 'react-bootstrap/Badge';
 import Col from 'react-bootstrap/Col';
@@ -19,16 +17,16 @@ import { getImageUrl, ImagePath } from 'utils/getImageUrl';
 
 export default function ExpandingUserDetail({ data }: any) {
   return (
-    <Row className="g-3 custom-padding">
+    <Row className="g-3 custom-padding pt-3">
       <Col xs={12} sm={5} md={4} xl={3.5}>
         <MainCard>
-          <Badge bg="light-secondary" className="position-absolute top-0 end-0">
+          <Badge bg="light-secondary" className="position-absolute top-0 end-0 rounded-0">
             {data.status}
           </Badge>
           <Col xs={12}>
-            <Stack className="align-items-center">
+            <Stack className="align-items-center p-4 pb-0">
               <Image
-                src={getImageUrl(`avatar-${data.avatar}.jpg`, ImagePath.USER)}
+                src={getImageUrl(`avatar-${data.avatar}.png`, ImagePath.USER)}
                 alt="User Avatar"
                 className="rounded-circle avatar avatar-l"
               />
@@ -57,7 +55,7 @@ export default function ExpandingUserDetail({ data }: any) {
           </Col>
           <hr />
           <Col xs={12}>
-            <Stack gap={2}>
+            <Stack gap={2} className="px-3">
               <Stack direction="horizontal" className="justify-content-between" gap={2}>
                 <Stack direction="horizontal">
                   <i className="ti ti-mail me-2" />
@@ -91,9 +89,9 @@ export default function ExpandingUserDetail({ data }: any) {
                   <span className="text-muted">Portfolio</span>
                 </Stack>
                 <Stack direction="horizontal" className="d-inline-block text-truncate">
-                  <Link to="https://google.com" target="_blank" rel="noopener noreferrer">
+                  <a href="https://google.com" target="_blank" rel="noopener noreferrer">
                     https://anshan.dh.url
-                  </Link>
+                  </a>
                 </Stack>
               </Stack>
             </Stack>
@@ -139,7 +137,7 @@ export default function ExpandingUserDetail({ data }: any) {
             </ListGroup>
           </MainCard>
           <MainCard title="About Me">
-            <p className="mb-0 text-wrap">
+            <p className="mb-0 text-wrap p-3 pb-0">
               Hello, I’m {data.firstName} {data.lastName}, {data.role} based in an international company. {data.about}
             </p>
           </MainCard>

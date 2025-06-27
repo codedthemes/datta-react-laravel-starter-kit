@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 // react-bootstrap
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -13,7 +11,7 @@ import MainCard from 'components/MainCard';
 export default function OffsetReference() {
   return (
     <MainCard title="Offset & Reference">
-      <Dropdown className="me-1">
+      <Dropdown className="mb-1">
         <Dropdown.Toggle variant="secondary" id="dropdownMenuOffset">
           Offset
         </Dropdown.Toggle>
@@ -29,32 +27,18 @@ export default function OffsetReference() {
             ]
           }}
         >
-          <Dropdown.Item as={Link} to="#">
-            Action
-          </Dropdown.Item>
-          <Dropdown.Item as={Link} to="#">
-            Another action
-          </Dropdown.Item>
-          <Dropdown.Item as={Link} to="#">
-            Something else
-          </Dropdown.Item>
+          <Dropdown.Item>Action</Dropdown.Item>
+          <Dropdown.Item>Another action</Dropdown.Item>
+          <Dropdown.Item>Something else</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
       <Dropdown as={ButtonGroup} drop="down-centered">
         <DropdownButton variant="secondary" title="Reference" id="dropdownMenuReference">
-          <Dropdown.Item as={Link} to="#">
-            Action
-          </Dropdown.Item>
-          <Dropdown.Item as={Link} to="#">
-            Another action
-          </Dropdown.Item>
-          <Dropdown.Item as={Link} to="#">
-            Something else
-          </Dropdown.Item>
-          <Dropdown.Divider />
-          <Dropdown.Item as={Link} to="#">
-            Separated link
-          </Dropdown.Item>
+          <Dropdown.Item>Action</Dropdown.Item>
+          <Dropdown.Item>Another action</Dropdown.Item>
+          <Dropdown.Item>Something else</Dropdown.Item>
+          <hr className="m-0 my-2" />
+          <Dropdown.Item>Separated link</Dropdown.Item>
         </DropdownButton>
       </Dropdown>
     </MainCard>

@@ -22,7 +22,7 @@ export default function LexiAdvance() {
               Altruistic <span>Lexi</span>
             </h2>
             <p>Each and every friend is special. Lexi won't hide a single cookie.</p>
-            <a href="#!">View more</a>
+            <a>View more</a>
           </FigureCaption>
         </Figure>
         <Figure className="effect-lexi">
@@ -32,7 +32,7 @@ export default function LexiAdvance() {
               Altruistic <span>Lexi</span>
             </h2>
             <p>Each and every friend is special. Lexi won't hide a single cookie.</p>
-            <a href="#!">View more</a>
+            <a>View more</a>
           </FigureCaption>
         </Figure>
       </div>

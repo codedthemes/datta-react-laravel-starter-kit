@@ -2,38 +2,56 @@ import { useState } from 'react';
 
 // react-bootstrap
 import Badge from 'react-bootstrap/Badge';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
 import Image from 'react-bootstrap/Image';
 import Nav from 'react-bootstrap/Nav';
-import Row from 'react-bootstrap/Row';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Stack from 'react-bootstrap/Stack';
 import Tab from 'react-bootstrap/Tab';
 import Table from 'react-bootstrap/Table';
+import Tooltip from 'react-bootstrap/Tooltip';
+
+// third-party
+import { useReactTable, getCoreRowModel, flexRender, ColumnDef } from '@tanstack/react-table';
 
 // project-imports
 import MainCard from 'components/MainCard';
+import SortingData from 'components/third-party/react-table/SortingData';
+import DebouncedInput from 'components/third-party/react-table/DebouncedInput';
 
 // assets
-import Image1 from 'assets/images/user/avatar-1.jpg';
-import Image2 from 'assets/images/user/avatar-2.jpg';
-import Image3 from 'assets/images/user/avatar-3.jpg';
-import Image4 from 'assets/images/user/avatar-4.jpg';
-import Image5 from 'assets/images/user/avatar-5.jpg';
-import Image7 from 'assets/images/user/avatar-7.jpg';
-import Image8 from 'assets/images/user/avatar-8.jpg';
-import Image9 from 'assets/images/user/avatar-9.jpg';
-import Image10 from 'assets/images/user/avatar-10.jpg';
+import Image1 from 'assets/images/user/avatar-1.png';
+import Image2 from 'assets/images/user/avatar-2.png';
+import Image5 from 'assets/images/user/avatar-5.png';
+import Image9 from 'assets/images/user/avatar-9.png';
+import Image10 from 'assets/images/user/avatar-10.png';
 
+interface TableDataProps {
+  id: number;
+  image: string;
+  name: string;
+  description: string;
+  createDate: string;
+  dueDate: string;
+  quantity: string;
+  badge: string;
+  installClass: string;
+  badgeClass: string;
+}
+
+interface ReactTableProps {
+  columns: ColumnDef<TableDataProps>[];
+  data: TableDataProps[];
+}
+
+// table list data
 const tableList1 = [
   {
     id: 1,
     image: Image5,
     name: 'Mickie Melmoth',
     description: 'mmsht23@gmail.com',
-    createdate: '5/5/2022',
-    dueedate: '7/11/2022',
+    createDate: '5/5/2022',
+    dueDate: '7/11/2022',
     quantity: '3000',
     badge: 'Paid',
     installClass: 'text-success m-0',
@@ -44,8 +62,8 @@ const tableList1 = [
     image: Image9,
     name: 'Shelba Thews',
     description: 'Shelba Thews',
-    createdate: '7/6/2022',
-    dueedate: '7/8/2022',
+    createDate: '7/6/2022',
+    dueDate: '7/8/2022',
     quantity: '3000',
     badge: 'Cancelled',
     installClass: 'text-muted m-o',
@@ -56,8 +74,8 @@ const tableList1 = [
     image: Image10,
     name: 'tass23@gmail.com',
     description: 'Shelba Thews',
-    createdate: '05/01/2022	',
-    dueedate: '06/02/2022',
+    createDate: '05/01/2022	',
+    dueDate: '06/02/2022',
     quantity: '1000',
     badge: 'Unpaid',
     installClass: 'text-success m-0',
@@ -68,8 +86,8 @@ const tableList1 = [
     image: Image1,
     name: 'Mickie Melmoth',
     description: 'mmsht23@gmail.com',
-    createdate: '5/5/2022',
-    dueedate: '7/11/2022',
+    createDate: '5/5/2022',
+    dueDate: '7/11/2022',
     quantity: '3000',
     badge: 'Paid',
     installClass: 'text-success m-0',
@@ -80,379 +98,175 @@ const tableList1 = [
     image: Image2,
     name: 'Shelba Thews',
     description: 'Shelba Thews',
-    createdate: '7/6/2022',
-    dueedate: '7/8/2022',
+    createDate: '7/6/2022',
+    dueDate: '7/8/2022',
     quantity: '3000',
-    badge: 'Cancelled',
-    installClass: 'text-success m-0',
-    badgeClass: 'light-danger'
-  },
-  {
-    id: 6,
-    image: Image3,
-    name: 'tass23@gmail.com',
-    description: 'Shelba Thews',
-    createdate: '05/01/2022	',
-    dueedate: '06/02/2022',
-    quantity: '1000',
     badge: 'Unpaid',
     installClass: 'text-success m-0',
-    badgeClass: 'light-primary'
-  },
-  {
-    id: 7,
-    image: Image4,
-    name: 'Mickie Melmoth',
-    description: 'mmsht23@gmail.com',
-    createdate: '5/5/2022',
-    dueedate: '7/11/2022',
-    quantity: '3000',
-    badge: 'Paid',
-    installClass: 'text-success m-0',
-    badgeClass: 'light-success'
-  },
-  {
-    id: 8,
-    image: Image7,
-    name: 'Shelba Thews',
-    description: 'Shelba Thews',
-    createdate: '7/6/2022',
-    dueedate: '7/8/2022',
-    quantity: '3000',
-    badge: 'Cancelled',
-    installClass: 'text-success m-0',
     badgeClass: 'light-danger'
-  },
-  {
-    id: 9,
-    image: Image8,
-    name: 'tass23@gmail.com',
-    description: 'Shelba Thews',
-    createdate: '05/01/2022',
-    dueedate: '06/02/2022',
-    quantity: '1000',
-    badge: 'Unpaid',
-    installClass: 'text-success m-0',
-    badgeClass: 'light-primary'
   }
 ];
 
-const tableList2 = [
+// action icons data
+const actionIcons = [
+  { icon: 'ti ti-eye', name: 'View' },
+  { icon: 'ti ti-edit', name: 'Edit' },
+  { icon: 'ti ti-trash', name: 'Delete' }
+];
+
+const columns: ColumnDef<TableDataProps>[] = [
   {
-    id: 5,
-    image: Image2,
-    name: 'Shelba Thews',
-    description: 'Shelba Thews',
-    createdate: '7/6/2022',
-    dueedate: '7/8/2022',
-    quantity: '3000',
-    badge: 'Cancelled',
-    installClass: 'text-success m-0',
-    badgeClass: 'light-danger'
+    accessorKey: 'id',
+    header: 'ID'
   },
   {
-    id: 6,
-    image: Image3,
-    name: 'tass23@gmail.com',
-    description: 'Shelba Thews',
-    createdate: '05/01/2022	',
-    dueedate: '06/02/2022',
-    quantity: '1000',
-    badge: 'Unpaid',
-    installClass: 'text-success m-0',
-    badgeClass: 'light-primary'
+    header: 'User Name',
+    accessorKey: 'fullName',
+    cell: ({ row }) => (
+      <Stack direction="horizontal" gap={2} className="align-items-center">
+        <Image src={row.original.image} alt="User Avatar" className="avatar avatar-xs" />
+        <Stack>
+          <h6 className="text-truncate w-100 mb-1">{row.original.name} </h6>
+          <span className="f-12 mb-0">{row.original.description}</span>
+        </Stack>
+      </Stack>
+    )
   },
   {
-    id: 1,
-    image: Image5,
-    name: 'Mickie Melmoth',
-    description: 'mmsht23@gmail.com',
-    createdate: '5/5/2022',
-    dueedate: '7/11/2022',
-    quantity: '3000',
-    badge: 'Paid',
-    installClass: 'text-success m-0',
-    badgeClass: 'light-success'
+    accessorKey: 'createDate',
+    header: 'Created'
   },
   {
-    id: 2,
-    image: Image9,
-    name: 'Shelba Thews',
-    description: 'Shelba Thews',
-    createdate: '7/6/2022',
-    dueedate: '7/8/2022',
-    quantity: '3000',
-    badge: 'Cancelled',
-    installClass: 'text-muted m-o',
-    badgeClass: 'light-danger'
+    accessorKey: 'dueDate',
+    header: 'Due Date'
   },
   {
-    id: 3,
-    image: Image10,
-    name: 'tass23@gmail.com',
-    description: 'Shelba Thews',
-    createdate: '05/01/2022	',
-    dueedate: '06/02/2022',
-    quantity: '1000',
-    badge: 'Unpaid',
-    installClass: 'text-success m-0',
-    badgeClass: 'light-primary'
+    accessorKey: 'quantity',
+    header: '	Quantity  '
   },
   {
-    id: 4,
-    image: Image1,
-    name: 'Mickie Melmoth',
-    description: 'mmsht23@gmail.com',
-    createdate: '5/5/2022',
-    dueedate: '7/11/2022',
-    quantity: '3000',
-    badge: 'Paid',
-    installClass: 'text-success m-0',
-    badgeClass: 'light-success'
+    accessorKey: 'badge',
+    header: 'Status',
+    cell: ({ row }) => {
+      const badgeClass = row.original.badgeClass;
+      return <Badge bg={badgeClass}>{row.original.badge}</Badge>;
+    }
   },
   {
-    id: 7,
-    image: Image4,
-    name: 'Mickie Melmoth',
-    description: 'mmsht23@gmail.com',
-    createdate: '5/5/2022',
-    dueedate: '7/11/2022',
-    quantity: '3000',
-    badge: 'Paid',
-    installClass: 'text-success m-0',
-    badgeClass: 'light-success'
-  },
-  {
-    id: 8,
-    image: Image7,
-    name: 'Shelba Thews',
-    description: 'Shelba Thews',
-    createdate: '7/6/2022',
-    dueedate: '7/8/2022',
-    quantity: '3000',
-    badge: 'Cancelled',
-    installClass: 'text-success m-0',
-    badgeClass: 'light-danger'
-  },
-  {
-    id: 9,
-    image: Image8,
-    name: 'tass23@gmail.com',
-    description: 'Shelba Thews',
-    createdate: '05/01/2022',
-    dueedate: '06/02/2022',
-    quantity: '1000',
-    badge: 'Unpaid',
-    installClass: 'text-success m-0',
-    badgeClass: 'light-primary'
+    accessorKey: 'action',
+    header: 'Action',
+    cell: () => (
+      <Stack direction="horizontal" gap={1}>
+        {actionIcons.map((action, idx) => (
+          <OverlayTrigger key={idx} placement="bottom" overlay={<Tooltip>{action.name}</Tooltip>}>
+            <a href="#" className="btn-link-secondary avatar avatar-xs mx-1">
+              <i className={`${action.icon} f-20`} />
+            </a>
+          </OverlayTrigger>
+        ))}
+      </Stack>
+    )
   }
 ];
 
-const buttondata = [
-  { icon: <i className="ti ti-eye" />, variant: 'info' },
-  { icon: <i className="ti ti-edit" />, variant: 'success' },
-  { icon: <i className="ti ti-trash" />, variant: 'danger' }
-];
+function ReactTable({ columns, data }: ReactTableProps) {
+  const [globalFilter, setGlobalFilter] = useState('');
 
-// ==============================|| TABLE DATA ||============================== //
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel()
+  });
 
-function TableData1() {
   return (
-    <Table responsive hover>
-      <thead>
-        <tr>
-          <th>INVOICE ID</th>
-          <th>USER NAME</th>
-          <th>CREATE DATE</th>
-          <th>DUE DATE </th>
-          <th>QUANTITY</th>
-          <th>STATUS</th>
-          <th className="text-end">ACTIONS</th>
-        </tr>
-      </thead>
-      <tbody>
-        {tableList1.map((user, index) => (
-          <tr key={index}>
-            <td>{user.id}</td>
-            <td>
-              <Row className="align-items-center">
-                <Col xs="auto" className="pe-0">
-                  <Image src={user.image} width="40px" />
-                </Col>
-                <Col>
-                  <h6 className="mb-1">
-                    <span className="text-truncate">{user.name}</span>
-                  </h6>
-                  <p className="f-12 mb-0">{user.description}</p>
-                </Col>
-              </Row>
-            </td>
-            <td>
-              <h6 className="mb-0">{user.createdate}</h6>
-            </td>
-
-            <td>
-              <h6 className="mb-1">{user.dueedate}</h6>
-            </td>
-            <td>
-              <h6 className="mb-0">{user.quantity}</h6>
-            </td>
-            <td>
-              <Badge bg={user.badgeClass}>{user.badge}</Badge>
-            </td>
-            <td className="text-end">
-              <Stack direction="horizontal" className="justify-content-end">
-                {buttondata.map((btn, index) => (
-                  <Button variant={`link-${btn.variant}`} key={index} className={`avatar avatar-s btn-pc-default`}>
-                    {btn.icon}
-                  </Button>
-                ))}
-              </Stack>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </Table>
+    <>
+      <Stack direction="horizontal" className="justify-content-between align-items-center flex-wrap p-4 pt-0" gap={2}>
+        <SortingData getState={table.getState} setPageSize={table.setPageSize} />
+        <div className="datatable-search">
+          <DebouncedInput value={globalFilter ?? ''} onFilterChange={(value) => setGlobalFilter(String(value))} />
+        </div>
+      </Stack>
+      <Table responsive hover className="mb-0 border-top">
+        <thead>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <th key={header.id} {...header.column.columnDef.meta}>
+                  {flexRender(header.column.columnDef.header, header.getContext())}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody>
+          {table.getRowModel().rows.map((row) => (
+            <tr key={row.id}>
+              {row.getVisibleCells().map((cell) => (
+                <td key={cell.id} {...cell.column.columnDef.meta}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </>
   );
 }
-function TableData2() {
-  return (
-    <Table responsive hover>
-      <thead>
-        <tr>
-          <th>INVOICE ID</th>
-          <th>USER NAME</th>
-          <th>CREATE DATE</th>
-          <th>DUE DATE </th>
-          <th>QUANTITY</th>
-          <th>STATUS</th>
-          <th className="text-end">ACTIONS</th>
-        </tr>
-      </thead>
-      <tbody>
-        {tableList2.map((user, index) => (
-          <tr key={index}>
-            <td>{user.id}</td>
-            <td>
-              <Row className="align-items-center">
-                <div className="col-auto pe-0">
-                  <Image src={user.image} width="40px" />
-                </div>
-                <Col>
-                  <h6 className="mb-1">
-                    <span className="text-truncate">{user.name}</span>
-                  </h6>
-                  <p className="f-12 mb-0">{user.description}</p>
-                </Col>
-              </Row>
-            </td>
-            <td>
-              <h6 className="mb-0">{user.createdate}</h6>
-            </td>
-
-            <td>
-              <h6 className="mb-1">{user.dueedate}</h6>
-            </td>
-            <td>
-              <h6 className="mb-0">{user.quantity}</h6>
-            </td>
-            <td>
-              <Badge bg={user.badgeClass}>{user.badge}</Badge>
-            </td>
-            <td className="text-end">
-              <Stack direction="horizontal" className="justify-content-end">
-                {buttondata.map((btn, index) => (
-                  <Button key={index} className={`avatar avatar-s btn-link-${btn.variant} btn-pc-default`}>
-                    {btn.icon}
-                  </Button>
-                ))}
-              </Stack>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </Table>
-  );
-}
-// ==============================|| ADMIN PANEL - INVOICE LIST TABLE ||============================== //
 
 export default function ListTable() {
-  const [activeTab, setActiveTab] = useState<string>('all');
+  const [activeTab, setActiveTab] = useState('all');
+
+  const filteredData = activeTab === 'all' ? tableList1 : tableList1.filter((item) => item.badge.toLowerCase() === activeTab);
 
   return (
-    <MainCard>
+    <MainCard className="table-card">
       <Tab.Container activeKey={activeTab} onSelect={(k) => k && setActiveTab(k)}>
-        <Nav className="nav-tabs invoice-tab mb-3" id="myTab" role="tablist">
+        <Nav className="nav-tabs invoice-tab p-4" role="tablist">
           <Nav.Item>
             <Nav.Link eventKey="all">
-              <Stack direction="horizontal" className="align-items-center" gap={2}>
+              <Stack direction="horizontal" gap={2}>
                 All
-                <Badge bg="light-primary" className="avatar rounded-circle">
-                  5
+                <Badge pill bg="light-primary">
+                  {tableList1.length}
                 </Badge>
               </Stack>
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link eventKey="paid">
-              <Stack direction="horizontal" className="align-items-center" gap={2}>
+              <Stack direction="horizontal" gap={2}>
                 Paid
-                <Badge bg="light-success" className="avatar rounded-circle">
-                  2
+                <Badge pill bg="light-success">
+                  {tableList1.filter((i) => i.badge === 'Paid').length}
                 </Badge>
               </Stack>
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link eventKey="unpaid">
-              <Stack direction="horizontal" className="align-items-center" gap={2}>
+              <Stack direction="horizontal" gap={2}>
                 Unpaid
-                <Badge bg="light-warning" className="avatar rounded-circle">
-                  2
+                <Badge pill bg="light-warning">
+                  {tableList1.filter((i) => i.badge === 'Unpaid').length}
                 </Badge>
               </Stack>
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link eventKey="cancelled">
-              <Stack direction="horizontal" className="align-items-center" gap={2}>
+              <Stack direction="horizontal" gap={2}>
                 Cancelled
-                <Badge bg="light-danger" className="avatar rounded-circle">
-                  1
+                <Badge pill bg="light-danger">
+                  {tableList1.filter((i) => i.badge === 'Cancelled').length}
                 </Badge>
               </Stack>
             </Nav.Link>
           </Nav.Item>
         </Nav>
-        <div className="datatable-top">
-          <div className="datatable-dropdown">
-            <Form.Label>
-              <Form.Select className="datatable-selector">
-                <option value="5">5</option>
-                <option defaultValue="10">10</option>
-                <option value="15">15</option>
-                <option value="20">20</option>
-                <option value="25">25</option>
-              </Form.Select>
-              entries per page
-            </Form.Label>
-          </div>
-          <div className="datatable-search">
-            <Form.Control aria-label="First name" type="search" placeholder="search..." />
-          </div>
-        </div>
         <Tab.Content>
-          <Tab.Pane eventKey="all">
-            <TableData1 />
-          </Tab.Pane>
-          <Tab.Pane eventKey="paid">
-            <TableData2 />
-          </Tab.Pane>
-          <Tab.Pane eventKey="unpaid">
-            <TableData1 />
-          </Tab.Pane>
-          <Tab.Pane eventKey="cancelled">
-            <TableData2 />
+          <Tab.Pane eventKey={activeTab}>
+            <ReactTable data={filteredData} columns={columns} />
           </Tab.Pane>
         </Tab.Content>
       </Tab.Container>

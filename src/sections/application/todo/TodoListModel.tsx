@@ -22,18 +22,18 @@ interface Task {
   completed: boolean;
 }
 
+const staticData: Task[] = [
+  { id: 1, text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been', completed: false },
+  { id: 2, text: "the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley", completed: false },
+  { id: 3, text: 'of type and scrambled it to make a type specimen book. It has survived not only five', completed: false },
+  { id: 4, text: 'centuries, but also the leap into electronic typesetting, remaining essentially unchanged.', completed: false }
+];
+
 // ==============================|| TODO - TODO LIST MODEL ||============================== //
 
 export default function TodoListModel() {
-  const INITIAL_STATIC_TASKS: Task[] = [
-    { id: 1, text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been', completed: false },
-    { id: 2, text: "the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley", completed: false },
-    { id: 3, text: 'of type and scrambled it to make a type specimen book. It has survived not only five', completed: false },
-    { id: 4, text: 'centuries, but also the leap into electronic typesetting, remaining essentially unchanged.', completed: false }
-  ];
-
   const [show, setShow] = useState(false);
-  const [tasks, setTasks] = useState<Task[]>(INITIAL_STATIC_TASKS);
+  const [tasks, setTasks] = useState<Task[]>(staticData);
   const [newTask, setNewTask] = useState<string>('');
 
   const handleClose = () => setShow(false);
@@ -87,7 +87,7 @@ export default function TodoListModel() {
               </div>
               <div className="float-end">
                 <Button variant="link" onClick={() => handleDeleteTask(task.id)}>
-                  <i className="far fa-trash-alt" />
+                  <i className="ti ti-trash" />
                 </Button>
               </div>
             </Stack>

@@ -12,8 +12,8 @@ enum SortType {
 function SortToggler({ type }: { type?: SortType }) {
   return (
     <Stack className="ms-2 text-secondary opacity-50">
-      <i className={`fa fa-caret-up ${type === SortType.ASC ? 'text-dark' : ''}`} />
-      <i className={`fa fa-caret-down mt-n1 ${type === SortType.DESC ? 'text-dark' : ''}`} />
+      <i className={`ti ti-caret-up-filled ${type === SortType.ASC ? 'text-dark' : ''}`} />
+      <i className={`ti ti-caret-down-filled mt-n1 ${type === SortType.DESC ? 'text-dark' : ''}`} />
     </Stack>
   );
 }

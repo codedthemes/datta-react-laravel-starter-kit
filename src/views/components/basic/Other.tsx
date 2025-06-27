@@ -5,13 +5,13 @@ import Row from 'react-bootstrap/Row';
 // project-imports
 import AspectRatios from 'sections/components/basic/other/AspectRatios';
 import Border from 'sections/components/basic/other/Border';
-import ColoredLinks from 'sections/components/basic/other/Colored-links';
+import ColoredLinks from 'sections/components/basic/other/ColoredLinks';
 import Embeds from 'sections/components/basic/other/Embeds';
 import LineHeight from 'sections/components/basic/other/LineHeight';
 import PointerEvents from 'sections/components/basic/other/PointerEvents';
 import PositionValues from 'sections/components/basic/other/PositionValues';
 import Shadows from 'sections/components/basic/other/Shadows';
-import TextSelection from 'sections/components/basic/other/Text-Selection';
+import TextSelection from 'sections/components/basic/other/TextSelection';
 import UtilityClass from 'sections/components/basic/other/UtilityClass';
 
 // ==============================|| BASIC - OTHER ||============================== //

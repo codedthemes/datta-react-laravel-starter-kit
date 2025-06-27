@@ -10,14 +10,14 @@ import LiveToast from 'sections/components/basic/toasts/LiveToast';
 import Placement from 'sections/components/basic/toasts/Placement';
 import Stacking from 'sections/components/basic/toasts/Stacking';
 import Translucent from 'sections/components/basic/toasts/Translucent';
-import ComponentHeader from 'components/cards/ComponentHeader';
+import ReferenceHeader from 'components/ReferenceHeader';
 
 // ==============================|| BASIC - TOASTS ||============================== //
 
 export default function ToastsPage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="Push notifications to your visitors with a toast, a lightweight and easily customizable alert message."
         link="https://react-bootstrap.netlify.app/docs/components/toasts/"
       />

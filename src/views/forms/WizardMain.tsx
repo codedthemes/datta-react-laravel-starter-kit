@@ -1,5 +1,5 @@
 // project-imports
-import Wizard from 'sections/forms/wizard/Wizard';
+import Wizard from 'sections/forms/Wizard';
 
 // =============================|| FORM - WIZARD MAIN ||============================== //
 

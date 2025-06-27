@@ -41,35 +41,6 @@ export default function TextColor() {
           </div>
         </Col>
         <Col md={4}>
-          <div className="p-3 color-block text-indigo-100" data-clipboard-text="text-indigo-100">
-            text-indigo-100
-          </div>
-          <div className="p-3 color-block text-indigo-200" data-clipboard-text="text-indigo-200">
-            text-indigo-200
-          </div>
-          <div className="p-3 color-block text-indigo-300" data-clipboard-text="text-indigo-300">
-            text-indigo-300
-          </div>
-          <div className="p-3 color-block text-indigo-400" data-clipboard-text="text-indigo-400">
-            text-indigo-400
-          </div>
-          <div className="p-3 color-block text-indigo-500" data-clipboard-text="text-indigo-500">
-            text-indigo-500
-          </div>
-          <div className="p-3 color-block text-indigo-600" data-clipboard-text="text-indigo-600">
-            text-indigo-600
-          </div>
-          <div className="p-3 color-block text-indigo-700" data-clipboard-text="text-indigo-700">
-            text-indigo-700
-          </div>
-          <div className="p-3 color-block text-indigo-800" data-clipboard-text="text-indigo-800">
-            text-indigo-800
-          </div>
-          <div className="p-3 color-block text-indigo-900" data-clipboard-text="text-indigo-900">
-            text-indigo-900
-          </div>
-        </Col>
-        <Col md={4}>
           <div className="p-3 color-block text-purple-100" data-clipboard-text="text-purple-100">
             text-purple-100
           </div>
@@ -241,35 +212,6 @@ export default function TextColor() {
           </div>
           <div className="p-3 color-block text-green-900" data-clipboard-text="text-green-900">
             text-green-900
-          </div>
-        </Col>
-        <Col md={4}>
-          <div className="p-3 color-block text-teal-100" data-clipboard-text="text-teal-100">
-            text-teal-100
-          </div>
-          <div className="p-3 color-block text-teal-200" data-clipboard-text="text-teal-200">
-            text-teal-200
-          </div>
-          <div className="p-3 color-block text-teal-300" data-clipboard-text="text-teal-300">
-            text-teal-300
-          </div>
-          <div className="p-3 color-block text-teal-400" data-clipboard-text="text-teal-400">
-            text-teal-400
-          </div>
-          <div className="p-3 color-block text-teal-500" data-clipboard-text="text-teal-500">
-            text-teal-500
-          </div>
-          <div className="p-3 color-block text-teal-600" data-clipboard-text="text-teal-600">
-            text-teal-600
-          </div>
-          <div className="p-3 color-block text-teal-700" data-clipboard-text="text-teal-700">
-            text-teal-700
-          </div>
-          <div className="p-3 color-block text-teal-800" data-clipboard-text="text-teal-800">
-            text-teal-800
-          </div>
-          <div className="p-3 color-block text-teal-900" data-clipboard-text="text-teal-900">
-            text-teal-900
           </div>
         </Col>
         <Col md={4}>

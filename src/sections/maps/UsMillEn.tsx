@@ -25,7 +25,7 @@ export default function UsMillEnMap() {
 
   return (
     <MainCard title="us-mill-en Map">
-      <div id="us-mill-en" className="h-400" />
+      <div id="us-mill-en" style={{ height: '400px' }} />
     </MainCard>
   );
 }

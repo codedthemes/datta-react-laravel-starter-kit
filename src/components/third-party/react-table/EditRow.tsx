@@ -2,7 +2,6 @@ import { useState, useRef, ReactNode } from 'react';
 
 // react-bootstrap
 import Badge from 'react-bootstrap/Badge';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
@@ -15,9 +14,6 @@ import LinearWithLabel from 'components/@extended/progress/LinearWithLabel';
 // third-party
 import { Row } from '@tanstack/react-table';
 import * as Yup from 'yup';
-
-// assets
-import { PencilSimpleLine } from 'phosphor-react';
 
 interface EditRowProps<TData> {
   row: Row<TData>;
@@ -163,21 +159,21 @@ export default function EditRow<TData>({ row, onSave }: EditRowProps<TData>) {
             cellContent = isEditMode ? (
               <Stack direction="horizontal" gap={2}>
                 <OverlayTrigger overlay={<Tooltip>Cancel</Tooltip>}>
-                  <Button variant="link-danger" onClick={handleCancelClick}>
-                    <i className="ti ti-x" />
-                  </Button>
+                  <a href="#" className="btn-link-danger avatar avatar-xs mx-1" onClick={handleCancelClick}>
+                    <i className="ti ti-x f-20" />
+                  </a>
                 </OverlayTrigger>
                 <OverlayTrigger overlay={<Tooltip>Save</Tooltip>}>
-                  <Button variant="link-danger" onClick={handleSaveClick}>
-                    <i className="ti ti-check" />
-                  </Button>
+                  <a href="#" className="btn-link-success avatar avatar-xs mx-1" onClick={handleSaveClick}>
+                    <i className="ti ti-check f-20" />
+                  </a>
                 </OverlayTrigger>
               </Stack>
             ) : (
               <OverlayTrigger overlay={<Tooltip>Edit</Tooltip>}>
-                <Button variant="link-primary" onClick={() => setEditMode(true)}>
-                  <PencilSimpleLine size={22} />
-                </Button>
+                <a href="#" className="btn-link-primary avatar avatar-xs " onClick={() => setEditMode(true)}>
+                  <i className="ti ti-ti ti-edit f-20" />
+                </a>
               </OverlayTrigger>
             );
             break;

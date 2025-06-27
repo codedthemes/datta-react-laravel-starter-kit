@@ -9,10 +9,10 @@ const other: NavItemType = {
   type: 'group',
   children: [
     {
-      id: '/menu-levels',
+      id: 'menu-levels',
       title: 'menu-levels',
       type: 'collapse',
-      icon: <i className="ti ti-align-right" />,
+      icon: <i className="ph ph-tree-structure" />,
       children: [
         {
           id: 'level-2.1',
@@ -20,7 +20,7 @@ const other: NavItemType = {
           type: 'item'
         },
         {
-          id: '/level-2.2',
+          id: 'level-2.2',
           title: 'level-2.2',
           type: 'collapse',
           children: [
@@ -35,7 +35,7 @@ const other: NavItemType = {
               type: 'item'
             },
             {
-              id: '/level-3.3',
+              id: 'level-3.3',
               title: 'level-3.3',
               type: 'collapse',
               children: [
@@ -54,7 +54,7 @@ const other: NavItemType = {
           ]
         },
         {
-          id: '/level-2.3',
+          id: 'level-2.3',
           title: 'level-2.3',
           type: 'collapse',
           children: [
@@ -69,7 +69,7 @@ const other: NavItemType = {
               type: 'item'
             },
             {
-              id: '/level-3.3',
+              id: 'level-3.3',
               title: 'level-3.3',
               type: 'collapse',
               children: [
@@ -91,9 +91,9 @@ const other: NavItemType = {
     },
     {
       id: 'sample-page',
-      title: 'sample-page',
+      title: 'sample page',
       type: 'item',
-      icon: <i className="ti ti-layout-sidebar" />,
+      icon: <i className="ph ph-desktop" />,
       url: '/other/sample-page'
     }
   ]

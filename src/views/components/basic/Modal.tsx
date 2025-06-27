@@ -12,14 +12,14 @@ import ToggleBetweenModals from 'sections/components/basic/modal/ToggleBetweenMo
 import UsingTheGrid from 'sections/components/basic/modal/UsingTheGrid';
 import VaryingModalContent from 'sections/components/basic/modal/VaryingModalContent';
 import VerticallyCentered from 'sections/components/basic/modal/VerticallyCentered';
-import ComponentHeader from 'components/cards/ComponentHeader';
+import ReferenceHeader from 'components/ReferenceHeader';
 
 // ==============================|| BASIC - MODAL ||============================== //
 
 export default function ModalPage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="Use React-Bootstrap’s JavaScript modal plugin to add dialogs to your site for lightboxes, user notifications, or completely custom content."
         link="https://react-bootstrap.netlify.app/docs/components/modal/"
       />

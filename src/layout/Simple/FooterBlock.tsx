@@ -10,6 +10,9 @@ import Stack from 'react-bootstrap/Stack';
 // third-party
 import { motion } from 'framer-motion';
 
+// project-imports
+import branding from 'branding.json';
+
 // assets
 import WhiteLogo from 'assets/images/logo-white.svg';
 
@@ -17,40 +20,39 @@ const columns = [
   {
     title: 'Company',
     links: [
-      { text: 'Profile', href: 'https://codedthemes.com/' },
-      { text: 'Follow Us', href: 'https://codedthemes.com/' },
-      { text: 'Website', href: 'https://codedthemes.com/' }
+      { text: 'Profile', href: branding.company.url },
+      { text: 'Follow Us', href: branding.company.url },
+      { text: 'Website', href: branding.company.url }
     ],
     delay: '0.4s'
   },
   {
     title: 'Help & Support',
     links: [
-      { text: 'Documentation', href: 'https://codedthemes.gitbook.io/datta' },
-      { text: 'Feature Request', href: 'https://codedthemes.gitbook.io/datta/v/datta-able-bootstrap/' },
-      { text: 'RoadMap', href: 'https://codedthemes.gitbook.io/datta/v/datta-able-bootstrap/' },
-      { text: 'Support', href: 'https://codedthemes.support-hub.io/' },
-      { text: 'Email Us', href: 'mailto:codedthemes@gmail.com' }
+      { text: 'Documentation', href: branding.Docs },
+      { text: 'Feature Request', href: branding.company.support },
+      { text: 'Support', href: branding.company.support },
+      { text: 'Change Log', href: branding.changeLog }
     ],
     delay: '0.6s'
   },
   {
     title: 'Useful Resources',
     links: [
-      { text: 'Support Policy', href: 'https://codedthemes.com/privacy-policy/' },
-      { text: 'Licenses Term', href: 'https://codedthemes.com/license/' }
+      { text: 'Support Policy', href: branding.company.privacyPolicy },
+      { text: 'Licenses Term', href: branding.company.license }
     ],
     delay: '0.8s'
   }
 ];
 
 const footerLinks = [
-  { href: 'https://fb.com/Codedthemes', icon: 'fab fa-facebook-square', delay: '0.4s' },
-  { href: 'https://x.com/codedthemes', icon: 'fab fa-twitter', delay: '0.5s' },
-  { href: 'https://www.linkedin.com/company/codedthemes/', icon: 'fab fa-linkedin', delay: '0.6s' },
-  { href: 'https://www.instagram.com/codedthemes/', icon: 'fab fa-instagram', delay: '0.7s' },
-  { href: 'https://discord.com/invite/p2E2WhCb6s', icon: 'fab fa-discord', delay: '0.8s' },
-  { href: 'https://github.com/codedthemes', icon: 'fab fa-github', delay: '0.9s' }
+  { href: branding.company.socialLink.facebook, icon: 'ti ti-brand-facebook-filled', delay: '0.4s' },
+  { href: branding.company.socialLink.twitter, icon: 'ti ti-brand-twitter-filled', delay: '0.5s' },
+  { href: branding.company.socialLink.linkedin, icon: 'ti ti-brand-linkedin-filled', delay: '0.6s' },
+  { href: branding.company.socialLink.instagram, icon: 'ti ti-brand-instagram', delay: '0.7s' },
+  { href: branding.company.socialLink.discord, icon: 'ti ti-brand-discord-filled', delay: '0.8s' },
+  { href: branding.company.socialLink.github, icon: 'ti ti-brand-github-filled', delay: '0.9s' }
 ];
 
 // ==============================|| SIMPLE - FOOTER BLOCK ||============================== //
@@ -74,7 +76,7 @@ export default function FooterBlock() {
               <Image src={WhiteLogo} alt="image" className="img-fluid mb-3" />
               <p className="mb-4 text-white text-opacity-50">
                 Codedthemes has gained the trust of over 5.5K customers since 2015, thanks to our commitment to delivering high-quality
-                products. Our experienced team players are responsible for managing Datta able.
+                products. Our experienced team players are responsible for managing {branding.brandName}.
               </p>
             </motion.div>
           </Col>
@@ -124,7 +126,7 @@ export default function FooterBlock() {
                 <p className="mb-0">
                   © Handcrafted by Team{' '}
                   <a href="https://codedthemes.com/contact/" target="_blank" rel="noopener noreferrer">
-                    Codedthemes
+                    CodedThemes
                   </a>
                 </p>
               </motion.div>

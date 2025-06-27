@@ -22,17 +22,17 @@ export default function HeraAdvance() {
               Tender <span>Hera</span>
             </h2>
             <p className="text-spacing">
-              <a href="#!">
-                <i className="far fa-file-pdf f-36" />
+              <a>
+                <i className="ti ti-file-type-pdf f-36" />
               </a>
-              <a href="#!">
-                <i className="far fa-file-image f-36" />
+              <a>
+                <i className="ti ti-photo f-36" />
               </a>
-              <a href="#!">
-                <i className="far fa-file-archive f-36" />
+              <a>
+                <i className="ti ti-file-zip f-36" />
               </a>
-              <a href="#!">
-                <i className="far fa-file-code f-36" />
+              <a>
+                <i className="ti ti-file-code f-36" />
               </a>
             </p>
           </FigureCaption>
@@ -44,17 +44,17 @@ export default function HeraAdvance() {
               Tender <span>Hera</span>
             </h2>
             <p className="text-spacing">
-              <a href="#!">
-                <i className="far fa-file-pdf f-36" />
+              <a>
+                <i className="ti ti-file-type-pdf f-36" />
               </a>
-              <a href="#!">
-                <i className="far fa-file-image f-36" />
+              <a>
+                <i className="ti ti-photo f-36" />
               </a>
-              <a href="#!">
-                <i className="far fa-file-archive f-36" />
+              <a>
+                <i className="ti ti-file-zip f-36" />
               </a>
-              <a href="#!">
-                <i className="far fa-file-code f-36" />
+              <a>
+                <i className="ti ti-file-code f-36" />
               </a>
             </p>
           </FigureCaption>

@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 // react-bootstrap
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -14,9 +12,7 @@ function CardFooter() {
       <Button type="submit">Submit</Button>
       <span>
         or
-        <Link to="#" className="ms-2">
-          Clear
-        </Link>
+        <a className="ms-2">Clear</a>
       </span>
     </Stack>
   );
@@ -30,7 +26,7 @@ export default function ActionButtonwithLinkPage() {
       <Form>
         <Form.Group className="mb-0">
           <Form.Label>Name:</Form.Label>
-          <Form.Control type="text" placeholder="Enter Name " />
+          <Form.Control type="text" placeholder="Enter Name" />
           <Form.Text>Please enter your Name</Form.Text>
         </Form.Group>
       </Form>

@@ -5,6 +5,7 @@ import Stack from 'react-bootstrap/Stack';
 
 // project-imports
 import AuthLoginForm from 'sections/auth/AuthLogin';
+import branding from 'branding.json';
 
 // assets
 import BackgroundImg2 from 'assets/images/authentication/img-auth-bg-2.jpg';
@@ -19,7 +20,7 @@ export default function LoginV2Page() {
           <Row>
             <Stack direction="horizontal" className="align-items-center w-100 justify-content-center">
               <Col md={8}>
-                <h1 className="text-white mb-5">Login in Datta Able</h1>
+                <h1 className="text-white mb-5">Login in {branding.brandName}</h1>
                 <p className="text-white">
                   Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
                   dummy text ever.
@@ -28,7 +29,7 @@ export default function LoginV2Page() {
             </Stack>
           </Row>
         </div>
-        <div className="auth-form ">
+        <div className="auth-form">
           <AuthLoginForm link="/auth/register-v2" />
         </div>
       </div>

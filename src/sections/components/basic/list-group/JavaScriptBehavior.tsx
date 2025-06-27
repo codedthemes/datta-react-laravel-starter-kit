@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 // react-bootstrap
 import Col from 'react-bootstrap/Col';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -26,16 +24,16 @@ export default function JavaScriptBehaviorPage() {
         <Row className="g-4">
           <Col sm={4}>
             <ListGroup>
-              <ListGroup.Item action as={Link} to="#link1">
+              <ListGroup.Item action href="#link1">
                 Home
               </ListGroup.Item>
-              <ListGroup.Item action as={Link} to="#link2">
+              <ListGroup.Item action href="#link2">
                 Profile
               </ListGroup.Item>
-              <ListGroup.Item action as={Link} to="#link3">
+              <ListGroup.Item action href="#link3">
                 Messages
               </ListGroup.Item>
-              <ListGroup.Item action as={Link} to="#link4">
+              <ListGroup.Item action href="#link4">
                 Settings
               </ListGroup.Item>
             </ListGroup>

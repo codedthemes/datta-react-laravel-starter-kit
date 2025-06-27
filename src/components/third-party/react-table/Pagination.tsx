@@ -34,26 +34,35 @@ export default function TablePagination({
   const totalPages = getPageCount();
 
   return (
-    <Stack direction="horizontal" className={`justify-content-between align-items-center pt-4 ${className}`}>
+    <Stack
+      direction="horizontal"
+      className={`justify-content-between align-items-center p-4 pb-0 border-top ${className} flex-wrap`}
+      gap={2}
+    >
       <p className="mb-0">
         Showing {indexOfFirstUser} to {indexOfLastUser} of {totalEntries} entries
       </p>
       <Pagination className="custom-pagination justify-content-md-end justify-content-start mb-0">
-        <Pagination.Prev
-          onClick={() => setPageIndex((prev) => Math.max(prev - 1, 0))}
-          disabled={pageIndex === 1}
-          className={`custom-prev-arrow`}
-        />
-        {Array.from({ length: totalPages }, (_, index) => (
-          <Pagination.Item key={index} active={index === pageIndex} onClick={() => setPageIndex(index)} bsPrefix="bg-secondary-1">
-            {index + 1}
-          </Pagination.Item>
-        ))}
+        <Pagination.Prev onClick={() => setPageIndex((prev) => Math.max(prev - 1, 0))} disabled={pageIndex === 0} />
+
+        {pageIndex > 2 && <Pagination.Item onClick={() => setPageIndex(0)}>1</Pagination.Item>}
+        {pageIndex > 3 && <Pagination.Ellipsis />}
+        {Array.from({ length: totalPages }, (_, index) => {
+          if (index >= pageIndex - 1 && index <= pageIndex + 1) {
+            return (
+              <Pagination.Item key={index} active={index === pageIndex} onClick={() => setPageIndex(index)}>
+                {index + 1}
+              </Pagination.Item>
+            );
+          }
+          return null;
+        })}
+        {pageIndex < totalPages - 3 && <Pagination.Ellipsis />}
+        {pageIndex < totalPages - 2 && <Pagination.Item onClick={() => setPageIndex(totalPages - 1)}>{totalPages}</Pagination.Item>}
+
         <Pagination.Next
-          bsPrefix="bg-secondary"
           onClick={() => setPageIndex((prev) => Math.min(prev + 1, totalPages - 1))}
-          disabled={pageIndex + 1 === totalPages}
-          className={`custom-next-arrow`}
+          disabled={pageIndex === totalPages - 1}
         />
       </Pagination>
     </Stack>

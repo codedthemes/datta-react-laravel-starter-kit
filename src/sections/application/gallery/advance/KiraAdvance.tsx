@@ -22,17 +22,17 @@ export default function KiraAdvance() {
               Dark <span>Kira</span>
             </h2>
             <p>
-              <a href="#!">
-                <i className="fa fa-fw fa-home" />
+              <a>
+                <i className="ti ti-home text-black" />
               </a>
-              <a href="#!">
-                <i className="fa fa-fw fa-download" />
+              <a>
+                <i className="ti ti-download text-black" />
               </a>
-              <a href="#!">
-                <i className="fa fa-fw fa-heart" />
+              <a>
+                <i className="ti ti-heart-filled text-black" />
               </a>
-              <a href="#!">
-                <i className="fa fa-fw fa-share" />
+              <a>
+                <i className="ti ti-brand-stackshare text-black" />
               </a>
             </p>
           </FigureCaption>
@@ -44,17 +44,17 @@ export default function KiraAdvance() {
               Dark <span>Kira</span>
             </h2>
             <p>
-              <a href="#!">
-                <i className="fa fa-fw fa-home" />
+              <a>
+                <i className="ti ti-home text-black" />
               </a>
-              <a href="#!">
-                <i className="fa fa-fw fa-download" />
+              <a>
+                <i className="ti ti-download text-black" />
               </a>
-              <a href="#!">
-                <i className="fa fa-fw fa-heart" />
+              <a>
+                <i className="ti ti-heart-filled text-black" />
               </a>
-              <a href="#!">
-                <i className="fa fa-fw fa-share" />
+              <a>
+                <i className="ti ti-brand-stackshare text-black" />
               </a>
             </p>
           </FigureCaption>

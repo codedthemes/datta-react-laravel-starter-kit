@@ -26,6 +26,8 @@ interface FormData {
 
 const experienceOptions = ['Startup', '2 year', '3 year', '4 year', '5 year'];
 const locationOptions = ['Washington', 'India', 'Africa', 'New York', 'Malaysia'];
+
+// skills options
 const skillsOptions = [
   'admin template',
   'bootstrap',
@@ -42,6 +44,7 @@ const skillsOptions = [
   'webflow'
 ];
 
+// initial data
 const initialData: FormData = {
   name: 'Ashoka Tano',
   location: 'Washington',
@@ -93,7 +96,7 @@ export default function PersonalInformation() {
     <MainCard bodyClassName="p-0">
       <Card.Header>
         <h5>
-          <i className="ti ti-user f-20 text-primary" /> Personal Information
+          <i className="ph ph-user align-text-bottom text-primary f-20" /> Personal Information
         </h5>
       </Card.Header>
       <Card.Body>
@@ -109,14 +112,14 @@ export default function PersonalInformation() {
       </Card.Body>
       <Card.Header>
         <h5>
-          <i className="ti ti-upload f-20 text-primary" /> Social Information
+          <i className="ph ph-share-network align-text-bottom text-primary f-20" /> Social Information
         </h5>
       </Card.Header>
       <Card.Body>
         {[
-          { icon: 'ti ti-brand-facebook', color: 'primary', name: 'Facebook' },
-          { icon: 'ti ti-brand-twitter', color: 'info', name: 'Twitter' },
-          { icon: 'ti ti-brand-google', color: 'danger', name: 'Google Plus' }
+          { icon: 'ti ti-brand-facebook-filled', color: 'primary', name: 'Facebook' },
+          { icon: 'ti ti-brand-twitter-filled', color: 'info', name: 'Twitter' },
+          { icon: 'ti ti-brand-google-filled', color: 'danger', name: 'Google Plus' }
         ].map(({ icon, color, name }) => (
           <Form.Group controlId={`formBasic${name}`} key={name} className="mb-3">
             <Form.Label>{name}</Form.Label>
@@ -132,7 +135,7 @@ export default function PersonalInformation() {
       </Card.Body>
       <Card.Header>
         <h5>
-          <i className="ti ti-map-pin f-20 text-primary" /> Contact Information
+          <i className="ph ph-map-pin align-text-bottom text-primary f-20" /> Contact Information
         </h5>
       </Card.Header>
       <Card.Body>

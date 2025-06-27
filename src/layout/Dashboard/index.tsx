@@ -1,28 +1,30 @@
 import { Outlet } from 'react-router-dom';
 
 // project-imports
-import CustomBreadcrumbs from 'components/@extended/CustomBreadcrumb';
+import Drawer from './Drawer';
 import Footer from './Footer';
-import HeaderContent from './Header/headerContent/HeaderContent';
-import MainDrawer from './drawer';
-import HorizontalBar from './drawer/HorizontalBar';
-import Settings from './settings/Settings';
+import Header from './Header';
+import Customizer from './Customizer';
+import Breadcrumbs from 'components/Breadcrumbs';
+import useConfig from 'hooks/useConfig';
+import NavigationScroll from 'components/NavigationScroll';
 
-// ==============================|| DASHBOARD - MAIN LAYOUT ||============================== //
+// ==============================|| MAIN LAYOUT ||============================== //
 
-export default function DashboardLayout() {
-  const isHorizontal = window.location.pathname === '/layouts/horizontal';
+export default function MainLayout() {
+  const { container } = useConfig();
 
   return (
     <>
-      <Settings />
-      <MainDrawer />
-      <HeaderContent />
-      {!isHorizontal ? <MainDrawer /> : <HorizontalBar />}
+      <Customizer />
+      <Drawer />
+      <Header />
       <div className="pc-container">
-        <div className="pc-content">
-          <CustomBreadcrumbs />
-          <Outlet />
+        <div className={`pc-content ${container && 'container'} `}>
+          <Breadcrumbs />
+          <NavigationScroll>
+            <Outlet />
+          </NavigationScroll>
         </div>
       </div>
       <Footer />

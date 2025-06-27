@@ -8,12 +8,14 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 // project-imports
 import MainCard from 'components/MainCard';
+import useConfig from 'hooks/useConfig';
 import { emailSchema } from 'utils/validationSchema';
+import { ThemeMode } from 'config';
+import { getResolvedTheme, setResolvedTheme } from 'components/setResolvedTheme';
 
 // assets
-import WhiteLogo from 'assets/images/logo-white.svg';
-import Logo from 'assets/images/logo-dark.svg';
-import { Link } from 'react-router-dom';
+import LightLogo from 'assets/images/logo-white.svg';
+import DarkLogo from 'assets/images/logo-dark.svg';
 
 interface ResetPasswordFormInput {
   email: string;
@@ -22,6 +24,12 @@ interface ResetPasswordFormInput {
 // ==============================|| AUTH RESET PASSWORD FORM ||============================== //
 
 export default function AuthResetPasswordForm({ className }: { className?: string }) {
+  const { mode } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
+
+  const logo = resolvedTheme === ThemeMode.DARK ? LightLogo : DarkLogo;
+
   const {
     register,
     handleSubmit,
@@ -34,11 +42,11 @@ export default function AuthResetPasswordForm({ className }: { className?: strin
   };
 
   return (
-    <MainCard className={window.location.pathname === '/auth/login-v4' ? 'my-0' : 'my-5'}>
+    <MainCard className="mb-0">
       <div className="text-center">
-        <Link to="#">
-          <Image src={className ? WhiteLogo : Logo} alt="img" />
-        </Link>
+        <a>
+          <Image src={logo} alt="img" />
+        </a>
       </div>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <h4 className={`text-center f-w-500 mt-4 mb-3 ${className}`}>Reset Password</h4>

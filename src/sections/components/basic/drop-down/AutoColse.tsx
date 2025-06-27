@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 // react-bootstrap
 import Dropdown from 'react-bootstrap/Dropdown';
 import Stack from 'react-bootstrap/Stack';
@@ -19,15 +17,9 @@ export default function AutoClose() {
               Default Dropdown
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item as={Link} to="#/Menu item-1">
-                Menu item
-              </Dropdown.Item>
-              <Dropdown.Item as={Link} to="#/Menu item-2">
-                Menu item
-              </Dropdown.Item>
-              <Dropdown.Item as={Link} to="#/Menu item-3">
-                Menu item
-              </Dropdown.Item>
+              <Dropdown.Item href="#/Menu item-1">Menu item</Dropdown.Item>
+              <Dropdown.Item href="#/Menu item-2">Menu item</Dropdown.Item>
+              <Dropdown.Item href="#/Menu item-3">Menu item</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
           <Dropdown autoClose="inside">
@@ -35,15 +27,9 @@ export default function AutoClose() {
               Clickable outside
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item as={Link} to="#/Menu item-1">
-                Menu item
-              </Dropdown.Item>
-              <Dropdown.Item as={Link} to="#/Menu item-2">
-                Menu item
-              </Dropdown.Item>
-              <Dropdown.Item as={Link} to="#/Menu item-3">
-                Menu item
-              </Dropdown.Item>
+              <Dropdown.Item href="#/Menu item-1">Menu item</Dropdown.Item>
+              <Dropdown.Item href="#/Menu item-2">Menu item</Dropdown.Item>
+              <Dropdown.Item href="#/Menu item-3">Menu item</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
           <Dropdown autoClose="outside">
@@ -51,15 +37,9 @@ export default function AutoClose() {
               Clickable inside
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item as={Link} to="#/Menu item-1">
-                Menu item
-              </Dropdown.Item>
-              <Dropdown.Item as={Link} to="#/Menu item-2">
-                Menu item
-              </Dropdown.Item>
-              <Dropdown.Item as={Link} to="#/Menu item-3">
-                Menu item
-              </Dropdown.Item>
+              <Dropdown.Item href="#/Menu item-1">Menu item</Dropdown.Item>
+              <Dropdown.Item href="#/Menu item-2">Menu item</Dropdown.Item>
+              <Dropdown.Item href="#/Menu item-3">Menu item</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
           <Dropdown autoClose={false}>
@@ -67,15 +47,9 @@ export default function AutoClose() {
               Manual close
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item as={Link} to="#/Menu item-1">
-                Menu item
-              </Dropdown.Item>
-              <Dropdown.Item as={Link} to="#/Menu item-2">
-                Menu item
-              </Dropdown.Item>
-              <Dropdown.Item as={Link} to="#/Menu item-3">
-                Menu item
-              </Dropdown.Item>
+              <Dropdown.Item href="#/Menu item-1">Menu item</Dropdown.Item>
+              <Dropdown.Item href="#/Menu item-2">Menu item</Dropdown.Item>
+              <Dropdown.Item href="#/Menu item-3">Menu item</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Stack>

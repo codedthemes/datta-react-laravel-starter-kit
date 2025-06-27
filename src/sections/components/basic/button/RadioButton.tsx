@@ -11,7 +11,7 @@ export default function RadioButton() {
   return (
     <MainCard title="Radio button groups">
       <ToggleButtonGroup type="radio" name="radio1">
-        <ToggleButton id="tbg-radio-1" value={1} variant="outline-secondary" className="border-end-0">
+        <ToggleButton id="tbg-radio-1" value={1} variant="outline-secondary">
           radio 1
         </ToggleButton>
         <ToggleButton id="tbg-radio-2" value={2} variant="outline-secondary">

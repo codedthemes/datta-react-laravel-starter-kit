@@ -15,9 +15,9 @@ export default function InlineMode() {
         <Form.Label className="mb-0">Inline Mode</Form.Label>
       </Col>
 
-      <Col lg={4} md={9} sm={12} className="w-286">
+      <Col lg={4} md={9} sm={12}>
         <Calendar
-          className="react-calendar-3"
+          className="position-relative z-1"
           formatShortWeekday={(locale, date) => date.toLocaleDateString(locale, { weekday: 'short' }).slice(0, 2)}
           prev2Label={null}
           next2Label={null}

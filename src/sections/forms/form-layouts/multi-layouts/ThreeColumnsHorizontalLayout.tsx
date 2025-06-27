@@ -21,7 +21,7 @@ export default function ThreeColumnsHorizontalLayoutPage() {
                   <Form.Label>Name:</Form.Label>
                 </Col>
                 <Col lg={9}>
-                  <Form.Control type="text" placeholder="Enter full name " />
+                  <Form.Control type="text" placeholder="Enter full name" />
                   <Form.Text>Please enter your full name</Form.Text>
                 </Col>
               </Row>
@@ -51,7 +51,7 @@ export default function ThreeColumnsHorizontalLayoutPage() {
                 <Col lg={9}>
                   <InputGroup>
                     <InputGroup.Text>
-                      <i className="ti ti-lock f-18" />
+                      <i className="ph ph-lock-key" />
                     </InputGroup.Text>
                     <Form.Control type="text" placeholder="Enter Password" />
                   </InputGroup>
@@ -88,7 +88,7 @@ export default function ThreeColumnsHorizontalLayoutPage() {
                   <InputGroup>
                     <Form.Control type="email" placeholder="Fax Profile URL" />
                     <InputGroup.Text>
-                      <i className="ti ti-info-circle f-18" />
+                      <i className="ph ph-info" />
                     </InputGroup.Text>
                   </InputGroup>
                   <Form.Text>Please enter Profile URL</Form.Text>
@@ -121,7 +121,7 @@ export default function ThreeColumnsHorizontalLayoutPage() {
                   <Form.Label>Address:</Form.Label>
                 </Col>
                 <Col lg={9}>
-                  <Form.Control type="text" placeholder="Enter your address " />
+                  <Form.Control type="text" placeholder="Enter your address" />
                   <Form.Text>Please enter your address</Form.Text>
                 </Col>
               </Row>

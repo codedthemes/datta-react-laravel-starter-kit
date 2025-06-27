@@ -8,6 +8,7 @@ import MainCard from 'components/MainCard';
 // third-party
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
+// chart-options
 const chartOptions: ChartProps = {
   series: [27, 23, 20, 17],
   colors: ['#f4c22b', '#1de9b6', '#f44236', '#04a9f5'],
@@ -73,8 +74,8 @@ export default function ExpensesChart() {
       <Stack direction="horizontal" className="align-items-center justify-content-between pb-0">
         <h5 className="mb-0">Total Expenses</h5>
         <Dropdown>
-          <Dropdown.Toggle className="avatar avatar-s btn-link-secondary dropdown-toggle arrow-none show" as="span">
-            <i className="ti ti-dots-vertical f-18 cursor-pointer" />
+          <Dropdown.Toggle variant="link-secondary" className="avatar avatar-s arrow-none border-0">
+            <i className="ti ti-dots-vertical f-18" />
           </Dropdown.Toggle>
           <Dropdown.Menu align="end">
             <Dropdown.Item href="#/action-1">Today</Dropdown.Item>
@@ -89,7 +90,7 @@ export default function ExpensesChart() {
       {expenses.map(({ label, amount, color }) => (
         <Stack key={label} direction="horizontal" className="align-items-center justify-content-between mb-2 mt-2">
           <Stack direction="horizontal" gap={2} className="align-items-center">
-            <i className={`fas fa-circle text-${color} f-12`} />
+            <i className={`ti ti-circle-filled text-${color} f-12`} />
             <h6 className="mb-0">{label}</h6>
           </Stack>
           <p className="mb-0 text-muted">{amount}</p>
@@ -97,7 +98,7 @@ export default function ExpensesChart() {
       ))}
       <Stack direction="horizontal" className="align-items-center justify-content-between">
         <Stack direction="horizontal" gap={2} className="align-items-center">
-          <i className="fas fa-circle text-primary text-opacity-25 f-12" />
+          <i className="ti ti-circle-filled text-primary text-opacity-25 f-12" />
           <h6 className="mb-0">Draft</h6>
         </Stack>
         <p className="mb-0 text-muted">$7,694</p>

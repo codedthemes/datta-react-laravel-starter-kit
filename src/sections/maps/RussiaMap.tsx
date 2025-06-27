@@ -25,7 +25,7 @@ export default function RussiaMap() {
 
   return (
     <MainCard title="russia Map">
-      <div id="russia" className="h-400" />
+      <div id="russia" style={{ height: '400px' }} />
     </MainCard>
   );
 }

@@ -25,7 +25,7 @@ export default function UsLccEnMap() {
 
   return (
     <MainCard title="us-lcc-en Map">
-      <div id="us-lcc-en" className="h-400" />
+      <div id="us-lcc-en" style={{ height: '400px' }} />
     </MainCard>
   );
 }

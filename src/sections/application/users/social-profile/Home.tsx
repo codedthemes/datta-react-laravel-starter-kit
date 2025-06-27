@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Fragment } from 'react';
 
 // react-bootstrap
 import Button from 'react-bootstrap/Button';
@@ -15,9 +15,9 @@ import Stack from 'react-bootstrap/Stack';
 import MainCard from 'components/MainCard';
 
 // assets
-import avatar1 from 'assets/images/user/avatar-1.jpg';
-import avatar2 from 'assets/images/user/avatar-2.jpg';
-import avatar3 from 'assets/images/user/avatar-3.jpg';
+import avatar1 from 'assets/images/user/avatar-1.png';
+import avatar2 from 'assets/images/user/avatar-2.png';
+import avatar3 from 'assets/images/user/avatar-3.png';
 import background1 from 'assets/images/profile/bg-1.jpg';
 import background2 from 'assets/images/profile/bg-2.jpg';
 import background3 from 'assets/images/profile/bg-3.jpg';
@@ -40,6 +40,7 @@ interface Post {
   totalComments: number;
 }
 
+// post data
 const posts: Post[] = [
   {
     user: 'Josephin Doe',
@@ -93,15 +94,17 @@ const posts: Post[] = [
   }
 ];
 
+// =============================|| POST CARD ||============================== //
+
 const PostCard: React.FC<{ post: Post }> = ({ post }) => (
   <MainCard className="mb-3" bodyClassName="p-0">
     <Card.Header className="d-flex align-items-center">
       <Image src={post.userImage} roundedCircle width={40} height={40} className="me-2" />
       <div>
         <h5 className="mb-1">
-          <Link to="#" className="text-h-primary text-reset">
+          <a className="text-h-primary text-reset">
             <strong>{post.user}</strong>
-          </Link>
+          </a>
           posted on your timeline
         </h5>
         <p className="text-muted mb-0">{post.time}</p>
@@ -109,56 +112,54 @@ const PostCard: React.FC<{ post: Post }> = ({ post }) => (
     </Card.Header>
     <Image fluid src={post.postImage} />
     <Card.Body>
-      <Link to="#" className="text-h-primary">
+      <a className="text-h-primary">
         <h6>{post.title}</h6>
-      </Link>
+      </a>
       <p className="text-muted mb-0">{post.content}</p>
     </Card.Body>
     <Card.Body className="border-top border-bottom">
       <ListGroup horizontal className="m-0">
         <ListGroup.Item className="border-0 p-0">
-          <Link to="#!" className={`${post.liked === true ? 'text-danger' : 'text-muted'} text-decoration-none`}>
-            <i className="ti ti-heart me-2 " />
+          <a className={`${post.liked === true ? 'text-danger' : 'text-muted'} me-1`}>
+            <i className="ph ph-heart me-2 align-middle" />
             Like
-          </Link>
+          </a>
         </ListGroup.Item>
         <ListGroup.Item className="border-0 p-0 ms-2">
-          <Link to="#!" className="text-muted text-decoration-none">
-            <i className="ti ti-message-dots me-2 " />
+          <a className="text-muted me-1">
+            <i className="ph ph-chat me-2 align-middle" />
             Comment
-          </Link>
+          </a>
         </ListGroup.Item>
         <ListGroup.Item className="border-0 p-0 ms-2">
-          <Link to="#!" className="text-muted text-decoration-none">
-            <i className="ti ti-share me-2 " />
+          <a className="text-muted">
+            <i className="ph ph-share-network me-2 align-middle" />
             Share
-          </Link>
+          </a>
         </ListGroup.Item>
       </ListGroup>
     </Card.Body>
     <Card.Body>
       <Row className="justify-content-between mb-4">
         <Col xs="auto">
-          <Link to="#!" className="text-muted text-h-primary">
-            Comment ({post.totalComments})
-          </Link>
+          <a className="text-muted text-h-primary">Comment ({post.totalComments})</a>
         </Col>
         <Col xs="auto">
-          <Link to="#!" className="text-muted text-h-primary">
-            See All
-          </Link>
+          <a className="text-muted text-h-primary">See All</a>
         </Col>
       </Row>
       {post.comments.map((comment, idx) => (
-        <>
-          <Comment key={idx} comment={comment} />
+        <Fragment key={idx}>
+          <Comment comment={comment} />
           <hr />
-        </>
+        </Fragment>
       ))}
       <CommentInput />
     </Card.Body>
   </MainCard>
 );
+
+// =============================|| COMMENT INPUT ||============================== //
 
 const CommentInput: React.FC = () => (
   <Stack direction="horizontal">
@@ -166,11 +167,13 @@ const CommentInput: React.FC = () => (
     <InputGroup className="mb-0">
       <Form.Control placeholder="Write a comment here..." className="border-0 shadow-none" />
       <Button variant="primary">
-        <i className="ti ti-message-circle" />
+        <i className="ph ph-chat-circle" />
       </Button>
     </InputGroup>
   </Stack>
 );
+
+// =============================|| COMMENT ||============================== //
 
 const Comment: React.FC<{ comment: Comment }> = ({ comment }) => (
   <Stack direction="horizontal" className="mb-3">
@@ -179,12 +182,12 @@ const Comment: React.FC<{ comment: Comment }> = ({ comment }) => (
       <h6 className="mb-0 text-h-primary">{comment.user}</h6>
       <p className="mb-0">
         {comment.text}
-        <Link to="#" className="text-muted ms-2">
+        <a className="text-muted ms-2">
           <small>Like</small>
-        </Link>
-        <Link to="#" className="text-muted ms-2">
+        </a>
+        <a className="text-muted ms-2">
           <small>Comment</small>
-        </Link>
+        </a>
       </p>
     </div>
   </Stack>

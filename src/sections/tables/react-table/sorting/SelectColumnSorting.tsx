@@ -28,7 +28,7 @@ export default function SelectColumnSorting({ getState, getAllColumns, setSortin
   };
 
   return (
-    <Form className="w-200">
+    <Form>
       <Form.Select value={sortingState.length > 0 ? sortingState[0].id : []} onChange={(e) => handleSortChange(e.target.value)}>
         {getAllColumns().map(
           (column) =>
@@ -43,11 +43,7 @@ export default function SelectColumnSorting({ getState, getAllColumns, setSortin
                   )
                 }
               >
-                <Form.Check
-                  type="checkbox"
-                  checked={getState().sorting.length > 0 && column.id === getState().sorting[0].id}
-                  label={column.columnDef.header as string}
-                />
+                {column.columnDef.header as string}
               </option>
             )
         )}

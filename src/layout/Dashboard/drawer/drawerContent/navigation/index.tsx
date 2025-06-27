@@ -6,9 +6,9 @@ import ListGroup from 'react-bootstrap/ListGroup';
 // project-imports
 import NavItem from './NavItem';
 import NavGroup from './NavGroup';
+import { MenuOrientation } from 'config';
 import menuItems from 'menu-items';
 import useConfig from 'hooks/useConfig';
-import { HORIZONTAL_MAX_ITEM, MenuOrientation } from 'config';
 
 // types
 import { NavItemType } from 'types/menu';
@@ -26,9 +26,7 @@ export default function Navigation({ selectedItems, setSelectedItems, setSelectT
   const [selectedLevel, setSelectedLevel] = useState<number>(0);
   const { menuOrientation } = useConfig();
 
-  const isHorizontal = menuOrientation === MenuOrientation.HORIZONTAL;
-
-  const lastItem = isHorizontal ? HORIZONTAL_MAX_ITEM : null;
+  const lastItem = null;
   let lastItemIndex = menuItems.items.length - 1;
   let remItems: NavItemType[] = [];
   let lastItemId: string;
@@ -54,18 +52,9 @@ export default function Navigation({ selectedItems, setSelectedItems, setSelectT
         if (item.url && item.id !== lastItemId) {
           return (
             <>
-              {menuOrientation !== MenuOrientation.HORIZONTAL ? (
-                <ListGroup variant="flush">
-                  {!isHorizontal && index !== 0 && <hr className="mx-1 my-0" />}
-                  <ListGroup.Item>
-                    <NavItem item={item} level={1} isParents />
-                  </ListGroup.Item>
-                </ListGroup>
-              ) : (
-                <ListGroup.Item>
-                  <NavItem item={item} level={1} isParents />
-                </ListGroup.Item>
-              )}
+              <ListGroup.Item key={index}>
+                <NavItem item={item} level={1} isParents />
+              </ListGroup.Item>
             </>
           );
         }
@@ -96,12 +85,6 @@ export default function Navigation({ selectedItems, setSelectedItems, setSelectT
   });
 
   return (
-    <ul
-      className={`pc-navbar ${isHorizontal && window.innerWidth < 1023 ? 'pc-trigger d-flex' : 'd-block'}  ${
-        menuOrientation === MenuOrientation.TAB ? 'pc-tab-link nav flex-column' : ''
-      }`}
-    >
-      {navGroups}
-    </ul>
+    <ul className={`pc-navbar 'd-block'  ${menuOrientation === MenuOrientation.TAB ? 'pc-tab-link nav flex-column' : ''}`}>{navGroups}</ul>
   );
 }

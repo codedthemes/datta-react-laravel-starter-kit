@@ -2,47 +2,49 @@ import { lazy } from 'react';
 
 // project-imports
 import Loadable from 'components/Loadable';
-import GuestLayout from 'layout/Auth';
+import AuthLayout from 'layout/Auth';
 
-// render - Maintenance components page
-const ErrorPage = Loadable(lazy(() => import('views/pages/maintenance/Error')));
-const ComingSoonPage = Loadable(lazy(() => import('views/pages/maintenance/ComingSoon')));
-const OfflineUiPage = Loadable(lazy(() => import('views/pages/maintenance/OfflineUi')));
-const LandingPage = Loadable(lazy(() => import('views/Landing')));
+// render - maintenance pages
+const ErrorPage = Loadable(lazy(() => import('views/maintenance/Error')));
+const ComingSoonPage = Loadable(lazy(() => import('views/maintenance/ComingSoon')));
+const OfflineUiPage = Loadable(lazy(() => import('views/maintenance/OfflineUi')));
 
-// render - Authentication page
+// render - login pages
 const LoginV1Page = Loadable(lazy(() => import('views/auth/login/LoginV1')));
 const LoginV2Page = Loadable(lazy(() => import('views/auth/login/LoginV2')));
 const LoginV3Page = Loadable(lazy(() => import('views/auth/login/LoginV3')));
 const LoginV4Page = Loadable(lazy(() => import('views/auth/login/LoginV4')));
 const LoginV5Page = Loadable(lazy(() => import('views/auth/login/LoginV5')));
 
+// render - register pages
 const RegisterV1Page = Loadable(lazy(() => import('views/auth/register/RegisterV1')));
 const RegisterV2Page = Loadable(lazy(() => import('views/auth/register/RegisterV2')));
 const RegisterV3Page = Loadable(lazy(() => import('views/auth/register/RegisterV3')));
 const RegisterV4Page = Loadable(lazy(() => import('views/auth/register/RegisterV4')));
 const RegisterV5Page = Loadable(lazy(() => import('views/auth/register/RegisterV5')));
 
+// render - reset password pages
 const ResetPasswordV1Page = Loadable(lazy(() => import('views/auth/reset-password/ResetPasswordV1')));
 const ResetPasswordV2Page = Loadable(lazy(() => import('views/auth/reset-password/ResetPasswordV2')));
 const ResetPasswordV3Page = Loadable(lazy(() => import('views/auth/reset-password/ResetPasswordV3')));
 const ResetPasswordV4Page = Loadable(lazy(() => import('views/auth/reset-password/ResetPasswordV4')));
 const ResetPasswordV5Page = Loadable(lazy(() => import('views/auth/reset-password/ResetPasswordV5')));
 
+// render - change password pages
 const ChangePasswordV1Page = Loadable(lazy(() => import('views/auth/change-password/ChangePasswordV1')));
 const ChangePasswordV2Page = Loadable(lazy(() => import('views/auth/change-password/ChangePasswordV2')));
 const ChangePasswordV3Page = Loadable(lazy(() => import('views/auth/change-password/ChangePasswordV3')));
 const ChangePasswordV4Page = Loadable(lazy(() => import('views/auth/change-password/ChangePasswordV4')));
 const ChangePasswordV5Page = Loadable(lazy(() => import('views/auth/change-password/ChangePasswordV5')));
 
-// ==============================|| ROUTES - PAGES ROUTES ||============================== //
+// ==============================|| AUTH PAGES ROUTING ||============================== //
 
 const PagesRoutes = {
   path: '/',
   children: [
     {
       path: '/',
-      element: <GuestLayout />,
+      element: <AuthLayout />,
       children: [
         {
           path: 'pages',
@@ -66,10 +68,7 @@ const PagesRoutes = {
             }
           ]
         },
-        {
-          path: '/landing',
-          element: <LandingPage />
-        },
+
         {
           path: 'auth',
           children: [

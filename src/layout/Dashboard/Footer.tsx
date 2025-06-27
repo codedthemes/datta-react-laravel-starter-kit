@@ -1,45 +1,47 @@
-import { Link } from 'react-router-dom';
-
 // react-bootstrap
-import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import Stack from 'react-bootstrap/Stack';
 
-// ==============================|| DASHBOARD - FOOTER ||============================== //
+// project-imports
+import useConfig from 'hooks/useConfig';
+import branding from 'branding.json';
 
+// ==============================|| MAIN LAYOUT - FOOTER ||============================== //
 export default function Footer() {
+  const { container } = useConfig();
+
   return (
     <footer className="pc-footer">
-      <Container fluid className="footer-wrapper">
-        <Row className="justify-content-md-between">
+      <div className={`footer-wrapper ${container === false ? 'container-fluid' : 'container'}`}>
+        <Row className="justify-content-center justify-content-md-between">
           {/* Footer Text */}
-          <Col xs={12} md="auto" className="my-1 text-center text-md-start">
+          <Col xs="auto" className="my-1">
             <p className="m-0">
-              Datta able ♥ crafted by Team{' '}
-              <Link to="https://codedthemes.com/" target="_blank" rel="noopener noreferrer">
+              {branding.brandName} ♥ Crafted By Team{' '}
+              <a href="https://codedthemes.com/" target="_blank" rel="noopener noreferrer" className="text-primary">
                 CodedThemes
-              </Link>
+              </a>
             </p>
           </Col>
 
           {/* Footer Links */}
-          <Col xs={12} md="auto" className="my-1 col-auto text-center text-md-start">
-            <Stack direction="horizontal" gap={3}>
-              <Nav.Link className="p-0" as={Link} to="/">
+          <Col xs="auto" className="my-1">
+            <Stack direction="horizontal" gap={3} className="justify-content-center">
+              <Nav.Link className="p-0" as="a" href="/">
                 Home
               </Nav.Link>
-              <Nav.Link className="p-0" as={Link} to="https://codedthemes.gitbook.io/datta" target="_blank" rel="noopener noreferrer">
+              <Nav.Link className="p-0" as="a" href="https://codedthemes.gitbook.io/datta" target="_blank" rel="noopener noreferrer">
                 Documentation
               </Nav.Link>
-              <Nav.Link className="p-0" as={Link} to="https://codedthemes.support-hub.io/" target="_blank" rel="noopener noreferrer">
+              <Nav.Link className="p-0" as="a" href="https://codedthemes.support-hub.io/" target="_blank" rel="noopener noreferrer">
                 Support
               </Nav.Link>
             </Stack>
           </Col>
         </Row>
-      </Container>
+      </div>
     </footer>
   );
 }

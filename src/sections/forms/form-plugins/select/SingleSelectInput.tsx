@@ -127,7 +127,7 @@ export default function SingleSelectInput() {
   return (
     <MainCard title="Single select input">
       <Form>
-        <Form.Group className="mb-3 " as={Row}>
+        <Form.Group className="mb-3" as={Row}>
           <Form.Label column lg={4} sm={12} className="text-lg-end">
             Default
           </Form.Label>
@@ -168,7 +168,7 @@ export default function SingleSelectInput() {
           </Col>
         </Form.Group>
 
-        <Form.Group className="mb-3 " as={Row}>
+        <Form.Group className="mb-3" as={Row}>
           <Form.Label column lg={4} sm={12} className="text-lg-end">
             Option groups
           </Form.Label>
@@ -211,7 +211,7 @@ export default function SingleSelectInput() {
           </Col>
         </Form.Group>
 
-        <Form.Group className="mb-3 " as={Row}>
+        <Form.Group className="mb-3" as={Row}>
           <Form.Label column lg={4} sm={12} className="text-lg-end">
             Right-to-left
           </Form.Label>
@@ -225,12 +225,12 @@ export default function SingleSelectInput() {
           </Col>
         </Form.Group>
 
-        <Form.Group className="mb-3 " as={Row}>
+        <Form.Group className="mb-3" as={Row}>
           <Form.Label column lg={4} sm={12} className="text-lg-end">
             Options added via config with no search
           </Form.Label>
           <Col lg={6} md={11} sm={12}>
-            <Form.Control as="select" id="choices-single-no-search">
+            <Form.Control as="select" id="choices-single-no-search" defaultValue="six">
               <option value="0">Zero</option>
               <option value="One">Label One</option>
               <option value="Two" disabled>
@@ -241,14 +241,12 @@ export default function SingleSelectInput() {
                 Label Four
               </option>
               <option value="Five">Label Five</option>
-              <option value="Six" selected>
-                Label Six
-              </option>
+              <option value="Six">Label Six</option>
             </Form.Control>
           </Col>
         </Form.Group>
 
-        <Form.Group className="mb-3 " as={Row}>
+        <Form.Group className="mb-3" as={Row}>
           <Form.Label column lg={4} sm={12} className="text-lg-end">
             Option and option groups added via config
           </Form.Label>
@@ -272,7 +270,7 @@ export default function SingleSelectInput() {
           </Col>
         </Form.Group>
 
-        <Form.Group className="mb-3 " as={Row}>
+        <Form.Group className="mb-3" as={Row}>
           <Form.Label column lg={4} sm={12} className="text-lg-end">
             Option selected via config with custom properties
           </Form.Label>
@@ -282,11 +280,11 @@ export default function SingleSelectInput() {
               <option>Label Three</option>
               <option disabled>Label Two</option>
             </Form.Control>
-            <small>Try searching for 'fantastic', "Label 3" should display</small>
+            <small>Try searching for 'fantastic',"Label 3" should display</small>
           </Col>
         </Form.Group>
 
-        <Form.Group className="mb-3 " as={Row}>
+        <Form.Group className="mb-3" as={Row}>
           <Form.Label column lg={4} sm={12} className="text-lg-end">
             Option searchable by custom properties via <code>data-custom-properties</code> attribute
           </Form.Label>
@@ -298,11 +296,11 @@ export default function SingleSelectInput() {
                 Label Two
               </option>
             </Form.Control>
-            <small>Try searching for 'fantastic', "Label 3" should display</small>
+            <small>Try searching for 'fantastic',"Label 3" should display</small>
           </Col>
         </Form.Group>
 
-        <Form.Group className="mb-3 " as={Row}>
+        <Form.Group className="mb-3" as={Row}>
           <Form.Label column lg={4} sm={12} className="text-lg-end">
             Options without sorting
           </Form.Label>
@@ -332,7 +330,7 @@ export default function SingleSelectInput() {
           </Col>
         </Form.Group>
 
-        <Form.Group className="mb-3 " as={Row}>
+        <Form.Group className="mb-3" as={Row}>
           <Form.Label column lg={4} sm={12} className="text-lg-end">
             Custom templates
           </Form.Label>
@@ -346,7 +344,7 @@ export default function SingleSelectInput() {
           </Col>
         </Form.Group>
 
-        <Form.Group className="mb-3 " as={Row}>
+        <Form.Group className="mb-3" as={Row}>
           <Form.Label column lg={4} sm={12} className="text-lg-end">
             Cities
           </Form.Label>
@@ -366,7 +364,7 @@ export default function SingleSelectInput() {
           </Col>
         </Form.Group>
 
-        <Form.Group className="mb-3 " as={Row}>
+        <Form.Group className="mb-3" as={Row}>
           <Form.Label column lg={4} sm={12} className="text-lg-end">
             Tube stations
           </Form.Label>

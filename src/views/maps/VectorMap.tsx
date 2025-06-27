@@ -1,9 +1,9 @@
 // react-bootstrap
-import ComponentHeader from 'components/cards/ComponentHeader';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 // project-imports
+import ReferenceHeader from 'components/ReferenceHeader';
 import BasicMap from 'sections/maps/BasicMap';
 import CanadaMap from 'sections/maps/CanadaMap';
 import IraqMap from 'sections/maps/IraqMap';
@@ -21,7 +21,7 @@ import WorldMap from 'sections/maps/WorldMap';
 export default function VectorMapPage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="Jsvectormap is a lightweight JavaScript library for creating interactive maps and pretty data visualization"
         link="https://github.com/themustafaomar/jsvectormap"
       />

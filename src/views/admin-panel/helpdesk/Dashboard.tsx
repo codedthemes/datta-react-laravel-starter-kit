@@ -1,5 +1,5 @@
-// react-bootstrap
-import Dashboard from 'sections/admin-panel/helpdesk/dashboard/Dashboard';
+// project-imports
+import Dashboard from 'sections/admin-panel/helpdesk/Dashboard';
 
 // =============================|| HELP DESK - DASHBOARD ||============================== //
 

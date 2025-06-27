@@ -1,5 +1,4 @@
 import { ChangeEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
 
 // react-bootstrap
 import Alert from 'react-bootstrap/Alert';
@@ -50,9 +49,9 @@ export default function HTMLInputTypes() {
           <i className="ti ti-info-circle h2 f-w-400 mb-0" />
           <div className="flex-grow-1 ms-3">
             Here are the different input types you can use in HTML. Check more at{' '}
-            <Link to="https://www.w3schools.com/html/html_form_input_types.asp" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.w3schools.com/html/html_form_input_types.asp" target="_blank" rel="noopener noreferrer">
               W3Schools
-            </Link>
+            </a>
           </div>
         </Stack>
       </Alert>
@@ -140,7 +139,7 @@ export default function HTMLInputTypes() {
 
       <Stack direction="horizontal" gap={2} className="pt-4">
         <Button>Submit</Button>
-        <Button variant="secondary">Cancel</Button>
+        <Button variant="danger">Cancel</Button>
       </Stack>
     </MainCard>
   );

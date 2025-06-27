@@ -30,7 +30,7 @@ export default function ToggleBetweenModals() {
   };
 
   return (
-    <MainCard title="Toggle between modals">
+    <MainCard title="Toggle Between Modals">
       <Button onClick={handleShowFirstModal}>Open first modal</Button>
       <Modal centered show={showFirstModal} onHide={handleClose}>
         <Modal.Header closeButton>

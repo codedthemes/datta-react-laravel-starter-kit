@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 
 // project-imports
 import ControlDivider from 'sections/forms/form-layouts/layouts/ControlDivider';
-import HorizontalFormLayout from 'sections/forms/form-layouts/layouts/HorizontalFormLayout';
+// import HorizontalFormLayout from 'sections/forms/form-layouts/layouts/HorizontalFormLayout';
 import InputLabelAlignment from 'sections/forms/form-layouts/layouts/InputLabelAlignment';
 import SimpleFormLayout from 'sections/forms/form-layouts/layouts/SimpleFormLayout';
 
@@ -19,7 +19,7 @@ export default function SimpleLayoutPage() {
       </Col>
 
       <Col lg={6}>
-        <HorizontalFormLayout />
+        {/* <HorizontalFormLayout /> */}
         <InputLabelAlignment />
       </Col>
     </Row>

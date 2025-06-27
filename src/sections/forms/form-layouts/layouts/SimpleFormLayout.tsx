@@ -12,12 +12,12 @@ export default function SimpleFormLayoutPage() {
       <Form>
         <Form.Group className="mb-3">
           <Form.Label>Name:</Form.Label>
-          <Form.Control type="text" placeholder="Enter full name " />
+          <Form.Control type="text" placeholder="Enter full name" />
           <Form.Text>Please enter your full name</Form.Text>
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Email:</Form.Label>
-          <Form.Control type="email" placeholder="Enter email " />
+          <Form.Control type="email" placeholder="Enter email" />
           <Form.Text>Please enter your Email</Form.Text>
         </Form.Group>
 

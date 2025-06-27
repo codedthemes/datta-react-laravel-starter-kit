@@ -1,5 +1,5 @@
 // project-imports
-import ComponentHeader from 'components/cards/ComponentHeader';
+import ReferenceHeader from 'components/ReferenceHeader';
 import Classic from 'sections/forms/text-editor/class-editor/Classic';
 
 // =============================|| CK EDITOR - CLASSIC ||============================== //
@@ -7,7 +7,7 @@ import Classic from 'sections/forms/text-editor/class-editor/Classic';
 export default function ClassicPage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="CKEditor 5 allows users to create any type of content in your application, be it documents, reports, emails, notes or chat messages.
 
 "

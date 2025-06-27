@@ -39,11 +39,11 @@ export default function AreaChart() {
   const series = useMemo(
     () => [
       {
-        name: 'series1',
+        name: 'Series1',
         data: [31, 40, 28, 51, 42, 109, 100]
       },
       {
-        name: 'series2',
+        name: 'Series2',
         data: [11, 32, 45, 32, 34, 52, 41]
       }
     ],

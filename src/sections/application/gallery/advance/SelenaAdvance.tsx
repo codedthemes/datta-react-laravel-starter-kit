@@ -22,7 +22,7 @@ export default function SelenaAdvance() {
               Happy <span>Selena</span>
             </h2>
             <p>Selena is a tiny-winged bird.</p>
-            <a href="#!">View more</a>
+            <a>View more</a>
           </FigureCaption>
         </Figure>
         <Figure className="effect-selena">
@@ -32,8 +32,8 @@ export default function SelenaAdvance() {
               Happy <span>Selena</span>
             </h2>
             <p>Selena is a tiny-winged bird.</p>
-            <a href="#!">View more</a>
-            <a href="#!">View more</a>
+            <a>View more</a>
+            <a>View more</a>
           </FigureCaption>
         </Figure>
       </div>

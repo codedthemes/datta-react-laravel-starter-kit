@@ -8,46 +8,48 @@ import Stack from 'react-bootstrap/Stack';
 import MainCard from 'components/MainCard';
 
 // assets
-import Avatar from 'assets/images/user/avatar-1.jpg';
-import Avatar1 from 'assets/images/user/avatar-2.jpg';
-import Avatar2 from 'assets/images/user/avatar-3.jpg';
-import Avatar3 from 'assets/images/user/avatar-4.jpg';
+import Avatar from 'assets/images/user/avatar-1.png';
+import Avatar1 from 'assets/images/user/avatar-2.png';
+import Avatar2 from 'assets/images/user/avatar-3.png';
+import Avatar3 from 'assets/images/user/avatar-4.png';
+
+// member data
+const members = [
+  {
+    avatar: Avatar,
+    name: 'Brieley join casual membership..',
+    time: 'Today | 9:00 AM'
+  },
+  {
+    avatar: Avatar1,
+    name: 'Ashton end membership planing',
+    time: 'Yesterday | 6:30 PM'
+  },
+  {
+    avatar: Avatar2,
+    name: 'Airi canceled in 2 months membership',
+    time: '05 Feb | 3:45 PM'
+  },
+  {
+    avatar: Avatar3,
+    name: 'Colleen join Addicted membership',
+    time: '05 Feb | 4:00 PM'
+  },
+  {
+    avatar: Avatar,
+    name: 'Airi canceled in 2 months membership',
+    time: '05 Feb | 3:45 PM'
+  },
+  {
+    avatar: Avatar3,
+    name: 'Colleen join Addicted membership',
+    time: '05 Feb | 4:00 PM'
+  }
+];
 
 // =============================|| DASHBOARD - NOTIFICATIONS ||============================== //
 
 export default function Notifications() {
-  const members = [
-    {
-      avatar: Avatar,
-      name: 'Brieley join casual membership..',
-      time: 'Today | 9:00 AM'
-    },
-    {
-      avatar: Avatar1,
-      name: 'Ashton end membership planing',
-      time: 'Yesterday | 6:30 PM'
-    },
-    {
-      avatar: Avatar2,
-      name: 'Airi canceled in 2 months membership',
-      time: '05 Feb | 3:45 PM'
-    },
-    {
-      avatar: Avatar3,
-      name: 'Colleen join Addicted membership',
-      time: '05 Feb | 4:00 PM'
-    },
-    {
-      avatar: Avatar,
-      name: 'Airi canceled in 2 months membership',
-      time: '05 Feb | 3:45 PM'
-    },
-    {
-      avatar: Avatar3,
-      name: 'Colleen join Addicted membership',
-      time: '05 Feb | 4:00 PM'
-    }
-  ];
   return (
     <MainCard>
       <Stack direction="horizontal" className="align-items-center justify-content-between mb-3">

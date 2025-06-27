@@ -15,14 +15,14 @@ import ImageOverlays from 'sections/components/basic/cards/ImageOverlays';
 import LeftAlign from 'sections/components/basic/cards/LeftAlign';
 import RightAlign from 'sections/components/basic/cards/RightAlign';
 import TitleTextLink from 'sections/components/basic/cards/TitleTextLink';
-import ComponentHeader from 'components/cards/ComponentHeader';
+import ReferenceHeader from 'components/ReferenceHeader';
 
 // ==============================|| BASIC - CARDS ||============================== //
 
 export default function CardsPage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="React-Bootstrap’s cards provide a flexible and extensible content container with multiple variants and options."
         link="https://react-bootstrap.netlify.app/docs/components/cards"
       />

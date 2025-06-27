@@ -8,14 +8,14 @@ import Row from 'react-bootstrap/Row';
 import MainCard from 'components/MainCard';
 
 // assets
-import avatar2 from 'assets/images/user/avatar-2.jpg';
+import avatar2 from 'assets/images/user/avatar-2.png';
 
-interface Stat {
+interface settingDataProp {
   value: number;
   label: string;
 }
 
-const stats: Stat[] = [
+const settingData: settingDataProp[] = [
   { value: 69, label: 'Shots' },
   { value: 2749, label: 'Followers' },
   { value: 678, label: 'Following' },
@@ -50,7 +50,7 @@ export default function UserSettings() {
         footer={
           <Row className="align-items-center">
             <Col>
-              <a href="#!">
+              <a>
                 <i className="ti ti-mail" /> Message{' '}
               </a>
             </Col>
@@ -63,10 +63,10 @@ export default function UserSettings() {
         }
       >
         <Row className="text-center">
-          {stats.map((stat, index) => (
+          {settingData.map((value, index) => (
             <Col key={index}>
-              <h6 className="mb-1">{stat.value}</h6>
-              <p className="mb-0">{stat.label}</p>
+              <h6 className="mb-1">{value.value}</h6>
+              <p className="mb-0">{value.label}</p>
             </Col>
           ))}
         </Row>

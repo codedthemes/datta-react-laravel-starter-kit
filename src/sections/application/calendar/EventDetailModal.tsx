@@ -6,7 +6,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Modal from 'react-bootstrap/Modal';
 import Stack from 'react-bootstrap/Stack';
 
-// project-imports
+// third-party
 import Swal from 'sweetalert2';
 
 interface EventDetailProps {
@@ -24,6 +24,7 @@ interface EventProps {
   handleEventModal: () => void;
   setModalOpen: (open: boolean) => void;
 }
+
 function handleConfirmDialog(id: string | undefined) {
   const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
@@ -117,7 +118,6 @@ export default function EventDetailModal({ isModalOpen, handleModal, selectedEve
         <ListGroup horizontal className="me-auto mb-0">
           <ListGroup.Item className="border-0 p-0">
             <a
-              href="#"
               id="pc_event_remove"
               className="avatar avatar-s btn-link-danger btn-pc-default w-sm-auto"
               data-bs-toggle="tooltip"
@@ -133,7 +133,6 @@ export default function EventDetailModal({ isModalOpen, handleModal, selectedEve
           </ListGroup.Item>
           <ListGroup.Item className="border-0 p-0">
             <a
-              href="#"
               id="pc_event_edit"
               className="avatar avatar-s btn-link-success btn-pc-default"
               onClick={handleEventModal}

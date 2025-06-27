@@ -39,7 +39,7 @@ export default function InputGroupSizing() {
 
       <Stack direction="horizontal" gap={2} className="pt-4">
         <Button>Submit</Button>
-        <Button variant="secondary">Cancel</Button>
+        <Button variant="danger">Cancel</Button>
       </Stack>
     </MainCard>
   );

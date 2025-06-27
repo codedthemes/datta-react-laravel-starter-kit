@@ -67,10 +67,14 @@ export default function CardStyles() {
         </Col>
         <Col sm={4}>
           <Card bg="light" text="dark">
-            <Card.Header>Header</Card.Header>
+            <Card.Header className="text-muted">Header</Card.Header>
             <Card.Body>
-              <Card.Title as="h5">light card title</Card.Title>
-              <Card.Text>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+              <Card.Title as="h5" className="text-muted ">
+                light card title
+              </Card.Title>
+              <Card.Text className="text-muted">
+                Some quick example text to build on the card title and make up the bulk of the card's content.
+              </Card.Text>
             </Card.Body>
           </Card>
         </Col>

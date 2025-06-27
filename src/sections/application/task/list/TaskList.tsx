@@ -11,20 +11,16 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import MainCard from 'components/MainCard';
 
 // assets
-import DesignServicesTwoToneIcon from '@mui/icons-material/DesignServicesTwoTone';
-import LibraryBooksTwoToneIcon from '@mui/icons-material/LibraryBooksTwoTone';
-import MoreVertTwoToneIcon from '@mui/icons-material/MoreVertTwoTone';
-import Rotate90DegreesCcwTwoToneIcon from '@mui/icons-material/Rotate90DegreesCcwTwoTone';
-import Img1 from 'assets/images/user/avatar-1.jpg';
-import Img2 from 'assets/images/user/avatar-2.jpg';
-import Img3 from 'assets/images/user/avatar-3.jpg';
-import Img4 from 'assets/images/user/avatar-4.jpg';
+import Img1 from 'assets/images/user/avatar-1.png';
+import Img2 from 'assets/images/user/avatar-2.png';
+import Img3 from 'assets/images/user/avatar-3.png';
+import Img4 from 'assets/images/user/avatar-4.png';
 
+// task data
 const tasks = [
   {
     id: 12,
     title: 'Add Proper Cursor In Sortable Page',
-    lastCommit: '',
     status: 'Status',
     name: 'Joseph',
     assignedUsers: [
@@ -38,7 +34,6 @@ const tasks = [
   {
     id: 56,
     title: 'Edit the draft for the icons',
-    lastCommit: '',
     status: 'Status',
     name: 'William',
     assignedUsers: [
@@ -52,7 +47,6 @@ const tasks = [
   {
     id: 78,
     title: 'Create UI design model',
-    lastCommit: '',
     status: 'Status',
     name: 'Joseph',
     assignedUsers: [
@@ -62,9 +56,8 @@ const tasks = [
     ]
   },
   {
-    id: 78,
+    id: 89,
     title: 'Create UI design model',
-    lastCommit: '',
     status: 'Status',
     name: 'William',
     assignedUsers: [
@@ -75,9 +68,8 @@ const tasks = [
     ]
   },
   {
-    id: 78,
+    id: 14,
     title: 'Create UI design model',
-    lastCommit: '',
     status: 'Status',
     name: 'Joseph',
     assignedUsers: [{ img: Img1, name: 'Joseph' }]
@@ -88,8 +80,8 @@ const tasks = [
 
 export default function TaskList() {
   return (
-    <MainCard title="Task List" bodyClassName="p-0">
-      <Table responsive>
+    <MainCard title="Task List" className="table-card">
+      <Table responsive className="mb-0">
         <thead>
           <tr>
             <th className="ps-4">#</th>
@@ -103,7 +95,7 @@ export default function TaskList() {
         <tbody>
           {tasks.map((task) => (
             <tr key={task.id}>
-              <td>#{task.id}</td>
+              <td className="ps-4">#{task.id}</td>
               <td>{task.title}</td>
               <td>
                 <Form.Control type="date" className="form-control-sm" />
@@ -116,35 +108,40 @@ export default function TaskList() {
                 </DropdownButton>
               </td>
               <td>
-                {task.assignedUsers.map((item, index) => (
-                  <OverlayTrigger key={index} placement="top" overlay={<Tooltip>{item.name}</Tooltip>}>
-                    <Image fluid className="img-radius wid-45 img-thumbnail me-n3" src={item.img} />
-                  </OverlayTrigger>
-                ))}
-                {task.extraUsers && (
-                  <div className="img-radius wid-40 hei-40 me-n3 d-inline-flex align-items-center justify-content-center card align-middle f-16 mb-0 bg-info text-white">
-                    {task.extraUsers}
+                <div style={{ width: '210px' }}>
+                  {task.assignedUsers.map((item, index) => (
+                    <OverlayTrigger key={index} placement="top" overlay={<Tooltip>{item.name}</Tooltip>}>
+                      <Image fluid className="img-radius wid-45 img-thumbnail me-n3" src={item.img} />
+                    </OverlayTrigger>
+                  ))}
+                  {task.extraUsers && (
+                    <div className="img-radius wid-40 hei-40 me-n3 d-inline-flex align-items-center justify-content-center card align-middle f-16 mb-0 bg-info text-white">
+                      {task.extraUsers}
+                    </div>
+                  )}
+                  <div className="img-radius wid-40 hei-40 me-n3 d-inline-flex align-items-center justify-content-center card align-middle f-16 mb-0 bg-success text-white">
+                    <i className="ph ph-plus" />
                   </div>
-                )}
-                <div className="img-radius wid-40 hei-40 me-n3 d-inline-flex align-items-center justify-content-center card align-middle f-16 mb-0 bg-success text-white">
-                  <i className="ti ti-plus" />
                 </div>
               </td>
-              <td className="text-end">
+              <td className="text-end pe-4">
                 <Dropdown align="end">
-                  <Dropdown.Toggle variant="link" className="p-0 text-decoration-none arrow-none">
-                    <MoreVertTwoToneIcon className="text-secondary" />
+                  <Dropdown.Toggle as="a" className="p-0 text-decoration-none arrow-none ">
+                    <i className="ph ph-dots-three-outline-vertical fs-6" />
                   </Dropdown.Toggle>
                   <Dropdown.Menu className="arrow-none">
                     <Dropdown.Item href="#">
-                      <LibraryBooksTwoToneIcon className="icon-color" /> Attach File
+                      <i className="ph ph-file-plus" />
+                      Attach File
                     </Dropdown.Item>
                     <Dropdown.Item href="#">
-                      <DesignServicesTwoToneIcon className="icon-color" /> Edit Task
+                      <i className="ph ph-pencil-simple-line" />
+                      Edit Taskasdad
                     </Dropdown.Item>
-                    <Dropdown.Divider />
+                    <hr className="m-0 my-2" />
                     <Dropdown.Item href="#">
-                      <Rotate90DegreesCcwTwoToneIcon className="icon-color" /> Reassign Task
+                      <i className="ph ph-arrow-u-up-left" />
+                      Reassign Task
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>

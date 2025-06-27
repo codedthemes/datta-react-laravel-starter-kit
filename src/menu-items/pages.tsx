@@ -12,7 +12,7 @@ const pages: NavItemType = {
       id: 'authentication',
       title: 'authentication',
       type: 'collapse',
-      icon: <i className="ti ti-lock" />,
+      icon: <i className="ph ph-lock-key" />,
       children: [
         {
           id: 'login',
@@ -185,10 +185,10 @@ const pages: NavItemType = {
       ]
     },
     {
-      id: '/maintenance',
+      id: 'maintenance',
       title: 'maintenance',
       type: 'collapse',
-      icon: <i className="ti ti-adjustments-alt" />,
+      icon: <i className="ph ph-wrench" />,
       children: [
         {
           id: 'error',
@@ -218,8 +218,9 @@ const pages: NavItemType = {
       id: 'landing',
       title: 'landing',
       type: 'item',
-      icon: <i className="ti ti-location" />,
-      url: '/landing'
+      icon: <i className="ph ph-target" />,
+      url: '/landing',
+      target: true
     }
   ]
 };

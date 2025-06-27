@@ -1,12 +1,8 @@
-import { useEffect, useRef } from 'react';
-
 // react-bootstrap
-import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
-import Row from 'react-bootstrap/Row';
 
 // third-party
-import Isotope from 'isotope-layout';
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 
 // project-imports
 import MainCard from 'components/MainCard';
@@ -26,32 +22,17 @@ const images = [masonryImage1, masonryImage2, masonryImage8, masonryImage3, maso
 // ==============================|| MASONRY LAYOUTS - MASONRY ||============================== //
 
 export default function MasonryLayout() {
-  const gridRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    if (gridRef.current) {
-      const isotopeInstance = new Isotope(gridRef.current, {
-        itemSelector: '.masonry-item',
-        masonry: {
-          columnWidth: 1
-        }
-      });
-
-      return () => {
-        isotopeInstance.destroy();
-      };
-    }
-  }, []); // Runs only once after mount
-
   return (
     <MainCard title="Masonry Layouts">
-      <Row className="grid-masonry" ref={gridRef}>
-        {images.map((img, index) => (
-          <Col key={index} xl={3} md={4} sm={6} className="masonry-item">
-            <Image fluid className="img-thumbnail mb-3" src={img} alt="Masonry gallery image" />
-          </Col>
-        ))}
-      </Row>
+      {/* @ts-ignore https://github.com/cedricdelpoux/react-responsive-masonry/issues/127 */}
+      <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
+        {/* @ts-ignore https://github.com/cedricdelpoux/react-responsive-masonry/issues/127 */}
+        <Masonry>
+          {images.map((image, i) => (
+            <Image key={i} src={image} alt="masonry" className="w-100 d-block" />
+          ))}
+        </Masonry>
+      </ResponsiveMasonry>
     </MainCard>
   );
 }

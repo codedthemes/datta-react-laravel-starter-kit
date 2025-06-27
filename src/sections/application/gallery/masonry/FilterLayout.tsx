@@ -38,7 +38,7 @@ const filters = [
   { label: 'Product Designer', filter: '.product' }
 ];
 
-//images
+// images
 const images = [
   { src: masonryImage1, category: 'web' },
   { src: masonryImage2, category: 'graphic' },
@@ -81,7 +81,7 @@ export default function FilterLayout() {
   return (
     <MainCard title="Filter Magical Layouts" content={false}>
       <Card.Body className="border-bottom">
-        <Stack direction="horizontal" id="filters" gap={1} className="btn-filter">
+        <Stack direction="horizontal" id="filters" gap={1} className="btn-filter flex-wrap">
           {filters.map(({ label, filter }, index) => (
             <Button
               key={index}

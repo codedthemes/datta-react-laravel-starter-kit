@@ -8,14 +8,14 @@ import ButtonBadge from 'sections/components/basic/badges/ButtonBadge';
 import ContextualBadge from 'sections/components/basic/badges/ContextualBadge';
 import LightBadge from 'sections/components/basic/badges/LightBadge';
 import PillBadge from 'sections/components/basic/badges/PillBadge';
-import ComponentHeader from 'components/cards/ComponentHeader';
+import ReferenceHeader from 'components/ReferenceHeader';
 
 // ==============================|| BASIC - BADGES ||============================== //
 
 export default function BadgesPage() {
   return (
     <>
-      <ComponentHeader
+      <ReferenceHeader
         caption="Documentation and examples for badges, our small count and labeling component."
         link="https://react-bootstrap.netlify.app/docs/components/badge/"
       />

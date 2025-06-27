@@ -25,7 +25,7 @@ export default function UsAeaEnMap() {
 
   return (
     <MainCard title="us-aea-en Map">
-      <div id="us-aea-en" className="h-400" />
+      <div id="us-aea-en" style={{ height: '400px' }} />
     </MainCard>
   );
 }

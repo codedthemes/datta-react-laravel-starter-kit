@@ -42,9 +42,9 @@ export default function SizeSpinner() {
                 </Button>
               </Col>
               <Col xs={12}>
-                <Button className="lh-1 " disabled>
+                <Button className="lh-1" disabled>
                   <Spinner as="span" animation="border" size="sm" role="status" />
-                  <span className="visually-hidden "> Loading...</span>
+                  <span className="visually-hidden"> Loading...</span>
                   Loading...
                 </Button>
               </Col>
@@ -59,7 +59,7 @@ export default function SizeSpinner() {
                 </Button>
               </Col>
               <Col xs={12}>
-                <Button className="lh-1 " disabled>
+                <Button className="lh-1" disabled>
                   <Spinner as="span" animation="grow" size="sm" role="status" />
                   <span className="visually-hidden">Loading...</span>
                   Loading...

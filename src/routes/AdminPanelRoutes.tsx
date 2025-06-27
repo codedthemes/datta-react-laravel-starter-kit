@@ -4,21 +4,7 @@ import { lazy } from 'react';
 import DashboardLayout from 'layout/Dashboard';
 import Loadable from 'components/Loadable';
 
-// render - admin panel page
-const InvoiceDashboard = Loadable(lazy(() => import('views/admin-panel/invoice/Dashboard')));
-const InvoiceDetails = Loadable(lazy(() => import('views/admin-panel/invoice/Details')));
-const InvoiceCreate = Loadable(lazy(() => import('views/admin-panel/invoice/Create')));
-const InvoiceList = Loadable(lazy(() => import('views/admin-panel/invoice/List')));
-const InvoiceEdit = Loadable(lazy(() => import('views/admin-panel/invoice/Edit')));
-const CreateMain = Loadable(lazy(() => import('views/admin-panel/helpdesk/tickets/CreateMain')));
-const CustomersMain = Loadable(lazy(() => import('views/admin-panel/helpdesk/Customers')));
-const DashboardMain = Loadable(lazy(() => import('views/admin-panel/helpdesk/Dashboard')));
-const DetailsMain = Loadable(lazy(() => import('views/admin-panel/helpdesk/tickets/DetailsMain')));
-const ListMain = Loadable(lazy(() => import('views/admin-panel/helpdesk/tickets/ListMain')));
-const DashboardPage = Loadable(lazy(() => import('views/admin-panel/membership/DashboardMain')));
-const MembershipList = Loadable(lazy(() => import('views/admin-panel/membership/ListMain')));
-const PricingMain = Loadable(lazy(() => import('views/admin-panel/membership/PricingMain')));
-const SettingMain = Loadable(lazy(() => import('views/admin-panel/membership/SettingMain')));
+// render - online course pages
 const OnlineCourseDashboard = Loadable(lazy(() => import('views/admin-panel/online-courses/Dashboard')));
 const OnlineCourseTeacherList = Loadable(lazy(() => import('views/admin-panel/online-courses/teacher/List')));
 const OnlineCourseTeacherApply = Loadable(lazy(() => import('views/admin-panel/online-courses/teacher/Apply')));
@@ -34,7 +20,27 @@ const OnlineCourseSettingsPayment = Loadable(lazy(() => import('views/admin-pane
 const OnlineCourseSettingsPricing = Loadable(lazy(() => import('views/admin-panel/online-courses/settings/Pricing')));
 const OnlineCourseSettingsNotification = Loadable(lazy(() => import('views/admin-panel/online-courses/settings/Notification')));
 
-// ==============================|| ADMIN PANEL ROUTES ||============================== //
+// render - helpdesk pages
+const CreateMain = Loadable(lazy(() => import('views/admin-panel/helpdesk/tickets/CreateMain')));
+const CustomersMain = Loadable(lazy(() => import('views/admin-panel/helpdesk/Customers')));
+const DashboardMain = Loadable(lazy(() => import('views/admin-panel/helpdesk/Dashboard')));
+const DetailsMain = Loadable(lazy(() => import('views/admin-panel/helpdesk/tickets/DetailsMain')));
+const ListMain = Loadable(lazy(() => import('views/admin-panel/helpdesk/tickets/ListMain')));
+
+// render - membership pages
+const DashboardPage = Loadable(lazy(() => import('views/admin-panel/membership/DashboardMain')));
+const MembershipList = Loadable(lazy(() => import('views/admin-panel/membership/ListMain')));
+const PricingMain = Loadable(lazy(() => import('views/admin-panel/membership/PricingMain')));
+const SettingMain = Loadable(lazy(() => import('views/admin-panel/membership/SettingMain')));
+
+// render - invoice pages
+const InvoiceDashboard = Loadable(lazy(() => import('views/admin-panel/invoice/Dashboard')));
+const InvoiceDetails = Loadable(lazy(() => import('views/admin-panel/invoice/Details')));
+const InvoiceCreate = Loadable(lazy(() => import('views/admin-panel/invoice/Create')));
+const InvoiceList = Loadable(lazy(() => import('views/admin-panel/invoice/List')));
+const InvoiceEdit = Loadable(lazy(() => import('views/admin-panel/invoice/Edit')));
+
+// ==============================|| ADMIN PANEL ROUTING ||============================== //
 
 const AdminPanelRoutes = {
   path: '/',

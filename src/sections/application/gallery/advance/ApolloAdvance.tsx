@@ -22,7 +22,7 @@ export default function ApolloAdvance() {
               Strong <span>Apollo</span>
             </h2>
             <p>Apollo's last game of pool was so strange.</p>
-            <a href="#!">View more</a>
+            <a>View more</a>
           </FigureCaption>
         </Figure>
         <Figure className="effect-apollo">
@@ -32,7 +32,7 @@ export default function ApolloAdvance() {
               Strong <span>Apollo</span>
             </h2>
             <p>Apollo's last game of pool was so strange.</p>
-            <a href="#!">View more</a>
+            <a>View more</a>
           </FigureCaption>
         </Figure>
       </div>

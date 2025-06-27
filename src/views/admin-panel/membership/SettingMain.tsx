@@ -1,8 +1,18 @@
 // react-bootstrap
-import Setting from 'sections/admin-panel/membership/setting/Setting';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+
+// project-imports
+import Setting from 'sections/admin-panel/membership/Setting';
 
 // =============================|| MEMBERSHIP - SETTING ||============================== //
 
 export default function SettingMainPage() {
-  return <Setting />;
+  return (
+    <Row>
+      <Col xs={12}>
+        <Setting />
+      </Col>
+    </Row>
+  );
 }

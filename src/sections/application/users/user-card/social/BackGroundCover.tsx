@@ -18,7 +18,12 @@ export default function BackGroundCover() {
     <>
       <h6 className="text-center mb-3">Backround cover image</h6>
       <MainCard className="text-center" bodyClassName="p-0">
-        <div className="widget-main-card blur-user-card">
+        <div
+          className="widget-main-card blur-user-card"
+          style={{
+            backgroundImage: `url('/src/assets/images/widget/blur-bg.png')`
+          }}
+        >
           <Image src={blurBackground} alt="Profile Background" fluid />
           <Card.Title as="h3" className="text-white">
             Linda Fox

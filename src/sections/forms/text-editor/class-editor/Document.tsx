@@ -58,7 +58,7 @@ export default function Document() {
     <MainCard title="Document Editor">
       <div ref={editorToolbarRef}></div>
 
-      <div className="p-4 bg-secondary-100 ">
+      <div className="p-4 bg-secondary-100">
         <div className="document-main">
           {isMounted && (
             <CKEditor

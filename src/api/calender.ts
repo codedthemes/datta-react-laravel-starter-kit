@@ -11,8 +11,6 @@ import { fetcher } from 'utils/axios';
 // types
 import { EventInput } from '@fullcalendar/common';
 
-// ----------------------------------------------------------------------
-
 export const endpoints = {
   key: 'api/calendar/events',
   add: '/add', // server URL

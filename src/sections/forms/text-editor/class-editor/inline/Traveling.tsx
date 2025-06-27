@@ -202,7 +202,7 @@ export default function Traveling() {
   }, [isLayoutReady]);
 
   return (
-    <div ref={editorRef} className="border ">
+    <div ref={editorRef} className="border">
       {editorConfig && (
         <CKEditor
           onReady={(editor) => {

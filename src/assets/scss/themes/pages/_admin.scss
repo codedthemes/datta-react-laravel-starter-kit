@@ -546,10 +546,6 @@
         text-align: center;
         color: #fff;
         transition: all 0.3s ease-in-out;
-
-        &.material-icons-two-tone {
-          background-color: #fff;
-        }
       }
     }
   }
@@ -561,10 +557,6 @@
 
         i {
           color: $value;
-
-          &.material-icons-two-tone {
-            background-color: $value;
-          }
         }
       }
     }
@@ -588,10 +580,6 @@
   }
 }
 
-.invoice-total {
-  width: 100%;
-  max-width: 400px;
-}
 .invoice-tab {
   .nav-item {
     .nav-link {

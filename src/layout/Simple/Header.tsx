@@ -28,28 +28,28 @@ export default function HeaderSection() {
   }, [handleScroll]);
 
   return (
-    <Navbar expand="md" className="navbar-Datta top-nav-collapse default " ref={navbarRef}>
+    <Navbar expand="md" className="navbar-Datta top-nav-collapse default" ref={navbarRef}>
       <Container>
-        <Navbar.Brand as={Link} to="/">
+        <Navbar.Brand href="/">
           <Image src={Logo} alt="logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarTogglerDemo01" />
         <Navbar.Collapse id="navbarTogglerDemo01">
           <Nav className="ms-auto mb-2 mb-md-0 align-items-start">
             <Nav.Item className="px-1">
-              <Nav.Link as={Link} to="https://codedthemes.gitbook.io/datta" target="_blank">
+              <Link to="https://codedthemes.gitbook.io/datta" target="_blank" className="nav-link">
                 Documentation
-              </Nav.Link>
+              </Link>
             </Nav.Item>
             <Nav.Item className="px-1">
-              <Nav.Link as={Link} to="/dashboard/default">
+              <Link to="/dashboard/default" target="_blank" className="nav-link">
                 Live Preview
-              </Nav.Link>
+              </Link>
             </Nav.Item>
             <Nav.Item className="px-1">
-              <Nav.Link as={Link} to="/basic/alert" className="me-sm-3">
+              <Link to="/basic/alert" target="_blank" className="nav-link me-sm-3">
                 Components
-              </Nav.Link>
+              </Link>
             </Nav.Item>
             <Nav.Item>
               <Button variant="dark" href="https://codedthemes.com/item/datta-able-bootstrap-admin-template/" target="_blank">

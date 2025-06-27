@@ -55,7 +55,7 @@ export default function BasicInputs() {
       </div>
       <Stack direction="horizontal" className="pt-4" gap={2}>
         <Button>Submit</Button>
-        <Button variant="light">Reset</Button>
+        <Button className="btn-link-danger">Reset</Button>
       </Stack>
     </MainCard>
   );

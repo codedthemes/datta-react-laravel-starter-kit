@@ -52,13 +52,13 @@ export default function ExpandingSubTableDetails({ row }: { row: { original: Tab
   const userData = row.original;
 
   return (
-    <MainCard className="mb-3" title={`${userData.fullName}'s Employee List`}>
+    <MainCard className="my-3" title={`${userData.fullName}'s Employee List`}>
       {loading ? (
-        <div className="text-center">
+        <div className="text-center mt-4">
           <Spinner animation="border" />
         </div>
       ) : (
-        <Table hover responsive>
+        <Table hover responsive className="mb-0">
           <thead>
             <tr>
               {columns.map((col) => (
@@ -71,7 +71,7 @@ export default function ExpandingSubTableDetails({ row }: { row: { original: Tab
               <tr key={index}>
                 <td>
                   <Image
-                    src={getImageUrl(`avatar-${item.avatar}.jpg`, ImagePath.USER)}
+                    src={getImageUrl(`avatar-${item.avatar}.png`, ImagePath.USER)}
                     alt="User Avatar"
                     className="rounded-circle"
                     width={'32px'}

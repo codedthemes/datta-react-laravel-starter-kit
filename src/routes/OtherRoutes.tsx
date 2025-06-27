@@ -4,10 +4,10 @@ import { lazy } from 'react';
 import Loadable from 'components/Loadable';
 import DashboardLayout from 'layout/Dashboard';
 
-// render - Other components page
-const OtherSamplePage = Loadable(lazy(() => import('views/other/sample-page/SamplePage')));
+// render - other pages
+const OtherSamplePage = Loadable(lazy(() => import('views/SamplePage')));
 
-// ==============================|| ROUTES - OTHER ROUTES ||============================== //
+// ==============================|| OTHER ROUTING ||============================== //
 
 const OtherRoutes = {
   path: '/',

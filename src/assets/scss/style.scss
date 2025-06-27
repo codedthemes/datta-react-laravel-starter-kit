@@ -1,6 +1,6 @@
 /**======================================================================
 =========================================================================
-Template Name: Datta able - Bootstrap Admin Template
+Template Name: Datta able - Admin Template
 Author: Codedthemes
 Support: https://codedthemes.support-hub.io/
 File: style.css
@@ -11,7 +11,6 @@ File: style.css
 4.  header css
 5.  footer css
 6.  Common layout css
-7.  Compact layout css
 8.  Horizontal layout css
 9.  Tab layout css
 10. Widget css 
@@ -46,68 +45,57 @@ File: style.css
 =================================================================================== */
 
 // main framework
-
-@import '../../../node_modules/bootstrap/scss/functions';
-@import '../../../node_modules/bootstrap/scss/variables';
-@import '../../../node_modules/bootstrap/scss/variables-dark';
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/variables-dark';
 
 @import 'settings/color-variables';
 @import 'settings/theme-variables';
 @import 'settings/bootstrap-variables';
 
-@import 'react-calendar/dist/Calendar.css';
-@import 'react-toastify/dist/ReactToastify.css';
-@import 'rc-slider/assets/index.css';
-@import 'simplebar-react/dist/simplebar.min.css';
-@import 'flatpickr/dist/flatpickr.css';
-@import 'flatpickr/dist/themes/material_green.css';
-@import 'animate.css';
-@import 'intro.js/introjs.css';
-// @import 'react-quill/dist/quill.snow.css';
-
-@import '../../../node_modules/bootstrap/scss/maps';
-@import '../../../node_modules/bootstrap/scss/mixins';
-@import '../../../node_modules/bootstrap/scss/root';
-@import '../../../node_modules/bootstrap/scss/reboot';
-@import '../../../node_modules/bootstrap/scss/type';
-@import '../../../node_modules/bootstrap/scss/images';
-@import '../../../node_modules/bootstrap/scss/containers';
-@import '../../../node_modules/bootstrap/scss/grid';
-@import '../../../node_modules/bootstrap/scss/tables';
-@import '../../../node_modules/bootstrap/scss/forms';
-@import '../../../node_modules/bootstrap/scss/buttons';
-@import '../../../node_modules/bootstrap/scss/transitions';
-@import '../../../node_modules/bootstrap/scss/dropdown';
-@import '../../../node_modules/bootstrap/scss/button-group';
-@import '../../../node_modules/bootstrap/scss/nav';
-@import '../../../node_modules/bootstrap/scss/navbar';
-@import '../../../node_modules/bootstrap/scss/card';
-@import '../../../node_modules/bootstrap/scss/accordion';
-@import '../../../node_modules/bootstrap/scss/breadcrumb';
-@import '../../../node_modules/bootstrap/scss/pagination';
-@import '../../../node_modules/bootstrap/scss/badge';
-@import '../../../node_modules/bootstrap/scss/alert';
-@import '../../../node_modules/bootstrap/scss/progress';
-@import '../../../node_modules/bootstrap/scss/list-group';
-@import '../../../node_modules/bootstrap/scss/close';
-@import '../../../node_modules/bootstrap/scss/toasts';
-@import '../../../node_modules/bootstrap/scss/modal';
-@import '../../../node_modules/bootstrap/scss/tooltip';
-@import '../../../node_modules/bootstrap/scss/popover';
-@import '../../../node_modules/bootstrap/scss/carousel';
-@import '../../../node_modules/bootstrap/scss/spinners';
-@import '../../../node_modules/bootstrap/scss/offcanvas';
-@import '../../../node_modules/bootstrap/scss/placeholders';
-@import '../../../node_modules/bootstrap/scss/helpers';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/root';
+@import 'bootstrap/scss/reboot';
+@import 'bootstrap/scss/type';
+@import 'bootstrap/scss/images';
+@import 'bootstrap/scss/containers';
+@import 'bootstrap/scss/grid';
+@import 'bootstrap/scss/tables';
+@import 'bootstrap/scss/forms';
+@import 'bootstrap/scss/buttons';
+@import 'bootstrap/scss/transitions';
+@import 'bootstrap/scss/dropdown';
+@import 'bootstrap/scss/button-group';
+@import 'bootstrap/scss/nav';
+@import 'bootstrap/scss/navbar';
+@import 'bootstrap/scss/card';
+@import 'bootstrap/scss/accordion';
+@import 'bootstrap/scss/breadcrumb';
+@import 'bootstrap/scss/pagination';
+@import 'bootstrap/scss/badge';
+@import 'bootstrap/scss/alert';
+@import 'bootstrap/scss/progress';
+@import 'bootstrap/scss/list-group';
+@import 'bootstrap/scss/close';
+@import 'bootstrap/scss/toasts';
+@import 'bootstrap/scss/modal';
+@import 'bootstrap/scss/tooltip';
+@import 'bootstrap/scss/popover';
+@import 'bootstrap/scss/carousel';
+@import 'bootstrap/scss/spinners';
+@import 'bootstrap/scss/offcanvas';
+@import 'bootstrap/scss/placeholders';
+@import 'bootstrap/scss/helpers';
 
 [data-pc-direction='ltr'] {
-  @import '../../../node_modules/bootstrap/scss/utilities';
-  @import '../../../node_modules/bootstrap/scss/utilities/api';
+  @import 'bootstrap/scss/utilities';
+  @import 'bootstrap/scss/utilities/api';
 }
 
 [data-pc-direction='rtl'] {
   @import 'themes/layouts/style-rtl-utility';
-  @import '../../../node_modules/bootstrap/scss/utilities/api';
+  @import 'bootstrap/scss/utilities/api';
 }
 
 // main framework
@@ -119,8 +107,7 @@ File: style.css
 @import 'themes/layouts/pc-header';
 @import 'themes/layouts/pc-footer';
 @import 'themes/layouts/pc-common';
-@import 'themes/layouts/pc-compact';
-@import 'themes/layouts/pc-horizontal';
+// @import 'themes/layouts/pc-horizontal';
 @import 'themes/layouts/pc-tab';
 
 // widget
@@ -140,11 +127,11 @@ File: style.css
 // pages
 @import 'themes/pages/authentication';
 @import 'themes/pages/maintaince';
-
+@import 'themes/pages/pages';
 @import 'themes/pages/icon-pages';
+@import 'themes/pages/user';
 @import 'themes/pages/application';
 @import 'themes/pages/admin';
-@import 'themes/pages/user';
 
 // custom plugins
 @import 'themes/plugins/sweatalert';
@@ -153,18 +140,9 @@ File: style.css
 @import 'themes/plugins/modal';
 @import 'themes/plugins/rangeslider';
 @import 'themes/plugins/daterange';
-@import 'themes/plugins/scrollbar';
-@import 'themes/plugins/jsvectormap';
-
-@import 'jsvectormap/dist/jsvectormap.css';
 @import 'themes/plugins/tags-input';
 @import 'themes/plugins/slider';
 @import 'themes/plugins/switches';
 @import 'themes/plugins/data-tables';
 @import 'themes/plugins/treeview';
 @import 'themes/layouts/customizer';
-
-@import 'animate.css';
-
-@import './assets/fonts/tabler-icons.min.css';
-@import './assets/fonts/fontawesome.css';

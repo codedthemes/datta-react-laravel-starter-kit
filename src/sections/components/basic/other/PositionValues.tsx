@@ -13,9 +13,9 @@ export default function PositionValues() {
   return (
     <MainCard
       title={
-        <>
+        <h5>
           Position Values <Badge bg="danger">NEW</Badge>
-        </>
+        </h5>
       }
       subheader={
         <p className="mb-0">
@@ -23,7 +23,7 @@ export default function PositionValues() {
         </p>
       }
     >
-      <div className="position-relative bg-body h-250">
+      <div className="position-relative bg-body" style={{ height: '250px' }}>
         <div className="hei-40 wid-40 rounded bg-secondary position-absolute top-0 start-0" />
         <div className="hei-40 wid-40 rounded bg-secondary position-absolute top-0 end-0" />
         <div className="hei-40 wid-40 rounded bg-secondary position-absolute top-50 start-50" />
@@ -38,7 +38,7 @@ export default function PositionValues() {
         In addition, you can also center the elements with the transform utility class <code>.translate-middle</code>.
       </p>
       <div className="p-4 my-3">
-        <div className="position-relative bg-body h-250">
+        <div className="position-relative bg-body" style={{ height: '250px' }}>
           <div className="hei-40 wid-40 rounded bg-secondary position-absolute top-0 start-0 translate-middle" />
           <div className="hei-40 wid-40 rounded bg-secondary position-absolute top-0 start-50 translate-middle" />
           <div className="hei-40 wid-40 rounded bg-secondary position-absolute top-0 start-100 translate-middle" />
@@ -59,8 +59,8 @@ export default function PositionValues() {
           Mails <Badge className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99</Badge>
         </Button>
 
-        <Button className="position-relative bg-dark border-dark ">
-          Marker <i className="fa fa-caret-down f-18 position-absolute top-100 start-50 text-dark  translate-middle mt-1 " />
+        <Button className="position-relative bg-dark border-dark">
+          Marker <i className="ti ti-caret-down-filled f-18 position-absolute top-100 start-50 text-dark  translate-middle mt-1" />
         </Button>
 
         <Button className="position-relative">
@@ -80,11 +80,9 @@ export default function PositionValues() {
         <div className="p-3 p-sm-5">
           <div className="position-relative">
             <ProgressBar now={50} style={{ height: 3 }} />
-            <Button className="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill w-32 h-32">1</Button>
-            <Button className="position-absolute top-0 start-50 translate-middle btn btn-sm btn-primary rounded-pill w-32 h-32">2</Button>
-            <Button className="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill w-32 h-32">
-              3
-            </Button>
+            <Button className="btn-icon avatar-s position-absolute top-0 start-0 translate-middle btn-primary rounded-pill">1</Button>
+            <Button className="btn-icon avatar-s position-absolute top-0 start-50 translate-middle btn-primary rounded-pill">2</Button>
+            <Button className="btn-icon avatar-s position-absolute top-0 start-100 translate-middle btn-secondary rounded-pill">3</Button>
           </div>
         </div>
       </div>
