@@ -33,6 +33,23 @@ interface FormProps {
   resetLink?: string;
 }
 
+  // -----------------------------------------
+  // st kit code
+  // -----------------------------------------
+  type LoginForm = {
+    email: string;
+    password: string;
+    remember: boolean;
+  };
+
+  interface LoginProps {
+      status?: string;
+      canResetPassword: boolean;
+  }
+
+  // -----------------------------------------
+
+
 export default function AuthLoginForm({ className, link, resetLink }: FormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState('');
@@ -54,17 +71,90 @@ export default function AuthLoginForm({ className, link, resetLink }: FormProps)
     setShowPassword((prevState) => !prevState);
   };
 
+  
+  // const onSubmit: SubmitHandler<LoginFormInput> = async (data) => {
+    // setLoginError('');
+    // try {
+    //   // Step 1: Get CSRF token
+    //   await axios.get('http://localhost:8000/login', {
+    //     // withCredentials: true,
+    //   });
+
+    //   // Step 2: Submit login request
+    //   await axios.post(
+    //     'http://localhost:8000/login',
+    //     {
+    //       email: data.email,
+    //       password: data.password,
+    //       remember: true,
+    //     },
+    //     {
+    //       withCredentials: true,
+    //     }
+    //   );
+
+    //   // Step 3: Redirect
+    //   window.location.href = 'http://localhost:3000/dashboard/default';
+    // } catch (error: any) {
+    //   setLoginError('Login failed');
+    //   // reset('password');
+    // }
+  // };
+
+
+  // ---------------------------------------
+  // st kit code
+  // ---------------------------------------
+    const { data, setData, post, processing } = useForm<Required<LoginForm>>({
+        email: '',
+        password: '',
+        remember: false,
+    });
+
+    // const submit: FormEventHandler = (e) => {
+    //     e.preventDefault();
+    //     post('http://localhost:3000/auth/login-v1', {  
+    //         onFinish: () => reset('password'),
+    //     });
+    // };
+
+  // const submit: FormEventHandler = async (data) => {
+  //   // e.preventDefault();
+
+  //   try {
+  //     const response = await axios.post('http://localhost:3000/login', {
+  //       email: data.email,
+  //       password: data.password,
+  //     }, {
+  //       withCredentials: true // required if using Laravel sessions or Sanctum
+  //     });
+  //     window.location.href = 'http://localhost:3000/dashboard/default';
+
+  //   } catch (error) {
+  //     console.error('Login error:', error.response?.data || error.message);
+  //   }
+  // };
   const onSubmit: SubmitHandler<LoginFormInput> = async (data) => {
-    setLoginError('');
+    console.log(data.email);
+    console.log(data.password);
+    
     try {
+      // const response = await axios.post('http://localhost:3000/auth/login-v1', {
+      //   email: data.email,
+      //   password: data.password,
+      // }, {
+      //   withCredentials: true
+      // });
+      // window.location.href = 'http://localhost:3000/dashboard/default';
+
       // Step 1: Get CSRF token
-      await axios.get('http://localhost:8000/sanctum/csrf-cookie', {
+      await axios.get('http://localhost:8000/login', {
         withCredentials: true,
       });
 
       // Step 2: Submit login request
       await axios.post(
-        'http://localhost:8000/login',
+        'login',
         {
           email: data.email,
           password: data.password,
@@ -77,11 +167,14 @@ export default function AuthLoginForm({ className, link, resetLink }: FormProps)
 
       // Step 3: Redirect
       window.location.href = 'http://localhost:3000/dashboard/default';
-    } catch (error: any) {
-      setLoginError('Login failed');
-      // reset('password');
+
+    } catch (error) {
+      console.error('Login error:', error.response?.data || error.message);
     }
+
   };
+
+  // ---------------------------------------
 
   return (
     <MainCard className="mb-0">
@@ -91,6 +184,7 @@ export default function AuthLoginForm({ className, link, resetLink }: FormProps)
         </a>
       </div>
 
+      {/* <Form onSubmit={submit}> */}
       <Form onSubmit={handleSubmit(onSubmit)}>
         <h4 className={`text-center f-w-500 mt-4 mb-3 ${className}`}>Login</h4>
 

@@ -20,8 +20,15 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(append: [
             HandleAppearance::class,
             HandleInertiaRequests::class,
-            AddLinkHeadersForPreloadedAssets::class,
+            AddLinkHeadersForPreloadedAssets::class
         ]);
+
+//         $middleware = [
+//     \Fruitcake\Cors\HandleCors::class, // for Laravel < 9
+//     // or
+//     \Illuminate\Http\Middleware\HandleCors::class, // Laravel 9+
+//          ];
+
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
