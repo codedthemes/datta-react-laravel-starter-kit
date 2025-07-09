@@ -3,6 +3,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 const VITE_APP_API_URL = 'https://mock-data-api-nextjs.vercel.app/';
 const axiosServices = axios.create({ baseURL: VITE_APP_API_URL || 'http://localhost:3010/' });
 
+
 // ==============================|| AXIOS - FOR MOCK SERVICES ||============================== //
 
 axiosServices.interceptors.request.use(

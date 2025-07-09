@@ -17,7 +17,7 @@ export default function UserProfile2() {
         <div
           className="widget-profile-card-3"
           style={{
-            backgroundImage: `url('/src/assets/images/widget/slider5.jpg')`
+            backgroundImage: `url('/resources/assets/images/widget/slider5.jpg')`
           }}
         >
           <Image className=" img-thumbnail" src={imgRound1} alt="Profile-user" fluid />

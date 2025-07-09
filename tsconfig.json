@@ -19,7 +19,7 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "src",
+    "baseUrl": "resources",
 
     /* Linting */
     "strict": true,
@@ -29,6 +29,6 @@
     "noUncheckedSideEffectImports": true
   },
   "exclude": ["node_modules", "vite.config.mts", "vendor/**/*"], // Exclude vite.config.mts
-  "include": ["src", "**/*.tsx", "src/**/*"],
+  "include": ["resources", "**/*.tsx", "resources/**/*"],
   "references": [{ "path": "./tsconfig.app.json" }]
 }

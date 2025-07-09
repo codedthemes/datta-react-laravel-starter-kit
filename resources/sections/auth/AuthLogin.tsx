@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import route from 'routes';
 
 // react-bootstrap
 import Button from 'react-bootstrap/Button';
@@ -33,26 +34,26 @@ interface FormProps {
   resetLink?: string;
 }
 
-  // -----------------------------------------
-  // st kit code
-  // -----------------------------------------
-  type LoginForm = {
-    email: string;
-    password: string;
-    remember: boolean;
-  };
+// -----------------------------------------
+// st kit code
+// -----------------------------------------
+// type LoginForm = {
+//   email: string;
+//   password: string;
+//   remember: boolean;
+// };
 
-  interface LoginProps {
-      status?: string;
-      canResetPassword: boolean;
-  }
+// interface LoginProps {
+//     status?: string;
+//     canResetPassword: boolean;
+// }
 
-  // -----------------------------------------
+// -----------------------------------------
 
 
 export default function AuthLoginForm({ className, link, resetLink }: FormProps) {
   const [showPassword, setShowPassword] = useState(false);
-  const [loginError, setLoginError] = useState('');
+  const [loginError] = useState('');
 
   const { mode } = useConfig();
   const resolvedTheme = getResolvedTheme(mode);
@@ -63,7 +64,6 @@ export default function AuthLoginForm({ className, link, resetLink }: FormProps)
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors }
   } = useForm<LoginFormInput>();
 
@@ -71,52 +71,52 @@ export default function AuthLoginForm({ className, link, resetLink }: FormProps)
     setShowPassword((prevState) => !prevState);
   };
 
-  
+
   // const onSubmit: SubmitHandler<LoginFormInput> = async (data) => {
-    // setLoginError('');
-    // try {
-    //   // Step 1: Get CSRF token
-    //   await axios.get('http://localhost:8000/login', {
-    //     // withCredentials: true,
-    //   });
+  // setLoginError('');
+  // try {
+  //   // Step 1: Get CSRF token
+  //   await axios.get('http://localhost:8000/login', {
+  //     // withCredentials: true,
+  //   });
 
-    //   // Step 2: Submit login request
-    //   await axios.post(
-    //     'http://localhost:8000/login',
-    //     {
-    //       email: data.email,
-    //       password: data.password,
-    //       remember: true,
-    //     },
-    //     {
-    //       withCredentials: true,
-    //     }
-    //   );
+  //   // Step 2: Submit login request
+  //   await axios.post(
+  //     'http://localhost:8000/login',
+  //     {
+  //       email: data.email,
+  //       password: data.password,
+  //       remember: true,
+  //     },
+  //     {
+  //       withCredentials: true,
+  //     }
+  //   );
 
-    //   // Step 3: Redirect
-    //   window.location.href = 'http://localhost:3000/dashboard/default';
-    // } catch (error: any) {
-    //   setLoginError('Login failed');
-    //   // reset('password');
-    // }
+  //   // Step 3: Redirect
+  //   window.location.href = 'http://localhost:3000/dashboard/default';
+  // } catch (error: any) {
+  //   setLoginError('Login failed');
+  //   // reset('password');
+  // }
   // };
 
 
   // ---------------------------------------
   // st kit code
   // ---------------------------------------
-    const { data, setData, post, processing } = useForm<Required<LoginForm>>({
-        email: '',
-        password: '',
-        remember: false,
-    });
+  // const { data, setData, post, processing } = useForm<Required<LoginForm>>({
+  //     email: '',
+  //     password: '',
+  //     remember: false,
+  // });
 
-    // const submit: FormEventHandler = (e) => {
-    //     e.preventDefault();
-    //     post('http://localhost:3000/auth/login-v1', {  
-    //         onFinish: () => reset('password'),
-    //     });
-    // };
+  // const submit: FormEventHandler = (e) => {
+  //     e.preventDefault();
+  //     post('http://localhost:3000/auth/login-v1', {  
+  //         onFinish: () => reset('password'),
+  //     });
+  // };
 
   // const submit: FormEventHandler = async (data) => {
   //   // e.preventDefault();
@@ -135,9 +135,8 @@ export default function AuthLoginForm({ className, link, resetLink }: FormProps)
   //   }
   // };
   const onSubmit: SubmitHandler<LoginFormInput> = async (data) => {
-    console.log(data.email);
-    console.log(data.password);
-    
+
+
     try {
       // const response = await axios.post('http://localhost:3000/auth/login-v1', {
       //   email: data.email,
@@ -147,29 +146,70 @@ export default function AuthLoginForm({ className, link, resetLink }: FormProps)
       // });
       // window.location.href = 'http://localhost:3000/dashboard/default';
 
-      // Step 1: Get CSRF token
-      await axios.get('http://localhost:8000/login', {
-        withCredentials: true,
+    //   console.log(data.email);
+    //   console.log(data.password);
+
+    //       // Step 1: Get CSRF cookie
+    // await axios.get('/sanctum/csrf-cookie');
+
+    // // Step 2: Login
+    // await axios.post('/login', {
+    //   email: data.email,
+    //   password: data.password,
+    // });
+
+    // // Step 3: Redirect or fetch user
+    // window.location.href = '/dashboard/default';
+
+      axios.post(route('login'), {
+        onFinish: () => reset('password'),
       });
 
+
+
+      // Get CSRF cookie if using Sanctum
+      // await axios.get('http://localhost:8000/sanctum/csrf-cookie', {
+      //   withCredentials: true,
+      // });
+
+      // // Send login POST request
+      // await axios.post(
+      //   'http://localhost:8000/login',
+      //   {
+      //     email: data.email,
+      //     password: data.password,
+      //   },
+      //   {
+      //     withCredentials: true,
+      //   }
+      // );
+
+      // // On success
+      // reset('password');
+      // window.location.href = '/dashboard/default';
+      // Step 1: Get CSRF token
+      // await axios.get('http://localhost:8000/login', {
+      //   withCredentials: true,
+      // });
+
       // Step 2: Submit login request
-      await axios.post(
-        'login',
-        {
-          email: data.email,
-          password: data.password,
-          remember: true,
-        },
-        {
-          withCredentials: true,
-        }
-      );
+      // await axios.post(
+      //   'login',
+      //   {
+      //     email: data.email,
+      //     password: data.password,
+      //     remember: true,
+      //   },
+      //   {
+      //     withCredentials: true,
+      //   }
+      // );
 
       // Step 3: Redirect
-      window.location.href = 'http://localhost:3000/dashboard/default';
+      // window.location.href = 'http://localhost:3000/dashboard/default';
 
     } catch (error) {
-      console.error('Login error:', error.response?.data || error.message);
+      console.error('Login error', error);
     }
 
   };
@@ -186,6 +226,7 @@ export default function AuthLoginForm({ className, link, resetLink }: FormProps)
 
       {/* <Form onSubmit={submit}> */}
       <Form onSubmit={handleSubmit(onSubmit)}>
+      {/* <Form method="POST" action="{{ route('login') }}"> */}
         <h4 className={`text-center f-w-500 mt-4 mb-3 ${className}`}>Login</h4>
 
         {loginError && (

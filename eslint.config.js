@@ -41,7 +41,7 @@ export default [
     settings: {
       'import/resolver': {
         node: {
-          moduleDirectory: ['node_modules', 'src/']
+          moduleDirectory: ['node_modules', 'resources/']
         },
 
         typescript: {
@@ -95,6 +95,6 @@ export default [
   },
   {
     ignores: ['node_modules/**'], // Make sure this doesn't match your files.
-    files: ['src/**/*.{js,jsx,ts,tsx}']
+    files: ['resources/**/*.{js,jsx,ts,tsx}']
   }
 ];

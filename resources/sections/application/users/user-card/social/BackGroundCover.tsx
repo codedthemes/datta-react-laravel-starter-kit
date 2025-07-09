@@ -21,7 +21,7 @@ export default function BackGroundCover() {
         <div
           className="widget-main-card blur-user-card"
           style={{
-            backgroundImage: `url('/src/assets/images/widget/blur-bg.png')`
+            backgroundImage: `url('/resources/assets/images/widget/blur-bg.png')`
           }}
         >
           <Image src={blurBackground} alt="Profile Background" fluid />
