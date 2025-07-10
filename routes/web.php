@@ -16,5 +16,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('component');
 });
 
+Route::view('/{any}', 'react')->where('any', '.*');
+
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

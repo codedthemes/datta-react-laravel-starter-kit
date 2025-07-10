@@ -26,21 +26,25 @@ export default defineConfig(({ mode }) => {
       global: "window",
     },
     resolve: {
-      alias: [
-        // { find: '', replacement: path.resolve(__dirname, 'src') },
-        // {
-        //   find: /^~(.+)/,
-        //   replacement: path.join(process.cwd(), 'node_modules/$1')
-        // },
-        // {
-        //   find: /^src(.+)/,
-        //   replacement: path.join(process.cwd(), 'src/$1')
-        // }
-        // {
-        //   find: 'assets',
-        //   replacement: path.join(process.cwd(), 'src/assets')
-        // },
-      ],
+      alias: {
+        '@': path.resolve(__dirname, 'resources/js'),
+      },
+      // alias: [
+      // { find: '', replacement: path.resolve(__dirname, 'src') },
+      // { find: '', replacement: path.resolve(__dirname, 'src') },
+      // {
+      //   find: /^~(.+)/,
+      //   replacement: path.join(process.cwd(), 'node_modules/$1')
+      // },
+      // {
+      //   find: /^src(.+)/,
+      //   replacement: path.join(process.cwd(), 'src/$1')
+      // }
+      // {
+      //   find: 'assets',
+      //   replacement: path.join(process.cwd(), 'src/assets')
+      // },
+      // ],
     },
     css: {
       preprocessorOptions: {
