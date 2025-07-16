@@ -5,30 +5,40 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-[color,box-shadow] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "inline-block cursor-pointer rounded text-center border border-transparent bg-transparent text-base font-medium transition-all duration-200 ease-in-out",
   {
     variants: {
       variant: {
-        default:
-          "bg-primary text-primary-foreground shadow-xs hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40",
-        outline:
-          "border border-input bg-background shadow-xs hover:bg-accent hover:text-accent-foreground",
-        secondary:
-          "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+        primary:"bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 focus:bg-primary-600",
+        secondary: "bg-secondary-500 text-white hover:bg-secondary-600 active:bg-secondary-700 focus:bg-secondary-600",
+        success: "bg-success-500 text-white hover:bg-success-600 active:bg-success-700 focus:bg-success-600",
+        danger: "bg-danger-500 text-white hover:bg-danger-600 active:bg-danger-700 focus:bg-danger-600",
+        warning: "bg-warning-500 text-white hover:bg-warning-600 active:bg-warning-700 focus:bg-warning-600",
+        info: "bg-info-500 text-white hover:bg-info-600 active:bg-info-700 focus:bg-info-600",
+        dark: "bg-dark-500 text-white hover:bg-dark-600 active:bg-dark-700 focus:bg-dark-600",
+
+        light: "bg-secondary-50/10 text-dark dark:text-white hover:bg-secondary-50/20 active:bg-secondary-50/30 focus:bg-secondary-50/20",
+        link: "bg-transparent text-primary-500 hover:underline active:bg-primary-50/30 focus:bg-primary-50/20",
+        
+        light_primary:"bg-primary-500/10 dark:bg-primary-500/10 text-primary-500 hover:bg-primary-500 dark:hover:bg-primary-500 hover:text-white focus:bg-primary-600 focus:text-white",
+        light_secondary:"bg-secondary-500/10 dark:bg-secondary-500/10 text-secondary-500 hover:bg-secondary-500 dark:hover:bg-secondary-500 hover:text-white focus:bg-secondary-600 focus:text-white",
+        light_success:"bg-success-500/10 dark:bg-success-500/10 text-success-500 hover:bg-success-500 dark:hover:bg-success-500 hover:text-white focus:bg-success-600 focus:text-white",
+        light_danger:"bg-danger-500/10 dark:bg-danger-500/10 text-danger-500 hover:bg-danger-500 dark:hover:bg-danger-500 hover:text-white focus:bg-danger-600 focus:text-white",
+        light_warning:"bg-warning-500/10 dark:bg-warning-500/10 text-warning-500 hover:bg-warning-500 dark:hover:bg-warning-500 hover:text-white focus:bg-warning-600 focus:text-white",
+        light_info:"bg-info-500/10 dark:bg-info-500/10 text-info-500 hover:bg-info-500 dark:hover:bg-info-500 hover:text-white focus:bg-info-600 focus:text-white",
+        light_dark:"bg-dark-500/10 dark:bg-dark-500/10 text-dark-500 hover:bg-dark-500 dark:hover:bg-dark-500 hover:text-white focus:bg-dark-600 focus:text-white",
+
+        outline: "border border-input bg-background shadow-xs hover:bg-accent hover:text-accent-foreground",
       },
       size: {
-        default: "h-9 px-4 py-2 has-[>svg]:px-3",
-        sm: "h-8 rounded-md px-3 has-[>svg]:px-2.5",
-        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
+        default: "py-2 px-4",
+        sm: "py-1 px-3",
+        lg: "py-3 px-5",
         icon: "size-9",
       },
     },
     defaultVariants: {
-      variant: "default",
+      variant: "primary",
       size: "default",
     },
   }
