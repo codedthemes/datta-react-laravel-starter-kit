@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row';
 import { motion } from 'framer-motion';
 import Slider from 'react-slick';
 import '../../../../node_modules/slick-carousel/slick/slick.css';
-// import 'slick-carousel/slick/slick-theme.css';
+import '../../../../node_modules/slick-carousel/slick/slick-theme.css';
 
 // project-imports
 import MainCard from '@/components/MainCard';
