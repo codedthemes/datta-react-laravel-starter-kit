@@ -1,3 +1,4 @@
+
 import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
@@ -5,10 +6,19 @@ import { FormEventHandler } from 'react';
 import InputError from '@/components/input-error';
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import AuthLayout from '@/layouts/auth-layout';
+import Form from 'react-bootstrap/Form';
+
+import Image from 'react-bootstrap/Image';
+
+import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
+
+import LightLogo from '@assets/images/logo-white.svg';
+import DarkLogo from '@assets/images/logo-dark.svg';
+
 
 type LoginForm = {
     email: string;
@@ -28,6 +38,12 @@ export default function Login({ status, canResetPassword }: LoginProps) {
         remember: false,
     });
 
+    const { mode } = useConfig();
+    const resolvedTheme = getResolvedTheme(mode);
+    setResolvedTheme(mode);
+
+    const logo = resolvedTheme === ThemeMode.DARK ? LightLogo : DarkLogo;
+
     const submit: FormEventHandler = (e) => {
         console.log(route('login'));
         e.preventDefault();
@@ -37,71 +53,73 @@ export default function Login({ status, canResetPassword }: LoginProps) {
     };
 
     return (
-        <AuthLayout title="Log in to your account" description="Enter your email and password below to log in">
+        <AuthLayout>
             <Head title="Log in" />
-
+            <div className="text-center">
+                <a>
+                    <Image src={logo} alt="img" />
+                </a>
+            </div>
+            <h4 className={`text-center f-w-500 mt-4 mb-3`}>Login</h4>
             <form className="flex flex-col gap-6" onSubmit={submit}>
-                <div className="grid gap-6">
-                    <div className="grid gap-2">
-                        <Label htmlFor="email">Email address</Label>
-                        <Input
-                            id="email"
-                            type="email"
-                            required
-                            autoFocus
-                            tabIndex={1}
-                            autoComplete="email"
-                            value={data.email}
-                            onChange={(e) => setData('email', e.target.value)}
-                            placeholder="email@example.com"
-                        />
-                        <InputError message={errors.email} />
-                    </div>
-
-                    <div className="grid gap-2">
-                        <div className="flex items-center">
-                            <Label htmlFor="password">Password</Label>
-                            {canResetPassword && (
-                                <TextLink href={route('password.request')} className="ml-auto text-sm" tabIndex={5}>
-                                    Forgot password?
-                                </TextLink>
-                            )}
-                        </div>
-                        <Input
-                            id="password"
-                            type="password"
-                            required
-                            tabIndex={2}
-                            autoComplete="current-password"
-                            value={data.password}
-                            onChange={(e) => setData('password', e.target.value)}
-                            placeholder="Password"
-                        />
-                        <InputError message={errors.password} />
-                    </div>
-
-                    <div className="flex items-center space-x-3">
-                        <Checkbox
-                            id="remember"
-                            name="remember"
+                <div className="d-flex flex-column gap-2 mb-3">
+                    <Input
+                        id="email"
+                        type="email"
+                        required
+                        autoFocus
+                        tabIndex={1}
+                        autoComplete="email"
+                        value={data.email}
+                        className='form-control'
+                        onChange={(e) => setData('email', e.target.value)}
+                        placeholder="email@example.com"
+                    />
+                    <InputError message={errors.email} />
+                </div>
+                <div className="d-flex flex-column gap-2 mb-3">
+                    <Input
+                        id="password"
+                        type="password"
+                        required
+                        className='form-control'
+                        tabIndex={2}
+                        autoComplete="current-password"
+                        value={data.password}
+                        onChange={(e) => setData('password', e.target.value)}
+                        placeholder="Password"
+                    />
+                    <InputError message={errors.password} />
+                </div>
+                <div className="d-flex align-items-center justify-content-between gap-3">
+                    <Form.Group controlId="customCheckc1">
+                        <Form.Check
+                            type="checkbox"
+                            label="Remember me?"
+                            defaultChecked
+                            className={`input-primary`}
                             checked={data.remember}
                             onClick={() => setData('remember', !data.remember)}
-                            tabIndex={3}
                         />
-                        <Label htmlFor="remember">Remember me</Label>
-                    </div>
-
-                    <Button type="submit" className="mt-4 w-full" tabIndex={4} disabled={processing}>
+                    </Form.Group>
+                    {canResetPassword && (
+                        <TextLink href={route('password.request')} className="ml-auto text-sm" tabIndex={5}>
+                            Forgot password?
+                        </TextLink>
+                    )}
+                </div>
+                <div className="text-center mt-4">
+                    <Button type="submit" className="btn btn-primary shadow px-sm-4" tabIndex={4} disabled={processing}>
                         {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
                         Log in
                     </Button>
                 </div>
 
-                <div className="text-muted-foreground text-center text-sm">
-                    Don't have an account?{' '}
-                    <TextLink href={route('register')} tabIndex={5}>
+                <div className="d-flex justify-content-between align-items-end mt-4">
+                    <h6 className={`f-w-500 mb-0`}>Don't have an Account?</h6>
+                    <a href={route('register')} className="link-primary text-end">
                         Sign up
-                    </TextLink>
+                    </a>
                 </div>
             </form>
 

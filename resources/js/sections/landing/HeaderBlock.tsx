@@ -1,4 +1,6 @@
 // import { Link } from 'react-router-dom';
+import { type SharedData } from '@/types';
+import { Link, usePage } from '@inertiajs/react';
 
 // react-bootstrap
 import Col from 'react-bootstrap/Col';
@@ -19,6 +21,7 @@ import ImgWave from '@assets/images/landing/img-wave.svg';
 // ==============================|| LANDING - HEADER BLOCK ||============================== //
 
 export default function HeaderBlock() {
+  const { auth } = usePage<SharedData>().props;
   return (
     <>
       <Container>
@@ -56,12 +59,25 @@ export default function HeaderBlock() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
             >
-              <a href="/basic/alert" target="_blank" className="btn btn-outline-light me-2">
-                Explore Components
-              </a>
-              <a href="/dashboard/default" target="_blank" className="btn btn-light">
-                Live Preview
-              </a>
+              {auth.user ? (
+                <>
+                  <a href="/basic/alert" target="_blank" className="btn btn-outline-light me-2">
+                    Explore Components
+                  </a>
+                  <a href={route('dashboard')} target="_blank" className="btn btn-light">
+                    Live Preview
+                  </a>
+                </>
+              ) : (
+                <>
+                  <a href={route('login')} target="_blank" className="btn btn-light me-2">
+                    Log in
+                  </a>
+                  <a href={route('register')} target="_blank" className="btn btn-outline-light ">
+                    Register
+                  </a>
+                </>
+              )}
             </motion.div>
             <motion.div
               className="mt-4 mt-sm-5"

@@ -1,3 +1,7 @@
+
+import '@assets/fonts/phosphor/regular/style.css';
+import '@assets/fonts/tabler-icons.min.css';
+
 import '@assets/scss/style.scss';
 
 import { createInertiaApp } from '@inertiajs/react';
