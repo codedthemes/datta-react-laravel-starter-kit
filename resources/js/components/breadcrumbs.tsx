@@ -36,7 +36,8 @@ export default function Breadcrumbs(): React.ReactElement {
         item.children.forEach((collapse) => {
           if (collapse.type === 'collapse') {
             getCollapse(collapse);
-          } else if (collapse.type === 'item' && location.pathname === collapse.url) {
+            
+          } else if (collapse.type === 'item' && new URL(location.url, window.location.origin).pathname === collapse.url) {
             setMain((prev) => ({
               ...prev,
               type: 'collapse', // Add this
@@ -52,7 +53,7 @@ export default function Breadcrumbs(): React.ReactElement {
         });
       }
     },
-    [location.pathname]
+    [new URL(location.url, window.location.origin).pathname]
   );
 
   useEffect(() => {
@@ -61,7 +62,7 @@ export default function Breadcrumbs(): React.ReactElement {
         getCollapse(navItem);
       }
     });
-  }, [location.pathname, getCollapse]);
+  }, [new URL(location.url, window.location.origin).pathname, getCollapse]);
 
   let mainContent;
   let itemContent;

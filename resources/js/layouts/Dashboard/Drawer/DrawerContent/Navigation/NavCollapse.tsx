@@ -112,12 +112,12 @@ export default function NavCollapse({ menu, level, parentId, setSelectedItems, s
           checkOpenForParent(item.children, menu.id!);
         }
 
-        if (item.link && !!matchPath({ path: item?.link, end: false }, pathname)) {
+        if (item.link && !!matchPath({ path: item?.link, end: false }, pathname.url)) {
           setSelected(menu.id);
           setOpen(true);
         }
 
-        if (item.url === pathname) {
+        if (item.url === pathname.url) {
           setSelected(menu.id);
           setOpen(true);
         }
@@ -126,7 +126,7 @@ export default function NavCollapse({ menu, level, parentId, setSelectedItems, s
   }, [pathname, menu.id, menu.children, checkOpenForParent]);
 
   useEffect(() => {
-    if (menu.url === pathname) {
+    if (menu.url === pathname.url) {
       setSelected(menu.id);
       setOpen(true);
     }

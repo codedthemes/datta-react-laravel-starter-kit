@@ -5,9 +5,9 @@ import Drawer from './Drawer';
 import Footer from './Footer';
 import Header from './Header';
 import Customizer from './Customizer';
-import Breadcrumbs from 'components/Breadcrumbs';
+import Breadcrumbs from '@/components/breadcrumbs';
 import useConfig from '@/hooks/useConfig';
-import NavigationScroll from 'components/NavigationScroll';
+import NavigationScroll from '@/components/NavigationScroll';
 
 // ==============================|| MAIN LAYOUT ||============================== //
 
