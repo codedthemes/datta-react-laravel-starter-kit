@@ -63,7 +63,6 @@ export default function Breadcrumbs(): React.ReactElement {
       }
     });
   }, [new URL(location.url, window.location.origin).pathname, getCollapse]);
-
   let mainContent;
   let itemContent;
   let breadcrumbContent;

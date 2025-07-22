@@ -2,7 +2,7 @@
 import Image from 'react-bootstrap/Image';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 interface VisitorGrowthTrackerCardProps {
   title: string;

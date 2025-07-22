@@ -2,7 +2,13 @@
 import '@assets/fonts/phosphor/regular/style.css';
 import '@assets/fonts/tabler-icons.min.css';
 
+import '@fontsource/open-sans/300.css';
+import '@fontsource/open-sans/400.css';
+import '@fontsource/open-sans/500.css';
+import '@fontsource/open-sans/600.css';
+
 import '@assets/scss/style.scss';
+import '@assets/scss/style-preset.scss';
 
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';

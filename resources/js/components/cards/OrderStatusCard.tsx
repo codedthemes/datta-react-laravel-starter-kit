@@ -3,7 +3,7 @@ import ProgressBar, { ProgressBarProps } from 'react-bootstrap/ProgressBar';
 import Stack from 'react-bootstrap/Stack';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 interface OrderStatusCardProps {
   title: string;

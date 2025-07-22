@@ -5,8 +5,8 @@ import Stack from 'react-bootstrap/Stack';
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // project-imports
-import DropDown from 'sections/dashboard/finance/DropDown';
-import MainCard from 'components/MainCard';
+import DropDown from '@/sections/dashboard/finance/DropDown';
+import MainCard from '@/components/MainCard';
 
 interface UserStatsCardProps {
   title: string;

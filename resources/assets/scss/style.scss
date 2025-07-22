@@ -88,10 +88,10 @@ File: style.css
 @import 'bootstrap/scss/placeholders';
 @import 'bootstrap/scss/helpers';
 
-// [data-pc-direction='ltr'] {
+[data-pc-direction='ltr'] {
   @import 'bootstrap/scss/utilities';
   @import 'bootstrap/scss/utilities/api';
-// }
+}
 
 [data-pc-direction='rtl'] {
   @import 'themes/layouts/style-rtl-utility';
@@ -145,4 +145,7 @@ File: style.css
 @import 'themes/plugins/switches';
 @import 'themes/plugins/data-tables';
 @import 'themes/plugins/treeview';
+
 @import 'themes/layouts/customizer';
+
+@import 'global.scss';

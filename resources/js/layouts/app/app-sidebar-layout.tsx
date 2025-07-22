@@ -10,7 +10,7 @@ import Drawer from '../Dashboard/Drawer';
 import Footer from '../Dashboard/Footer';
 import Header from '../Dashboard/Header';
 import Customizer from '../Dashboard/Customizer';
-import Breadcrumbs from '@/components/Breadcrumbs';
+import Breadcrumbs from '@/components/breadcrumbs';
 import useConfig from '@/hooks/useConfig';
 import NavigationScroll from '@/components/NavigationScroll';
 

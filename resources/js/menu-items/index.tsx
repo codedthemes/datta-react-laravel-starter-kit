@@ -10,7 +10,7 @@ import tableRoutes from './tables';
 import navigation from './navigation';
 
 // types
-import { NavItemType } from 'types/menu';
+import { NavItemType } from '@/types/menu';
 
 // ==============================|| MENU ITEMS ||============================== //
 

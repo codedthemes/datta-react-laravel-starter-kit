@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col';
 import Badge, { BadgeProps } from 'react-bootstrap/Badge';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 interface ProfitSummaryCardProps {
   title: string;

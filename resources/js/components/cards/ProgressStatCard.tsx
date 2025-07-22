@@ -2,7 +2,7 @@
 import ProgressBar, { ProgressBarProps } from 'react-bootstrap/ProgressBar';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 interface ProgressStatCardProps {
   title: number;

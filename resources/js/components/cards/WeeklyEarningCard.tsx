@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Nav from 'react-bootstrap/Nav';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 type WeeklyEarningCardProps = {
   title: string;

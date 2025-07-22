@@ -3,7 +3,7 @@ import Image from 'react-bootstrap/Image';
 import Stack from 'react-bootstrap/Stack';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 interface PaymentMethodCardProps {
   name: string;

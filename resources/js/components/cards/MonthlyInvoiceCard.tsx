@@ -5,7 +5,7 @@ import ProgressBar, { ProgressBarProps } from 'react-bootstrap/ProgressBar';
 import Row from 'react-bootstrap/Row';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 interface MonthlyInvoiceCardProps {
   icon: string;

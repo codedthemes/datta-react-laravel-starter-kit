@@ -4,8 +4,8 @@ import ProgressBar, { ProgressBarProps } from 'react-bootstrap/ProgressBar';
 import Stack from 'react-bootstrap/Stack';
 
 // project-imports
-import DropDown from 'sections/dashboard/finance/DropDown';
-import MainCard from 'components/MainCard';
+import DropDown from '@/sections/dashboard/finance/DropDown';
+import MainCard from '@/components/MainCard';
 
 interface MoneyCardProps {
   image: string;

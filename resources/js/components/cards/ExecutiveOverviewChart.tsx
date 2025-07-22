@@ -7,7 +7,7 @@ import Stack from 'react-bootstrap/Stack';
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 const chartOptions: ChartProps = {
   chart: {
