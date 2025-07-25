@@ -6,11 +6,11 @@ import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
 
 // project-imports
-import MainCard from 'components/MainCard';
-import branding from 'branding.json';
+import MainCard from '@/components/MainCard';
+import branding from '../../../../../branding.json';
 
 // assets
-import Favicon from 'assets/images/favicon.svg';
+import Favicon from '@assets/images/favicon.svg';
 
 // ==============================|| TOAST - STACKING TOAST ||============================== //
 

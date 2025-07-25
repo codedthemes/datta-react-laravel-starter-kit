@@ -1,3 +1,13 @@
+@import 'react-calendar/dist/Calendar.css';
+@import 'react-toastify/dist/ReactToastify.css';
+@import 'rc-slider/assets/index.css';
+@import 'simplebar-react/dist/simplebar.min.css';
+@import 'flatpickr/dist/flatpickr.css';
+@import 'flatpickr/dist/themes/material_green.css';
+@import 'intro.js/introjs.css';
+@import 'jsvectormap/dist/jsvectormap.css';
+
+
 .switch.btn {
   &:not([class*='wid-']) {
     width: 4rem;

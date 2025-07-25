@@ -2,7 +2,7 @@
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 // ==============================|| PROGRESS BAR - HEIGHT PROGRESS BAR ||============================== //
 

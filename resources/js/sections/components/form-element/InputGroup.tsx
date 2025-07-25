@@ -9,7 +9,7 @@ import Row from 'react-bootstrap/Row';
 import SplitButton from 'react-bootstrap/SplitButton';
 
 // project-import
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 // =============================|| INPUT GROUP ||============================== //
 

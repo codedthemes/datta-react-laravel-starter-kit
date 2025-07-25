@@ -2,7 +2,7 @@
 import Accordion from 'react-bootstrap/Accordion';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 // ==============================|| COLLAPSE - ACCORDION FLUSH ||============================== //
 

@@ -2,7 +2,7 @@
 import Alert from 'react-bootstrap/Alert';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 // ==============================|| ALERT - LINKS ||============================== //
 

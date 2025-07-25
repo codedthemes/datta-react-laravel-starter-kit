@@ -2,7 +2,7 @@
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 // ==============================|| BREADCRUMB - EMBEDDED ||============================== //
 

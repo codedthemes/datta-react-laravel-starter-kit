@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 // project-import
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 // =============================|| SUPPORTED ELEMENTS ||============================== //
 

@@ -7,17 +7,17 @@ import Stack from 'react-bootstrap/Stack';
 import { toast } from 'react-toastify';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 // assets
-import Img1 from 'assets/images/notification/clock-48.png';
-import Img2 from 'assets/images/notification/survey-48.png';
-import Img3 from 'assets/images/notification/ok-48.png';
-import Img4 from 'assets/images/notification/medium_priority-48.png';
-import Img5 from 'assets/images/notification/high_priority-48.png';
-import useConfig from 'hooks/useConfig';
-import { getResolvedTheme, setResolvedTheme } from 'components/setResolvedTheme';
-import { ThemeMode } from 'config';
+import Img1 from '@assets/images/notification/clock-48.png';
+import Img2 from '@assets/images/notification/survey-48.png';
+import Img3 from '@assets/images/notification/ok-48.png';
+import Img4 from '@assets/images/notification/medium_priority-48.png';
+import Img5 from '@assets/images/notification/high_priority-48.png';
+import useConfig from '@/hooks/useConfig';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
+import { ThemeMode } from '@/config';
 
 type NotificationType = 'info' | 'success' | 'warning' | 'error' | 'default';
 

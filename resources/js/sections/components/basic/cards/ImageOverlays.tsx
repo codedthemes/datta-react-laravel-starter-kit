@@ -2,7 +2,7 @@
 import Card from 'react-bootstrap/Card';
 
 // assets
-import CardImg from 'assets/images/light-box/l3.jpg';
+import CardImg from '@assets/images/light-box/l3.jpg';
 
 // ==============================|| CARD - IMAGE OVERLAYS ||============================== //
 

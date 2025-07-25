@@ -98,6 +98,8 @@ File: style.css
   @import 'bootstrap/scss/utilities/api';
 }
 
+@import 'global.scss';
+
 // main framework
 @import 'themes/generic';
 @import 'themes/general';
@@ -147,5 +149,3 @@ File: style.css
 @import 'themes/plugins/treeview';
 
 @import 'themes/layouts/customizer';
-
-@import 'global.scss';

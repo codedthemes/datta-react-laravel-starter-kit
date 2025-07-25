@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 
 // project-imports
 import { showToastMessage } from './utils/ShowToastMsg';
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 // ==============================|| SWEET ALERT - MIXIN ||============================== //
 

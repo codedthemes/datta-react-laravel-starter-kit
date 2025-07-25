@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import Card from 'react-bootstrap/Card';
 
 // project-imports
-import branding from 'branding.json';
+import branding from '../../../../../branding.json';
 
 // third-party
 import IntroJs from 'intro.js';

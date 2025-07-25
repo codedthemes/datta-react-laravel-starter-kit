@@ -10,7 +10,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 
 // project-import
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 // =============================|| TOOLTIPS ||============================== //
 

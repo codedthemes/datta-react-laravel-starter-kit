@@ -1,11 +1,11 @@
 // project-imports
-import MainCard from 'components/MainCard';
-import useConfig from 'hooks/useConfig';
+import MainCard from '@/components/MainCard';
+import useConfig from '@/hooks/useConfig';
 
 // third-party
 import dark from 'react-syntax-highlighter/dist/esm/styles/prism/coy-without-shadows';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { ThemeMode } from 'config';
+import { ThemeMode } from '@/config';
 
 // =============================|| SYNTAX HIGHLIGHTER - CSS MARKUP ||============================== //
 

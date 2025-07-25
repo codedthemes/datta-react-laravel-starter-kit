@@ -4,7 +4,7 @@ import Ratio from 'react-bootstrap/Ratio';
 import Row from 'react-bootstrap/Row';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 // ==============================|| OTHER - EMBEDS ||============================== //
 

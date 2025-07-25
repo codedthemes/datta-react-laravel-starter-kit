@@ -6,7 +6,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 
 // project-import
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 //  =============================|| CUSTOM FORMS ||============================== //
 

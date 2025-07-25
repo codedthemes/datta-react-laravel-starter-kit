@@ -20,7 +20,7 @@ import { showCustomAnimation } from './utils/CustomAnimation';
 import { handleConfirmDialog } from './utils/ConfirmDialog';
 import { handleAutoClose } from './utils/AutoClose';
 import { handleAjaxRequest } from './utils/AjaxRequest';
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 // alert data
 const AlertData = [

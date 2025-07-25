@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 
 // project-imports
 import { showErrorModal, showInfoModal, showQuestionModal, showSuccessModal, showWarningModal } from './utils/Alert';
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 const IconsData = [
   { title: 'Success icons', function: showSuccessModal, color: 'btn-light-success' },

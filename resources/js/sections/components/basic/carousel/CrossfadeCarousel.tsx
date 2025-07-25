@@ -3,12 +3,12 @@ import Carousel from 'react-bootstrap/Carousel';
 import Image from 'react-bootstrap/Image';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 // assets
-import CardImg1 from 'assets/images/slider/img-slide-1.jpg';
-import CardImg2 from 'assets/images/slider/img-slide-2.jpg';
-import CardImg3 from 'assets/images/slider/img-slide-3.jpg';
+import CardImg1 from '@assets/images/slider/img-slide-1.jpg';
+import CardImg2 from '@assets/images/slider/img-slide-2.jpg';
+import CardImg3 from '@assets/images/slider/img-slide-3.jpg';
 
 // ==============================|| CAROUSEL - CROSS FADE ||============================== //
 

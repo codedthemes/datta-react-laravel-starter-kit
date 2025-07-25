@@ -7,11 +7,11 @@ import Stack from 'react-bootstrap/Stack';
 import { toast } from 'react-toastify';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 // assets
-import Img1 from 'assets/images/notification/survey-48.png';
-import useConfig from 'hooks/useConfig';
+import Img1 from '@assets/images/notification/survey-48.png';
+import useConfig from '@/hooks/useConfig';
 
 // ==============================|| NOTIFICATION - DISMISS ||============================== //
 

@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 
 // assets
-import CardImg from 'assets/images/light-box/l3.jpg';
+import CardImg from '@assets/images/light-box/l3.jpg';
 
 // ==============================|| CARD - IMAGE GROUPS ||============================== //
 

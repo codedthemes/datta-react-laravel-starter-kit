@@ -2,7 +2,7 @@
 import Pagination from 'react-bootstrap/Pagination';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 // =============================|| PAGINATION ||============================== //
 

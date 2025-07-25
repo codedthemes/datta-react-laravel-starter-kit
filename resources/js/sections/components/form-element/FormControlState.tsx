@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 
 // project-import
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 // ============================|| FORM CONTROL STATE ||============================== //
 

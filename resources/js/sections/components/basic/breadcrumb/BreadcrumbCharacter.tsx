@@ -3,7 +3,7 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb';
 
 // project-imports
 import Breadcrumbs from './Breadcrumbs';
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 // ==============================|| BREADCRUMB - CHARACTER ||============================== //
 

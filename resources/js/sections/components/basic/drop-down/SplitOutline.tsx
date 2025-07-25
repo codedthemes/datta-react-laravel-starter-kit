@@ -5,7 +5,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Stack from 'react-bootstrap/Stack';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 // ==============================|| DROP DOWN - SPLIT OUTLINE ||============================== //
 

@@ -16,7 +16,7 @@ import { handleRadioInput } from './utils/RadioInput';
 import { handleFileInput } from './utils/FileInput';
 import { handleRangeInput } from './utils/RangeInput';
 import { handleMultipleInputs } from './utils/MultiInput';
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 const InputTypesData = [
   { title: 'Text', function: handleTextInput },

@@ -8,7 +8,7 @@ import Stack from 'react-bootstrap/Stack';
 import Calendar from 'react-calendar';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 // types
 import { DatePickerDisabledProps, SelectedValue } from 'types/date-picker';

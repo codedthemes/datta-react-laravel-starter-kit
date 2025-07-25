@@ -2,7 +2,7 @@
 import Card from 'react-bootstrap/Card';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 // ==============================|| CARD - TITLE TEXT LINK ||============================== //
 

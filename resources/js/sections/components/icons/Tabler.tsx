@@ -9,7 +9,7 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import ClipboardJS from 'clipboard';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 const iconList = [
   { name: 'ti-trending-down-2' },

@@ -3,7 +3,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Stack from 'react-bootstrap/Stack';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 // =============================|| LIST GROUP - CUSTOM CONTENT ||============================== //
 

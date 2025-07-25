@@ -9,8 +9,8 @@ import Stack from 'react-bootstrap/Stack';
 import Table from 'react-bootstrap/Table';
 
 // project-imports
-import MainCard from 'components/MainCard';
-import SimpleBarScroll from 'components/third-party/SimpleBar';
+import MainCard from '@/components/MainCard';
+import SimpleBarScroll from '@/components/third-party/SimpleBar';
 
 // =============================|| OFFCANVAS - LIVE DEMO ||============================== //
 

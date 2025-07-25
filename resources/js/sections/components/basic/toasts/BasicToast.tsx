@@ -5,11 +5,11 @@ import Image from 'react-bootstrap/Image';
 import Toast from 'react-bootstrap/Toast';
 
 // project-imports
-import MainCard from 'components/MainCard';
-import branding from 'branding.json';
+import MainCard from '@/components/MainCard';
+import branding from '../../../../../branding.json';
 
 // assets
-import Favicon from 'assets/images/favicon.svg';
+import Favicon from '@assets/images/favicon.svg';
 
 // ==============================|| TOAST - BASIC ||============================== //
 

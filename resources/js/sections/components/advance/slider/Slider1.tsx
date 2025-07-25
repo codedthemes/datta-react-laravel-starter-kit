@@ -11,12 +11,12 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 // assets
-import image1 from 'assets/images/slider/img-slide-1.jpg';
-import image2 from 'assets/images/slider/img-slide-2.jpg';
-import image3 from 'assets/images/slider/img-slide-3.jpg';
+import image1 from '@assets/images/slider/img-slide-1.jpg';
+import image2 from '@assets/images/slider/img-slide-2.jpg';
+import image3 from '@assets/images/slider/img-slide-3.jpg';
 
 const settings = {
   dots: true,

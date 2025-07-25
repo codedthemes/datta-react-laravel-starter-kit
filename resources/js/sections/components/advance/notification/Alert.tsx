@@ -6,10 +6,10 @@ import Stack from 'react-bootstrap/Stack';
 import { toast } from 'react-toastify';
 
 // project-imports
-import MainCard from 'components/MainCard';
-import useConfig from 'hooks/useConfig';
-import { getResolvedTheme, setResolvedTheme } from 'components/setResolvedTheme';
-import { ThemeMode } from 'config';
+import MainCard from '@/components/MainCard';
+import useConfig from '@/hooks/useConfig';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
+import { ThemeMode } from '@/config';
 
 type NotificationType = 'info' | 'success' | 'warning' | 'error' | 'default';
 

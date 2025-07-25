@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 // assets
-import CardImg from 'assets/images/light-box/l3.jpg';
+import CardImg from '@assets/images/light-box/l3.jpg';
 
 // ==============================|| CARD - HORIZONTAL ||============================== //
 

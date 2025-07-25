@@ -9,7 +9,7 @@ import Table from 'react-bootstrap/Table';
 import Stack from 'react-bootstrap/Stack';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '@/components/MainCard';
 
 // =============================|| OFFCANVAS - PLACEMENT ||============================== //
 
