@@ -16,7 +16,7 @@ import 'cropperjs/dist/cropper.css';
 import MainCard from '@/components/MainCard';
 
 // assets
-import backgrounfImag from 'assets/images/light-box/l1.jpg';
+import backgrounfImag from '@assets/images/light-box/l1.jpg';
 
 // =========================|| IMAGE CROPPER - IMAGE CROPPER PLUGIN ||========================== //
 

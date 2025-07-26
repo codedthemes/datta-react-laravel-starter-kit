@@ -16,7 +16,7 @@ import TabContainer from 'react-bootstrap/TabContainer';
 import MainCard from '@/components/MainCard';
 
 // assets
-import Image1 from 'assets/images/application/img-prod-3.jpg';
+import Image1 from '@assets/images/application/img-prod-3.jpg';
 
 // ==============================|| WIZARD ||============================== //
 

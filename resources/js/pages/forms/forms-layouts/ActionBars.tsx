@@ -1,3 +1,5 @@
+import AppLayout from '@/layouts/app-layout';
+import { Head } from '@inertiajs/react';
 // react-bootstrap
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -14,17 +16,20 @@ import TopBottomActionsBars from '@/sections/forms/form-layouts/action-bars/TopB
 
 export default function ActionBarsPage() {
   return (
-    <Row>
-      <Col lg={6}>
-        <SimpleActionBar />
-        <ActionButtonwithLink />
-        <LayoutWithSideActionButton />
-      </Col>
-      <Col lg={6}>
-        <RightAlignActionBar />
-        <HorizontalForm />
-        <TopBottomActionsBars />
-      </Col>
-    </Row>
+    <AppLayout>
+      <Head title="Action bar" />
+      <Row>
+        <Col lg={6}>
+          <SimpleActionBar />
+          <ActionButtonwithLink />
+          <LayoutWithSideActionButton />
+        </Col>
+        <Col lg={6}>
+          <RightAlignActionBar />
+          <HorizontalForm />
+          <TopBottomActionsBars />
+        </Col>
+      </Row>
+    </AppLayout>
   );
 }

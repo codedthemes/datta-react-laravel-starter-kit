@@ -1,3 +1,5 @@
+import AppLayout from '@/layouts/app-layout';
+import { Head } from '@inertiajs/react';
 // project-imports
 import ReferenceHeader from '@/components/ReferenceHeader';
 import AutoSavingPage from '@/sections/forms/text-editor/mark-down/AutoSaving';
@@ -9,10 +11,13 @@ import SimpleMDEMarkdownEditor from '@/sections/forms/text-editor/mark-down/Simp
 export default function MarkDownPage() {
   return (
     <>
-      <ReferenceHeader caption="SimpleMDE is a simple, embeddable, and beautiful JS markdown editor" link="https://simplemde.com/" />
-      <SimpleMDEMarkdownEditor />
-      <AutoSavingPage />
-      <HiddenToolbar />
+      <AppLayout>
+        <Head title="Markdown" />
+        <ReferenceHeader caption="SimpleMDE is a simple, embeddable, and beautiful JS markdown editor" link="https://simplemde.com/" />
+        <SimpleMDEMarkdownEditor />
+        <AutoSavingPage />
+        <HiddenToolbar />
+      </AppLayout>
     </>
   );
 }

@@ -1,3 +1,5 @@
+import AppLayout from '@/layouts/app-layout';
+import { Head } from '@inertiajs/react';
 // react-bootstrap
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -12,13 +14,16 @@ import TwoColumnsHorizontalForm from '@/sections/forms/form-layouts/multi-layout
 
 export default function MultiLayoutsPage() {
   return (
-    <Row>
-      <Col xs={12}>
-        <TwoColumnsFormLayout />
-        <TwoColumnsHorizontalForm />
-        <ThreeColumnsFormLayout />
-        <ThreeColumnsHorizontalLayout />
-      </Col>
-    </Row>
+    <AppLayout>
+      <Head title="Multi Layout" />
+      <Row>
+        <Col xs={12}>
+          <TwoColumnsFormLayout />
+          <TwoColumnsHorizontalForm />
+          <ThreeColumnsFormLayout />
+          <ThreeColumnsHorizontalLayout />
+        </Col>
+      </Row>
+    </AppLayout>
   );
 }

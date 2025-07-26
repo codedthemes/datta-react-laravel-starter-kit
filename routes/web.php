@@ -65,7 +65,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('animation', function () {return Inertia::render('components/Animation');})->name('Animation'); 
     Route::get('icons', function () {return Inertia::render('components/Icons');})->name('Icons'); 
 
-
     // Forms element
     Route::get('forms/form-elements/basic', function () {return Inertia::render('forms/form-element/FormBasic');})->name('FormBasic');
     Route::get('forms/form-elements/floating', function () {return Inertia::render('forms/form-element/FormFloating');})->name('FormFloating');
@@ -92,27 +91,50 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Forms editor
     Route::get('forms/text-editor/tinymce', function () {return Inertia::render('forms/text-editor/TinyMCE');})->name('TinyMCE'); 
     Route::get('forms/text-editor/quill', function () {return Inertia::render('forms/text-editor/Quill');})->name('quill'); 
+    Route::get('forms/text-editor/ck-editor/classic', function () {return Inertia::render('forms/text-editor/ck-editor/ClassicMain');})->name('TinyMCE'); 
+    Route::get('forms/text-editor/ck-editor/document', function () {return Inertia::render('forms/text-editor/ck-editor/DocumentMain');})->name('TinyMCE'); 
+    Route::get('forms/text-editor/ck-editor/inline', function () {return Inertia::render('forms/text-editor/ck-editor/InlineMain');})->name('TinyMCE'); 
+    Route::get('forms/text-editor/ck-editor/balloon', function () {return Inertia::render('forms/text-editor/ck-editor/BalloonEditorMain');})->name('TinyMCE'); 
+    Route::get('forms/text-editor/markdown', function () {return Inertia::render('forms/text-editor/MarkDown');})->name('TinyMCE'); 
 
-// Route::get('forms/text-editor/tinymce', function () {return Inertia::render('forms/text-editor/ck-editor/ClassicMain');})->name('TinyMCE'); 
-// Route::get('forms/text-editor/tinymce', function () {return Inertia::render('forms/text-editor/ck-editor/DocumentMain');})->name('TinyMCE'); 
-// Route::get('forms/text-editor/tinymce', function () {return Inertia::render('forms/text-editor/ck-editor/InlineMain');})->name('TinyMCE'); 
-// Route::get('forms/text-editor/tinymce', function () {return Inertia::render('forms/text-editor/ck-editor/BalloonEditorMain');})->name('TinyMCE'); 
-// Route::get('forms/text-editor/tinymce', function () {return Inertia::render('forms/text-editor/MarkDown');})->name('TinyMCE'); 
+    // Forms layout
+    Route::get('forms/form-layouts/default-layouts', function () {return Inertia::render('forms/forms-layouts/SimpleLayout');})->name('SimpleLayout'); 
+    Route::get('forms/form-layouts/multi-layouts', function () {return Inertia::render('forms/forms-layouts/MultiLayouts');})->name('MultiLayouts'); 
+    Route::get('forms/form-layouts/action-bar', function () {return Inertia::render('forms/forms-layouts/ActionBars');})->name('ActionBars'); 
+    Route::get('forms/form-layouts/sticky-action-bar', function () {return Inertia::render('forms/forms-layouts/StickyActionBarMain');})->name('StickyActionBarMain'); 
+    
+    // Forms upload
+    Route::get('forms/form-upload/dropzone', function () {return Inertia::render('forms/form-upload/DropZone');})->name('DropZone'); 
+    Route::get('forms/form-upload/uppy', function () {return Inertia::render('forms/form-upload/Uppy');})->name('Uppy'); 
+    
+    // Forms validation, wizard, image-cropper
+    Route::get('forms/wizard', function () {return Inertia::render('forms/WizardMain');})->name('WizardMain'); 
+    Route::get('forms/form-validation', function () {return Inertia::render('forms/FormValidationMain');})->name('FormValidationMain'); 
+    Route::get('forms/image-cropper', function () {return Inertia::render('forms/ImageCrop');})->name('ImageCrop'); 
 
-// // render - forms layout pages
-// const FormLayoutMain = Loadable(lazy(() => import('views/forms/forms-layouts/SimpleLayout')));
-// const FormMultiLayouts = Loadable(lazy(() => import('views/forms/forms-layouts/MultiLayouts')));
-// const FormActionBars = Loadable(lazy(() => import('views/forms/forms-layouts/ActionBars')));
-// const FormStickyActionBarMain = Loadable(lazy(() => import('views/forms/forms-layouts/StickyActionBarMain')));
+    // Bootstrap table
+    Route::get('tables/bootstrap-table/basic-table', function () {return Inertia::render('table/bootstrap-table/BasicTable');})->name('BasicTable'); 
+    Route::get('tables/bootstrap-table/sizing-table', function () {return Inertia::render('table/bootstrap-table/SizingTable');})->name('SizingTable'); 
+    Route::get('tables/bootstrap-table/border-table', function () {return Inertia::render('table/bootstrap-table/BorderTable');})->name('BorderTable'); 
+    Route::get('tables/bootstrap-table/styling-table', function () {return Inertia::render('table/bootstrap-table/StylingTable');})->name('StylingTable'); 
 
-// // render - forms upload pages
-// const FileUploadDropZone = Loadable(lazy(() => import('views/forms/form-upload/DropZone')));
-// const FileUploadUppy = Loadable(lazy(() => import('views/forms/form-upload/Uppy')));
-
-// // render - forms validation, wizard, image-cropper pages
-// const FormValidationMain = Loadable(lazy(() => import('views/forms/FormValidationMain')));
-// const FormWizard = Loadable(lazy(() => import('views/forms/WizardMain')));
-// const FormImageCrop = Loadable(lazy(() => import('views/forms/ImageCrop')));
+    // React table
+    Route::get('tables/react-table/basic', function () {return Inertia::render('table/react-table/Basic');})->name('Basic');
+    Route::get('tables/react-table/dense', function () {return Inertia::render('table/react-table/Dense');})->name('Dense');
+    Route::get('tables/react-table/sorting', function () {return Inertia::render('table/react-table/Sorting');})->name('Sorting');
+    Route::get('tables/react-table/filtering', function () {return Inertia::render('table/react-table/Filtering');})->name('Filtering');
+    Route::get('tables/react-table/grouping', function () {return Inertia::render('table/react-table/Grouping');})->name('Grouping');
+    Route::get('tables/react-table/pagination', function () {return Inertia::render('table/react-table/Pagination');})->name('Pagination');
+    Route::get('tables/react-table/row-selection', function () {return Inertia::render('table/react-table/RowSelection');})->name('RowSelection');
+    Route::get('tables/react-table/expanding', function () {return Inertia::render('table/react-table/Expanding');})->name('Expanding');
+    Route::get('tables/react-table/drag-drop', function () {return Inertia::render('table/react-table/DragDrop');})->name('DragDrop');
+    Route::get('tables/react-table/column-visibility', function () {return Inertia::render('table/react-table/ColumnVisibility');})->name('ColumnVisibility');
+    Route::get('tables/react-table/column-resizing', function () {return Inertia::render('table/react-table/ColumnResizing');})->name('ColumnResizing');
+    Route::get('tables/react-table/sticky', function () {return Inertia::render('table/react-table/StickyHeader');})->name('StickyHeader');
+    Route::get('tables/react-table/umbrella', function () {return Inertia::render('table/react-table/Umbrella');})->name('Umbrella');
+    Route::get('tables/react-table/empty', function () {return Inertia::render('table/react-table/Empty');})->name('Empty');
+    Route::get('tables/react-table/virtualized', function () {return Inertia::render('table/react-table/Virtualized');})->name('Virtualized');
+    Route::get('tables/react-table/edit-table', function () {return Inertia::render('table/react-table/EditTable');})->name('EditTable');
 
 });
 

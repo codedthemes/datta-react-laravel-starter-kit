@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 
 // react-bootstrap
@@ -25,6 +26,7 @@ export default function FormValidation() {
   };
 
   return (
+
     <MainCard title="Form Validation">
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Row className="mb-3">
