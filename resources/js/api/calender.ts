@@ -6,7 +6,7 @@ import { v4 as UIDV4 } from 'uuid';
 
 // project-imports
 
-import { fetcher } from 'utils/axios';
+import { fetcher } from '@/utils/axios';
 
 // types
 import { EventInput } from '@fullcalendar/common';

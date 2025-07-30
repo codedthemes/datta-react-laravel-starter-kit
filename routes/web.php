@@ -3,9 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('welcome');
-})->name('home');
+Route::get('/', function () {return Inertia::render('welcome');})->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
@@ -19,6 +17,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard/crypto', function () {return Inertia::render('navigation/dashboard/Crypto');})->name('crypto');
     Route::get('dashboard/finance', function () {return Inertia::render('navigation/dashboard/Finance');})->name('finance');
     Route::get('dashboard/project', function () {return Inertia::render('navigation/dashboard/Project');})->name('project');
+
+    // Layout
+    Route::get('layouts/vertical', function () {return Inertia::render('navigation/layouts/Vertical');})->name('Vertical');
+    Route::get('layouts/tab', function () {return Inertia::render('navigation/layouts/Tab');})->name('Tab');
+    Route::get('layouts/layout-2', function () {return Inertia::render('navigation/layouts/LayoutTwoPage');})->name('LayoutTwoPage');
+    Route::get('layouts/layout-3', function () {return Inertia::render('navigation/layouts/LayoutThreePage');})->name('LayoutThreePage');
 
     // Widgets
     Route::get('widget/statistics', function () {return Inertia::render('navigation/widgets/statistics/index');})->name('statistics');
@@ -135,6 +139,77 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('tables/react-table/empty', function () {return Inertia::render('table/react-table/Empty');})->name('Empty');
     Route::get('tables/react-table/virtualized', function () {return Inertia::render('table/react-table/Virtualized');})->name('Virtualized');
     Route::get('tables/react-table/edit-table', function () {return Inertia::render('table/react-table/EditTable');})->name('EditTable');
+
+    // Chart
+    Route::get('charts/apex-chart', function () {return Inertia::render('charts/ApexChart');})->name('ApexChart');
+    Route::get('charts/chart-js', function () {return Inertia::render('charts/ChartJS');})->name('ChartJS');
+    
+    // Map
+    Route::get('map/vector-map', function () {return Inertia::render('maps/VectorMap');})->name('VectorMap');
+    Route::get('map/google-map', function () {return Inertia::render('maps/GoogleMap');})->name('GoogleMap');
+
+    // Application calendar, todo, message
+    Route::get('application/calendar', function () {return Inertia::render('application/Calendar');})->name('Calendar');
+    Route::get('application/message', function () {return Inertia::render('application/Message');})->name('Message');
+    Route::get('application/todo', function () {return Inertia::render('application/Todo');})->name('Todo');
+    
+    // Task
+    Route::get('application/task/list', function () {return Inertia::render('application/task/List');})->name('List');
+    Route::get('application/task/board', function () {return Inertia::render('application/task/Board');})->name('Board');
+    Route::get('application/task/detail', function () {return Inertia::render('application/task/Detail');})->name('Detail');
+
+    // Gallery
+    Route::get('application/gallery/advance', function () {return Inertia::render('application/gallery/AdvanceGallery');})->name('AdvanceGallery');
+    Route::get('application/gallery/grid', function () {return Inertia::render('application/gallery/GridGallery');})->name('GridGallery');
+    Route::get('application/gallery/masonry', function () {return Inertia::render('application/gallery/MasonryGallery');})->name('MasonryGallery');
+
+
+    // Invoice
+    Route::get('application/invoice/invoice', function () {return Inertia::render('application/invoice/index');})->name('invoice');
+    Route::get('application/invoice/summary', function () {return Inertia::render('application/invoice/InvoiceSummary');})->name('InvoiceSummary');
+    Route::get('application/invoice/list', function () {return Inertia::render('application/invoice/InvoiceList');})->name('InvoiceList');
+    
+    // User
+    Route::get('application/users/user-list', function () {return Inertia::render('application/users/UserList');})->name('UserList'); 
+    Route::get('application/users/social-profile', function () {return Inertia::render('application/users/SocialProfile');})->name('SocialProfile'); 
+    Route::get('application/users/profile', function () {return Inertia::render('application/users/Profile');})->name('Profile'); 
+    Route::get('application/users/user-card', function () {return Inertia::render('application/users/UserCard');})->name('UserCard'); 
+    
+    // Login
+    Route::get('auth/login-v1', function () {return Inertia::render('auth/login/LoginV1');})->name('LoginV1'); 
+    Route::get('auth/login-v2', function () {return Inertia::render('auth/login/LoginV2');})->name('LoginV2'); 
+    Route::get('auth/login-v3', function () {return Inertia::render('auth/login/LoginV3');})->name('LoginV3'); 
+    Route::get('auth/login-v4', function () {return Inertia::render('auth/login/LoginV4');})->name('LoginV4'); 
+    Route::get('auth/login-v5', function () {return Inertia::render('auth/login/LoginV5');})->name('LoginV5'); 
+    
+    // Register
+    Route::get('auth/register-v1', function () {return Inertia::render('auth/register/RegisterV1');})->name('RegisterV1');
+    Route::get('auth/register-v2', function () {return Inertia::render('auth/register/RegisterV2');})->name('RegisterV2');
+    Route::get('auth/register-v3', function () {return Inertia::render('auth/register/RegisterV3');})->name('RegisterV3');
+    Route::get('auth/register-v4', function () {return Inertia::render('auth/register/RegisterV4');})->name('RegisterV4');
+    Route::get('auth/register-v5', function () {return Inertia::render('auth/register/RegisterV5');})->name('RegisterV5');
+
+    // Reset password
+    Route::get('auth/reset-password-v1', function () {return Inertia::render('auth/reset-password/ResetPasswordV1');})->name('ResetPasswordV1');
+    Route::get('auth/reset-password-v2', function () {return Inertia::render('auth/reset-password/ResetPasswordV2');})->name('ResetPasswordV2');
+    Route::get('auth/reset-password-v3', function () {return Inertia::render('auth/reset-password/ResetPasswordV3');})->name('ResetPasswordV3');
+    Route::get('auth/reset-password-v4', function () {return Inertia::render('auth/reset-password/ResetPasswordV4');})->name('ResetPasswordV4');
+    Route::get('auth/reset-password-v5', function () {return Inertia::render('auth/reset-password/ResetPasswordV5');})->name('ResetPasswordV5');
+    
+    // Change password 
+    Route::get('auth/change-password-v1', function () {return Inertia::render('auth/change-password/ChangePasswordV1');})->name('ChangePasswordV1');
+    Route::get('auth/change-password-v2', function () {return Inertia::render('auth/change-password/ChangePasswordV2');})->name('ChangePasswordV2');
+    Route::get('auth/change-password-v3', function () {return Inertia::render('auth/change-password/ChangePasswordV3');})->name('ChangePasswordV3');
+    Route::get('auth/change-password-v4', function () {return Inertia::render('auth/change-password/ChangePasswordV4');})->name('ChangePasswordV4');
+    Route::get('auth/change-password-v5', function () {return Inertia::render('auth/change-password/ChangePasswordV5');})->name('ChangePasswordV5');
+
+    // Maintenance
+    Route::get('pages/maintenance/error', function () {return Inertia::render('maintenance/Error');})->name('Error');
+    Route::get('pages/maintenance/coming-soon', function () {return Inertia::render('maintenance/ComingSoon');})->name('ComingSoon');
+    Route::get('pages/maintenance/offline-ui', function () {return Inertia::render('maintenance/OfflineUi');})->name('OfflineUi');
+
+    Route::get('landing', function () {return Inertia::render('welcome');})->name('Landing');
+    Route::get('other/sample-page', function () {return Inertia::render('SamplePage');})->name('SamplePage');
 
 });
 

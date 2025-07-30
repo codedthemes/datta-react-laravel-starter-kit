@@ -14,7 +14,7 @@ export default ({ children, ...props }: SimpleLayout) => (
       <div
         data-pc-preset="preset-1"
         data-pc-sidebar-caption="true"
-        data-pc-direction="ltr" 
+        data-pc-direction="ltr"
         data-pc-theme="light"
         className="landing-page"
         {...props}
