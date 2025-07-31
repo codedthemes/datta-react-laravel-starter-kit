@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-
+import { Link, usePage } from '@inertiajs/react';
+import { type SharedData } from '@/types';
+import { useMobileNavigation } from '@/hooks/use-mobile-navigation';
 // react-bootstrap
 import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -75,7 +76,9 @@ const notifications = [
 
 export default function Header() {
   const { i18n, onChangeLocalization, onChangeMode, mode } = useConfig();
-
+  const page = usePage<SharedData>();
+  const cleanup = useMobileNavigation();
+  const { auth } = page.props;
   useEffect(() => {
     setResolvedTheme(mode);
   }, [mode]);
@@ -211,7 +214,7 @@ export default function Header() {
               <Dropdown.Menu className="dropdown-notification pc-h-dropdown">
                 <Dropdown.Header className="d-flex align-items-center justify-content-between">
                   <h5 className="m-0">Notifications</h5>
-                  <Link className="btn btn-link btn-sm" to="#">
+                  <Link className="btn btn-link btn-sm" href="#">
                     Mark all read
                   </Link>
                 </Dropdown.Header>
@@ -248,7 +251,7 @@ export default function Header() {
                 </SimpleBarScroll>
 
                 <div className="text-center py-2">
-                  <Link to="#!" className="link-danger">
+                  <Link href="#!" className="link-danger">
                     Clear all Notifications
                   </Link>
                 </div>
@@ -272,8 +275,8 @@ export default function Header() {
                       <Image src={Img2} alt="user-avatar" className="user-avatar wid-35" roundedCircle />
                     </div>
                     <Stack gap={1}>
-                      <h6 className="text-white mb-0">Carson Darrin 🖖</h6>
-                      <span className="text-white text-opacity-75">carson.darrin@company.io</span>
+                      <h6 className="text-white mb-0">{auth.user.name} 🖖</h6>
+                      <span className="text-white text-opacity-75">{auth.user.email}</span>
                     </Stack>
                   </Stack>
                 </Dropdown.Header>
@@ -293,10 +296,10 @@ export default function Header() {
                       Change Password
                     </Dropdown.Item>
                     <div className="d-grid my-2">
-                      <Button>
+                      <Link className="btn btn-primary" method="post" href={route('logout')} as="button" onClick={cleanup}>
                         <i className="ph ph-sign-out align-middle me-2" />
                         Logout
-                      </Button>
+                      </Link>
                     </div>
                   </div>
                 </div>

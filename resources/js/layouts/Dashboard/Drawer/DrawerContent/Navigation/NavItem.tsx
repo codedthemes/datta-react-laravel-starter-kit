@@ -1,5 +1,5 @@
-import { useLocation, matchPath, Link } from 'react-router-dom';
-import { usePage } from '@inertiajs/react';
+import { useLocation, matchPath } from 'react-router-dom';
+import { Link, usePage } from '@inertiajs/react';
 
 // react-bootstrap
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
@@ -37,7 +37,7 @@ export default function NavItem({ item }: Props) {
   return (
     <li className={`pc-item ${isSelected ? 'active' : ''} `}>
       {menuOrientation !== MenuOrientation.TAB ? (
-        <a
+        <Link
           className="pc-link"
           href={item?.url || '#'}
           target={itemTarget}
@@ -50,11 +50,11 @@ export default function NavItem({ item }: Props) {
         >
           {item?.icon && (
             <span className="pc-micon">
-              <i className={typeof item.icon === 'string' ? item.icon : item.icon?.props.className} />
+              <i className={item.icon} />
             </span>
           )}
           {item.title}
-        </a>
+        </Link>
       ) : (
         <>
           {menuOrientation !== MenuOrientation.TAB && (
@@ -66,7 +66,7 @@ export default function NavItem({ item }: Props) {
                 </Tooltip>
               }
             >
-              <a
+              <Link
                 className="pc-link"
                 href={item?.url || ''}
                 target={itemTarget}
@@ -78,10 +78,10 @@ export default function NavItem({ item }: Props) {
               >
                 {item?.icon && (
                   <span className="pc-micon">
-                    <i className={typeof item.icon === 'string' ? item.icon : item.icon?.props.className} />
+                    <i className={item.icon} />
                   </span>
                 )}
-              </a>
+              </Link>
             </OverlayTrigger>
           )}
         </>

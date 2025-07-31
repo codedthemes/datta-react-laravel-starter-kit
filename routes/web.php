@@ -31,6 +31,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('widget/user', function () {return Inertia::render('navigation/widgets/UserPage');})->name('UserPage');
     Route::get('widget/chart', function () {return Inertia::render('navigation/widgets/Charts');})->name('Charts');
 
+    
+
     // Basic component
     Route::get('basic/alert', function () {return Inertia::render('components/basic/Alert');})->name('Alert');
     Route::get('basic/buttons', function () {return Inertia::render('components/basic/Button');})->name('Button');

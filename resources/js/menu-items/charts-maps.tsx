@@ -12,7 +12,7 @@ const chartsMaps: NavItemType = {
       id: 'charts',
       title: 'charts',
       type: 'collapse',
-      icon: <i className="ph ph-chart-donut" />,
+      icon: 'ph ph-chart-donut',
       children: [
         {
           id: 'apex-chart',
@@ -32,7 +32,7 @@ const chartsMaps: NavItemType = {
       id: 'map',
       title: 'map',
       type: 'collapse',
-      icon: <i className="ph ph-map-trifold" />,
+      icon: 'ph ph-map-trifold',
       children: [
         {
           id: 'vector-map',

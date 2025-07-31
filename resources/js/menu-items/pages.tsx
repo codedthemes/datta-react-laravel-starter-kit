@@ -12,7 +12,7 @@ const pages: NavItemType = {
       id: 'authentication',
       title: 'authentication',
       type: 'collapse',
-      icon: <i className="ph ph-lock-key" />,
+      icon: 'ph ph-lock-key',
       children: [
         {
           id: 'login',
@@ -188,7 +188,7 @@ const pages: NavItemType = {
       id: 'maintenance',
       title: 'maintenance',
       type: 'collapse',
-      icon: <i className="ph ph-wrench" />,
+      icon: 'ph ph-wrench',
       children: [
         {
           id: 'error',
@@ -218,7 +218,7 @@ const pages: NavItemType = {
       id: 'landing',
       title: 'landing',
       type: 'item',
-      icon: <i className="ph ph-target" />,
+      icon: 'ph ph-target',
       url: '/landing',
       target: true
     }

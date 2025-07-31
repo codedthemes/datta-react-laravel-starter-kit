@@ -12,7 +12,7 @@ const formComponents: NavItemType = {
       id: 'form-elements',
       title: 'form elements',
       type: 'collapse',
-      icon: <i className="ph ph-textbox" />,
+      icon: 'ph ph-textbox',
       children: [
         {
           id: 'form-basic',
@@ -68,7 +68,7 @@ const formComponents: NavItemType = {
       id: 'form-plugins',
       title: 'form plugins',
       type: 'collapse',
-      icon: <i className="ph ph-plug-charging" />,
+      icon: 'ph ph-plug-charging',
       children: [
         {
           id: 'date',
@@ -132,12 +132,12 @@ const formComponents: NavItemType = {
           type: 'item',
           url: '/forms/form-plugins/clipboard'
         },
-        {
-          id: 'nouislider',
-          title: 'nouislider',
-          type: 'item',
-          url: '/forms/form-plugins/nouislider'
-        },
+        // {
+        //   id: 'nouislider',
+        //   title: 'nouislider',
+        //   type: 'item',
+        //   url: '/forms/form-plugins/nouislider'
+        // },
         {
           id: 'bootstrap-switch',
           title: 'bootstrap switch',
@@ -156,7 +156,7 @@ const formComponents: NavItemType = {
       id: 'text-editor',
       title: 'text editor',
       type: 'collapse',
-      icon: <i className="ph ph-pen-nib" />,
+      icon: 'ph ph-pen-nib',
       children: [
         {
           id: 'tinymce',
@@ -213,7 +213,7 @@ const formComponents: NavItemType = {
       id: 'form-layouts',
       title: 'form layouts',
       type: 'collapse',
-      icon: <i className="ph ph-windows-logo" />,
+      icon: 'ph ph-windows-logo',
       children: [
         {
           id: 'form-layouts',
@@ -245,7 +245,7 @@ const formComponents: NavItemType = {
       id: 'form-upload',
       title: 'form upload',
       type: 'collapse',
-      icon: <i className="ph ph-cloud-arrow-up" />,
+      icon: 'ph ph-cloud-arrow-up',
       children: [
         {
           id: 'dropzone',
@@ -266,21 +266,21 @@ const formComponents: NavItemType = {
       id: 'wizard',
       title: 'wizard',
       type: 'item',
-      icon: <i className="ph ph-tabs" />,
+      icon: 'ph ph-tabs',
       url: '/forms/wizard'
     },
     {
       id: 'form-validation',
       title: 'form validation',
       type: 'item',
-      icon: <i className="ph ph-password" />,
+      icon: 'ph ph-password',
       url: '/forms/form-validation'
     },
     {
       id: 'image-cropper',
       title: 'image cropper',
       type: 'item',
-      icon: <i className="ph ph-crop" />,
+      icon: 'ph ph-crop',
       url: '/forms/image-cropper'
     }
   ]

@@ -1,4 +1,4 @@
-import { DefaultConfigProps } from 'types/config';
+import { DefaultConfigProps } from '@/types/config';
 
 // ==============================|| THEME CONSTANT ||============================== //
 

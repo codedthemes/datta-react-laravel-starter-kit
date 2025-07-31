@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 // ==============================|| MENU TYPES ||============================== //
 
@@ -6,7 +6,7 @@ export type NavItemType = {
   badge?: number;
   breadcrumbs?: boolean;
   children?: NavItemType[];
-  icon?: ReactElement | string;
+  icon?: string;
   id?: string;
   link?: string;
   target?: boolean;

@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { usePage } from '@inertiajs/react';
+import { usePage, Link } from '@inertiajs/react';
 
 // react-bootstrap
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -105,10 +104,10 @@ export default function DrawerContent({ selectedItems, setSelectedItems }: Props
                     key={item.id}
                     className={`pc-item pc-hasmenu ${open[item.id as string] ? 'pc-trigger' : ''} ${isActive(item) ? 'active' : ''}`}
                   >
-                    <Link to={item.url || '#'} className="pc-link" onClick={() => handleClick(item)}>
+                    <Link href={item.url || '#'} className="pc-link" onClick={() => handleClick(item)}>
                       {item.icon && (
                         <span className="pc-micon">
-                          <i className={typeof item.icon === 'string' ? item.icon : item.icon?.props.className} />
+                          <i className={item.icon} />
                         </span>
                       )}
                       <span className="pc-mtext">
@@ -129,7 +128,7 @@ export default function DrawerContent({ selectedItems, setSelectedItems }: Props
                             className={`pc-item ${open[child.id as string] ? 'pc-trigger' : ''} ${isActive(child) ? 'active' : ''}`}
                           >
                             <Link
-                              to={child.url || '#'}
+                              href={child.url || '#'}
                               className="pc-link"
                               onClick={() => {
                                 handleClick(child);
@@ -140,7 +139,7 @@ export default function DrawerContent({ selectedItems, setSelectedItems }: Props
                             >
                               {child.icon && (
                                 <span className="pc-micon">
-                                  <i className={typeof child.icon === 'string' ? child.icon : child.icon?.props.className} />
+                                  <i className={child.icon} />
                                 </span>
                               )}
                        {child.title}
@@ -157,7 +156,7 @@ export default function DrawerContent({ selectedItems, setSelectedItems }: Props
                                   <li key={value.id} className={`pc-item ${isActive(value) ? 'active' : ''}`}>
                                     <Link
                                       className="pc-link"
-                                      to={value.url || ''}
+                                      href={value.url || ''}
                                       onClick={() => {
                                         if (value?.layout === value?.title) {
                                           onChangeMenuOrientation(value?.layout as MenuOrientation);
@@ -166,7 +165,7 @@ export default function DrawerContent({ selectedItems, setSelectedItems }: Props
                                     >
                                       {value.icon && (
                                         <span className="pc-micon">
-                                          <i className={typeof value.icon === 'string' ? value.icon : value.icon?.props.className} />
+                                          <i className={value.icon} />
                                         </span>
                                       )}
                                       {value.title}

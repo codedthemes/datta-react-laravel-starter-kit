@@ -1,7 +1,6 @@
 import { Fragment, useCallback, useEffect, useState } from 'react';
-import { Link, matchPath, useLocation } from 'react-router-dom';
-import { usePage } from '@inertiajs/react';
-
+import { matchPath, useLocation } from 'react-router-dom';
+import { Link, usePage } from '@inertiajs/react';
 
 // react-bootstrap
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
@@ -184,7 +183,7 @@ export default function NavGroup({
             }
           >
             <Link
-              to="#!"
+              href="#!"
               className={`nav-link ${item.id === selected ? 'active' : ''}`}
               onClick={() => {
                 handleClick();

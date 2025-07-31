@@ -12,7 +12,7 @@ const adminPanel: NavItemType = {
       id: 'online-course',
       title: 'online course',
       type: 'collapse',
-      icon: <i className="ph ph-book-open-text" />,
+      icon: 'ph ph-book-open-text',
       children: [
         {
           id: 'online-course-dashboard',
@@ -133,7 +133,7 @@ const adminPanel: NavItemType = {
       id: 'membership',
       title: 'membership',
       type: 'collapse',
-      icon: <i className="ph ph-users-four" />,
+      icon: 'ph ph-users-four',
       children: [
         {
           id: 'dashboard',
@@ -165,7 +165,7 @@ const adminPanel: NavItemType = {
       id: 'helpdesk',
       title: 'helpdesk',
       type: 'collapse',
-      icon: <i className="ph ph-lifebuoy" />,
+      icon: 'ph ph-lifebuoy',
       children: [
         {
           id: 'helpdesk-dashboard',
@@ -210,7 +210,7 @@ const adminPanel: NavItemType = {
       id: 'admin-invoice',
       title: 'invoice',
       type: 'collapse',
-      icon: <i className="ph ph-printer" />,
+      icon: 'ph ph-printer',
       children: [
         {
           id: 'invoice-dashboard',

@@ -11,7 +11,7 @@ const uiComponents: NavItemType = {
     {
       id: 'basic',
       title: 'basic',
-      icon: <i className="ph ph-pencil-ruler" />,
+      icon: 'ph ph-pencil-ruler',
       type: 'collapse',
       children: [
         {
@@ -139,7 +139,7 @@ const uiComponents: NavItemType = {
     {
       id: 'advanced',
       title: 'advanced',
-      icon: <i className="ph ph-briefcase" />,
+      icon: 'ph ph-briefcase',
       type: 'collapse',
       children: [
         {
@@ -207,14 +207,14 @@ const uiComponents: NavItemType = {
     {
       id: 'animation',
       title: 'animation',
-      icon: <i className="ph ph-vinyl-record" />,
+      icon: 'ph ph-vinyl-record',
       type: 'item',
       url: '/animation'
     },
     {
       id: 'icons',
       title: 'icons',
-      icon: <i className="ph ph-feather" />,
+      icon: 'ph ph-feather',
       type: 'item',
       url: '/icons'
     }

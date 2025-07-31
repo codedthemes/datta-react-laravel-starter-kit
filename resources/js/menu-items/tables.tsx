@@ -12,7 +12,7 @@ const tableComponents: NavItemType = {
       id: 'bootstrap-table',
       title: 'bootstrap table',
       type: 'collapse',
-      icon: <i className="ph ph-table" />,
+      icon: 'ph ph-table',
       children: [
         {
           id: 'basic-table',
@@ -44,7 +44,7 @@ const tableComponents: NavItemType = {
       id: 'react-table',
       title: 'react table',
       type: 'collapse',
-      icon: <i className="ph ph-grid-nine" />,
+      icon: 'ph ph-grid-nine',
       children: [
         {
           id: 'basic',

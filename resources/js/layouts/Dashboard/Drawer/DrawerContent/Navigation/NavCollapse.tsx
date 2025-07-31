@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
-import { Link, matchPath, useLocation, useNavigate } from 'react-router-dom';
-import { usePage } from '@inertiajs/react';
+import { matchPath, useLocation, useNavigate } from 'react-router-dom';
+import { Link, usePage } from '@inertiajs/react';
 
 // react-bootstrap
 import Badge from 'react-bootstrap/Badge';
@@ -165,7 +165,7 @@ export default function NavCollapse({ menu, level, parentId, setSelectedItems, s
           <a className="pc-link" href="#!" onClick={() => handleClick(true)}>
             {menu.icon && (
               <span className="pc-micon">
-                <i className={typeof menu.icon === 'string' ? menu.icon : menu.icon?.props.className} />
+                <i className={menu.icon} />
               </span>
             )}
             <span className="pc-mtext">
@@ -190,7 +190,7 @@ export default function NavCollapse({ menu, level, parentId, setSelectedItems, s
                   </Tooltip>
                 }
               >
-                <a
+                <Link
                   href="#!"
                   className="pc-link"
                   onClick={() => {
@@ -199,10 +199,10 @@ export default function NavCollapse({ menu, level, parentId, setSelectedItems, s
                 >
                   {menu.icon && (
                     <span className="pc-micon">
-                      <i className={typeof menu.icon === 'string' ? menu.icon : menu.icon?.props.className} />
+                      <i className={menu.icon} />
                     </span>
                   )}
-                </a>
+                </Link>
               </OverlayTrigger>
             </ListGroup>
           )}

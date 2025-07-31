@@ -1,20 +1,17 @@
 // types
 import { NavItemType } from '@/types/menu';
 
-const icons = { dashboard: <i className="ph ph-house-line" />, layouts: <i className="ph ph-house-line" /> };
-
 const navigation: NavItemType = {
   id: 'group-dashboard-loading-unique',
   title: 'navigation',
   type: 'group',
-  icon: icons.dashboard,
   children: [
     {
       id: 'dashboard',
       title: 'dashboard',
       badge: 5,
       type: 'collapse',
-      icon: icons.dashboard,
+      icon: 'ph ph-house-line',
       children: [
         {
           id: 'default',
@@ -64,7 +61,7 @@ const navigation: NavItemType = {
       id: 'layouts',
       title: 'layouts',
       type: 'collapse',
-      icon: <i className="ph ph-layout" />,
+      icon: 'ph ph-layout',
       children: [
         {
           id: 'vertical',
@@ -100,7 +97,7 @@ const navigation: NavItemType = {
       id: 'widget',
       title: 'widget',
       type: 'collapse',
-      icon: <i className="ph ph-flower-lotus" />,
+      icon: 'ph ph-flower-lotus',
       children: [
         {
           id: 'statistics',

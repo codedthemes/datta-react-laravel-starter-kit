@@ -12,7 +12,7 @@ const other: NavItemType = {
       id: 'menu-levels',
       title: 'menu-levels',
       type: 'collapse',
-      icon: <i className="ph ph-tree-structure" />,
+      icon: 'ph ph-tree-structure',
       children: [
         {
           id: 'level-2.1',
@@ -93,7 +93,7 @@ const other: NavItemType = {
       id: 'sample-page',
       title: 'sample page',
       type: 'item',
-      icon: <i className="ph ph-desktop" />,
+      icon: 'ph ph-desktop',
       url: '/other/sample-page'
     }
   ]

@@ -12,21 +12,21 @@ const application: NavItemType = {
       id: 'calendar',
       title: 'calendar',
       type: 'item',
-      icon: <i className="ph ph-calendar-blank" />,
+      icon: 'ph ph-calendar-blank',
       url: '/application/calendar'
     },
     {
       id: 'message',
       title: 'message',
       type: 'item',
-      icon: <i className="ph ph-chats-circle" />,
+      icon: 'ph ph-chats-circle',
       url: '/application/message'
     },
     {
       id: 'task',
       title: 'task',
       type: 'collapse',
-      icon: <i className="ph ph-list-bullets" />,
+      icon: 'ph ph-list-bullets',
       children: [
         {
           id: 'task-list',
@@ -52,14 +52,14 @@ const application: NavItemType = {
       id: 'todo',
       title: 'todo',
       type: 'item',
-      icon: <i className="ph ph-list-checks" />,
+      icon: 'ph ph-list-checks',
       url: '/application/todo'
     },
     {
       id: 'gallery',
       title: 'gallery',
       type: 'collapse',
-      icon: <i className="ph ph-images" />,
+      icon: 'ph ph-image',
       children: [
         {
           id: 'grid',
@@ -85,7 +85,7 @@ const application: NavItemType = {
       id: 'application-invoice',
       title: 'invoice',
       type: 'collapse',
-      icon: <i className="ph ph-printer" />,
+      icon: 'ph ph-printer',
       children: [
         {
           id: 'invoice',
@@ -110,7 +110,7 @@ const application: NavItemType = {
     {
       title: 'users',
       type: 'collapse',
-      icon: <i className="ph ph-user-circle" />,
+      icon: 'ph ph-user-circle',
       children: [
         {
           id: 'users-profile',

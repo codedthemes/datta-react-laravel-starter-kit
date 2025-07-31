@@ -34,8 +34,8 @@ interface LoginProps {
 
 export default function Login({ status, canResetPassword }: LoginProps) {
     const { data, setData, post, processing, errors, reset } = useForm<Required<LoginForm>>({
-        email: '',
-        password: '',
+        email: 'viral@phoenixcoded.co',
+        password: '123123123',
         remember: false,
     });
 
