@@ -10,7 +10,7 @@ import Row from 'react-bootstrap/Row';
 import Calendar from 'react-calendar';
 
 // types
-import { DatePickerDisabledProps, SelectedValue } from 'types/date-picker';
+import { DatePickerDisabledProps, SelectedValue } from '@/types/date-picker';
 
 function formatDate(date: Date) {
   const day = date.getDate().toString().padStart(2, '0');

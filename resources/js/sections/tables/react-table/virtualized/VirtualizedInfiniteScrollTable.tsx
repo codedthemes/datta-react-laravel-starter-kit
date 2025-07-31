@@ -29,7 +29,7 @@ import DebouncedInput from '@/components/third-party/react-table/DebouncedInput'
 import makeData from '@/data/react-table';
 
 // types
-import { TableDataApiResponse, TableDataProps } from 'types/table';
+import { TableDataApiResponse, TableDataProps } from '@/types/table';
 import { LabelKeyObject } from 'react-csv/lib/core';
 
 const fetchSize = 25;

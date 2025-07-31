@@ -12,7 +12,7 @@ import Stack from 'react-bootstrap/Stack';
 import MainCard from '@/components/MainCard';
 
 // types
-import { UserProfileProps } from 'types/userProfile';
+import { UserProfileProps } from '@/types/userProfile';
 
 // assets
 import avatar5 from '@assets/images/user/avatar-5.png';

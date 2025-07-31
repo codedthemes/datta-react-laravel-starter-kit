@@ -17,7 +17,7 @@ import RangePicker from './RangePicker';
 import WithInputGroup from './WithInputGroup';
 
 // types
-import { DatePickerDisabledProps, SelectedValue } from 'types/date-picker';
+import { DatePickerDisabledProps, SelectedValue } from '@/types/date-picker';
 
 function formatDate(date: Date) {
   const day = date.getDate().toString().padStart(2, '0');

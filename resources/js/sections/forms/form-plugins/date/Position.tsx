@@ -10,7 +10,7 @@ import Row from 'react-bootstrap/Row';
 import Calendar from 'react-calendar';
 
 // types
-import { DatePickerDisabledProps, SelectedValue } from 'types/date-picker';
+import { DatePickerDisabledProps, SelectedValue } from '@/types/date-picker';
 
 type PositionType = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
 

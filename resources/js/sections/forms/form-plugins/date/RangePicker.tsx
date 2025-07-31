@@ -10,7 +10,7 @@ import Row from 'react-bootstrap/Row';
 import Calendar from 'react-calendar';
 
 // types
-import { DatePickerDisabledProps } from 'types/date-picker';
+import { DatePickerDisabledProps } from '@/types/date-picker';
 
 // =============================|| DATE - RANGE PICKER ||============================== //
 

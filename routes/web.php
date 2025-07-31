@@ -30,9 +30,43 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('widget/table', function () {return Inertia::render('navigation/widgets/TablePages');})->name('TablePages');
     Route::get('widget/user', function () {return Inertia::render('navigation/widgets/UserPage');})->name('UserPage');
     Route::get('widget/chart', function () {return Inertia::render('navigation/widgets/Charts');})->name('Charts');
-
     
+    // Online course
+    Route::get('admin-panel/online-course/dashboard/', function () {return Inertia::render('admin-panel/online-courses/Dashboard');})->name('Dashboard');
+    Route::get('admin-panel/online-course/teacher/list', function () {return Inertia::render('admin-panel/online-courses/teacher/List');})->name('teacherList');
+    Route::get('admin-panel/online-course/teacher/apply', function () {return Inertia::render('admin-panel/online-courses/teacher/Apply');})->name('teacherApply');
+    Route::get('admin-panel/online-course/teacher/add', function () {return Inertia::render('admin-panel/online-courses/teacher/Add');})->name('teacherAdd');
+    Route::get('admin-panel/online-course/student/list', function () {return Inertia::render('admin-panel/online-courses/student/List');})->name('List');
+    Route::get('admin-panel/online-course/student/apply', function () {return Inertia::render('admin-panel/online-courses/student/Apply');})->name('Apply');
+    Route::get('admin-panel/online-course/student/add', function () {return Inertia::render('admin-panel/online-courses/student/Add');})->name('Add');
+    Route::get('admin-panel/online-course/course/view', function () {return Inertia::render('admin-panel/online-courses/courses/View');})->name('View');
+    Route::get('admin-panel/online-course/course/add', function () {return Inertia::render('admin-panel/online-courses/courses/Add');})->name('Add');
+    Route::get('admin-panel/online-course/pricing', function () {return Inertia::render('admin-panel/online-courses/Pricing');})->name('Pricing');
+    Route::get('admin-panel/online-course/site', function () {return Inertia::render('admin-panel/online-courses/Site');})->name('Site');
+    Route::get('admin-panel/online-course/setting/payment', function () {return Inertia::render('admin-panel/online-courses/settings/Payment');})->name('Payment');
+    Route::get('admin-panel/online-course/setting/pricing', function () {return Inertia::render('admin-panel/online-courses/settings/Pricing');})->name('Pricing');
+    Route::get('admin-panel/online-course/setting/notification', function () {return Inertia::render('admin-panel/online-courses/settings/Notification');})->name('Notification');
 
+    // Helpdesk 
+    Route::get('admin-panel/helpdesk/dashboard', function () {return Inertia::render('admin-panel/helpdesk/Dashboard');})->name('Dashboard');
+    Route::get('admin-panel/helpdesk/ticket/create', function () {return Inertia::render('admin-panel/helpdesk/tickets/CreateMain');})->name('CreateMain');
+    Route::get('admin-panel/helpdesk/ticket/list', function () {return Inertia::render('admin-panel/helpdesk/tickets/ListMain');})->name('ListMain');
+    Route::get('admin-panel/helpdesk/ticket/details', function () {return Inertia::render('admin-panel/helpdesk/tickets/DetailsMain');})->name('DetailsMain');
+    Route::get('admin-panel/helpdesk/customers', function () {return Inertia::render('admin-panel/helpdesk/Customers');})->name('Customers');
+    
+    // Membership
+    Route::get('admin-panel/membership/dashboard', function () {return Inertia::render('admin-panel/membership/DashboardMain');})->name('DashboardMain'); 
+    Route::get('admin-panel/membership/list', function () {return Inertia::render('admin-panel/membership/ListMain');})->name('ListMain'); 
+    Route::get('admin-panel/membership/pricing', function () {return Inertia::render('admin-panel/membership/PricingMain');})->name('PricingMain'); 
+    Route::get('admin-panel/membership/setting', function () {return Inertia::render('admin-panel/membership/SettingMain');})->name('SettingMain'); 
+    
+    // Invoice
+    Route::get('admin-panel/invoice/dashboard', function () {return Inertia::render('admin-panel/invoice/Dashboard');})->name('Dashboard');
+    Route::get('admin-panel/invoice/details', function () {return Inertia::render('admin-panel/invoice/Details');})->name('Details');
+    Route::get('admin-panel/invoice/create', function () {return Inertia::render('admin-panel/invoice/Create');})->name('Create');
+    Route::get('admin-panel/invoice/list', function () {return Inertia::render('admin-panel/invoice/List');})->name('List');
+    Route::get('admin-panel/invoice/edit', function () {return Inertia::render('admin-panel/invoice/Edit');})->name('Edit');
+    
     // Basic component
     Route::get('basic/alert', function () {return Inertia::render('components/basic/Alert');})->name('Alert');
     Route::get('basic/buttons', function () {return Inertia::render('components/basic/Button');})->name('Button');

@@ -10,7 +10,7 @@ import Calendar from 'react-calendar';
 import MainCard from '@/components/MainCard';
 
 // types
-import { DatePickerDisabledProps, SelectedValue } from 'types/date-picker';
+import { DatePickerDisabledProps, SelectedValue } from '@/types/date-picker';
 
 interface TileClassNameProps {
   date: Date;

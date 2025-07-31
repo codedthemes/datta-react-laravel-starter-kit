@@ -8,5 +8,5 @@ export enum ImagePath {
 // ==============================|| UTIL - GET IMAGE URL ||============================== //
 
 export function getImageUrl(name: string, path: string) {
-  return new URL(`/src/assets/images/${path}/${name}`, import.meta.url).href;
+  return new URL(`@assets/images/${path}/${name}`, import.meta.url).href;
 }

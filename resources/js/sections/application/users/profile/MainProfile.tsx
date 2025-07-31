@@ -9,7 +9,7 @@ import ProfileOverview from './ProfileOverview';
 import PersonalInformation from './PersonalInformation';
 
 // types
-import { UserProfileProps } from 'types/userProfile';
+import { UserProfileProps } from '@/types/userProfile';
 
 const profilePanClass = 'tab-pane fade';
 const profilePanActiveClass = 'tab-pane fade show active';
