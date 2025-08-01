@@ -1,3 +1,5 @@
+import AppLayout from '@/layouts/app-layout';
+import { Head } from '@inertiajs/react';
 // react-bootstrap
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -9,10 +11,13 @@ import InvoiceCreate from '@/sections/admin-panel/invoice/Create';
 
 export default function InvoiceCreatePage() {
   return (
-    <Row>
-      <Col xs={12}>
-        <InvoiceCreate />
-      </Col>
-    </Row>
+    <AppLayout>
+      <Head title="Create" />
+      <Row>
+        <Col xs={12}>
+          <InvoiceCreate />
+        </Col>
+      </Row>
+    </AppLayout>
   );
 }
