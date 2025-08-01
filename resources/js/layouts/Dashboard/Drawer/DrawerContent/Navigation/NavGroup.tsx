@@ -7,7 +7,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 
 // third-party
-// import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 // project-imports
 import NavItem from './NavItem';
@@ -167,7 +167,7 @@ export default function NavGroup({
         <Fragment>
           <li className="pc-item pc-caption" key={item.id}>
             <label>
-              {item.title}
+             <FormattedMessage id={item.title as string}  />
             </label>
           </li>
           {navCollapse}
@@ -178,7 +178,7 @@ export default function NavGroup({
             placement="right"
             overlay={
               <Tooltip id={`tooltip-${item?.title ?? ''}`}>
-                {item.title}
+               <FormattedMessage id={item.title as string}  />
               </Tooltip>
             }
           >

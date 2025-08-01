@@ -1,3 +1,5 @@
+import AppLayout from '@/layouts/app-layout';
+import { Head } from '@inertiajs/react';
 // react-bootstrap
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -10,11 +12,14 @@ import InvoiceDetailsCard from '@/sections/admin-panel/invoice/details/DetailsCa
 
 export default function InvoiceDetailsPage() {
   return (
-    <Row>
-      <Col xs={12}>
-        <InvoiceDetailsCard />
-        <InvoiceDetails />
-      </Col>
-    </Row>
+    <AppLayout>
+      <Head title="Invoice details" />
+      <Row>
+        <Col xs={12}>
+          <InvoiceDetailsCard />
+          <InvoiceDetails />
+        </Col>
+      </Row>
+    </AppLayout>
   );
 }

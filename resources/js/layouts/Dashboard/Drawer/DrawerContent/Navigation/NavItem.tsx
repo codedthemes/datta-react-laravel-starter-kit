@@ -6,7 +6,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 
 // third-party
-// import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 // project-imports
 import { handlerDrawerOpen } from '@/api/menu';
@@ -53,7 +53,7 @@ export default function NavItem({ item }: Props) {
               <i className={item.icon} />
             </span>
           )}
-          {item.title}
+          <FormattedMessage id={item.title as string} />
         </Link>
       ) : (
         <>
@@ -62,7 +62,7 @@ export default function NavItem({ item }: Props) {
               placement="right"
               overlay={
                 <Tooltip id={`tooltip-${item.title as string}`}>
-                  {item.title}
+                  <FormattedMessage id={item.title as string} />
                 </Tooltip>
               }
             >

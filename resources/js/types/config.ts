@@ -1,4 +1,4 @@
-import { MenuOrientation, ThemeDirection, ThemeMode } from 'config';
+import { MenuOrientation, ThemeDirection, ThemeMode } from '@/config';
 
 export type FontFamily = "'Public Sans', sans-serif";
 export type PresetColor = 'default' | 'theme1' | 'theme2' | 'theme3' | 'theme4' | 'theme5' | 'theme6' | 'theme7' | 'theme8';

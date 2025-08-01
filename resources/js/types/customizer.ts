@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 // project-imports
-import { ThemeDirection, ThemeMode } from 'config';
+import { ThemeDirection, ThemeMode } from '@/config';
 
 export interface ColorOption {
   id: string;

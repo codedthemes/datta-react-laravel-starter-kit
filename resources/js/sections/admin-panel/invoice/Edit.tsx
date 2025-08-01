@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '@inertiajs/react';
 
 // react-bootstrap
 import Button from 'react-bootstrap/Button';
@@ -270,7 +270,7 @@ export default function InvoiceEdit() {
               </Form.Select>
             </Col>
             <Col sm="auto" className="btn-page">
-              <Link className="btn btn-outline-secondary" to="/admin-panel/invoice/details">
+              <Link className="btn btn-outline-secondary" href="/admin-panel/invoice/details">
                 Preview
               </Link>
               <Button>Update & Send</Button>
