@@ -1,3 +1,5 @@
+import AppLayout from '@/layouts/app-layout';
+import { Head } from '@inertiajs/react';
 // react-bootstrap
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -9,10 +11,13 @@ import Setting from '@/sections/admin-panel/membership/Setting';
 
 export default function SettingMainPage() {
   return (
-    <Row>
-      <Col xs={12}>
-        <Setting />
-      </Col>
-    </Row>
+    <AppLayout>
+      <Head title="Setting" />
+      <Row>
+        <Col xs={12}>
+          <Setting />
+        </Col>
+      </Row>
+    </AppLayout>
   );
 }

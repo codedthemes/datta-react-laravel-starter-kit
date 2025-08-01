@@ -9,7 +9,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 
 // third-party
-// import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 // project-imports
 import NavItem from './NavItem';
@@ -169,7 +169,7 @@ export default function NavCollapse({ menu, level, parentId, setSelectedItems, s
               </span>
             )}
             <span className="pc-mtext">
-              {menu.title}
+              <FormattedMessage id={menu.title as string} />
             </span>
             <span className="pc-arrow">
               <i className={`ti ti-chevron-right`} />
@@ -186,7 +186,7 @@ export default function NavCollapse({ menu, level, parentId, setSelectedItems, s
                 placement="right"
                 overlay={
                   <Tooltip id={`tooltip-${menu.title as string}`}>
-                    {menu.title}
+                   <FormattedMessage id={menu.title as string} />
                   </Tooltip>
                 }
               >

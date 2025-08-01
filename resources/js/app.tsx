@@ -1,3 +1,5 @@
+import Locales from '@/components/Locales';
+import { ConfigProvider } from '@/contexts/ConfigContext';
 
 import '@assets/fonts/phosphor/regular/style.css';
 import '@assets/fonts/tabler-icons.min.css';
@@ -9,6 +11,7 @@ import '@fontsource/open-sans/600.css';
 
 import '@assets/scss/style.scss';
 import '@assets/scss/style-preset.scss';
+
 
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
@@ -23,7 +26,13 @@ createInertiaApp({
     setup({ el, App, props }) {
         const root = createRoot(el);
 
-        root.render(<App {...props} />);
+        root.render(
+            <ConfigProvider>
+            <Locales>
+                <App {...props} />
+            </Locales>
+            </ConfigProvider>
+        );
     },
     progress: {
         color: '#4B5563',
