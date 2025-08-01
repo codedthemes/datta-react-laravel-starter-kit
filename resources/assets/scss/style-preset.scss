@@ -314,7 +314,9 @@ $i: 1;
     --pc-sidebar-caption-color: #{$value};
   }
   [data-pc-navimg='#{$name}'] {
-    --pc-sidebar-background: url('@assets/images/layout/navbar-img-#{$i}.jpg');
+    @if($i <= 6){
+      --pc-sidebar-background: url('@assets/images/layout/navbar-img-#{$i}.jpg');
+    }
   }
   $i: $i + 1;
 }
