@@ -10,6 +10,10 @@ import Image from 'react-bootstrap/Image';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
+// project-imports
+import branding from '../../../branding.json';
+import { APP_DEFAULT_PATH } from '@/config';
+
 // assets
 import Logo from '@assets/images/logo-white.svg';
 
@@ -30,7 +34,7 @@ export default function HeaderSection() {
   }, [handleScroll]);
 
   return (
-    <Navbar expand="md" className="navbar-Datta top-nav-collapse default " ref={navbarRef}>
+    <Navbar expand="md" className="navbar-Datta top-nav-collapse default" ref={navbarRef} data-bs-theme="dark">
       <Container>
         <Navbar.Brand href="/">
           <Image src={Logo} alt="logo" />
@@ -39,42 +43,42 @@ export default function HeaderSection() {
         <Navbar.Collapse id="navbarTogglerDemo01">
           <Nav className="ms-auto mb-2 mb-md-0 align-items-start">
             {auth.user ? (
-               <Nav.Item className="px-1">
+              <Nav.Item className="px-1">
                 <Nav.Link href={route('dashboard')} target="_blank">
                   Dashboard
                 </Nav.Link>
               </Nav.Item>
             ) : (
               <>
-              <Nav.Item className="px-1">
-                <Nav.Link href={route('login')} target="_blank">
-                  Log in
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item className="px-1">
-                <Nav.Link href={route('register')} target="_blank">
-                  Register
-                </Nav.Link>
-              </Nav.Item>
+                <Nav.Item className="px-1">
+                  <Nav.Link href={route('login')} target="_blank">
+                    Log in
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item className="px-1">
+                  <Nav.Link href={route('register')} target="_blank">
+                    Register
+                  </Nav.Link>
+                </Nav.Item>
               </>
             )}
             <Nav.Item className="px-1">
-              <Nav.Link href="https://codedthemes.gitbook.io/datta" target="_blank">
+              <a href="https://codedthemes.gitbook.io/datta" target="_blank" className="nav-link">
                 Documentation
-              </Nav.Link>
+              </a>
             </Nav.Item>
             <Nav.Item className="px-1">
-              <Nav.Link href="/dashboard/default">
+              <a href="/dashboard/default" target="_blank" className="nav-link">
                 Live Preview
-              </Nav.Link>
+              </a>
             </Nav.Item>
             <Nav.Item className="px-1">
-              <Nav.Link href="/basic/alert" className="me-sm-3">
+              <a href="/basic/alert" target="_blank" className="nav-link me-sm-3">
                 Components
-              </Nav.Link>
+              </a>
             </Nav.Item>
             <Nav.Item>
-              <Button variant="dark" href="https://codedthemes.com/item/datta-able-bootstrap-admin-template/" target="_blank">
+              <Button variant="dark" href={branding.buyNow} target="_blank" className='d-inline-flex align-items-center gap-2'>
                 Purchase Now <i className="ti ti-external-link" />
               </Button>
             </Nav.Item>

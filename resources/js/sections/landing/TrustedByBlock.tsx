@@ -16,49 +16,45 @@ import VodafoneImg from '@assets/images/landing/client-vodafone.svg';
 // ===========================|| LANDING - TRUSTED BY BLOCK ||=========================== //
 
 export default function TrustedBySection() {
+  const fadeInUp = (delay = 0.2) => ({
+    initial: { opacity: 0, y: 50 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { delay, duration: 0.8 }
+  });
+
+  const fadeInRight = (delay = 0.2) => ({
+    initial: { opacity: 0, x: 50 },
+    whileInView: { opacity: 1, x: 0 },
+    viewport: { once: true },
+    transition: { delay, duration: 0.8 }
+  });
+
+  const clients = [
+    { src: EagamesImg, alt: 'EA Games', delay: 0.3 },
+    { src: HaswentImg, alt: 'Haswent', delay: 0.4 },
+    { src: CrystalImg, alt: 'Crystal', delay: 0.5 },
+    { src: VodafoneImg, alt: 'Vodafone', delay: 0.6 }
+  ] as const;
+
   return (
     <section>
       <Container>
         <Row className="justify-content-center text-center">
           <Col md={8} xl={6} className="title">
-            <motion.h2
-              initial={{ opacity: 0, y: 50 }}
-              viewport={{ once: true }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.8, ease: 'easeOut' }}
-            >
+            <motion.h2 {...fadeInUp(0.1)}>
               <strong className="landing-background-image">Trusted </strong> By
             </motion.h2>
-            <motion.p
-              className="mt-lg-4 mt-2"
-              initial={{ opacity: 0, y: 50 }}
-              viewport={{ once: true }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-            >
+            <motion.p className="mt-lg-4 mt-2" {...fadeInUp(0.2)}>
               From budding startups to industry-leading entrepreneurs, our template is shaping the future of great products.
             </motion.p>
           </Col>
         </Row>
         <Row className="justify-content-center client-block g-lg-4 g-3">
-          {[
-            { src: EagamesImg, delay: '0.3s' },
-            { src: HaswentImg, delay: '0.4s' },
-            { src: CrystalImg, delay: '0.5s' },
-            { src: VodafoneImg, delay: '0.6s' }
-          ].map((client, index) => (
-            <Col key={index} className="col-auto">
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                viewport={{ once: true }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{
-                  delay: parseFloat(client.delay),
-                  duration: 0.8,
-                  ease: 'easeOut'
-                }}
-              >
-                <Image src={client.src} alt="client-logo" className="img-fluid" />
+          {clients.map((client) => (
+            <Col key={`${client.alt}-${client.delay}`} className="col-auto">
+              <motion.div {...fadeInRight(client.delay)}>
+                <Image src={client.src} alt={`${client.alt} logo`} className="img-fluid" />
               </motion.div>
             </Col>
           ))}

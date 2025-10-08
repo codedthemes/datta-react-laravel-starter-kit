@@ -1,5 +1,3 @@
-import { type SharedData } from '@/types';
-import { Head, Link, usePage } from '@inertiajs/react';
 
 import SimpleLayout from '@/layouts/Simple';
 
@@ -19,7 +17,6 @@ import '@assets/scss/landing.scss';
 
 export default function Welcome() {
     
-
     return (
         <>
             <SimpleLayout>

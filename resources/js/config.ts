@@ -7,6 +7,7 @@ export const DRAWER_WIDTH = 260;
 
 export enum MenuOrientation {
   VERTICAL = 'vertical',
+  HORIZONTAL = 'horizontal',
   TAB = 'tab',
   LAYOUT2 = 'layout 2',
   LAYOUT3 = 'layout 3'

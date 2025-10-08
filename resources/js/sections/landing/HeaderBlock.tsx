@@ -22,43 +22,32 @@ import ImgWave from '@assets/images/landing/img-wave.svg';
 
 export default function HeaderBlock() {
   const { auth } = usePage<SharedData>().props;
+  const fadeInUp = (delay = 0.2) => ({
+    initial: { opacity: 0, y: 50 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { delay, duration: 0.8 }
+  });
   return (
     <>
       <Container>
-        
+
         <Row className="justify-content-center">
           <Col md={10} className="text-center">
-            <motion.h1
-              className="text-white mb-4"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.8, ease: 'easeOut' }}
-            >
+            <motion.h1 className="text-white mb-4" {...fadeInUp(0.2)}>
               Explore One of the <strong className="hero-text-gradient">Featured Dashboard</strong> Template in CodedThemes
             </motion.h1>
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              viewport={{ once: true }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-            >
+            <motion.div {...fadeInUp(0.3)}>
               <Row className="justify-content-center">
                 <Col md={8}>
                   <p className="text-white text-opacity-75 f-16 mb-0">
-                    {branding.brandName} is the one of the Featured admin dashboard template in Envato Marketplace and used by over 2.5K+
-                    Customers wordwide.
+                    {branding.brandName} is one of the featured admin dashboard templates on Envato Marketplace, used by over 2.5K+
+                    customers worldwide.
                   </p>
                 </Col>
               </Row>
             </motion.div>
-            <motion.div
-              className="my-4 my-sm-5"
-              initial={{ opacity: 0, y: 50 }}
-              viewport={{ once: true }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-            >
+            <motion.div className="my-4 my-sm-5" {...fadeInUp(0.4)}>
               {auth.user ? (
                 <>
                   <a href="/basic/alert" target="_blank" className="btn btn-outline-light me-2">
@@ -79,19 +68,13 @@ export default function HeaderBlock() {
                 </>
               )}
             </motion.div>
-            <motion.div
-              className="mt-4 mt-sm-5"
-              initial={{ opacity: 0, y: 50 }}
-              viewport={{ once: true }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-            >
-              <Image src={MainHeaderImg} alt="images" className="img-fluid img-header" />
+            <motion.div className="mt-4 mt-sm-5" {...fadeInUp(0.6)}>
+              <Image src={MainHeaderImg} alt="Dashboard preview hero" className="img-fluid img-header" loading="eager" />
             </motion.div>
           </Col>
         </Row>
       </Container>
-      <Image src={ImgWave} alt="images" className="img-wave" />
+      <Image src={ImgWave} alt="" role="presentation" aria-hidden className="img-wave" />
     </>
   );
 }

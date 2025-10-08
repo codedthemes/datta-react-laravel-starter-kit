@@ -14,6 +14,7 @@ export type NavItemType = {
   type?: string;
   url?: string | undefined;
   layout?: string;
+  direction?: 'ltr' | 'rtl';
 };
 
 export type LinkTarget = '_blank' | '_self' | '_parent' | '_top';

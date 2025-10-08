@@ -1,4 +1,3 @@
-// import { Link } from 'react-router-dom';
 import { Link } from '@inertiajs/react';
 
 // react-bootstrap
@@ -17,6 +16,7 @@ import { MenuOrientation } from '@/config';
 
 // assets
 import VerticalImg from '@assets/images/landing/vertical.jpg';
+import HorizontalImg from '@assets/images/landing/horizontal.jpg';
 import TabImg from '@assets/images/landing/tab.jpg';
 import Layout2Img from '@assets/images/landing/layout-2.jpg';
 import Layout3Img from '@assets/images/landing/layout-3.jpg';
@@ -26,7 +26,7 @@ interface LayoutCardProps {
   imgSrc: string;
   title: string;
   description: string;
-  delay: string;
+  delay: number;
   url?: string;
 }
 
@@ -36,15 +36,23 @@ const layouts = [
     imgSrc: VerticalImg,
     title: 'Vertical',
     description: 'Default theme layout',
-    delay: '0.2s',
-    url: 'dashboard/default'
+    delay: 0.2,
+    url: 'layouts/vertical'
+  },
+  {
+    id: 'horizontal',
+    imgSrc: HorizontalImg,
+    title: 'Horizontal',
+    description: 'Layout display in different visual',
+    delay: 0.4,
+    url: 'layouts/horizontal'
   },
   {
     id: 'tab',
     imgSrc: TabImg,
     title: 'Tab',
-    description: 'Menu display in tabular format',
-    delay: '0.4s',
+    description: 'Menu display in tab format',
+    delay: 0.6,
     url: 'layouts/tab'
   },
   {
@@ -52,7 +60,7 @@ const layouts = [
     imgSrc: Layout2Img,
     title: 'Layout 2',
     description: 'Layout display in different visual',
-    delay: '0.6s',
+    delay: 0.8,
     url: 'layouts/layout-2'
   },
   {
@@ -60,7 +68,7 @@ const layouts = [
     imgSrc: Layout3Img,
     title: 'Layout 3',
     description: 'Layout display in different visual',
-    delay: '0.8s',
+    delay: 1.0,
     url: 'layouts/layout-3'
   }
 ];
@@ -69,35 +77,38 @@ const layouts = [
 
 function LayoutCard({ id, url, imgSrc, title, description, delay }: LayoutCardProps) {
   const { onChangeMenuOrientation } = useConfig();
+  const fadeInUp = {
+    initial: { opacity: 0, y: 50 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true }
+  } as const;
+
   return (
     <Col lg={4} md={6}>
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        viewport={{ once: true }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: parseFloat(delay), duration: 0.8, ease: 'easeOut' }}
-      >
+      <motion.div {...fadeInUp} transition={{ delay, duration: 0.8 }}>
         <Card className="mb-0">
-          <Link href={`/${url}`}>
+          <Link href={`/${url}`} target="_blank">
             <Card.Img src={imgSrc} alt={title} className="img-fluid card-img-top p-2" />
           </Link>
           <Card.Body>
             <h5 className="f-w-600">{title}</h5>
             <p>{description}</p>
-            <Stack
-              direction="horizontal"
-              as="a"
-              gap={2}
+            <a
+              target="_blank"
               href={url}
-              className="link-primary h6  align-items-center mb-0"
+              className="link-primary h6 align-items-center mb-0 d-inline-flex"
               onClick={() => {
                 if (id) {
                   onChangeMenuOrientation(id as MenuOrientation);
                 }
               }}
+              aria-label={`Preview ${title} layout`}
             >
-              <strong>Preview</strong> <i className="ti ti-arrow-narrow-right f-18" />
-            </Stack>
+              <Stack direction="horizontal" gap={2}>
+                <strong>Preview</strong>
+                <i className="ti ti-arrow-narrow-right f-18" aria-hidden="true" />
+              </Stack>
+            </a>
           </Card.Body>
         </Card>
       </motion.div>
@@ -122,8 +133,8 @@ export default function LayoutsBlock() {
           </Col>
         </Row>
         <Row className="g-3 justify-content-center">
-          {layouts.map((layout, index) => (
-            <LayoutCard key={index} {...layout} />
+          {layouts.map((layout) => (
+            <LayoutCard key={layout.id} {...layout} />
           ))}
         </Row>
       </Container>

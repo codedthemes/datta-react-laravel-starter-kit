@@ -15,19 +15,19 @@ const features = [
     icon: 'ti ti-leaf',
     title: 'Clean and Clear Design',
     description: 'Eye catchy clean design with 5+ prebuilt color combinations.',
-    delay: '0.2s'
+    delay: 0.2
   },
   {
     icon: 'ti ti-dashboard',
     title: 'Made for Performance',
     description: `Speed, Easy to customize, Flexible to use are 3 top most key factors for ${branding.brandName} Admin Template.`,
-    delay: '0.4s'
+    delay: 0.4
   },
   {
     icon: 'ti ti-separator-vertical',
     title: 'Error-free Code',
     description: 'Well tested code with 0 error even on W3 validator.',
-    delay: '0.6s'
+    delay: 0.6
   },
   {
     icon: 'ti ti-headset',
@@ -41,36 +41,36 @@ const features = [
         . 99% query resolution in the first response.
       </>
     ),
-    delay: '0.4s'
+    delay: 0.4
   },
   {
     icon: 'ti ti-cloud-upload',
     title: 'Always Updated',
     description: 'Plug-ins update available? No worries, we always update our package on time.',
-    delay: '0.6s'
+    delay: 0.6
   },
   {
     icon: 'ti ti-notebook',
     title: 'Effective Documentation',
     description: 'Online video tutorial series and helper document files.',
-    delay: '0.8s'
+    delay: 0.8
   }
 ];
 
 // ==============================|| FEATURE CARD ||============================== //
 
 function FeatureCard({ icon, title, description, delay }: (typeof features)[0]) {
+  const fadeInUp = {
+    initial: { opacity: 0, y: 50 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true }
+  } as const;
   return (
     <Col lg={4} md={6}>
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        viewport={{ once: true }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: parseFloat(delay), duration: 0.8, ease: 'easeOut' }}
-      >
+      <motion.div {...fadeInUp} transition={{ delay, duration: 0.8 }}>
         <Stack direction="horizontal" className="align-items-start">
           <div className="flex-shrink-0">
-            <i className={`${icon} text-primary f-32`} />
+            <i className={`${icon} text-primary f-32`} aria-hidden="true" />
           </div>
           <div className="flex-grow-1 ms-3">
             <h5>
@@ -101,8 +101,8 @@ export default function FeatureBlock() {
           </Col>
         </Row>
         <Row className="g-4">
-          {features.map((feature, index) => (
-            <FeatureCard key={index} {...feature} />
+          {features.map((feature) => (
+            <FeatureCard key={feature.title} {...feature} />
           ))}
         </Row>
       </Container>

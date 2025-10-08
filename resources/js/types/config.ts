@@ -1,4 +1,4 @@
-import { MenuOrientation, ThemeDirection, ThemeMode } from '@/config';
+import { MenuOrientation, ThemeDirection, ThemeMode } from 'config';
 
 export type FontFamily = "'Public Sans', sans-serif";
 export type PresetColor = 'default' | 'theme1' | 'theme2' | 'theme3' | 'theme4' | 'theme5' | 'theme6' | 'theme7' | 'theme8';
@@ -45,7 +45,7 @@ export type DefaultConfigProps = {
 
   /**
    * the props used for theme primary color variants
-   * we provide static below options thoe s are already defaine in resources/themes/theme -
+   * we provide static below options thoe s are already defaine in src/themes/theme -
    * 'default'
    * 'theme1'
    * 'theme2'
@@ -79,6 +79,7 @@ export type DefaultConfigProps = {
 };
 
 export type CustomizationProps = {
+  fontFamily: FontFamily;
   i18n: I18n;
   menuOrientation: MenuOrientation;
   themeDirection: ThemeDirection;
