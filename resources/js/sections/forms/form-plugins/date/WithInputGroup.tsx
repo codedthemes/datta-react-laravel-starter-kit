@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { RefObject, useRef, useState } from 'react';
 
 // react-bootstrap
 import Col from 'react-bootstrap/Col';
@@ -8,36 +8,33 @@ import Row from 'react-bootstrap/Row';
 
 // third-party
 import Calendar from 'react-calendar';
+import { Value } from 'react-calendar/dist/shared/types.js';
 
 // types
-import { DatePickerDisabledProps, SelectedValue } from '@/types/date-picker';
+import { DatePickerDisabledProps } from 'types/date-picker';
 
+// Format date as dd/mm/yyyy
 function formatDate(date: Date) {
-  const day = date.getDate().toString().padStart(2, '0');
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const year = date.getFullYear();
-
-  return `${day}/${month}/${year}`;
+  return date.toLocaleDateString('en-GB'); // 04/09/2025
 }
 
 // ==============================|| DATE - WITH INPUT GROUP  ||============================== //
 
 export default function WithInputGroup({ useClickOutside }: DatePickerDisabledProps) {
-  const [withinputgroup, setWithinputgroup] = useState<Date | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const [isWithinputgroup, setWithinputgroupOpen] = useState(false);
+  const calendarRef = useRef<HTMLDivElement | null>(null);
 
-  const withinputgroupRef = useRef<HTMLDivElement | null>(null);
+  // close calendar when clicking outside
+  useClickOutside(calendarRef as RefObject<HTMLElement>, () => setIsOpen(false));
 
-  useClickOutside(withinputgroupRef, () => setWithinputgroupOpen(false));
+  const toggleCalendar = () => setIsOpen((prev) => !prev);
 
-  const handleInputClick1 = () => {
-    setWithinputgroupOpen((prev) => !prev);
-  };
-
-  const handleWithinputgroup = (selectedDate: SelectedValue) => {
-    if (selectedDate instanceof Date) {
-      setWithinputgroup(selectedDate);
+  const handleDateChange = (value: Value) => {
+    if (value instanceof Date) {
+      setSelectedDate(value);
+      setIsOpen(false);
     }
   };
 
@@ -46,27 +43,28 @@ export default function WithInputGroup({ useClickOutside }: DatePickerDisabledPr
       <Col lg={3} sm={12} className="col-form-label text-lg-end">
         <Form.Label className="mb-0">With Input Group</Form.Label>
       </Col>
-      <Col lg={4} md={9} sm={12}>
+      <Col lg={4} md={9} sm={12} className="position-relative">
         <InputGroup>
           <Form.Control
             type="text"
             className="datepicker-input"
             placeholder="Select date"
-            id="d_week_1"
-            value={withinputgroup ? formatDate(withinputgroup) : ''}
-            onClick={handleInputClick1}
+            id="d_with_input"
+            value={selectedDate ? formatDate(selectedDate) : ''}
+            onClick={toggleCalendar}
             readOnly
           />
-          <InputGroup.Text>
+          <InputGroup.Text role="button" onClick={toggleCalendar}>
             <i className="ph ph-calendar-blank f-18" />
           </InputGroup.Text>
         </InputGroup>
-        {isWithinputgroup && (
-          <div ref={withinputgroupRef}>
+
+        {isOpen && (
+          <div ref={calendarRef} className="position-absolute start-0 top-100 z-3">
             <Calendar
-              onChange={handleWithinputgroup}
+              onChange={handleDateChange}
+              value={selectedDate}
               formatShortWeekday={(locale, date) => date.toLocaleDateString(locale, { weekday: 'short' }).slice(0, 2)}
-              value={withinputgroup}
               prev2Label={null}
               next2Label={null}
               prevLabel="«"

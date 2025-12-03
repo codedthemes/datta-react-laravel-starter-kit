@@ -5,7 +5,6 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 
@@ -57,6 +56,12 @@ const initialData: FormData = {
   address: '3379 Monroe Avenue, Fort Myers, Florida(33912)'
 };
 
+const socialMediaPlatforms = [
+  { icon: 'ti ti-brand-facebook-filled', color: 'primary', name: 'Facebook' },
+  { icon: 'ti ti-brand-twitter-filled', color: 'info', name: 'Twitter' },
+  { icon: 'ti ti-brand-google-filled', color: 'danger', name: 'Google Plus' }
+];
+
 // ==============================|| PROFILE - PERSONAL INFORMATION ||==============================
 
 export default function PersonalInformation() {
@@ -68,7 +73,7 @@ export default function PersonalInformation() {
   };
 
   const renderFormField = (label: string, name: keyof FormData, type: string = 'text', options: string[] = []) => (
-    <Form.Group controlId={`formBasic${name}`} className="mb-3">
+    <Form.Group controlId={`formBasic${name}`}>
       <Form.Label>
         {label} {['name', 'bio', 'experience', 'email'].includes(name) && <span className="text-danger">*</span>}
       </Form.Label>
@@ -93,20 +98,31 @@ export default function PersonalInformation() {
   );
 
   return (
-    <MainCard bodyClassName="p-0">
+    <MainCard
+      bodyClassName="p-0"
+      footerClassName="text-end pt-0"
+      footer={
+        <>
+          <Button variant="primary">Update Profile</Button>
+          <Button variant="outline-dark" className="ms-2">
+            Clear
+          </Button>
+        </>
+      }
+    >
       <Card.Header>
         <h5>
-          <i className="ph ph-user align-text-bottom text-primary f-20" /> Personal Information
+          <i className="ph ph-file-text align-text-bottom text-primary f-20" /> Personal Information
         </h5>
       </Card.Header>
-      <Card.Body>
+      <Card.Body className="pb-0">
         <Form>
-          <Row>
+          <Row className="g-3">
             <Col sm={6}>{renderFormField('Name', 'name')}</Col>
             <Col sm={6}>{renderFormField('Location', 'location', 'select', locationOptions)}</Col>
             <Col sm={12}>{renderFormField('Bio', 'bio', 'textarea')}</Col>
             <Col sm={6}>{renderFormField('Experience', 'experience', 'select', experienceOptions)}</Col>
-            <Col sm={12}>{renderFormField('Skills', 'skills', 'select', skillsOptions)}</Col>
+            <Col sm={6}>{renderFormField('Skills', 'skills', 'select', skillsOptions)}</Col>
           </Row>
         </Form>
       </Card.Body>
@@ -115,20 +131,18 @@ export default function PersonalInformation() {
           <i className="ph ph-share-network align-text-bottom text-primary f-20" /> Social Information
         </h5>
       </Card.Header>
-      <Card.Body>
-        {[
-          { icon: 'ti ti-brand-facebook-filled', color: 'primary', name: 'Facebook' },
-          { icon: 'ti ti-brand-twitter-filled', color: 'info', name: 'Twitter' },
-          { icon: 'ti ti-brand-google-filled', color: 'danger', name: 'Google Plus' }
-        ].map(({ icon, color, name }) => (
-          <Form.Group controlId={`formBasic${name}`} key={name} className="mb-3">
+      <Card.Body className="pb-0">
+        {socialMediaPlatforms.map(({ icon, color, name }, index) => (
+          <Form.Group controlId={`formBasic${name}`} key={index} className={`${index !== socialMediaPlatforms.length - 1 ? 'mb-3' : ''}`}>
             <Form.Label>{name}</Form.Label>
             <InputGroup>
-              <InputGroup.Text className={`bg-${color} text-white`}>
+              <InputGroup.Text className={`bg-${color} text-white border-0`}>
                 <i className={icon} />
               </InputGroup.Text>
-              <FormControl placeholder="Profile URL" aria-label="Profile URL" />
-              <Button className={`bg-${color}`}>Connect</Button>
+              <Form.Control placeholder="Profile URL" aria-label="Profile URL" />
+              <Button className={`bg-${color}`} variant={`${color}`}>
+                Connect
+              </Button>
             </InputGroup>
           </Form.Group>
         ))}
@@ -139,19 +153,13 @@ export default function PersonalInformation() {
         </h5>
       </Card.Header>
       <Card.Body>
-        <Row>
+        <Row className="g-3">
           <Col sm={6}>{renderFormField('Contact Phone', 'phone')}</Col>
           <Col sm={6}>{renderFormField('Email', 'email', 'email')}</Col>
           <Col sm={12}>{renderFormField('Portfolio URL', 'portfolioUrl')}</Col>
           <Col sm={12}>{renderFormField('Address', 'address', 'textarea')}</Col>
         </Row>
       </Card.Body>
-      <Card.Footer className="text-end">
-        <Button variant="primary">Update Profile</Button>
-        <Button variant="outline-dark" className="ms-2">
-          Clear
-        </Button>
-      </Card.Footer>
     </MainCard>
   );
 }

@@ -1,51 +1,45 @@
 // react-bootstrap
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import Stack from 'react-bootstrap/Stack';
 
 // project-imports
-import InvoiceCard from '../InvoiceCard';
+import MainCard from '@/components/MainCard';
 
-// ==============================|| ADMIN PANEL - INVOICE LIST CARD ||============================== //
+interface Props {
+  title: string;
+  count: string;
+  percentage?: number;
+  isLoss?: boolean;
+  bgColor?: string;
+  children: any;
+  invoice: number;
+}
 
-export default function InvoiceListCard() {
+// ==============================|| INVOICE CARD ||============================== //
+
+export default function InvoiceCard({ title, count, percentage, isLoss, children, bgColor, invoice }: Props) {
   return (
-    <Row className="g-3 mb-3">
-      <Col md={6} lg={4}>
-        <InvoiceCard
-          name="Total"
-          total={70.5}
-          price={5678.09}
-          invoice={9}
-          color="text-success"
-          series={[0, 20, 10, 45, 30, 55, 20, 30]}
-          chartColor="#1de9b6"
-          className="p-4"
-        />
-      </Col>
-      <Col md={6} lg={4}>
-        <InvoiceCard
-          name="Paid"
-          total={-8.73}
-          price={5678.09}
-          invoice={5}
-          color="text-warning"
-          series={[30, 20, 55, 30, 45, 10, 20, 0]}
-          chartColor="#f4c22b"
-          className="p-4"
-        />
-      </Col>
-      <Col md={6} lg={4}>
-        <InvoiceCard
-          name="Overdue"
-          total={-4.73}
-          price={5678.09}
-          invoice={5}
-          color="text-danger"
-          series={[0, 20, 10, 45, 30, 55, 20, 30]}
-          chartColor="#f44236"
-          className="p-4"
-        />
-      </Col>
-    </Row>
+    <MainCard className="p-4 rounded border" bodyClassName="p-0">
+      <Stack direction="horizontal" gap={2} className="align-items-center justify-content-between">
+        <h6 className="mb-0 f-w-600">{title}</h6>
+        <Stack direction="horizontal" gap={1} className="align-items-center">
+          <i className={`${isLoss ? 'ti ti-caret-down-filled' : 'ti ti-caret-up-filled'} ${bgColor} `} />
+          <p className="mb-0">{percentage}%</p>
+        </Stack>
+      </Stack>
+      <Row className="g-2 align-items-center">
+        <Col xs={6}>
+          <h5 className="mb-2 mt-3">{count}</h5>
+          <Stack direction="horizontal" className="align-items-center" gap={1}>
+            <h5 className="mb-0">{invoice}</h5>
+            <Stack direction="horizontal" className="align-items-center" gap={2}>
+              <p className="mb-0 text-muted">invoices</p>
+            </Stack>
+          </Stack>
+        </Col>
+        <Col xs={6}>{children}</Col>
+      </Row>
+    </MainCard>
   );
 }

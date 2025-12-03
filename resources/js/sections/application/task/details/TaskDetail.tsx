@@ -10,7 +10,7 @@ const detailData = [
   {
     icon: 'ph ph-code-block',
     label: 'Project',
-    value: <a className="link-secondary">Singular app</a>
+    value: <a href="#!">Singular app</a>
   },
   { icon: 'ph ph-arrows-clockwise', label: 'Updated', value: '12 May, 2020' },
   { icon: 'ph ph-feather', label: 'Created', value: '25 Feb, 2019' },
@@ -19,7 +19,7 @@ const detailData = [
     label: 'Priority',
     value: (
       <>
-        <i className="ph ph-arrow-circle-up f-20 align-middle " /> Highest
+        <i className="ph ph-arrow-circle-up f-20 align-bottom" /> Highest
       </>
     )
   },
@@ -33,14 +33,14 @@ const detailData = [
 export default function TaskDetail() {
   return (
     <MainCard title="Task Details" bodyClassName="p-0">
-      <ListGroup variant="flush">
+      <ListGroup variant="flush" as="ul">
         {detailData.map((item, index) => (
-          <ListGroup.Item key={index} className="d-flex justify-content-between">
+          <ListGroup.Item key={index} as="li" className="d-flex justify-content-between">
             <Stack direction="horizontal" gap={1} className="h6 m-0">
               <i className={`${item.icon} text-primary f-20 align-middle`} />
               {item.label} :
             </Stack>
-            <div>{item.value}</div>
+            <span>{item.value}</span>
           </ListGroup.Item>
         ))}
       </ListGroup>

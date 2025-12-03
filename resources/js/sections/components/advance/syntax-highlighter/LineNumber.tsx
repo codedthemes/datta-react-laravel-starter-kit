@@ -23,7 +23,6 @@ export default function LineNumberPage() {
         Optional: You can specify the data-start (Number) attribute on the <code>{`<pre>`}</code> element. It will shift the line counter.
       </p>
       <h6 className="m-t-20 f-w-600">Usage:</h6>
-      {/* @ts-ignore https://github.com/react-syntax-highlighter/react-syntax-highlighter/issues/539 */}
       <SyntaxHighlighter
         language="javascript"
         style={dark}
@@ -45,7 +44,6 @@ export default function LineNumberPage() {
       </SyntaxHighlighter>
 
       <h6 className="m-t-20 f-w-600">Example:</h6>
-      {/* @ts-ignore https://github.com/react-syntax-highlighter/react-syntax-highlighter/issues/539 */}
       <SyntaxHighlighter
         language="javascript"
         style={dark}

@@ -21,8 +21,7 @@ export default function ReCaptcha() {
           </Col>
 
           <Col lg={4} md={9} sm={12}>
-            {/* @ts-ignore */}
-            <ReCAPTCHA sitekey="Your client site key" />
+            <ReCAPTCHA sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" />
           </Col>
         </Row>
       </Form>

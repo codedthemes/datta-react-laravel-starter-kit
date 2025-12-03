@@ -1,116 +1,82 @@
-import { useState, useMemo } from 'react';
+import { Dispatch, SetStateAction, useMemo, useState } from 'react';
 
 // react-bootstrap
-import Badge from 'react-bootstrap/Badge';
-import Form from 'react-bootstrap/Form';
 import Table from 'react-bootstrap/Table';
 
-// third-party
-import Slider from 'rc-slider';
-
 // project-imports
-import LinearWithLabel from '@/components/@extended/progress/LinearWithLabel';
 import MainCard from '@/components/MainCard';
 import makeData from '@/data/react-table';
+import { CSVExport, EditCell } from '@/components/third-party/react-table';
+
+// third party
+import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
+import { LabelKeyObject } from 'react-csv/lib/core';
 
 // types
 import { TableDataProps } from '@/types/table';
 
+interface ReactTableProps {
+  columns: ColumnDef<TableDataProps>[];
+  data: TableDataProps[];
+  setData: Dispatch<SetStateAction<TableDataProps[]>>;
+  title?: string;
+}
+
 // =============================|| REACT TABLE ||============================== //
 
-function TanStackTable({ columns, initialData, striped }: { columns: any[]; initialData: any[]; striped?: boolean }) {
-  const [data, setData] = useState<TableDataProps[]>(initialData);
-  const [editing, setEditing] = useState<{ [key: string]: boolean }>({});
-  const [formData, setFormData] = useState<{ [key: string]: any }>({});
+function ReactTable({ columns, data, setData, title }: ReactTableProps) {
+  const table = useReactTable<TableDataProps>({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    debugTable: true
+  });
 
-  const handleEditToggle = (field: string, rowIndex: number) => {
-    setEditing((prev) => ({
-      ...prev,
-      [`${field}-${rowIndex}`]: !prev[`${field}-${rowIndex}`]
-    }));
-  };
+  const headers: LabelKeyObject[] = useMemo(
+    () =>
+      table.getAllColumns().map((col) => ({
+        label: typeof col.columnDef.header === 'string' ? col.columnDef.header : '#',
+        key: (col.columnDef as any).accessorKey ?? col.id
+      })),
+    [table]
+  );
 
-  const handleFieldChange = (field: string, value: any, rowIndex: number) => {
-    setFormData((prev) => ({
-      ...prev,
-      [`${field}-${rowIndex}`]: value
-    }));
-  };
-
-  const handleSave = (field: string, rowIndex: number) => {
-    const updatedData = [...data];
-    updatedData[rowIndex] = {
-      ...updatedData[rowIndex],
-      [field]: formData[`${field}-${rowIndex}`]
-    };
-    0;
-
-    setData(updatedData);
-
-    setFormData((prev) => ({ ...prev, [`${field}-${rowIndex}`]: undefined }));
-    setEditing((prev) => ({ ...prev, [`${field}-${rowIndex}`]: false }));
-  };
   return (
-    <MainCard title="Editable Cell" className="table-card">
-      <Table responsive striped={striped} className="mb-0">
+    <MainCard
+      title={title}
+      secondary={
+        <CSVExport {...{ data: table.getRowModel().flatRows.map((row) => row.original), headers, filename: 'editable-cell.csv' }} />
+      }
+      className="table-card"
+    >
+      {/* table */}
+      <Table hover responsive className="mb-0">
         <thead>
-          <tr>
-            {columns.map((column) => (
-              <th key={column.header} className={`${['Age', 'Visits'].includes(column.header) ? 'text-end' : ''}`}>
-                {column.header}
-              </th>
-            ))}
-          </tr>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <th key={header.id} {...header.column.columnDef.meta}>
+                  {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                </th>
+              ))}
+            </tr>
+          ))}
         </thead>
-        <tbody>
-          {data.map((row, rowIndex) => (
-            <tr key={rowIndex}>
-              {columns.map((column) => {
-                const field = column.accessorKey as string;
-                const currentValue = formData[`${field}-${rowIndex}`] ?? row[field as keyof TableDataProps];
 
-                return (
-                  <td key={column.header} className={`${['Age', 'Visits'].includes(column.header) ? 'text-end' : ''}  `}>
-                    {editing[`${field}-${rowIndex}`] ? (
-                      field === 'status' ? (
-                        <Form.Select
-                          value={currentValue}
-                          onChange={(e) => handleFieldChange(field, e.target.value, rowIndex)}
-                          onBlur={() => handleSave(field, rowIndex)}
-                        >
-                          <option value="Complicated">Complicated</option>
-                          <option value="Relationship">Relationship</option>
-                          <option value="Single">Single</option>
-                        </Form.Select>
-                      ) : field === 'progress' ? (
-                        <Slider
-                          defaultValue={currentValue}
-                          onChange={(value: number) => handleFieldChange(field, value, rowIndex)}
-                          onAfterChange={() => handleSave(field, rowIndex)}
-                        />
-                      ) : (
-                        <Form.Control
-                          type={field === 'email' ? 'email' : field === 'age' ? 'number' : 'text'}
-                          value={currentValue}
-                          onChange={(e) => handleFieldChange(field, e.target.value, rowIndex)}
-                          onBlur={() => handleSave(field, rowIndex)}
-                        />
-                      )
-                    ) : field === 'status' ? (
-                      <Badge
-                        bg={row[field] === 'Complicated' ? 'light-danger' : row[field] === 'Relationship' ? 'light-success' : 'light-info'}
-                        onClick={() => handleEditToggle(field, rowIndex)}
-                      >
-                        {row[field]}
-                      </Badge>
-                    ) : field === 'progress' ? (
-                      <LinearWithLabel value={currentValue} onClick={() => handleEditToggle(field, rowIndex)} />
-                    ) : (
-                      <span onClick={() => handleEditToggle(field, rowIndex)}>{row[field as keyof TableDataProps]}</span>
-                    )}
-                  </td>
-                );
-              })}
+        <tbody>
+          {table.getRowModel().rows.map((row) => (
+            <tr key={row.id}>
+              {row.getVisibleCells().map((cell) => (
+                <EditCell
+                  key={cell.id}
+                  cell={cell}
+                  onSave={(updatedValue) => {
+                    setData((prevData) =>
+                      prevData.map((item) => (item.id === row.original.id ? { ...item, [cell.column.id]: updatedValue } : item))
+                    );
+                  }}
+                />
+              ))}
             </tr>
           ))}
         </tbody>
@@ -121,20 +87,20 @@ function TanStackTable({ columns, initialData, striped }: { columns: any[]; init
 
 // ==============================|| EDIT TABLE - EDITABLE CELL ||============================== //
 
-export default function EditableCellTable({ striped }: { striped?: boolean; title?: string }) {
-  const data: TableDataProps[] = makeData(10);
+export default function EditableCellTable({ title }: { title: string }) {
+  const [data, setData] = useState<TableDataProps[]>(() => makeData(10));
 
-  const columns = useMemo(
+  const columns = useMemo<ColumnDef<TableDataProps>[]>(
     () => [
-      { header: 'Name', accessorKey: 'fullName' },
-      { header: 'Email', accessorKey: 'email' },
-      { header: 'Age', accessorKey: 'age', meta: { className: 'text-end' } },
-      { header: 'Visits', accessorKey: 'visits', meta: { className: 'text-end' } },
-      { header: 'Status', accessorKey: 'status' },
-      { header: 'Profile Progress', accessorKey: 'progress' }
+      { header: 'Name', accessorKey: 'fullName', dataType: 'text', meta: { className: 'text-nowrap' } },
+      { header: 'Email', accessorKey: 'email', dataType: 'text' },
+      { header: 'Age', accessorKey: 'age', dataType: 'number', meta: { className: 'text-end' } },
+      { header: 'Visits', accessorKey: 'visits', dataType: 'number', meta: { className: 'text-end' } },
+      { header: 'Status', accessorKey: 'status', dataType: 'select' },
+      { header: 'Profile Progress', accessorKey: 'progress', dataType: 'progress' }
     ],
     []
   );
 
-  return <TanStackTable columns={columns} initialData={data} striped={striped} />;
+  return <ReactTable {...{ data, columns, setData, title }} />;
 }

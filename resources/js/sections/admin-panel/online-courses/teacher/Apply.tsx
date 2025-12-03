@@ -22,22 +22,14 @@ import {
 import { PatternFormat } from 'react-number-format';
 
 // project-imports
-import HeaderSort from '@/sections/tables/react-table/sorting/HeaderSort';
-import DebouncedInput from '@/components/third-party/react-table/DebouncedInput';
-import TablePagination from '@/components/third-party/react-table/Pagination';
-import SortingData from '@/components/third-party/react-table/SortingData';
 import MainCard from '@/components/MainCard';
+import { DebouncedInput, HeaderSort, SortingData, TablePagination } from '@/components/third-party/react-table';
 
 import makeData from '@/data/react-table';
 import { getImageUrl, ImagePath } from '@/utils/getImageUrl';
 
 // types
 import { TableDataProps } from '@/types/table';
-
-interface LabelKeyObject {
-  label: string;
-  key: string;
-}
 
 interface ReactTableProps {
   columns: ColumnDef<TableDataProps>[];
@@ -64,24 +56,17 @@ function ReactTable({ columns, data }: ReactTableProps) {
     onGlobalFilterChange: setGlobalFilter
   });
 
-  let headers: LabelKeyObject[] = [];
-  table.getAllColumns().map((column) => {
-    const accessorKey = column.columnDef;
-
-    headers.push({
-      label: typeof column.columnDef.header === 'string' ? column.columnDef.header : '#',
-      key: typeof accessorKey === 'string' ? accessorKey : 'unknown'
-    });
-  });
-
   return (
     <MainCard className="table-card px-0" title="Apply Teacher list">
+      {/* toolbar */}
       <Stack direction="horizontal" className="justify-content-between align-items-center p-4 flex-wrap gap-2">
         <SortingData getState={table.getState} setPageSize={table.setPageSize} />
         <div className="datatable-search">
           <DebouncedInput value={globalFilter ?? ''} onFilterChange={(value) => setGlobalFilter(String(value))} />
         </div>
       </Stack>
+
+      {/* table */}
       <Table hover responsive className="mb-0 border-top">
         <thead>
           {table.getHeaderGroups().map((headerGroup: HeaderGroup<any>, index) => (
@@ -113,6 +98,8 @@ function ReactTable({ columns, data }: ReactTableProps) {
           ))}
         </tbody>
       </Table>
+
+      {/* pagination */}
       <TablePagination
         setPageSize={table.setPageSize}
         setPageIndex={table.setPageIndex}

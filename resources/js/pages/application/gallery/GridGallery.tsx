@@ -17,6 +17,8 @@ export default function GridGalleryPage() {
       <Row>
         <Col sm={12}>
           <ImageGridGallery />
+      </Col>
+      <Col sm={12}>
           <VideoGridGallery />
         </Col>
       </Row>

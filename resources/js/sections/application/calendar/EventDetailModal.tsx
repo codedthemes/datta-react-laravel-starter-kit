@@ -1,13 +1,14 @@
 // react-bootstrap
-import { EventInput } from '@fullcalendar/common';
-import { deleteEvent } from '@/api/calender';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Modal from 'react-bootstrap/Modal';
 import Stack from 'react-bootstrap/Stack';
 
 // third-party
+import { EventInput } from '@fullcalendar/common';
 import Swal from 'sweetalert2';
+
+import { deleteEvent } from '@/api/calender';
 
 interface EventDetailProps {
   icon: string;
@@ -59,7 +60,7 @@ function EventDetail({ icon, bgColor, title, className, value }: EventDetailProp
     <Stack direction="horizontal" className="align-items-start">
       <div className="flex-shrink-0">
         <div className={`avatar avatar-xs ${bgColor}`}>
-          <i className={`ti ${icon} f-20`}></i>
+          <i className={`${icon} f-20`}></i>
         </div>
       </div>
       <div className="flex-grow-1 ms-3">
@@ -82,32 +83,43 @@ export default function EventDetailModal({ isModalOpen, handleModal, selectedEve
       </Modal.Header>
       <Modal.Body>
         <EventDetail
-          icon="ti-heading"
+          icon="ti ti-heading"
           bgColor="bg-light-secondary"
           title="Title"
           className="pc-event-title"
           value={selectedEvent?.title ?? ''}
         />
-        <EventDetail icon="ti-map-pin" bgColor="bg-light-warning" title="Venue" className="pc-event-venue" value="City Town" />
+        <EventDetail icon="ti ti-map-pin" bgColor="bg-light-warning" title="Venue" className="pc-event-venue" value="City Town" />
         <EventDetail
-          icon="ti-calendar-event"
+          icon="ti ti-calendar-event"
           bgColor="bg-light-danger"
           title="Date"
           className="pc-event-date"
           value={
             selectedEvent?.start
-              ? Array.isArray(selectedEvent.start)
-                ? 'Date range'
-                : new Date(selectedEvent.start).toLocaleDateString('en-GB', {
-                    day: '2-digit',
-                    month: 'long',
-                    year: 'numeric'
-                  })
+              ? (() => {
+                  const startDate = new Date(selectedEvent.start as string);
+                  const endDate = selectedEvent.end ? new Date(selectedEvent.end as string) : null;
+                  const formatDate = (date: Date) =>
+                    date.toLocaleDateString('en-GB', {
+                      day: '2-digit',
+                      month: 'long',
+                      year: 'numeric'
+                    });
+
+                  if (endDate && startDate.toDateString() !== endDate.toDateString()) {
+                    // Show range
+                    return `${formatDate(startDate)} - ${formatDate(endDate)}`;
+                  } else {
+                    // Show single date
+                    return formatDate(startDate);
+                  }
+                })()
               : 'No date available'
           }
         />
         <EventDetail
-          icon="ti-file-text"
+          icon="ti ti-file-text"
           bgColor="bg-light-primary"
           title="Description"
           className="pc-event-description"
@@ -118,6 +130,7 @@ export default function EventDetailModal({ isModalOpen, handleModal, selectedEve
         <ListGroup horizontal className="me-auto mb-0">
           <ListGroup.Item className="border-0 p-0">
             <a
+              href="#!"
               id="pc_event_remove"
               className="avatar avatar-s btn-link-danger btn-pc-default w-sm-auto"
               data-bs-toggle="tooltip"
@@ -128,11 +141,12 @@ export default function EventDetailModal({ isModalOpen, handleModal, selectedEve
                 setModalOpen(false);
               }}
             >
-              <i className="ti ti-trash f-18" />
+              <i className="ti ti-trash f-18 text-danger" />
             </a>
           </ListGroup.Item>
           <ListGroup.Item className="border-0 p-0">
             <a
+              href="#!"
               id="pc_event_edit"
               className="avatar avatar-s btn-link-success btn-pc-default"
               onClick={handleEventModal}

@@ -6,7 +6,7 @@ import listPlugin from '@fullcalendar/list';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin, { EventResizeDoneArg } from '@fullcalendar/interaction';
-import { EventClickArg, EventDropArg, EventSourceInput } from '@fullcalendar/core';
+import { EventClickArg, EventDropArg, EventSourceInput, DateSelectArg } from '@fullcalendar/core';
 import { EventInput } from '@fullcalendar/common';
 
 // project-imports
@@ -14,16 +14,12 @@ import AddEventForm from './AddEventForm';
 import EventDetailModal from './EventDetailModal';
 import { updateEvent, useGetEvents } from '@/api/calender';
 
-const COLOR_CLASS_MAP: Record<string, string> = {
-  '#f6ffed': 'event-danger',
-  '#8c8c8c': 'event-secondary',
-  '#fffbe6': 'event-warning',
-  '#faad14': 'event-warning',
-  '#52c41a': 'event-success',
-  '#1890ff': 'event-primary',
-  '#f5222d': 'event-danger',
-  '#e6f7ff': 'event-info'
-};
+import { COLOR_CLASS_MAP } from '@/utils/colorClassMap';
+
+interface SelectedRange {
+  start: Date;
+  end: Date;
+}
 
 // ==============================|| APPLICATION - CALENDAR  ||============================== //
 
@@ -33,6 +29,7 @@ export default function CalendarComponent() {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [selectedEvent, setSelectedEvent] = useState<EventInput | null>();
+  const [selectedRange, setSelectedRange] = useState<SelectedRange | null>(null);
   const calendarRef = useRef<FullCalendar>(null);
 
   const handleEventModal = () => {
@@ -40,7 +37,12 @@ export default function CalendarComponent() {
     setModalOpen(false);
   };
 
-  const handleRangeSelect = () => {
+  const handleRangeSelect = (selectInfo: DateSelectArg) => {
+    setSelectedRange({
+      start: selectInfo.start,
+      end: selectInfo.end
+    });
+
     const calendarEl = calendarRef.current;
     if (calendarEl) {
       const calendarApi = calendarEl.getApi();
@@ -83,7 +85,7 @@ export default function CalendarComponent() {
   }, []);
 
   return (
-    <div className="container mt-4">
+    <div className="container px-0">
       <FullCalendar
         weekends
         editable
@@ -120,7 +122,7 @@ export default function CalendarComponent() {
         setModalOpen={setModalOpen}
         handleEventModal={handleEventModal}
       />
-      <AddEventForm open={open} handleEventModal={handleEventModal} selectedEvent={selectedEvent!} />
+      <AddEventForm open={open} handleEventModal={handleEventModal} selectedEvent={selectedEvent!} selectedRange={selectedRange} />
     </div>
   );
 }

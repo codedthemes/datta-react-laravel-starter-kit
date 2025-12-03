@@ -44,23 +44,34 @@ export default function Other() {
     setIsCollapsed(true);
   };
 
+  const getRowClassName = (index: number) => {
+    const baseClass = 'align-items-center col-form-label';
+    if (index === 0) return `${baseClass} pt-0`;
+    if (index === initialFields.length - 1) return `${baseClass} pb-0`;
+    return baseClass;
+  };
+
   return (
-    <MainCard bodyClassName="p-0">
-      <Card.Body className="d-flex align-items-center justify-content-between">
-        <h5 className="mb-0">Other Information</h5>
+    <MainCard
+      bodyClassName="p-0"
+      title="Other Information"
+      secondary={
         <Button variant="primary" size="sm" className="rounded m-0 float-end" onClick={() => setIsCollapsed(!isCollapsed)}>
           <i className="ph ph-note-pencil align-middle" />
         </Button>
-      </Card.Body>
+      }
+    >
       {isCollapsed && (
         <Card.Body className="border-top">
           <Form>
             {initialFields.map((item, index) => (
-              <Row key={index} className="mb-3 align-items-center">
-                <Col sm={3} className="col-form-label font-weight-bolder">
+              <Row key={index} className={getRowClassName(index)}>
+                <Col sm={3} xs={5} className="f-w-500">
                   {item.label}
                 </Col>
-                <Col sm={9}>{formData[item.label]}</Col>
+                <Col sm={9} xs={7} className="text-muted">
+                  {formData[item.label]}
+                </Col>
               </Row>
             ))}
           </Form>
@@ -71,7 +82,7 @@ export default function Other() {
           <Form onSubmit={handleSave}>
             {initialFields.map((item, index) => (
               <Row key={index} className="mb-3 align-items-center">
-                <Col sm={3} className="col-form-label font-weight-bolder">
+                <Col sm={3} className="col-form-label f-w-500">
                   {item.label}
                 </Col>
                 <Col sm={9}>
@@ -79,7 +90,7 @@ export default function Other() {
                 </Col>
               </Row>
             ))}
-            <Row className="mb-3 align-items-center">
+            <Row className="align-items-center">
               <Col sm={3} />
               <Col sm={9}>
                 <Button variant="primary" type="submit">

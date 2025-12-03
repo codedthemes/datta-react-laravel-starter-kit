@@ -15,39 +15,53 @@ import MainCard from '@/components/MainCard';
 
 // =============================|| INPUT GROUP - OPTIONS ||============================== //
 
-export default function InputgroupOptions() {
-  const [checkboxChecked, setCheckboxChecked] = useState<boolean>(true);
-  const [radioChecked, setRadioChecked] = useState<boolean>(true);
+export default function InputGroupOptions() {
+  const [checkboxChecked, setCheckboxChecked] = useState(true);
+  const [radioChecked, setRadioChecked] = useState(true);
 
-  const handleCheckboxChange = () => {
-    setCheckboxChecked((prevState) => !prevState);
-  };
+  const dropdownItems = [
+    { label: 'Action' },
+    { label: 'Another action' },
+    { label: 'Something else here' },
+    { divider: true },
+    { label: 'Separated link' }
+  ];
 
-  const handleRadioChange = () => {
-    setRadioChecked((prevState) => !prevState);
-  };
+  const renderDropdown = (id: string) => (
+    <DropdownButton variant="secondary" title="Dropdown" id={id}>
+      {dropdownItems.map((item, idx) =>
+        item.divider ? (
+          <hr key={`divider-${idx}`} className="m-0 my-2" />
+        ) : (
+          <Dropdown.Item key={item.label} href="#">
+            {item.label}
+          </Dropdown.Item>
+        )
+      )}
+    </DropdownButton>
+  );
+
   return (
     <MainCard title="Input Group Options">
-      <Alert>
+      <Alert variant="info">
         <Stack direction="horizontal">
           <i className="ti ti-info-circle h2 f-w-400 mb-0" />
-          <div className="flex-grow-1 ms-3">
-            Input Group with more options like Button, Button with Dropdown, Colors, Checkbox & with Radio
-          </div>
+          <div className="flex-grow-1 ms-3">Input Group with more options like Button, Button with Dropdown, Colors, Checkbox & Radio</div>
         </Stack>
       </Alert>
 
+      {/* --- With Button --- */}
       <Form.Label>With Button</Form.Label>
       <InputGroup className="mb-3">
-        <Button variant="outline-secondary" id="button-addon1">
+        <Button variant="outline-secondary" id="btn-left-1">
           Button
         </Button>
-        <Form.Control aria-label="Example text with button addon" aria-describedby="basic-addon1" placeholder="Left Button" />
+        <Form.Control placeholder="Left Button" aria-describedby="btn-left-1" />
       </InputGroup>
 
       <InputGroup className="mb-3">
-        <Form.Control aria-label="Example text with button addon" aria-describedby="basic-addon1" placeholder="Right Button" />
-        <Button variant="outline-secondary" id="button-addon1">
+        <Form.Control placeholder="Right Button" aria-describedby="btn-right-1" />
+        <Button variant="outline-secondary" id="btn-right-1">
           Button
         </Button>
       </InputGroup>
@@ -57,65 +71,60 @@ export default function InputgroupOptions() {
         <Form.Control placeholder="Left & Right Button" />
         <Button variant="outline-secondary">Button</Button>
       </InputGroup>
+
       <hr />
 
+      {/* --- Button with Dropdown --- */}
       <Form.Label>Button with Dropdown</Form.Label>
       <InputGroup className="mb-3">
-        <DropdownButton variant="secondary" title="Dropdown" id="input-group-dropdown-1">
-          <Dropdown.Item href="#">Action</Dropdown.Item>
-          <Dropdown.Item href="#">Another action</Dropdown.Item>
-          <Dropdown.Item href="#">Something else here</Dropdown.Item>
-          <hr className="m-0 my-2" />
-          <Dropdown.Item href="#">Separated link</Dropdown.Item>
-        </DropdownButton>
+        {renderDropdown('dropdown-left')}
         <Form.Control placeholder="Left Dropdown" />
       </InputGroup>
 
       <InputGroup className="mb-3">
         <Form.Control placeholder="Right Dropdown" />
-        <DropdownButton variant="secondary" title="Dropdown" id="input-group-dropdown-1">
-          <Dropdown.Item href="#">Action</Dropdown.Item>
-          <Dropdown.Item href="#">Another action</Dropdown.Item>
-          <Dropdown.Item href="#">Something else here</Dropdown.Item>
-          <hr className="m-0 my-2" />
-          <Dropdown.Item href="#">Separated link</Dropdown.Item>
-        </DropdownButton>
+        {renderDropdown('dropdown-right')}
       </InputGroup>
 
-      <Form.Label>Color variants with Icons</Form.Label>
+      <hr />
 
+      {/* --- Color Variants with Icons --- */}
+      <Form.Label>Color variants with Icons</Form.Label>
       <InputGroup className="mb-3">
-        <Button variant="outline-primary" id="button-addon1">
+        <Button variant="outline-primary" id="btn-outline">
           <i className="ph ph-aperture me-1" />
           Outline color
         </Button>
-        <Form.Control aria-label="Example text with button addon" aria-describedby="basic-addon1" placeholder="Left Button" />
+        <Form.Control placeholder="Left Button" aria-describedby="btn-outline" />
       </InputGroup>
 
       <InputGroup className="mb-4">
-        <Form.Control aria-label="Example text with button addon" aria-describedby="basic-addon1" placeholder="Right Button" />
-        <Button variant="success">
-          <i className="ph ph-cloud-arrow-down" /> Fill color
+        <Form.Control placeholder="Right Button" aria-describedby="btn-fill" />
+        <Button variant="success" id="btn-fill">
+          <i className="ph ph-cloud-arrow-down me-1" />
+          Fill color
         </Button>
       </InputGroup>
 
       <hr />
 
+      {/* --- Checkbox & Radio --- */}
       <Form.Label>Checkbox & Radio</Form.Label>
-
       <InputGroup className="mb-3">
-        <InputGroup.Checkbox aria-label="Checkbox for following text input" checked={checkboxChecked} onChange={handleCheckboxChange} />
-        <Form.Control />
-      </InputGroup>
-      <InputGroup className="mb-4">
-        <InputGroup.Radio aria-label="Radio button for following text input" checked={radioChecked} onChange={handleRadioChange} />
-        <Form.Control />
+        <InputGroup.Checkbox checked={checkboxChecked} onChange={() => setCheckboxChecked((c) => !c)} aria-label="Checkbox for input" />
+        <Form.Control placeholder="With checkbox" />
       </InputGroup>
 
+      <InputGroup className="mb-4">
+        <InputGroup.Radio checked={radioChecked} onChange={() => setRadioChecked((r) => !r)} aria-label="Radio for input" />
+        <Form.Control placeholder="With radio" />
+      </InputGroup>
+
+      {/* --- Footer --- */}
       <CardFooter className="px-0 pb-0">
         <Stack direction="horizontal" gap={2}>
-          <Button>Submit</Button>
-          <Button className="btn-link-danger">Reset</Button>
+          <Button variant="primary">Submit</Button>
+          <Button variant="outline-danger">Reset</Button>
         </Stack>
       </CardFooter>
     </MainCard>

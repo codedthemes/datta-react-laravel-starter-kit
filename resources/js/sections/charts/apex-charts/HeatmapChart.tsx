@@ -1,4 +1,9 @@
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
+
+// project imports
+import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 // third-party
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
@@ -13,57 +18,73 @@ function generateDatasehratheat(count: number, yrange: { min: number; max: numbe
   return series;
 }
 
-const options: ChartProps = {
+const heatmapChartOptions = {
+  chart: {
+    height: 350,
+    type: 'heatmap',
+    background: 'transparent'
+  },
   dataLabels: {
     enabled: false
-  },
-  colors: ['#04a9f5']
+  }
 };
 
 // ==============================|| APEX CHART - HEATMAP CHART ||============================== //
 
 export default function HeatMapChart() {
-  const series = useMemo(
-    () => [
-      {
-        name: 'Metric1',
-        data: generateDatasehratheat(12, { min: 0, max: 90 })
-      },
-      {
-        name: 'Metric2',
-        data: generateDatasehratheat(12, { min: 0, max: 90 })
-      },
-      {
-        name: 'Metric3',
-        data: generateDatasehratheat(12, { min: 0, max: 90 })
-      },
-      {
-        name: 'Metric4',
-        data: generateDatasehratheat(12, { min: 0, max: 90 })
-      },
-      {
-        name: 'Metric5',
-        data: generateDatasehratheat(12, { min: 0, max: 90 })
-      },
-      {
-        name: 'Metric6',
-        data: generateDatasehratheat(12, { min: 0, max: 90 })
-      },
-      {
-        name: 'Metric7',
-        data: generateDatasehratheat(12, { min: 0, max: 90 })
-      },
-      {
-        name: 'Metric8',
-        data: generateDatasehratheat(12, { min: 0, max: 90 })
-      },
-      {
-        name: 'Metric9',
-        data: generateDatasehratheat(12, { min: 0, max: 90 })
-      }
-    ],
-    []
-  );
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
+
+  const [series] = useState([
+    {
+      name: 'Metric1',
+      data: generateDatasehratheat(12, { min: 0, max: 90 })
+    },
+    {
+      name: 'Metric2',
+      data: generateDatasehratheat(12, { min: 0, max: 90 })
+    },
+    {
+      name: 'Metric3',
+      data: generateDatasehratheat(12, { min: 0, max: 90 })
+    },
+    {
+      name: 'Metric4',
+      data: generateDatasehratheat(12, { min: 0, max: 90 })
+    },
+    {
+      name: 'Metric5',
+      data: generateDatasehratheat(12, { min: 0, max: 90 })
+    },
+    {
+      name: 'Metric6',
+      data: generateDatasehratheat(12, { min: 0, max: 90 })
+    },
+    {
+      name: 'Metric7',
+      data: generateDatasehratheat(12, { min: 0, max: 90 })
+    },
+    {
+      name: 'Metric8',
+      data: generateDatasehratheat(12, { min: 0, max: 90 })
+    },
+    {
+      name: 'Metric9',
+      data: generateDatasehratheat(12, { min: 0, max: 90 })
+    }
+  ]);
+
+  const [options, setOptions] = useState<ChartProps>(heatmapChartOptions);
+
+  useEffect(() => {
+    setOptions({
+      ...heatmapChartOptions,
+      chart: { ...heatmapChartOptions.chart, fontFamily: fontFamily },
+      colors: ['#04a9f5'],
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
+    });
+  }, [resolvedTheme, fontFamily]);
 
   return <ReactApexChart options={options} series={series} type="heatmap" height={350} />;
 }

@@ -25,23 +25,19 @@ const users = [
 export default function AssignedUsers() {
   return (
     <MainCard title="Assigned Users" bodyClassName="p-0">
-      <ListGroup variant="flush">
+      <ListGroup variant="flush" as="ul">
         {users.map((user, index) => (
-          <ListGroup.Item key={index} className="d-flex justify-content-between align-items-center">
-            <Stack direction="horizontal" gap={4} className="align-items-center w-100">
-              <a>
-                <Image src={user.img} alt={user.name} roundedCircle width={45} height={45} fluid className="avatar" />
+          <ListGroup.Item key={index} as="li" className="d-flex gap-2 justify-content-between align-items-center">
+            <Image src={user.img} alt={user.name} roundedCircle width={45} height={45} fluid className="avatar" />
+            <Stack className="align-self-center">
+              <a href="#!" className="text-decoration-none text-dark">
+                {user.name}
               </a>
-
-              <Stack className="flex-grow-1">
-                <a className="text-decoration-none text-dark d-block">{user.name}</a>
-                <small className="text-muted">{user.role}</small>
-              </Stack>
-              <a href="#!" className="avatar avatar-s">
-                <i className="ti ti-chevron-right text-primary f-22" />
-              </a>
-              {/* </a> */}
+              <small className="text-muted">{user.role}</small>
             </Stack>
+            <a href="#!" aria-label="view details">
+              <i className="ti ti-chevron-right text-primary f-18" />
+            </a>
           </ListGroup.Item>
         ))}
       </ListGroup>

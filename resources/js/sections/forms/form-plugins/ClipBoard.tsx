@@ -8,12 +8,13 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Stack from 'react-bootstrap/Stack';
 import Row from 'react-bootstrap/Row';
 
-// third party
-import copy from 'copy-to-clipboard';
-
 // project-imports
 import MainCard from '@/components/MainCard';
-import branding from '../../../../branding.json';
+import branding from '@/../branding.json';
+
+// third party
+import copy from 'copy-to-clipboard';
+import { toast, ToastContainer } from 'react-toastify';
 
 // =============================|| FORM PLUGINS - CLIPBOARD ||============================== //
 
@@ -26,13 +27,15 @@ export default function ClipBoardPage() {
     'Lorem ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga.'
   );
 
-  const handleCopy = (text: string) => {
+  const handleCopy = (text: string, successMessage: string) => {
     copy(text);
+    toast.success(successMessage || 'copy success');
   };
 
   return (
     <MainCard>
       <Form>
+        {/* Copy from Input */}
         <Row className="mb-3">
           <Col lg={3} sm={12} className="col-form-label text-lg-end">
             Copy from TextField
@@ -48,7 +51,7 @@ export default function ClipBoardPage() {
                 placeholder="Type some value to copy"
               />
 
-              <Button className="hei-55" onClick={() => handleCopy(text1)}>
+              <Button className="hei-55" onClick={() => handleCopy(text1, 'Copy Text')}>
                 <i className="ph ph-copy" />
               </Button>
             </InputGroup>
@@ -58,6 +61,7 @@ export default function ClipBoardPage() {
           </Col>
         </Row>
 
+        {/* Copy / Cut from Textarea */}
         <Row className="mb-3">
           <Col lg={3} sm={12} className="col-form-label text-lg-end">
             Cut text from another element
@@ -72,19 +76,18 @@ export default function ClipBoardPage() {
               placeholder="Type some value to cut"
             />
             <small>
-              you can define a <code>data-clipboard-action</code> attribute to specify if you want to either <code>copy</code> or{' '}
-              <code>cut</code> content
+              You can define a <code>data-clipboard-action</code> attribute to specify <code>copy</code> or <code>cut</code> content
             </small>
             <br />
             <Stack direction="horizontal" gap={2}>
-              <Button variant="danger" className="mt-2" onClick={() => handleCopy(text2)}>
+              <Button variant="danger" className="mt-2" onClick={() => handleCopy(text2, 'Copy Text')}>
                 Text clipboard
               </Button>
               <Button
                 variant="secondary"
                 className="mt-2"
                 onClick={() => {
-                  handleCopy(text2);
+                  handleCopy(text2, 'Cut Text');
                   setText2('');
                 }}
               >
@@ -94,18 +97,20 @@ export default function ClipBoardPage() {
           </Col>
         </Row>
 
+        {/* Copy from Container */}
         <Row>
           <Col lg={3} sm={12} className="col-form-label text-lg-end">
             Copy From Container
           </Col>
           <Col lg={6} md={9} sm={12}>
             <div style={{ border: '4px solid rgba(234, 234, 234, 0.5)', padding: 10 }}>{text3}</div>
-            <Button onClick={() => handleCopy(text3)} className="mt-2">
+            <Button onClick={() => handleCopy(text3, 'Copy Text')} className="mt-2">
               Copy to clipboard
             </Button>
           </Col>
         </Row>
       </Form>
+      <ToastContainer position="top-right" theme="colored" />
     </MainCard>
   );
 }

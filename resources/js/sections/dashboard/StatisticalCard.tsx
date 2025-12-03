@@ -32,8 +32,8 @@ export default function StatisticalCard() {
   return (
     <MainCard title="Statistical" subheader={<p className="mb-0 mt-0">Status : live</p>}>
       <h3 className="f-w-300">4,445,701</h3>
-      <span className="d-block">
-        <i className="ti ti-map-pin-filled m-r-10" />
+      <span className="d-inline-flex align-items-center">
+        <i className="ti ti-map-pin-filled me-2" />
         256 Countries, 5667 Cites
       </span>
 

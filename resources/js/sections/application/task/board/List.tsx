@@ -2,7 +2,6 @@ import React from 'react';
 
 // react-bootstrap
 import Badge from 'react-bootstrap/Badge';
-import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import FormCheck from 'react-bootstrap/FormCheck';
@@ -18,60 +17,58 @@ import avatar3 from '@assets/images/user/avatar-5.png';
 interface TaskData {
   id: number;
   title: string;
-  priority: string;
-  priorityColor: string;
+  priority: {
+    label: string;
+    color: string;
+  };
   assignee: string;
-  playlistN0: string;
+  playlistNo: string;
   message: number;
   avatar: string;
-  avatarNumber?: number;
 }
 
 // list data
-const ListData: TaskData[] = [
+const listData: TaskData[] = [
   {
     id: 24,
     title: 'Create UI Design Model',
-    priority: 'Highest',
-    priorityColor: 'light-danger',
+    priority: { label: 'Highest', color: 'light-danger' },
     assignee: 'Joseph William',
-    playlistN0: '14/40',
+    playlistNo: '14/40',
     message: 9,
-    avatar: avatar1,
-    avatarNumber: 5
+    avatar: avatar1
   },
   {
     id: 22,
     title: 'Make Responsive UIKit',
-    priority: 'Normal',
-    priorityColor: 'light-success',
+    priority: { label: 'Normal', color: 'light-success' },
     assignee: 'Ashoka T.',
-    playlistN0: '23/37',
+    playlistNo: '23/37',
     message: 16,
-    avatar: avatar2,
-    avatarNumber: 3
+    avatar: avatar2
   },
   {
     id: 21,
     title: ' Add E-Commerce Module',
-    priority: 'Normal',
-    priorityColor: 'light-warning',
+    priority: { label: 'Normal', color: 'light-warning' },
     assignee: 'Ashoka T.',
-    playlistN0: '16/28',
+    playlistNo: '16/28',
     message: 12,
     avatar: avatar3
   }
 ];
 
-const boardData: TaskData[] = Array(2).fill(ListData).flat();
+const boardData: TaskData[] = Array(2).fill(listData).flat();
 
 // =================|| BOARD LIST ITEM ||============================== //
 
-const BoardListItem: React.FC<{ data: TaskData }> = ({ data }) => {
+type Props = { data: TaskData; isLast?: boolean };
+
+const BoardListItem: React.FC<Props> = ({ data, isLast }) => {
   return (
-    <Card.Body className="py-3 border-bottom">
+    <Card.Body className={`py-3 ${isLast ? '' : ' border-bottom'}`}>
       <Row className="justify-content-sm-between align-items-center">
-        <Col sm={5}>
+        <Col sm={5} className="mb-2 mb-sm-0">
           <Stack direction="horizontal" className="align-items-center">
             <FormCheck.Input className="input-secondary me-1" type="checkbox" />
             <span>
@@ -80,20 +77,20 @@ const BoardListItem: React.FC<{ data: TaskData }> = ({ data }) => {
           </Stack>
         </Col>
         <Col sm={2}>
-          <Badge bg={data.priorityColor}>{data.priority}</Badge>
+          <Badge bg={data.priority.color}>{data.priority.label}</Badge>
         </Col>
         <Col sm={5}>
           <Stack direction="horizontal" className="justify-content-between">
             <div>
-              <Image src={data.avatar} alt={data.assignee} className="img-fluid img-radius wid-20 me-2" /> {data.assignee}
+              <Image src={data.avatar} alt={data.assignee} fluid roundedCircle className="wid-20 me-2" /> {data.assignee}
             </div>
             <div>
               <p className="d-inline-block mb-0">
-                <i className="ph ph-list-checks align-middle f-18 text-primary" />
-                {data.playlistN0}
+                <i className="ph ph-list-checks align-text-bottom f-18 text-primary" style={{ marginInlineEnd: '0.25rem' }} />
+                {data.playlistNo}
               </p>
               <p className="d-inline-block mb-0 ms-2">
-                <i className="ph ph-chat align-middle f-18 text-success" />
+                <i className="ph ph-chat align-text-bottom f-18 text-success" style={{ marginInlineEnd: '0.25rem' }} />
                 {data.message}
               </p>
             </div>
@@ -104,20 +101,18 @@ const BoardListItem: React.FC<{ data: TaskData }> = ({ data }) => {
   );
 };
 
-// =================|| USER INVOICE LIST - INVOICE LIST ||============================== //
+// =================|| TASK BOARD - LIST ||============================== //
 
 export default function TaskBoardList() {
   return (
-    <Container fluid>
-      <Row>
-        <Col xs={12}>
-          <Card>
-            {boardData.map((value, index) => (
-              <BoardListItem key={index} data={value} />
-            ))}
-          </Card>
-        </Col>
-      </Row>
-    </Container>
+    <Row>
+      <Col xs={12}>
+        <Card>
+          {boardData.map((value, index) => (
+            <BoardListItem key={index} data={value} isLast={index === boardData.length - 1} />
+          ))}
+        </Card>
+      </Col>
+    </Row>
   );
 }

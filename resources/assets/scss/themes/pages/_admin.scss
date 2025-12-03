@@ -1,6 +1,8 @@
 /**  =====================
   admin css start
 ==========================  **/
+@use 'sass:color';
+
 .widget-calender {
   .datepicker-header {
     border-bottom: 1px solid var(--bs-border-color);
@@ -112,6 +114,20 @@
         background: var(--bs-primary);
         border-color: var(--bs-primary);
         color: #fff;
+      }
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .course-wizard {
+    .nav-item {
+      .nav-link {
+        min-width: 60px;
+
+        .course-wizard-num {
+          margin: 0 !important;
+        }
       }
     }
   }
@@ -553,7 +569,7 @@
   &:hover {
     @each $color, $value in $theme-colors {
       .border-feed.bg-#{$color} {
-        background-color: transparentize($value, 0.7) !important;
+        background-color: #{color.adjust($value, $alpha: -0.7)} !important;
 
         i {
           color: $value;

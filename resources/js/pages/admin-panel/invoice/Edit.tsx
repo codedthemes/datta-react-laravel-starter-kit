@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 // project-imports
-import InvoiceEdit from '@/sections/admin-panel/invoice/Edit';
+import InvoiceEdit from '@/sections/admin-panel/invoice/EditInvoice';
 
 // ==============================|| ADMIN PANEL - INVOICE EDIT ||============================== //
 

@@ -38,7 +38,7 @@ export default function TwoColumnsFormLayoutPage() {
               <InputGroup>
                 <Form.Control type="password" placeholder="Please enter your Password" />
                 <InputGroup.Text>
-                  <i className="ti ti-lock f-18" />
+                  <i className="ti ti-lock f-20" />
                 </InputGroup.Text>
               </InputGroup>
               <Form.Text>Please enter your Password</Form.Text>
@@ -51,7 +51,7 @@ export default function TwoColumnsFormLayoutPage() {
               <InputGroup>
                 <Form.Control type="url" placeholder="Please enter your Profile URL" />
                 <InputGroup.Text>
-                  <i className="ti ti-link f-18" />
+                  <i className="ti ti-link f-20" />
                 </InputGroup.Text>
               </InputGroup>
               <Form.Text>Please enter your Profile URL</Form.Text>
@@ -62,8 +62,11 @@ export default function TwoColumnsFormLayoutPage() {
         <Row className="mb-3">
           <Col lg={6}>
             <Form.Label>User Type:</Form.Label>
-            <Form.Check type="radio" name="userType" label="Administrator" id="Administrator" defaultChecked />
-            <Form.Check type="radio" name="userType" label="Author" id="Author" />
+            <div>
+              <Form.Check className="form-check-inline" type="radio" name="userType" label="Administrator" id="Administrator" />
+              <Form.Check className="form-check-inline" type="radio" name="userType" label="Author" id="Author" />
+            </div>
+            <small className="form-text text-muted">Please select user type</small>
           </Col>
         </Row>
       </Form>

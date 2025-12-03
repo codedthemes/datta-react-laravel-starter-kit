@@ -42,7 +42,7 @@ export default function ImageGridGallery() {
   return (
     <>
       <MainCard title="Image Grid">
-        <Row>
+        <Row className="g-3">
           {galleryImages.map((image, index) => (
             <Col key={index} lg={4} sm={6}>
               <a href="#!" className="thumbnail mb-4" onClick={() => handleShow(image.full)}>

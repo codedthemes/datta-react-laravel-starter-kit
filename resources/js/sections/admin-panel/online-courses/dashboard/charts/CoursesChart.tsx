@@ -4,8 +4,9 @@ import { useState, useEffect } from 'react';
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // project-imports
-import { ThemeMode } from '@/config';
 import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 type ChartData = {
   name: string;
@@ -17,7 +18,16 @@ const baseChartOptions = {
   chart: { type: 'bar', toolbar: { show: false }, offsetX: -5 },
   plotOptions: { bar: { horizontal: false, columnWidth: '55%' } },
   yaxis: { labels: { show: false } },
-  legend: { show: true, position: 'top', horizontalAlign: 'right' },
+  legend: {
+    show: true,
+    position: 'top',
+    horizontalAlign: 'right',
+    offsetX: 10,
+    offsetY: 10,
+    labels: { useSeriesColors: false },
+    markers: { size: 6, shape: 'circle', strokeWidth: 0 },
+    itemMargin: { horizontal: 10, vertical: 8 }
+  },
   dataLabels: { enabled: false },
   stroke: { show: true, width: 3, colors: ['transparent'] },
   grid: { strokeDashArray: 4 },
@@ -31,7 +41,9 @@ const baseChartOptions = {
 // ==============================|| DASHBOARD - COURSES CHART ||============================== //
 
 export default function CoursesChart({ data }: { data: ChartData[] }) {
-  const { mode } = useConfig();
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
 
   const [chartSeries, setChartSeries] = useState(data);
   const [chartOptions, setChartOptions] = useState<ChartProps>(baseChartOptions);
@@ -39,18 +51,18 @@ export default function CoursesChart({ data }: { data: ChartData[] }) {
   useEffect(() => {
     setChartOptions((prev) => ({
       ...prev,
-      colors: ['var(--bs-primary)', '#f4c22b'],
+      chart: { ...prev.chart, fontFamily: fontFamily },
+      colors: ['var(--bs-primary)', 'var(--bs-warning)'],
       grid: { ...prev.grid, borderColor: 'var(--bs-border-color)' },
       xaxis: {
         ...prev.xaxis,
-        labels: { style: { colors: 'var(--bs-secondary)' } },
         axisBorder: { color: 'var(--bs-border-color)' }
       },
       theme: {
-        mode: mode === ThemeMode.DARK ? 'dark' : 'light'
+        mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light'
       }
     }));
-  }, []);
+  }, [resolvedTheme, fontFamily]);
 
   useEffect(() => {
     setChartSeries(data);

@@ -1,6 +1,9 @@
 // ============================
 //    3. Sidebar css start
 // ============================
+@use 'sass:map';
+@use 'sass:color';
+
 .b-brand {
   display: flex;
   align-items: center;
@@ -16,6 +19,7 @@
     svg {
       stroke: #fff;
     }
+
     i {
       color: #fff;
     }
@@ -105,7 +109,7 @@
       vertical-align: text-top;
     }
 
-    > svg {
+    >svg {
       width: 18px;
       height: 18px;
       display: inline-block;
@@ -130,10 +134,10 @@
     }
   }
 
-  .pc-navbar > .pc-item:not(.pc-caption) {
+  .pc-navbar>.pc-item:not(.pc-caption) {
     position: relative;
 
-    > .pc-link {
+    >.pc-link {
       &::after {
         content: '';
         position: absolute;
@@ -163,7 +167,7 @@
         background: var(--pc-sidebar-active-color);
       }
 
-      > .pc-link {
+      >.pc-link {
         font-weight: 500;
         color: var(--pc-sidebar-main-active-color);
 
@@ -175,8 +179,9 @@
 
     .pc-submenu {
       padding: 15px 0;
+
       .pc-item {
-        > .pc-link {
+        >.pc-link {
           &:after {
             content: '';
             border-radius: 50%;
@@ -192,7 +197,7 @@
 
         &.pc-trigger,
         &.active {
-          > .pc-link {
+          >.pc-link {
             font-weight: 500;
             color: var(--pc-sidebar-active-color);
 
@@ -206,7 +211,7 @@
         &.active,
         &:focus,
         &:hover {
-          > .pc-link {
+          >.pc-link {
             &:after {
               opacity: 1;
               transform: scale(1.2);
@@ -274,7 +279,7 @@
     display: inline-block;
     transition: all 0.2s ease-in-out;
 
-    > svg {
+    >svg {
       width: 14px;
       height: 14px;
     }
@@ -320,18 +325,18 @@
 
   .pc-hasmenu {
     &:not(.pc-trigger) {
-      > .pc-submenu {
+      >.pc-submenu {
         display: none;
       }
     }
 
     &.pc-trigger {
-      > .pc-submenu {
+      >.pc-submenu {
         display: block;
       }
 
-      > .pc-link {
-        > .pc-arrow {
+      >.pc-link {
+        >.pc-arrow {
           transform: rotate(90deg);
         }
       }
@@ -355,9 +360,11 @@
     display: none;
   }
 }
+
 [data-pc-navimg*='preset-'] {
   .pc-sidebar {
     background-size: cover;
+
     .navbar-wrapper {
       background: rgba(0, 0, 0, 0.5);
     }
@@ -365,16 +372,16 @@
 }
 
 [data-pc-drp-menu-icon*='preset-'] {
-  .pc-sidebar .pc-arrow > i::before {
+  .pc-sidebar .pc-arrow>i::before {
     content: var(--pc-sidebar-drp-menu-icon);
   }
 }
 
 [data-pc-drp-menu-link-icon*='preset-']:not([data-pc-drp-menu-link-icon='preset-1']) {
   .pc-sidebar {
-    .pc-navbar > .pc-item:not(.pc-caption) .pc-submenu {
+    .pc-navbar>.pc-item:not(.pc-caption) .pc-submenu {
       .pc-item {
-        > .pc-link:after {
+        >.pc-link:after {
           content: var(--pc-sidebar-drp-menu-link-icon);
           font-family: tabler-icons !important;
           transform: none;
@@ -384,9 +391,10 @@
           top: 6px;
           opacity: 0;
         }
+
         &.active,
         &:hover {
-          > .pc-link:after {
+          >.pc-link:after {
             opacity: 1;
           }
         }
@@ -394,6 +402,7 @@
     }
   }
 }
+
 @media (min-width: 1025px) {
   .navbar-overlay {
     .pc-sidebar {
@@ -414,12 +423,12 @@
   .pc-sidebar {
     transition: width 0.2s ease;
 
-    ~ .pc-header {
+    ~.pc-header {
       transition: left 0.2s ease;
     }
 
-    ~ .pc-footer,
-    ~ .pc-container {
+    ~.pc-footer,
+    ~.pc-container {
       transition: margin-left 0.2s ease;
     }
 
@@ -427,12 +436,12 @@
       width: 0;
       --pc-sidebar-border: none;
 
-      ~ .pc-header {
+      ~.pc-header {
         left: 0;
       }
 
-      ~ .pc-footer,
-      ~ .pc-container {
+      ~.pc-footer,
+      ~.pc-container {
         margin-left: 0px;
       }
     }
@@ -483,19 +492,23 @@
 
   @each $name, $value in $preset-colors {
     a.preset.preset-#{$i} {
-      background: map-get($value, 'primary');
+      background: map.get($value, 'primary');
     }
 
     a.preset.preset-gradient-#{$i} {
-      background: linear-gradient(to right, map-get($value, 'primary') 0%, lighten(map-get($value, 'primary'), 10%) 100%);
+      background: linear-gradient(to right,
+        map.get($value, 'primary') 0%,
+        #{color.adjust(map.get($value, 'primary'), $lightness: 10%)} 100%);
     }
 
     &.preset-#{$i} {
-      --pc-layout-2-color: #{map-get($value, 'primary')};
+      --pc-layout-2-color: #{map.get($value, 'primary')};
     }
 
     &.preset-gradient-#{$i} {
-      --pc-layout-2-color: linear-gradient(to right, #{map-get($value, 'primary')} 0%, #{lighten(map-get($value, 'primary'), 10%)} 100%);
+      --pc-layout-2-color: linear-gradient(to right,
+        #{map.get($value, 'primary')} 0%,
+        #{color.adjust(map.get($value, 'primary'), $lightness: 10%)} 100%);
     }
 
     $i: $i + 1;
@@ -506,13 +519,15 @@
     background: transparent;
 
     .pc-head-link {
+
       &.active,
       &:active,
       &:focus,
       &:hover {
         color: var(--pc-header-color);
-        > svg,
-        > i {
+
+        >svg,
+        >i {
           color: var(--pc-header-color);
         }
       }
@@ -567,16 +582,15 @@
         margin-bottom: 5px;
         --bs-breadcrumb-divider-color: #fff;
 
-        .breadcrumb-item + .breadcrumb-item::before {
-          content: var(
-            --bs-breadcrumb-divider,
-            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14' stroke='%23ffffff' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' class='css-i6dzq1'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E")
-          );
+        .breadcrumb-item+.breadcrumb-item::before {
+          content: var(--bs-breadcrumb-divider,
+              url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14' stroke='%23ffffff' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' class='css-i6dzq1'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E"));
         }
 
         .breadcrumb-item,
         a {
           color: #fff;
+
           &:active,
           &:focus,
           &:hover {
@@ -617,23 +631,23 @@
 
   @each $name, $value in $preset-colors {
     a.preset.preset-#{$i} {
-      background: map-get($value, 'primary');
+      background: map.get($value, 'primary');
     }
 
     a.preset.preset-gradient-#{$i} {
-      background: linear-gradient(to right, map-get($value, 'primary') 0%, lighten(map-get($value, 'primary'), 10%) 100%);
+      background: linear-gradient(to right,
+        map.get($value, 'primary') 0%,
+        #{color.adjust(map.get($value, 'primary'), $lightness: 10%)} 100%);
     }
 
     &.preset-#{$i} {
-      --pc-layout-3-sidebar-background: #{map-get($value, 'primary')};
+      --pc-layout-3-sidebar-background: #{map.get($value, 'primary')};
     }
 
     &.preset-gradient-#{$i} {
-      --pc-layout-3-sidebar-background: linear-gradient(
-        to right,
-        #{map-get($value, 'primary')} 0%,
-        #{lighten(map-get($value, 'primary'), 10%)} 100%
-      );
+      --pc-layout-3-sidebar-background: linear-gradient(to right,
+        #{map.get($value, 'primary')} 0%,
+        #{color.adjust(map.get($value, 'primary'), $lightness: 10%)} 100%);
     }
 
     $i: $i + 1;
@@ -649,19 +663,20 @@
     }
 
     .pc-navbar {
-      > li {
+      >li {
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 
-        > a {
+        >a {
           padding: 20px 15px;
         }
       }
 
-      > .pc-item:not(.pc-caption) {
+      >.pc-item:not(.pc-caption) {
+
         &:hover,
         &.pc-trigger,
         &.active {
-          > .pc-link:after {
+          >.pc-link:after {
             background: rgba(0, 0, 0, 0.3);
           }
         }

@@ -47,7 +47,7 @@ export default function UserStatus() {
         <InputGroup>
           <FormControl placeholder="Search" />
           <InputGroup.Text>
-            <i className="ph ph-magnifying-glass align-middle" />
+            <i className="ph ph-magnifying-glass" style={{ marginBottom: '-2px' }} />
           </InputGroup.Text>
         </InputGroup>
       </Card.Body>
@@ -63,7 +63,7 @@ export default function UserStatus() {
           <div className="h6 mb-0 px-4">
             <i className="ph ph-flag-checkered align-middle f-20 text-primary me-1" />
             Completed Status
-            <i className="ph ph-caret-down float-end me-1" />
+            <i className="ph ph-caret-down float-end" />
           </div>
         </a>
         <Collapse in={statusOpen}>
@@ -94,7 +94,7 @@ export default function UserStatus() {
           <div className="h6 mb-0 px-4">
             <i className="ph ph-user-circle align-middle f-20 text-primary me-1" />
             Assign User
-            <i className="ph ph-caret-down float-end me-1" />
+            <i className="ph ph-caret-down float-end" />
           </div>
         </a>
         <Collapse in={assignOpen}>

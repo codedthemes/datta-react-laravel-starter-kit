@@ -7,28 +7,27 @@ import Table from 'react-bootstrap/Table';
 
 // third-party
 import { flexRender, useReactTable, ColumnDef, getCoreRowModel, getPaginationRowModel, getFilteredRowModel } from '@tanstack/react-table';
+import { LabelKeyObject } from 'react-csv/lib/core';
 
 // project-imports
 import MainCard from '@/components/MainCard';
 import LinearWithLabel from '@/components/@extended/progress/LinearWithLabel';
-import TablePagination from '@/components/third-party/react-table/Pagination';
-import SortingData from '@/components/third-party/react-table/SortingData';
-import DebouncedInput from '@/components/third-party/react-table/DebouncedInput';
 import makeData from '@/data/react-table';
 import SimpleBarScroll from '@/components/third-party/SimpleBar';
+import { CSVExport, DebouncedInput, SortingData, TablePagination } from '@/components/third-party/react-table';
 
 // types
 import { TableDataProps } from '@/types/table';
-import { LabelKeyObject } from 'react-csv/lib/core';
 
 interface ReactTableProps {
   columns: ColumnDef<TableDataProps>[];
   data: TableDataProps[];
+  title: string;
 }
 
 // ==============================|| REACT TABLE ||============================== //
 
-function ReactTable({ columns, data }: ReactTableProps) {
+function ReactTable({ columns, data, title }: ReactTableProps) {
   const [globalFilter, setGlobalFilter] = useState('');
 
   const table = useReactTable({
@@ -40,24 +39,27 @@ function ReactTable({ columns, data }: ReactTableProps) {
     getPaginationRowModel: getPaginationRowModel()
   });
 
-  let headers: LabelKeyObject[] = [];
-  table.getAllColumns().map((columns) =>
+  const headers: LabelKeyObject[] = [];
+  table.getAllColumns().map((column) => {
+    const accessorKey = (column.columnDef as { accessorKey?: string }).accessorKey;
     headers.push({
-      label: typeof columns.columnDef.header === 'string' ? columns.columnDef.header : '#',
-      // @ts-ignore
-      key: columns.columnDef.accessorKey
-    })
-  );
+      label: typeof column.columnDef.header === 'string' ? column.columnDef.header : '#',
+      key: accessorKey ?? ''
+    });
+  });
 
   return (
-    <MainCard title="Sticky Header" className="table-card">
+    <MainCard title={title} className="table-card" secondary={<CSVExport {...{ data, headers, filename: 'sticky-header.csv' }} />}>
+      {/* toolbar */}
       <Stack direction="horizontal" className="justify-content-between flex-wrap align-items-center border-bottom p-4" gap={2}>
         <SortingData getState={table.getState} setPageSize={table.setPageSize} />
         <div className="datatable-search">
           <DebouncedInput value={globalFilter ?? ''} onFilterChange={(value) => setGlobalFilter(String(value))} />
         </div>
       </Stack>
-      <SimpleBarScroll style={{ maxHeight: 'calc(100vh - 500px)' }}>
+
+      {/* table */}
+      <SimpleBarScroll style={{ maxHeight: 'calc(100vh - 544px)' }}>
         <Table hover className="mb-0">
           <thead className="sticky-top bg-white">
             {table.getHeaderGroups().map((headerGroup) => (
@@ -83,13 +85,15 @@ function ReactTable({ columns, data }: ReactTableProps) {
           </tbody>
         </Table>
       </SimpleBarScroll>
+
+      {/* pagination */}
       <TablePagination
         setPageSize={table.setPageSize}
         setPageIndex={table.setPageIndex}
         getState={table.getState}
         getPageCount={table.getPageCount}
         initialPageSize={10}
-        totalEntries={50}
+        totalEntries={data.length}
       />
     </MainCard>
   );
@@ -97,7 +101,7 @@ function ReactTable({ columns, data }: ReactTableProps) {
 
 // ==============================|| REACT TABLE - STICKY HEADER ||============================== //
 
-export default function StickyTable() {
+export default function StickyTable({ title }: { title: string }) {
   const data: TableDataProps[] = makeData(50);
 
   const columns = useMemo<ColumnDef<TableDataProps>[]>(
@@ -148,5 +152,5 @@ export default function StickyTable() {
     []
   );
 
-  return <ReactTable columns={columns} data={data} />;
+  return <ReactTable columns={columns} data={data} title={title} />;
 }

@@ -8,7 +8,24 @@ import Row from 'react-bootstrap/Row';
 import blurBackground from '@assets/images/widget/user-blur-bg.png';
 import slider7 from '@assets/images/widget/slider7.jpg';
 
-// ==============================|| USER CARD 4 ||============================== //
+const stats = [
+  { value: '400', label: 'Designs' },
+  { value: '90', label: 'Projects' },
+  { value: '70', label: 'Development' }
+];
+
+const StatsSection = () => (
+  <Row className="text-center">
+    {stats.map((stat, index) => (
+      <Col key={`${stat.label}-${index}`}>
+        <h5 className="f-w-500">{stat.value}</h5>
+        <span>{stat.label}</span>
+      </Col>
+    ))}
+  </Row>
+);
+
+// ==============================|| SOCIAL - USER CARD 4 ||============================== //
 
 export default function UserCard4() {
   return (
@@ -18,29 +35,18 @@ export default function UserCard4() {
         <div className="widget-profile-card-1">
           <Image src={slider7} alt="card-style-1" fluid />
           <div className="middle-user">
-            <Image fluid className="img-thumbnail" src={blurBackground} alt="Profile-user" />
+            <Image src={blurBackground} thumbnail fluid alt="Profile-user" />
           </div>
         </div>
         <Card.Body>
-          <Card.Title as="h3">Lary Doe</Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">Web Designer</Card.Subtitle>
-          <Card.Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci a, rem accusantium recusandae beatae.</Card.Text>
+          <Card.Title as="h4" className="f-20 text-dark f-w-500 mb-2">
+            Lary Doe
+          </Card.Title>
+          <Card.Subtitle className="mb-2 text-muted">Senior Web Designer</Card.Subtitle>
+          <Card.Text>Passionate designer with 5+ years of experience creating intuitive digital experiences.</Card.Text>
         </Card.Body>
-        <Card.Footer className="bg-inverse">
-          <Row className="text-center">
-            <Col>
-              <h4>400</h4>
-              <span>Designs</span>
-            </Col>
-            <Col>
-              <h4>90</h4>
-              <span>Projects</span>
-            </Col>
-            <Col>
-              <h4>70</h4>
-              <span>Development</span>
-            </Col>
-          </Row>
+        <Card.Footer className="bg-inverse pt-0">
+          <StatsSection />
         </Card.Footer>
       </Card>
     </>

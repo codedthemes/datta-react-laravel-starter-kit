@@ -1,12 +1,19 @@
+import { useEffect, useState } from 'react';
+
 // third-party
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // project-imports
 import MainCard from '@/components/MainCard';
+import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 // chart-options
-const chartOptions: ChartProps = {
+const statisticsBarChartOptions = {
   chart: {
+    type: 'bar',
+    height: 300,
     toolbar: {
       show: false
     }
@@ -25,7 +32,6 @@ const chartOptions: ChartProps = {
       data: [30, 50, 40, 40]
     }
   ],
-  colors: ['#1de9b6', '#a389d4', '#04a9f5'],
   fill: {
     type: 'gradient',
     opacity: 1,
@@ -59,15 +65,55 @@ const chartOptions: ChartProps = {
         return '$ ' + val + ' thousands';
       }
     }
+  },
+  legend: {
+    show: true,
+    position: 'bottom',
+    offsetX: 10,
+    offsetY: 10,
+    labels: { useSeriesColors: false },
+    markers: { size: 6, shape: 'circle', strokeWidth: 0 },
+    itemMargin: { horizontal: 10, vertical: 8 }
   }
 };
 
 // =============================|| ANALYTICS - STATISTICS BAR CHART ||============================== //
 
 export default function StatisticsBarChart() {
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
+
+  const [series] = useState([
+    {
+      name: 'Net Profit',
+      data: [20, 40, 20, 45]
+    },
+    {
+      name: 'Revenue',
+      data: [40, 70, 30, 60]
+    },
+    {
+      name: 'Free Cash Flow',
+      data: [30, 50, 40, 40]
+    }
+  ]);
+
+  const [options, setOptions] = useState<ChartProps>(statisticsBarChartOptions);
+
+  useEffect(() => {
+    setOptions({
+      ...statisticsBarChartOptions,
+      chart: { ...statisticsBarChartOptions.chart, fontFamily: fontFamily },
+      colors: ['var(--bs-success)', 'var(--bs-purple)', 'var(--bs-primary)'],
+      grid: { borderColor: 'var(--bs-border-color)' },
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
+    });
+  }, [resolvedTheme, fontFamily]);
+
   return (
     <MainCard title="Statistics">
-      <ReactApexChart options={chartOptions} series={chartOptions.series} type="bar" height={300} />
+      <ReactApexChart options={options} series={series} type="bar" height={300} />
     </MainCard>
   );
 }

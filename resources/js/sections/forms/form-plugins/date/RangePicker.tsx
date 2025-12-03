@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, RefObject } from 'react';
 
 // react-bootstrap
 import Col from 'react-bootstrap/Col';
@@ -8,9 +8,10 @@ import Row from 'react-bootstrap/Row';
 
 // third-party
 import Calendar from 'react-calendar';
+import { Value } from 'react-calendar/dist/shared/types.js';
 
 // types
-import { DatePickerDisabledProps } from '@/types/date-picker';
+import { DatePickerDisabledProps } from 'types/date-picker';
 
 // =============================|| DATE - RANGE PICKER ||============================== //
 
@@ -18,22 +19,25 @@ export default function RangePicker({ useClickOutside }: DatePickerDisabledProps
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [activeInput, setActiveInput] = useState<'start' | 'end' | null>(null);
-  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-  const [isCalendarOpen4, setIsCalendarOpen4] = useState(false);
-  const calendarRef = useRef<HTMLDivElement>(null);
-  const calendarRef4 = useRef<HTMLDivElement>(null);
 
-  useClickOutside(calendarRef, () => setIsCalendarOpen(false));
+  const calendarRef = useRef<HTMLDivElement>(null);
+
+  // close calendar on outside click
+  useClickOutside(calendarRef as RefObject<HTMLElement>, () => setActiveInput(null));
 
   const handleInputClick = (input: 'start' | 'end') => {
-    if (input === 'start') {
-      setActiveInput('start');
-      setIsCalendarOpen(true);
-      setIsCalendarOpen4(false);
-    } else {
-      setActiveInput('end');
-      setIsCalendarOpen4(true);
-      setIsCalendarOpen(false);
+    setActiveInput(input);
+  };
+
+  const handleDateChange = (value: Value) => {
+    if (Array.isArray(value)) {
+      const [start, end] = value;
+      setStartDate(start);
+      setEndDate(end);
+      setActiveInput(null);
+    } else if (value instanceof Date) {
+      setStartDate(value);
+      setEndDate(null);
     }
   };
 
@@ -43,8 +47,9 @@ export default function RangePicker({ useClickOutside }: DatePickerDisabledProps
         <Form.Label className="mb-0">Date Range</Form.Label>
       </Col>
 
-      <Col lg={4} md={9} sm={12}>
+      <Col lg={4} md={9} sm={12} className="position-relative">
         <InputGroup>
+          {/* Start Date */}
           <Form.Control
             type="text"
             className="rounded-start rounded-end-0"
@@ -54,57 +59,35 @@ export default function RangePicker({ useClickOutside }: DatePickerDisabledProps
             readOnly
           />
 
-          {isCalendarOpen && (
-            <div ref={calendarRef}>
-              <Calendar
-                selectRange
-                onChange={(value) => {
-                  if (Array.isArray(value)) {
-                    setStartDate(value[0]);
-                    setEndDate(value[1]);
-                  }
-                }}
-                formatShortWeekday={(locale, date) => date.toLocaleDateString(locale, { weekday: 'short' }).slice(0, 2)}
-                value={[startDate, endDate]}
-                prev2Label={null}
-                next2Label={null}
-                prevLabel="«"
-                nextLabel="»"
-                className={`react-calendar ${activeInput === 'end' ? 'end-active' : ''} react-calendar-1`}
-              />
-            </div>
-          )}
-
           <InputGroup.Text>to</InputGroup.Text>
+
+          {/* End Date */}
           <Form.Control
             type="text"
-            className=" text-end rounded-start-0 rounded-end"
+            className="text-end rounded-start-0 rounded-end"
             placeholder="End date"
             value={endDate ? endDate.toLocaleDateString() : ''}
             onClick={() => handleInputClick('end')}
             readOnly
           />
-          {isCalendarOpen4 && (
-            <div ref={calendarRef4}>
-              <Calendar
-                selectRange
-                onChange={(value) => {
-                  if (Array.isArray(value)) {
-                    setStartDate(value[0]);
-                    setEndDate(value[1]);
-                  }
-                }}
-                formatShortWeekday={(locale, date) => date.toLocaleDateString(locale, { weekday: 'short' }).slice(0, 2)}
-                value={[startDate, endDate]}
-                prev2Label={null}
-                next2Label={null}
-                prevLabel="«"
-                nextLabel="»"
-                className={`react-calendar ${activeInput === 'end' ? 'end-active' : ''} react-calendar-2`}
-              />
-            </div>
-          )}
         </InputGroup>
+
+        {/* Calendar */}
+        {activeInput && (
+          <div ref={calendarRef} className="position-absolute start-0 top-100 z-3">
+            <Calendar
+              selectRange
+              onChange={handleDateChange}
+              value={[startDate, endDate]}
+              formatShortWeekday={(locale, date) => date.toLocaleDateString(locale, { weekday: 'short' }).slice(0, 2)}
+              prev2Label={null}
+              next2Label={null}
+              prevLabel="«"
+              nextLabel="»"
+              className={`react-calendar react-calendar-${activeInput}`}
+            />
+          </div>
+        )}
       </Col>
     </Row>
   );

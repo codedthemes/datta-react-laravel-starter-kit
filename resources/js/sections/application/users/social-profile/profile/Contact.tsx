@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 // react-bootstrap
 import Button from 'react-bootstrap/Button';
@@ -24,6 +24,9 @@ const initialFields: InfoField[] = [
   { label: 'Skype', value: '@codedtheme demo', type: 'text' }
 ];
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MOBILE_REGEX = /^\d{10}$/;
+
 // ==============================|| PROFILE - CONTACT ||============================== //
 
 export default function Contact() {
@@ -38,54 +41,72 @@ export default function Contact() {
     }, {})
   );
 
-  const handleChange = (label: string, value: string) => {
+  const handleChange = useCallback((label: string, value: string) => {
     setFormData((prev) => ({ ...prev, [label]: value }));
-  };
+  }, []);
 
-  const handleSave = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (isValid) setIsCollapsed(true);
-  };
+  const handleSave = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      if (isValid) setIsCollapsed(true);
+    },
+    [isValid]
+  );
 
-  const validateForm = () => {
-    // Validate mobile number (10 digits only)
-    const mobile = formData['Mobile Number'].replace(/\D/g, '');
-    if (!/^\d{10}$/.test(mobile)) return false;
+  const validateForm = useCallback(() => {
+    const mobile = (formData['Mobile Number'] || '').replace(/\D/g, '');
+    if (!MOBILE_REGEX.test(mobile)) return false;
 
-    // Validate email
-    const email = formData['Email Address'];
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) return false;
+    const email = formData['Email Address'] || '';
+    if (!EMAIL_REGEX.test(email)) return false;
 
-    // Check other fields not empty
-    if (!formData['Twitter'].trim() || !formData['Skype'].trim()) return false;
-
-    return true;
-  };
+    return !!(formData['Twitter'] || '').trim() && !!(formData['Skype'] || '').trim();
+  }, [formData]);
 
   useEffect(() => {
     setIsValid(validateForm());
-  }, [formData]);
+  }, [validateForm]);
+
+  const validateField = useCallback((label: string, value: string): boolean => {
+    switch (label) {
+      case 'Mobile Number':
+        return MOBILE_REGEX.test(value.replace(/\D/g, ''));
+      case 'Email Address':
+        return EMAIL_REGEX.test(value);
+      default:
+        return value.trim() !== '';
+    }
+  }, []);
+
+  const getRowClassName = (index: number) => {
+    const baseClass = 'align-items-center col-form-label';
+    if (index === 0) return `${baseClass} pt-0`;
+    if (index === initialFields.length - 1) return `${baseClass} pb-0`;
+    return baseClass;
+  };
 
   return (
-    <MainCard bodyClassName="p-0">
-      <Card.Body className="d-flex align-items-center justify-content-between">
-        <h5 className="mb-0">Contact Information</h5>
+    <MainCard
+      bodyClassName="p-0"
+      title="Contact Information"
+      secondary={
         <Button variant="primary" size="sm" className="rounded m-0 float-end" onClick={() => setIsCollapsed(!isCollapsed)}>
           <i className="ph ph-note-pencil align-middle" />
         </Button>
-      </Card.Body>
-
+      }
+    >
       {/* View Mode */}
       {isCollapsed && (
         <Card.Body className="border-top">
           <Form>
             {initialFields.map((item, index) => (
-              <Row key={index} className="mb-3 align-items-center">
-                <Col sm={3} className="col-form-label font-weight-bolder">
+              <Row key={index} className={getRowClassName(index)}>
+                <Col sm={3} xs={5} className="f-w-500">
                   {item.label}
                 </Col>
-                <Col sm={9}>{formData[item.label]}</Col>
+                <Col sm={9} xs={7} className="text-muted">
+                  {formData[item.label]}
+                </Col>
               </Row>
             ))}
           </Form>
@@ -96,24 +117,13 @@ export default function Contact() {
       {!isCollapsed && (
         <Card.Body className="border-top">
           <Form onSubmit={handleSave}>
-            {initialFields.map((item, index) => {
+            {initialFields.map((item) => {
               const value = formData[item.label];
-              let isInvalid = false;
-
-              // Specific validations
-              if (item.label === 'Mobile Number') {
-                const digits = value.replace(/\D/g, '');
-                isInvalid = digits.length !== 10;
-              } else if (item.label === 'Email Address') {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                isInvalid = !emailRegex.test(value);
-              } else {
-                isInvalid = value.trim() === '';
-              }
+              const isInvalid = !validateField(item.label, value);
 
               return (
-                <Row key={index} className="mb-3 align-items-center">
-                  <Col sm={3} className="col-form-label font-weight-bolder">
+                <Row key={item.label} className="mb-3 align-items-center">
+                  <Col sm={3} className="col-form-label f-w-500">
                     {item.label}
                   </Col>
                   <Col sm={9}>
@@ -121,14 +131,14 @@ export default function Contact() {
                       type={item.type}
                       value={value}
                       onChange={(e) => handleChange(item.label, e.target.value)}
-                      isInvalid={!isCollapsed && isInvalid}
+                      isInvalid={isInvalid}
                     />
                   </Col>
                 </Row>
               );
             })}
 
-            <Row className="mb-3 align-items-center">
+            <Row>
               <Col sm={3}></Col>
               <Col sm={9}>
                 <Button variant="primary" type="submit" disabled={!isValid}>
@@ -139,36 +149,6 @@ export default function Contact() {
           </Form>
         </Card.Body>
       )}
-
-      {/* {!isCollapsed && (
-        <Card.Body className="border-top">
-          <Form onSubmit={handleSave}>
-            {initialFields.map((item, index) => (
-              <Row key={index} className="mb-3 align-items-center">
-                <Col sm={3} className="col-form-label font-weight-bolder">
-                  {item.label}
-                </Col>
-                <Col sm={9}>
-                  <Form.Control
-                    type={item.type}
-                    value={formData[item.label]}
-                    onChange={(e) => handleChange(item.label, e.target.value)}
-                    isInvalid={formData[item.label].trim() === ''}
-                  />
-                </Col>
-              </Row>
-            ))}
-            <Row className="mb-3 align-items-center">
-              <Col sm={3}></Col>
-              <Col sm={9}>
-                <Button variant="primary" type="submit" disabled={!isValid}>
-                  Save
-                </Button>
-              </Col>
-            </Row>
-          </Form>
-        </Card.Body>
-      )} */}
     </MainCard>
   );
 }

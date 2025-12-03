@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 // react-bootstrap
 import Button from 'react-bootstrap/Button';
@@ -11,17 +11,31 @@ import Row from 'react-bootstrap/Row';
 import Stack from 'react-bootstrap/Stack';
 import Tooltip from 'react-bootstrap/Tooltip';
 
+// project-imports
+import { addressData } from '@/data/invoice';
+
 interface AddressModalProps {
-  show: boolean;
-  handleClose: () => void;
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  handlerAddress: (a: any) => void;
 }
 
 // ================================|| ADDRESS MODAL ||============================== //
 
-export default function AddressModal({ show, handleClose }: AddressModalProps) {
+export default function AddressModal({ open, setOpen, handlerAddress }: AddressModalProps) {
   const [collapseShow, setCollapseShow] = useState(true);
+  const [selectedAddress, setSelectedAddress] = useState(0);
 
   const toggleCollapse = () => setCollapseShow((prev) => !prev);
+
+  function closeAddressModal() {
+    setOpen(false);
+  }
+
+  const handleAddressSelect = (index: number, address: any) => {
+    setSelectedAddress(index);
+    handlerAddress(address);
+  };
 
   const formTitleData = [
     ['First Name', 'Enter your first name', 'text'],
@@ -33,7 +47,7 @@ export default function AddressModal({ show, handleClose }: AddressModalProps) {
   ];
 
   return (
-    <Modal show={show} onHide={handleClose} centered size="lg" scrollable>
+    <Modal show={open} onHide={closeAddressModal} centered size="lg" scrollable>
       <Modal.Header>
         <Stack direction="horizontal" className="w-100 align-items-center justify-content-between">
           <Stack className="justify-content-center">
@@ -53,7 +67,7 @@ export default function AddressModal({ show, handleClose }: AddressModalProps) {
               </OverlayTrigger>
             )}
             <OverlayTrigger placement="top" overlay={<Tooltip>Close</Tooltip>}>
-              <Button variant="link-danger" className="avatar avatar-s" onClick={handleClose}>
+              <Button variant="link-danger" className="avatar avatar-s" onClick={closeAddressModal}>
                 <i className="ti ti-x f-20" />
               </Button>
             </OverlayTrigger>
@@ -64,31 +78,45 @@ export default function AddressModal({ show, handleClose }: AddressModalProps) {
       <Modal.Body>
         <Collapse in={collapseShow}>
           <div className="address-check-block">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="address-check border rounded p-3">
+            {addressData.map((address, index) => (
+              <div key={index} className="address-check border rounded p-3 mb-3" onClick={() => handleAddressSelect(index, address)}>
                 <Form.Check>
-                  <Form.Check.Input type="radio" name="radio1" defaultChecked={i == 1} />
-                  <Form.Check.Label className="w-100">
-                    <h6 className="mb-0 d-block">
-                      Ian Carpenter <small className="text-muted">(Home)</small>
-                    </h6>
-                    <span className="address-details">1754 Ureate Path, 695 Newga View, Seporcus, Rhode Island, Belgium - SA5 5BO</span>
+                  <Form.Check.Input
+                    type="radio"
+                    name="address"
+                    id={`address-${index}`}
+                    checked={selectedAddress === index}
+                    onChange={() => handleAddressSelect(index, address)}
+                  />
+                  <Form.Check.Label className="w-100" htmlFor={`address-${index}`}>
+                    <h6 className="mb-1 d-block f-w-600">{address.name}</h6>
+                    <span className="address-details d-block mb-2 text-break">{address.address}</span>
+                    <Row className="align-items-start align-items-md-center justify-content-between">
+                      <Col xs={12} lg={7}>
+                        <div className="d-flex flex-column flex-sm-row align-items-start align-items-sm-center gap-1 gap-sm-2">
+                          <span className="mb-0 text-break fw-medium text-nowrap">{address.phone}</span>
+                          <span className="mb-0 text-break">{address.email}</span>
+                        </div>
+                      </Col>
+                      <Col xs={12} lg={5} className="text-lg-end mt-2 mt-lg-0">
+                        <div className="d-flex align-items-center justify-content-start justify-content-lg-end flex-wrap gap-2">
+                          <a href="#" className="avatar avatar-s text-danger flex-shrink-0">
+                            <i className="ti ti-trash f-20" />
+                          </a>
+                          <Button
+                            variant="outline-primary"
+                            className="btn-sm flex-shrink-0"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleAddressSelect(index, address);
+                            }}
+                          >
+                            Deliver to this address
+                          </Button>
+                        </div>
+                      </Col>
+                    </Row>
                   </Form.Check.Label>
-                  <Row className="align-items-center justify-content-between">
-                    <Col xs={6}>
-                      <span className="mb-0">+91 1234567890</span>
-                    </Col>
-                    <Col xs={6} className="text-end">
-                      <Stack direction="horizontal" className="address-btns align-items-center justify-content-end">
-                        <Button variant="link-danger" className="avatar avatar-s btn-pc-default mx-1">
-                          <i className="ti ti-trash f-20" />
-                        </Button>
-                        <Button variant="outline-primary" className="btn-sm">
-                          Deliver to this address
-                        </Button>
-                      </Stack>
-                    </Col>
-                  </Row>
                 </Form.Check>
               </div>
             ))}
@@ -131,7 +159,7 @@ export default function AddressModal({ show, handleClose }: AddressModalProps) {
               <Button variant="outline-secondary" type="button" onClick={toggleCollapse}>
                 Cancel
               </Button>
-              <Button variant="primary" onClick={handleClose}>
+              <Button variant="primary" onClick={closeAddressModal}>
                 Save & Deliver to this Address
               </Button>
             </Stack>
@@ -151,10 +179,10 @@ export default function AddressModal({ show, handleClose }: AddressModalProps) {
             </li>
           </ul>
           <Stack direction="horizontal" gap={1}>
-            <Button variant="link-danger" onClick={handleClose}>
+            <Button variant="link-danger" onClick={closeAddressModal}>
               Cancel
             </Button>
-            <Button variant="primary" onClick={handleClose}>
+            <Button variant="primary" onClick={closeAddressModal}>
               Save
             </Button>
           </Stack>

@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 // project-imports
-import SortingTable from '@/sections/tables/react-table/sorting/SortingTable';
+import SortingTable from '@/sections/tables/react-table/SortingTable';
 
 // ==============================|| REACT TABLE - SORTING  ||============================== //
 
@@ -15,7 +15,7 @@ export default function SortingTablePage() {
       <Head title="Sorting table" />
       <Row>
         <Col>
-          <SortingTable />
+        <SortingTable title="Sorting Table" />
         </Col>
       </Row>
     </AppLayout>

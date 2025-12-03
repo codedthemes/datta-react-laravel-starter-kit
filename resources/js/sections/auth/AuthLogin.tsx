@@ -41,7 +41,7 @@ export default function AuthLoginForm({ className, link, resetLink }: FormProps)
   const resolvedTheme = getResolvedTheme(mode);
   setResolvedTheme(mode);
 
-  const logo = resolvedTheme === ThemeMode.DARK ? LightLogo : DarkLogo;
+  const logo = resolvedTheme === ThemeMode.DARK ? LightLogo : window.location.pathname.includes('v3') ? LightLogo : DarkLogo;
 
   const {
     register,
@@ -89,8 +89,8 @@ export default function AuthLoginForm({ className, link, resetLink }: FormProps)
             <Button onClick={togglePasswordVisibility}>
               {showPassword ? <i className="ti ti-eye" /> : <i className="ti ti-eye-off" />}
             </Button>
+            <Form.Control.Feedback type="invalid">{errors.password?.message}</Form.Control.Feedback>
           </InputGroup>
-          <Form.Control.Feedback type="invalid">{errors.password?.message}</Form.Control.Feedback>
         </Form.Group>
 
         <Stack direction="horizontal" className="mt-1 justify-content-between align-items-center">

@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // project-imports
-import { ThemeMode } from '@/config';
 import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 interface ChartProp {
   name: string;
@@ -33,26 +34,25 @@ const lineChartOptions = {
 // ==============================|| DASHBOARD - EARNING CHART ||============================== //
 
 export default function EarningChart({ data }: Props) {
-  const { mode } = useConfig();
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
 
   const [options, setOptions] = useState<ChartProps>(lineChartOptions);
 
   useEffect(() => {
     setOptions((prevState) => ({
       ...prevState,
+      chart: { ...prevState.chart, fontFamily: fontFamily },
       xaxis: {
         ...prevState.xaxis,
-        categories: [2018, 2019, 2020, 2021, 2022, 2023],
-        labels: { style: { colors: 'var(--bs-secondary)' } }
+        categories: [2018, 2019, 2020, 2021, 2022, 2023]
       },
-      yaxis: {
-        ...prevState.yaxis,
-        labels: { style: { colors: 'var(--bs-secondary)' } }
-      },
-      colors: ['#f4c22b'],
-      theme: { mode: mode === ThemeMode.DARK ? 'dark' : 'light' }
+
+      colors: ['var(--bs-warning)'],
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
     }));
-  }, []);
+  }, [resolvedTheme, fontFamily]);
 
   const [series, setSeries] = useState(data);
 

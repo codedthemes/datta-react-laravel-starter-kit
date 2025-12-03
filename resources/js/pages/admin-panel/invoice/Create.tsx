@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 // project-imports
-import InvoiceCreate from '@/sections/admin-panel/invoice/Create';
+import CreateInvoice from '@/sections/admin-panel/invoice/CreateInvoice';
 
 // ==============================|| ADMIN PANEL - INVOICE CREATE ||============================== //
 
@@ -15,7 +15,7 @@ export default function InvoiceCreatePage() {
       <Head title="Create" />
       <Row>
         <Col xs={12}>
-          <InvoiceCreate />
+          <CreateInvoice />
         </Col>
       </Row>
     </AppLayout>

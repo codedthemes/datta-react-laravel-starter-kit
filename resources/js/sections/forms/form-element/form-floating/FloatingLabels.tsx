@@ -12,12 +12,13 @@ import MainCard from '@/components/MainCard';
 export default function FloatingLabels() {
   return (
     <MainCard title="Floating Labels">
-      <h5>Form controls</h5>
+      {/* --- Form Controls --- */}
+      <h5>Form Controls</h5>
       <hr />
       <Form>
         <Row className="g-4">
           <Col md={6}>
-            <FloatingLabel controlId="floatingInput" label="Email address" className="mb-3">
+            <FloatingLabel controlId="floatingEmail" label="Email address" className="mb-3">
               <Form.Control type="email" placeholder="name@example.com" />
             </FloatingLabel>
           </Col>
@@ -30,35 +31,38 @@ export default function FloatingLabels() {
         </Row>
       </Form>
 
+      {/* --- Default Value --- */}
       <h5 className="mt-3">Default Value</h5>
       <hr />
-
       <Row className="g-4">
         <Col md={6}>
-          <FloatingLabel controlId="floatingInput" label="Input with value">
+          <FloatingLabel controlId="floatingEmailDefault" label="Input with value">
             <Form.Control type="email" placeholder="Email" defaultValue="test@example.com" />
           </FloatingLabel>
         </Col>
 
         <Col md={6}>
-          <FloatingLabel controlId="floatingPassword" label="Password">
-            <Form.Control type="password" placeholder="Password" defaultValue="Password" />
+          <FloatingLabel controlId="floatingPasswordDefault" label="Password">
+            <Form.Control type="password" placeholder="Password" defaultValue="" />
           </FloatingLabel>
         </Col>
       </Row>
 
-      <h5 className="mt-3">Validation styles</h5>
+      {/* --- Validation Styles --- */}
+      <h5 className="mt-3">Validation Styles</h5>
       <hr />
-
       <Row className="g-4">
         <Col md={6}>
-          <FloatingLabel controlId="floatingInput" label="Valid input">
+          <FloatingLabel controlId="floatingEmailValid" label="Valid input">
             <Form.Control type="email" placeholder="Email" defaultValue="test@example.com" isValid />
+            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </FloatingLabel>
         </Col>
+
         <Col md={6}>
-          <FloatingLabel controlId="floatingInput" label="Invalid input">
+          <FloatingLabel controlId="floatingEmailInvalid" label="Invalid input">
             <Form.Control type="email" placeholder="Email" defaultValue="test@example.com" isInvalid />
+            <Form.Control.Feedback type="invalid">Please provide a valid email.</Form.Control.Feedback>
           </FloatingLabel>
         </Col>
       </Row>

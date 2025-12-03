@@ -15,8 +15,8 @@ interface settingDataProp {
   label: string;
 }
 
-const settingData: settingDataProp[] = [
-  { value: 69, label: 'Shots' },
+const defaultSettingData: settingDataProp[] = [
+  { value: 69, label: 'Posts' },
   { value: 2749, label: 'Followers' },
   { value: 678, label: 'Following' },
   { value: 78, label: 'Like' }
@@ -33,11 +33,11 @@ export default function UserSettings() {
           <Row className="align-items-center">
             <Col>
               <Row className="align-items-center">
-                <Col xs="auto" className="pr-0">
-                  <Image className="img-radius wid-60" src={avatar2} alt="User" fluid />
+                <Col xs="auto" className="pe-0">
+                  <Image className="wid-60" src={avatar2} alt="Josephin Doe avatar" fluid roundedCircle />
                 </Col>
                 <Col>
-                  <h6 className="mb-1">Josephin Doe</h6>
+                  <h6 className="mb-1 f-w-500">Josephin Doe</h6>
                   <p className="mb-0">UI/UX Designer</p>
                 </Col>
               </Row>
@@ -50,9 +50,9 @@ export default function UserSettings() {
         footer={
           <Row className="align-items-center">
             <Col>
-              <a>
-                <i className="ti ti-mail" /> Message{' '}
-              </a>
+              <Button variant="link" className="text-decoration-none p-0">
+                <i className="ti ti-mail align-text-bottom" aria-label="Send message" /> Message
+              </Button>
             </Col>
             <Col xs="auto">
               <Button variant="secondary" size="sm" className="m-0">
@@ -61,11 +61,12 @@ export default function UserSettings() {
             </Col>
           </Row>
         }
+        footerClassName="pt-0"
       >
         <Row className="text-center">
-          {settingData.map((value, index) => (
+          {defaultSettingData.map((value, index) => (
             <Col key={index}>
-              <h6 className="mb-1">{value.value}</h6>
+              <h6 className="f-w-500 mb-1">{value.value}</h6>
               <p className="mb-0">{value.label}</p>
             </Col>
           ))}

@@ -8,32 +8,40 @@ import Stack from 'react-bootstrap/Stack';
 // project-imports
 import MainCard from '@/components/MainCard';
 
-// ===============================|| ACTION BAR - HORIZONTAL FORM ||============================== //
+// ===============================|| PAGE - HORIZONTAL FORM ||============================== //
 
 export default function HorizontalFormPage() {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
+
   return (
     <MainCard
       title="Horizontal Form"
       footerClassName="bg-light"
       footer={
         <Stack gap={2} direction="horizontal" className="justify-content-center">
-          <Button type="submit">Submit</Button>
-          <Button variant="secondary" type="reset">
+          <Button type="submit" variant="primary">
+            Submit
+          </Button>
+          <Button type="reset" variant="secondary">
             Clear
           </Button>
         </Stack>
       }
     >
-      <Form>
-        <Row className="mb-0">
+      <Form noValidate onSubmit={handleSubmit}>
+        {/* Name */}
+        <Form.Group as={Row} className="mb-0" controlId="formName">
           <Form.Label column lg={4} className="col-form-label">
-            Name:
+            Name
           </Form.Label>
           <Col lg={6}>
-            <Form.Control type="text" placeholder="Enter Name" />
-            <Form.Text>Please enter your Name</Form.Text>
+            <Form.Control type="text" placeholder="Enter your name" required />
+            <Form.Text muted>Please enter your full name</Form.Text>
           </Col>
-        </Row>
+        </Form.Group>
       </Form>
     </MainCard>
   );

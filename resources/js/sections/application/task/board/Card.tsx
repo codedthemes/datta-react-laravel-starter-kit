@@ -4,7 +4,6 @@ import React from 'react';
 import Badge from 'react-bootstrap/Badge';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
 import Dropdown from 'react-bootstrap/Dropdown';
 import FormCheck from 'react-bootstrap/FormCheck';
 import Image from 'react-bootstrap/Image';
@@ -27,14 +26,16 @@ interface TaskData {
   title: string;
   date: string;
   description: string;
-  priority: string;
-  priorityColor: string;
+  priority: {
+    label: string;
+    color: string;
+  };
   assignee: string;
   due: string;
   dueColor: string;
   progress: number;
   progressColor: string;
-  playlistN0: string;
+  playlistNo: string;
   message: number;
   avatar: string;
   name: string;
@@ -42,21 +43,20 @@ interface TaskData {
   avatarNumber?: number;
 }
 
-// cara data
+// card data
 const cardData: TaskData[] = [
   {
     id: 24,
     title: 'Create UI Design Model',
     date: '28 January, 2020',
     description: 'A collection of textile samples lay spread out on the table One morning, when Gregor Samsa woke from troubled...',
-    priority: 'Highest',
-    priorityColor: 'light-danger',
+    priority: { label: 'Highest', color: 'light-danger' },
     assignee: 'Joseph William',
     due: '23 hours',
     dueColor: 'light-warning',
     progress: 40,
     progressColor: 'warning',
-    playlistN0: '14/40',
+    playlistNo: '14/40',
     message: 9,
     avatar: Avatar1,
     name: 'Joseph William',
@@ -68,14 +68,13 @@ const cardData: TaskData[] = [
     title: 'Make Responsive UIKit',
     date: '14 March, 2020',
     description: 'A collection of textile samples lay spread out on the table One morning, when Gregor Samsa woke from troubled...',
-    priority: 'Normal',
-    priorityColor: 'light-success',
+    priority: { label: 'Normal', color: 'light-success' },
     assignee: 'Ashoka T.',
     due: '3 Weeks',
     dueColor: 'light-primary',
     progress: 80,
     progressColor: 'success',
-    playlistN0: '23/37',
+    playlistNo: '23/37',
     message: 16,
     avatar: Avatar2,
     name: 'Ashoka T.',
@@ -87,14 +86,13 @@ const cardData: TaskData[] = [
     title: ' Add E-Commerce Module',
     date: '16 December, 2020',
     description: 'A collection of textile samples lay spread out on the table One morning, when Gregor Samsa woke from troubled...  ',
-    priority: 'Normal',
-    priorityColor: 'light-warning',
+    priority: { label: 'Normal', color: 'light-warning' },
     assignee: 'Ashoka T.',
     due: '1 month',
     dueColor: 'light-success',
     progress: 20,
     progressColor: 'danger',
-    playlistN0: '16/28',
+    playlistNo: '16/28',
     message: 12,
     avatar: Avatar3,
     name: 'Ashoka T.',
@@ -112,9 +110,11 @@ const boardList: TaskData[] = [
 
 // ==============================|| BOARD CARD ||============================== //
 
-const BoardCard: React.FC<{ data: TaskData }> = ({ data }) => {
+type Props = { data: TaskData };
+
+const BoardCard: React.FC<Props> = ({ data }) => {
   return (
-    <Col md={6} sm={12} className="mb-3">
+    <Col md={6} sm={12}>
       <MainCard
         bodyClassName="p-0"
         headerClassName="py-3"
@@ -128,12 +128,12 @@ const BoardCard: React.FC<{ data: TaskData }> = ({ data }) => {
                 <i className="ph ph-dots-three-outline-vertical" />
               </Dropdown.Toggle>
               <Dropdown.Menu align="end">
-                <Dropdown.Item href="#">
-                  <i className="ph ph-pencil-simple-line" />
+                <Dropdown.Item href="#" className="text-warning">
+                  <i className="ph ph-hourglass-high" />
                   Pending
                 </Dropdown.Item>
-                <Dropdown.Item href="#">
-                  <i className="ph ph-trash" />
+                <Dropdown.Item href="#" className="text-success">
+                  <i className="ph ph-check-circle" />
                   Paid
                 </Dropdown.Item>
                 <hr className="m-0 my-2" />
@@ -146,18 +146,18 @@ const BoardCard: React.FC<{ data: TaskData }> = ({ data }) => {
           </Stack>
         }
       >
-        <Card.Body className="py-3 border-bottom d-flex align-items-center justify-content-between">
+        <Card.Body className="py-3 border-bottom d-flex gap-2 flex-wrap align-items-center justify-content-between">
           <p className="mb-0">
-            <i className="ph ph-calendar-blank align-middle f-18 text-danger me-1" />
+            <i className="ph ph-calendar-blank align-text-bottom f-18 text-danger" style={{ marginInlineEnd: '0.25rem' }} />
             {data.date}
           </p>
           <div>
             <p className="d-inline-block mb-0">
-              <i className="ph ph-list-checks align-middle f-18 text-primary me-1" />
-              {data.playlistN0}
+              <i className="ph ph-list-checks align-text-bottom f-18 text-primary" style={{ marginInlineEnd: '0.25rem' }} />
+              {data.playlistNo}
             </p>
             <p className="d-inline-block mb-0 ms-2">
-              <i className="ph ph-chat align-middle f-18 text-success me-1" />
+              <i className="ph ph-chat align-text-bottom f-18 text-success" style={{ marginInlineEnd: '0.25rem' }} />
               {data.message}
             </p>
           </div>
@@ -168,26 +168,26 @@ const BoardCard: React.FC<{ data: TaskData }> = ({ data }) => {
             <tbody>
               <tr>
                 <td className="pl-0 pb-0">
-                  <i className="ph ph-chart-bar align-middle text-primary f-16 me-1" />
-                  Priority:
+                  <i className="ph ph-chart-bar text-primary f-16" style={{ verticalAlign: '-2px', marginInlineEnd: '0.25rem' }} />
+                  Priority :
                 </td>
                 <td className="pb-0">
-                  <Badge bg={data.priorityColor}>{data.priority}</Badge>
+                  <Badge bg={data.priority.color}>{data.priority.label}</Badge>
                 </td>
               </tr>
               <tr>
                 <td className="pl-0 pb-0">
-                  <i className="ph ph-user-circle align-middle text-primary f-16 me-1" />
-                  Assign to:
+                  <i className="ph ph-user-circle text-primary f-16" style={{ verticalAlign: '-2px', marginInlineEnd: '0.25rem' }} />
+                  Assign to :
                 </td>
                 <td className="pb-0">
-                  <Image src={data.avatar} alt={data.name} width="30" height="30" className="rounded-circle" /> {data.name}
+                  <Image src={data.avatar} alt={data.name} width="30" height="30" roundedCircle /> {data.name}
                 </td>
               </tr>
               <tr>
                 <td className="pl-0 pb-0">
-                  <i className="ph ph-timer align-middle text-primary f-16 me-1" />
-                  Method:
+                  <i className="ph ph-timer text-primary f-16" style={{ verticalAlign: '-2px', marginInlineEnd: '0.25rem' }} />
+                  Method :
                 </td>
                 <td className="pb-0">
                   <Badge bg={data.dueColor}>{data.due}</Badge>
@@ -195,32 +195,32 @@ const BoardCard: React.FC<{ data: TaskData }> = ({ data }) => {
               </tr>
             </tbody>
           </Table>
-          <div className="h6">Task progress</div>
-          <ProgressBar className="rounded mb-3" now={data.progress} variant={data.progressColor} style={{ height: '5px' }} />
+          <h6>Task progress</h6>
+          <ProgressBar className="rounded" now={data.progress} variant={data.progressColor} style={{ height: '5px' }} />
         </Card.Body>
         <Card.Footer className="py-3 bg-light">
           {data.avatarList.map((avatar, index) => (
-            <Image key={index} src={avatar} alt={data.name} className="img-fluid img-radius wid-45 img-thumbnail me-n3" />
+            <Image key={index} src={avatar} alt={data.name} fluid roundedCircle thumbnail className="wid-45 me-n3" />
           ))}
-          <div className="img-radius wid-40 hei-40 me-n3 d-inline-flex align-items-center justify-content-center card align-middle f-16 mb-0 bg-success text-white">
-            +{data.avatarNumber}
-          </div>
+          {data.avatarNumber && (
+            <div className="img-radius wid-40 hei-40 me-n3 d-inline-flex align-items-center justify-content-center card align-middle f-16 mb-0 bg-success text-white">
+              +{data.avatarNumber}
+            </div>
+          )}
         </Card.Footer>
       </MainCard>
     </Col>
   );
 };
 
-// ==============================|| BOARD - CARD ||============================== //
+// ==============================|| TASK BOARD - CARD ||============================== //
 
 export default function TaskBoardCard() {
   return (
-    <Container fluid>
-      <Row>
-        {boardList.map((boardList, index) => (
-          <BoardCard key={index} data={boardList} />
-        ))}
-      </Row>
-    </Container>
+    <Row>
+      {boardList.map((board, index) => (
+        <BoardCard key={index} data={board} />
+      ))}
+    </Row>
   );
 }

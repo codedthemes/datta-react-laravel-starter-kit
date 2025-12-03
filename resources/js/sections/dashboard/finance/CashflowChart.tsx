@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 // react-bootstrap
 import Badge from 'react-bootstrap/Badge';
 import Form from 'react-bootstrap/Form';
@@ -8,9 +10,12 @@ import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // project-imports
 import MainCard from '@/components/MainCard';
+import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 // chart-options
-const chartOptions: ChartProps = {
+const cashflowChartOptions = {
   chart: {
     type: 'bar',
     height: 210,
@@ -36,38 +41,16 @@ const chartOptions: ChartProps = {
     enabled: false
   },
   legend: {
+    show: true,
     position: 'top',
     horizontalAlign: 'right',
-    show: true,
-    fontFamily: `'Public Sans', sans-serif`,
     offsetX: 10,
     offsetY: 10,
-    labels: {
-      useSeriesColors: false
-    },
-    markers: {
-      width: 10,
-      height: 10,
-      radius: '50%',
-      offsexX: 2,
-      offsexY: 2
-    },
-    itemMargin: {
-      horizontal: 15,
-      vertical: 5
-    }
+    labels: { useSeriesColors: false },
+    markers: { size: 6, shape: 'circle', strokeWidth: 0 },
+    itemMargin: { horizontal: 10, vertical: 8 }
   },
-  colors: ['#04a9f5', '#04a9f566'],
-  series: [
-    {
-      name: 'Income',
-      data: [180, 90, 135, 114, 120, 145, 180, 90, 135, 114, 120, 145]
-    },
-    {
-      name: 'Expends',
-      data: [120, 45, 78, 150, 168, 99, 120, 45, 78, 150, 168, 99]
-    }
-  ],
+
   grid: {
     borderColor: '#00000010'
   },
@@ -79,6 +62,33 @@ const chartOptions: ChartProps = {
 // ==============================|| FINANCE - CASHFLOW CHART ||============================== //
 
 export default function CashflowChart() {
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
+
+  const [series] = useState([
+    {
+      name: 'Income',
+      data: [180, 90, 135, 114, 120, 145, 180, 90, 135, 114, 120, 145]
+    },
+    {
+      name: 'Expends',
+      data: [120, 45, 78, 150, 168, 99, 120, 45, 78, 150, 168, 99]
+    }
+  ]);
+
+  const [options, setOptions] = useState<ChartProps>(cashflowChartOptions);
+
+  useEffect(() => {
+    setOptions({
+      ...cashflowChartOptions,
+      chart: { ...cashflowChartOptions.chart, fontFamily: fontFamily },
+      colors: ['#04a9f5', '#04a9f566'],
+      grid: { borderColor: 'var(--bs-border-color)' },
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
+    });
+  }, [fontFamily, resolvedTheme]);
+
   return (
     <MainCard>
       <Stack direction="horizontal" className="align-items-center justify-content-between mb-3">
@@ -95,7 +105,7 @@ export default function CashflowChart() {
           <option>Monthly</option>
         </Form.Select>
       </Stack>
-      <ReactApexChart options={chartOptions} series={chartOptions.series} type="bar" height={255} />
+      <ReactApexChart options={options} series={series} type="bar" height={255} />
     </MainCard>
   );
 }

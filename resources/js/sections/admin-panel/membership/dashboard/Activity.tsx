@@ -1,88 +1,67 @@
-// react-bootstrap
-import Form from 'react-bootstrap/Form';
-import Stack from 'react-bootstrap/Stack';
+import { useMemo, useState } from 'react';
 
-// third-party
-import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
+// react-bootstrap
+import Stack from 'react-bootstrap/Stack';
+import Form from 'react-bootstrap/Form';
 
 // project-imports
+import ActivityChart from '@/sections/admin-panel/membership/dashboard/charts/ActivityChart';
 import MainCard from '@/components/MainCard';
 
-// chart-options
-const chartOptions: ChartProps = {
-  chart: {
-    type: 'line',
-    height: 150,
-    toolbar: {
-      show: false
-    }
-  },
-  colors: ['#1de9b6', '#1de9b6'],
-  dataLabels: {
-    enabled: false
-  },
-  legend: {
-    show: true,
-    position: 'top'
-  },
-  markers: {
-    size: 1,
-    colors: ['#fff', '#fff'],
-    strokeColors: ['#1de9b6', '#1de9b6'],
-    strokeWidth: 1,
-    shape: 'circle',
-    hover: {
-      size: 4
-    }
-  },
-  fill: {
-    opacity: [1, 0.3]
-  },
-  stroke: {
-    width: 3,
-    curve: 'smooth'
-  },
-  grid: {
-    show: false
-  },
-  series: [
+const activityData: { [key: string]: { name: string; data: number[] }[] } = {
+  today: [
     {
       name: 'Active',
-      data: [20, 90, 65, 85, 20, 80, 30]
+      data: [220, 120, 90, 250, 20, 460, 580, 590, 480, 200, 230, 280]
     },
     {
       name: 'Inactive',
-      data: [70, 30, 40, 15, 60, 40, 95]
+      data: [550, 250, 80, 450, 200, 350, 450, 250, 450, 200, 250, 300]
     }
   ],
-  xaxis: {
-    labels: {
-      hideOverlappingLabels: true
+  weekly: [
+    {
+      name: 'Active',
+      data: [20, 460, 580, 590, 480, 200, 230, 280, 220, 120, 90, 250]
     },
-    axisBorder: {
-      show: false
-    },
-    axisTicks: {
-      show: false
+    {
+      name: 'Inactive',
+      data: [550, 450, 250, 200, 250, 300, 250, 80, 450, 200, 350, 450]
     }
-  }
+  ],
+  monthly: [
+    {
+      name: 'Active',
+      data: [20, 230, 280, 220, 120, 90, 250, 460, 580, 590, 480, 200]
+    },
+    {
+      name: 'Inactive',
+      data: [80, 450, 550, 450, 250, 200, 250, 300, 250, 200, 350, 450]
+    }
+  ]
 };
 
-// =============================|| DASHBOARD - ACTIVITY ||============================== //
+// ===============================|| DASHBOARD - ACTIVITY ||============================== //
 
-export default function Activity() {
+export default function ActivityCard() {
+  const [value, setValue] = useState('monthly');
+
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setValue(event.target.value as string);
+  };
+
+  const chartData = useMemo(() => activityData[value], [value]);
   return (
     <MainCard>
-      <Stack direction="horizontal" className="align-items-center justify-content-between mb-3">
-        <h5 className="mb-0">Activity</h5>
-        <Form.Select size="sm" className="rounded-3 w-auto" defaultValue="Monthly">
-          <option value="Today">Today</option>
-          <option value="Weekly">Weekly</option>
-          <option value="Monthly">Monthly</option>
+      <Stack direction="horizontal" className="align-items-center justify-content-between mb-2">
+        <h5 className="mb-1 f-w-600 f-14">Activity</h5>
+        <Form.Select aria-label="Default select example" className="w-auto form-select-sm rounded-3" value={value} onChange={handleChange}>
+          <option value="today">Today</option>
+          <option value="weekly">Weekly</option>
+          <option value="monthly">Monthly</option>
         </Form.Select>
       </Stack>
-
-      <ReactApexChart options={chartOptions} series={chartOptions.series} type="line" height={150} />
+      <ActivityChart data={chartData} />
     </MainCard>
   );
 }

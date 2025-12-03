@@ -72,7 +72,6 @@ export default function Customize() {
   return (
     <MainCard title="Customize" className="position-relative">
       <div className="slider-container">
-        {/* @ts-ignore https://github.com/akiran/react-slick/issues/2336 */}
         <Slider ref={sliderRef} {...settings}>
           {images.map((image, index) => (
             <div key={index}>

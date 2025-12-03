@@ -17,56 +17,68 @@ export default function InputAttributes() {
           <Stack direction="horizontal">
             <i className="ti ti-info-circle h2 f-w-400 mb-0" />
             <div className="flex-grow-1 ms-3">
-              Examples of <code>autofocus, value, readonly, disabled, required</code> attributes in Input .
+              Examples of <code>autofocus, value, readonly, disabled, required</code> attributes in Input.
             </div>
           </Stack>
         </Alert>
 
-        <div className="mb-3">
+        {/* Autofocus */}
+        <Form.Group className="mb-3" controlId="autoFocusInput">
           <Form.Label>Auto focus</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
-          <small>autofocus on page load</small>
-        </div>
+          <Form.Control type="email" placeholder="Enter email" autoFocus />
+          <Form.Text muted>autofocus on page load</Form.Text>
+        </Form.Group>
 
-        <div className="mb-3">
+        {/* Value */}
+        <Form.Group className="mb-3" controlId="valueInput">
           <Form.Label>Value</Form.Label>
-          <Form.Control type="text" placeholder="John Doe" />
-        </div>
+          <Form.Control type="text" value="John Doe" readOnly />
+          <Form.Text muted>
+            Demonstrates an input with a fixed <code>value</code>
+          </Form.Text>
+        </Form.Group>
 
-        <div className="mb-3">
+        {/* Required */}
+        <Form.Group className="mb-3" controlId="requiredInput">
           <Form.Label>Required</Form.Label>
           <Form.Control type="text" required />
-          <small>Submit the form to see it in action</small>
-        </div>
+          <Form.Text muted>Submit the form to see it in action</Form.Text>
+        </Form.Group>
 
-        <div className="mb-3">
+        {/* Readonly */}
+        <Form.Group className="mb-3" controlId="readonlyInput">
           <Form.Label>Readonly</Form.Label>
           <Form.Control type="text" value="demo@email.com" readOnly />
-          <small>
+          <Form.Text muted>
             The input <code>readonly</code> attribute specifies that an input field is read-only
-          </small>
-        </div>
+          </Form.Text>
+        </Form.Group>
 
-        <div className="mb-3">
+        {/* Disabled */}
+        <Form.Group className="mb-3" controlId="disabledInput">
           <Form.Label>Disabled</Form.Label>
           <Form.Control type="text" value="26" disabled />
-          <small>
+          <Form.Text muted>
             The value of a <code>disabled</code> input field will not be sent when submitting the form
-          </small>
-        </div>
+          </Form.Text>
+        </Form.Group>
 
-        <div className="mb-4">
+        {/* Disabled Select */}
+        <Form.Group className="mb-4" controlId="disabledSelect">
           <Form.Label>Disabled select</Form.Label>
           <Form.Select disabled>
             <option>Option 1</option>
             <option>Option 2</option>
             <option>Option 3</option>
           </Form.Select>
-        </div>
+        </Form.Group>
 
+        {/* Buttons */}
         <Stack direction="horizontal" gap={2} className="pt-4">
-          <Button>Submit</Button>
-          <Button className="btn-link-danger">Reset</Button>
+          <Button type="submit">Submit</Button>
+          <Button type="reset" className="btn-link-danger">
+            Reset
+          </Button>
         </Stack>
       </Form>
     </MainCard>

@@ -1,3 +1,5 @@
+import { useEffect, useMemo } from 'react';
+
 // react-bootstrap
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -8,9 +10,12 @@ import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // project-imports
 import MainCard from '@/components/MainCard';
+import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 // chart-options
-const chartOptions1: ChartProps = {
+const transactionsCard1BaseOptions = {
   chart: {
     sparkline: {
       enabled: true
@@ -55,7 +60,7 @@ const chartOptions1: ChartProps = {
   }
 };
 
-const chartOptions2: ChartProps = {
+const transactionsCard2BaseOptions = {
   chart: {
     sparkline: {
       enabled: true
@@ -103,19 +108,63 @@ const chartOptions2: ChartProps = {
 // =============================|| ANALYTICS - TRANSACTIONS CARD 2 ||============================== //
 
 export default function TransactionsCard2() {
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+
+  useEffect(() => {
+    setResolvedTheme(mode);
+  }, [mode]);
+
+  const options = useMemo<ChartProps>(() => {
+    return {
+      ...transactionsCard2BaseOptions,
+      chart: { ...transactionsCard2BaseOptions.chart, fontFamily: fontFamily },
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
+    };
+  }, [resolvedTheme, fontFamily]);
+
+  const options1 = useMemo<ChartProps>(() => {
+    return {
+      ...transactionsCard1BaseOptions,
+      chart: { ...transactionsCard1BaseOptions.chart, fontFamily: fontFamily },
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
+    };
+  }, [resolvedTheme, fontFamily]);
+
   return (
-    <MainCard title="Transactions" subheader={<p className="mb-0">June - July</p>}>
+    <MainCard
+      title="Transactions"
+      subheader={
+        <p className="mb-0" aria-label="Reporting period">
+          June - July
+        </p>
+      }
+    >
       <Row>
         <Col xs={6}>
           <Stack className="justify-content-center align-items-center">
-            <ReactApexChart options={chartOptions2} series={chartOptions2.series} type="bar" width={80} height={45} />
+            <ReactApexChart
+              options={options}
+              series={options.series}
+              type="bar"
+              width={80}
+              height={45}
+              aria-label="Transactions chart primary"
+            />
           </Stack>
           <h3 className="f-w-300 pt-3 mb-0 text-center">$80,48</h3>
         </Col>
 
         <Col xs={6}>
           <Stack className="justify-content-center align-items-center">
-            <ReactApexChart options={chartOptions1} series={chartOptions1.series} type="bar" width={80} height={45} />
+            <ReactApexChart
+              options={options1}
+              series={options1.series}
+              type="bar"
+              width={80}
+              height={45}
+              aria-label="Transactions chart secondary"
+            />
           </Stack>
           <h3 className="f-w-300 pt-3 mb-0 text-center">$40,27</h3>
         </Col>

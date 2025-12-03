@@ -59,7 +59,7 @@ export default function Vertical() {
 
   return (
     <MainCard title="Vertical" className="position-relative">
-      <Stack direction="horizontal" className="flex-wrap justify-content-center">
+      <Stack direction="horizontal" className="flex-wrap justify-content-center" gap={2}>
         <Button className="slider-custom-btn" onClick={handlePrev}>
           prev
         </Button>
@@ -72,7 +72,6 @@ export default function Vertical() {
           {isPlaying ? 'Stop' : 'Start'}
         </Button>
       </Stack>
-      {/* @ts-ignore https://github.com/akiran/react-slick/issues/2336 */}
       <Slider ref={sliderRef} {...settings}>
         <Image src={image1} />
         <Image src={image2} />

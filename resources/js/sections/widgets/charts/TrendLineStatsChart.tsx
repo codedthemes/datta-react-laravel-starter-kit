@@ -1,11 +1,16 @@
+import { useState, useEffect } from 'react';
+
 // third-party
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // project-imports
 import MainCard from '@/components/MainCard';
+import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 // chart-options
-const chartOptions: ChartProps = {
+const trandLineStatsChartOptions = {
   chart: {
     zoom: {
       enabled: false
@@ -26,11 +31,6 @@ const chartOptions: ChartProps = {
       columnWidth: '30%'
     }
   },
-  series: [
-    {
-      data: [10, 60, 45, 72]
-    }
-  ],
   xaxis: {
     categories: ['Jan', 'Feb', 'Mar', 'Apr'],
     tickPlacement: 'between'
@@ -78,9 +78,29 @@ const chartOptions: ChartProps = {
 // =============================|| WIDGET - TREND LINE STATS CHART ||============================== //
 
 export default function TrendLineStatsChart() {
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
+
+  const [series] = useState([
+    {
+      data: [10, 60, 45, 72]
+    }
+  ]);
+
+  const [options, setOptions] = useState<ChartProps>(trandLineStatsChartOptions);
+
+  useEffect(() => {
+    setOptions({
+      ...trandLineStatsChartOptions,
+      chart: { ...trandLineStatsChartOptions.chart, fontFamily: fontFamily },
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
+    });
+  }, [fontFamily, resolvedTheme]);
+
   return (
     <MainCard title="Statistics">
-      <ReactApexChart options={chartOptions} series={chartOptions.series} type="line" height={290} />
+      <ReactApexChart options={options} series={series} type="line" height={290} />
     </MainCard>
   );
 }

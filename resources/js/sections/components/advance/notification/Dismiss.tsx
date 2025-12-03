@@ -29,11 +29,9 @@ export default function DismissNotification() {
         </Stack>
       </div>,
       {
-        rtl: themeDirection === 'rtl',
+        rtl: themeDirection === 'rtl' ? true : false,
         autoClose: false,
         icon: false,
-        className: `custom-toast custom-toast-info`,
-        bodyClassName: 'custom-toast-body',
         hideProgressBar: true
       }
     );

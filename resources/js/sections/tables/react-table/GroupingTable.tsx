@@ -1,7 +1,6 @@
 import { useMemo, useRef, useState } from 'react';
 
 // react-bootstrap
-import Badge from 'react-bootstrap/Badge';
 import Stack from 'react-bootstrap/Stack';
 import Table from 'react-bootstrap/Table';
 
@@ -19,14 +18,14 @@ import {
   getFilteredRowModel
 } from '@tanstack/react-table';
 import { useVirtualizer } from '@tanstack/react-virtual';
+import { LabelKeyObject } from 'react-csv/lib/core';
 
 // project-imports
 import MainCard from '@/components/MainCard';
+import useConfig from '@/hooks/useConfig';
 import LinearWithLabel from '@/components/@extended/progress/LinearWithLabel';
-import TablePagination from '@/components/third-party/react-table/Pagination';
-import SortingData from '@/components/third-party/react-table/SortingData';
-import DebouncedInput from '@/components/third-party/react-table/DebouncedInput';
 import makeData from '@/data/react-table';
+import { CSVExport, DebouncedInput, SortingData, StatusPill, TablePagination } from '@/components/third-party/react-table';
 
 // types
 import { TableDataProps } from '@/types/table';
@@ -34,6 +33,7 @@ import { TableDataProps } from '@/types/table';
 interface ReactTableProps {
   columns: ColumnDef<TableDataProps>[];
   data: TableDataProps[];
+  title: string;
 }
 
 interface ColumnMeta {
@@ -42,9 +42,12 @@ interface ColumnMeta {
 
 // ==============================|| REACT TABLE ||============================== //
 
-function ReactTable({ columns, data }: ReactTableProps) {
+function ReactTable({ columns, data, title }: ReactTableProps) {
   const [grouping, setGrouping] = useState<GroupingState>(['age']);
+
   const [globalFilter, setGlobalFilter] = useState('');
+
+  const { themeDirection } = useConfig();
 
   const table = useReactTable({
     data,
@@ -75,31 +78,56 @@ function ReactTable({ columns, data }: ReactTableProps) {
   const paddingTop = virtualRows.length > 0 ? virtualRows[0]?.start || 0 : 0;
   const paddingBottom = virtualRows.length > 0 ? totalSize - (virtualRows[virtualRows.length - 1]?.end || 0) : 0;
 
+  const headers: LabelKeyObject[] = useMemo(
+    () =>
+      table.getAllColumns().map((col) => ({
+        label: typeof col.columnDef.header === 'string' ? col.columnDef.header : '#',
+        key: (col.columnDef as any).accessorKey ?? col.id
+      })),
+    [table]
+  );
+
   return (
-    <MainCard title="Grouping" className="table-card">
+    <MainCard
+      title={title}
+      secondary={<CSVExport {...{ data: table.getGroupedRowModel().rows.map((row) => row.original), headers, filename: 'grouping.csv' }} />}
+      className="table-card"
+    >
+      {/* toolbar */}
       <Stack direction="horizontal" className="justify-content-between flex-wrap align-items-center p-4" gap={2}>
         <SortingData getState={table.getState} setPageSize={table.setPageSize} />
         <div className="datatable-search">
           <DebouncedInput value={globalFilter ?? ''} onFilterChange={(value) => setGlobalFilter(String(value))} />
         </div>
       </Stack>
+
+      {/* table */}
       <div ref={tableContainerRef}>
         <Table hover responsive className="mb-0 border-top">
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
-                  const isRightAligned = ['age', 'visits'].includes(header.column.id);
+                  const meta = header.column.columnDef.meta as ColumnMeta | undefined;
 
                   return (
-                    <th key={header.id} style={{ textAlign: isRightAligned ? 'right' : 'left' }}>
-                      <Stack direction="horizontal" className={` ${isRightAligned ? 'justify-content-end' : ''}`}>
+                    <th key={header.id} style={{ textAlign: meta?.className?.includes('text-end') ? 'right' : 'left' }}>
+                      <Stack
+                        direction="horizontal"
+                        className={
+                          meta?.className?.includes('text-end')
+                            ? themeDirection === 'rtl'
+                              ? 'justify-content-start'
+                              : 'justify-content-end'
+                            : undefined
+                        }
+                      >
                         {header.column.getCanGroup() && (
                           <div onClick={header.column.getToggleGroupingHandler()} className="me-2">
                             {header.column.getIsGrouped() ? (
                               <i className="ti ti-article text-danger f-18" />
                             ) : (
-                              <i className="ti ti-command f-18" />
+                              <i className="ti ti-command text-primary f-18" />
                             )}
                           </div>
                         )}
@@ -138,9 +166,9 @@ function ReactTable({ columns, data }: ReactTableProps) {
                     return (
                       <td key={cell.id} style={{ backgroundColor: bgColor, color: textColor }} className={columnMetaClass}>
                         {cell.getIsGrouped() ? (
-                          <Stack direction="horizontal" className="align-items-center justify-content-end">
-                            <div className="mr-8 cursor-pointer" onClick={row.getToggleExpandedHandler()}>
-                              {row.getIsExpanded() ? <i className="ti ti-chevron-down" /> : <i className="ti ti-chevron-right" />}
+                          <Stack direction="horizontal" className="align-items-center justify-content-end" gap={1}>
+                            <div className="avatar avatar-xxs cursor-pointer" onClick={row.getToggleExpandedHandler()}>
+                              {row.getIsExpanded() ? <i className="ti ti-chevron-down f-18" /> : <i className="ti ti-chevron-right f-18" />}
                             </div>
                             {flexRender(cell.column.columnDef.cell, cell.getContext())} ({row.subRows.length})
                           </Stack>
@@ -163,13 +191,15 @@ function ReactTable({ columns, data }: ReactTableProps) {
           </tbody>
         </Table>
       </div>
+
+      {/* Pagination */}
       <TablePagination
         setPageSize={table.setPageSize}
         setPageIndex={table.setPageIndex}
         getState={table.getState}
         getPageCount={table.getPageCount}
         initialPageSize={10}
-        totalEntries={100}
+        totalEntries={data.length}
       />
     </MainCard>
   );
@@ -177,55 +207,25 @@ function ReactTable({ columns, data }: ReactTableProps) {
 
 // ==============================|| GROUPING TABLE ||============================== //
 
-export default function GroupingTable() {
+export default function GroupingTable({ title }: { title: string }) {
   const data: TableDataProps[] = makeData(100);
 
   const columns = useMemo<ColumnDef<TableDataProps>[]>(
     () => [
-      {
-        header: 'Name',
-        accessorKey: 'fullName',
-        enableGrouping: false
-      },
-      {
-        header: 'Email',
-        accessorKey: 'email',
-        enableGrouping: false
-      },
-      {
-        header: 'Age',
-        accessorKey: 'age',
-        meta: { className: 'text-end' }
-      },
-      {
-        header: 'Visits',
-        accessorKey: 'visits',
-        meta: { className: 'text-end' }
-      },
-      {
-        header: 'Status',
-        accessorKey: 'status',
-        cell: (cell) => {
-          switch (cell.getValue()) {
-            case 'Complicated':
-              return <Badge bg="light-danger">Complicated</Badge>;
-            case 'Relationship':
-              return <Badge bg="light-success">Relationship</Badge>;
-            case 'Single':
-            default:
-              return <Badge bg="light-info">Single</Badge>;
-          }
-        }
-      },
+      { header: 'Name', accessorKey: 'fullName', enableGrouping: false, meta: { className: 'text-nowrap' } },
+      { header: 'Email', accessorKey: 'email', enableGrouping: false },
+      { header: 'Age', accessorKey: 'age', meta: { className: 'text-end' } },
+      { header: 'Visits', accessorKey: 'visits', enableGrouping: false, meta: { className: 'text-end' } },
+      { header: 'Status', accessorKey: 'status', cell: (cell) => <StatusPill status={cell.getValue() as string} /> },
       {
         header: 'Profile Progress',
         accessorKey: 'progress',
-        cell: (props) => <LinearWithLabel value={props.getValue() as number} />,
+        cell: (cell) => <LinearWithLabel value={cell.getValue() as number} />,
         enableGrouping: false
       }
     ],
     []
   );
 
-  return <ReactTable {...{ data, columns }} />;
+  return <ReactTable {...{ data, columns, title }} />;
 }

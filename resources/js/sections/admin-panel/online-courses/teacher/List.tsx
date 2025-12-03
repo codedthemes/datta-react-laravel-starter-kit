@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Link } from '@inertiajs/react';
+import { Link } from 'react-router-dom';
 
 // react-bootstrap
 import Image from 'react-bootstrap/Image';
@@ -25,22 +25,14 @@ import {
 import { PatternFormat } from 'react-number-format';
 
 // project-imports
-import HeaderSort from '@/sections/tables/react-table/sorting/HeaderSort';
-import DebouncedInput from '@/components/third-party/react-table/DebouncedInput';
-import TablePagination from '@/components/third-party/react-table/Pagination';
-import SortingData from '@/components/third-party/react-table/SortingData';
 import MainCard from '@/components/MainCard';
+import { DebouncedInput, HeaderSort, SortingData, TablePagination } from '@/components/third-party/react-table';
 
 import makeData from '@/data/react-table';
 import { getImageUrl, ImagePath } from '@/utils/getImageUrl';
 
 // types
 import { TableDataProps } from '@/types/table';
-
-interface LabelKeyObject {
-  label: string;
-  key: string;
-}
 
 interface ReactTableProps {
   columns: ColumnDef<TableDataProps>[];
@@ -75,31 +67,22 @@ function ReactTable({ columns, data }: ReactTableProps) {
     onGlobalFilterChange: setGlobalFilter
   });
 
-  let headers: LabelKeyObject[] = [];
-  table.getAllColumns().map((column) => {
-    const accessorKey = column.columnDef;
-
-    headers.push({
-      label: typeof column.columnDef.header === 'string' ? column.columnDef.header : '#',
-      key: typeof accessorKey === 'string' ? accessorKey : 'unknown'
-    });
-  });
-
   return (
     <MainCard
       title="Teacher list"
       secondary={
         <Stack direction="horizontal" gap={2}>
-          <Link role="button" href={'/admin-panel/online-course/teacher/apply'} className="btn btn-outline-secondary">
+          <a role="button" href={'/admin-panel/online-course/teacher/apply'} className="btn btn-outline-secondary">
             Apply Teacher List
-          </Link>
-          <Link role="button" href={'/admin-panel/online-course/teacher/add'} className="btn btn-primary">
+          </a>
+          <a role="button" href={'/admin-panel/online-course/teacher/add'} className="btn btn-primary">
             Add Teacher
-          </Link>
+          </a>
         </Stack>
       }
       className="table-card px-0"
     >
+      {/* toolbar */}
       <Stack direction="horizontal" className="justify-content-between align-items-center p-4 flex-wrap gap-2">
         <SortingData getState={table.getState} setPageSize={table.setPageSize} />
         <div className="datatable-search">
@@ -107,6 +90,7 @@ function ReactTable({ columns, data }: ReactTableProps) {
         </div>
       </Stack>
 
+      {/* table */}
       <Table hover responsive className="mb-0 border-top">
         <thead>
           {table.getHeaderGroups().map((headerGroup: HeaderGroup<any>, index) => (
@@ -139,6 +123,7 @@ function ReactTable({ columns, data }: ReactTableProps) {
         </tbody>
       </Table>
 
+      {/* pagination */}
       <TablePagination
         setPageSize={table.setPageSize}
         setPageIndex={table.setPageIndex}

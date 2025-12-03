@@ -18,7 +18,6 @@ export default function BasicUsagePage() {
         <code>{`<code>`}</code> element inside, like so:
       </p>
       <h6 className="m-t-20 f-w-600">Code:</h6>
-      {/* @ts-ignore https://github.com/react-syntax-highlighter/react-syntax-highlighter/issues/539 */}
       <SyntaxHighlighter
         language="javascript"
         style={dark}

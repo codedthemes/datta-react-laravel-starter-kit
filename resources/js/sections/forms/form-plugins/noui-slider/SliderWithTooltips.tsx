@@ -6,18 +6,16 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
 // third-party
-// import ReactSlider from 'react-slider';
+import Slider from 'rc-slider';
+
+const CustomerSlider = Slider as any;
 
 // ==============================|| SLIDER WITH TOOLTIPS ||============================== //
 
 export default function SliderWithTooltips() {
-  // const [sliderValues, setSliderValues] = useState<[number, number]>([20, 80]);
+  const [sliderValues, setSliderValues] = useState<[number, number]>([20, 80]);
   const [sliderValues1, setSliderValues1] = useState<[number, number]>([-10, 10]);
   const [dropdownValue, setDropdownValue] = useState<number>(1);
-
-  // const handleSliderChange = (values: number[]) => {
-  //   setSliderValues(values as [number, number]);
-  // };
 
   const handleSliderChange1 = (value: [number, number]) => {
     if (Array.isArray(value)) {
@@ -45,35 +43,40 @@ export default function SliderWithTooltips() {
         </Form.Label>
         <Col lg={6} md={12}>
           <Row className="align-items-center g-3">
-            {/* <Col xs={6} sm={3} className="pb-sm-0">
+            <Col xs={6} sm={3} className="pb-sm-0">
               <Form.Control type="text" value={sliderValues[0]} readOnly />
             </Col>
             <Col xs={6} sm={3} className="pb-sm-0">
               <Form.Control type="text" value={sliderValues[1]} readOnly />
-            </Col> */}
+            </Col>
 
             <Col sm={6}>
-              {/* @ts-ignore https://github.com/zillow/react-slider/issues/321 */}
-              {/* <ReactSlider
-                className="custom-slider"
-                thumbClassName="custom-thumb"
-                trackClassName="custom-track"
-                value={[sliderValues[0], sliderValues[1]]}
-                onChange={handleSliderChange}
+              <CustomerSlider
+                range
                 min={0}
                 max={200}
-                defaultValue={[0, 200]}
-                pearling
-                minDistance={10}
-                renderThumb={(props, state) => {
-                  const { key, ...rest } = props;
+                allowCross={false}
+                defaultValue={sliderValues}
+                onChange={(values: number[]) => setSliderValues(values as [number, number])}
+                className="custom-slider"
+                trackStyle={[{ height: 4, borderRadius: 2 }]}
+                railStyle={{ height: 4, borderRadius: 2 }}
+                handleStyle={[{ top: -7 }, { top: -7 }]}
+                handleRender={(node: React.ReactNode, handleProps: any) => {
+                  const min = 0;
+                  const max = 200;
+                  const percent = ((handleProps.value - min) / (max - min)) * 100;
+
                   return (
-                    <div key={key} {...rest} className="custom-thumb">
-                      <div className="custom-tooltip">{state.valueNow}</div>
+                    <div style={{ position: 'relative' }}>
+                      <div className="custom-tooltip" style={{ top: -45, marginLeft: 15, left: `${percent}%` }}>
+                        {handleProps.value}
+                      </div>
+                      {node}
                     </div>
                   );
                 }}
-              /> */}
+              />
             </Col>
           </Row>
           <Form.Text>Always show slider values.</Form.Text>
@@ -88,46 +91,11 @@ export default function SliderWithTooltips() {
           <Row className="align-items-center g-3">
             <Col xs={6} sm={3} className="pb-sm-0">
               <Form.Select value={dropdownValue} onChange={handleDropdownChange1}>
-                <option value="-20">-20</option>
-                <option value="-19">-19</option>
-                <option value="-18">-18</option>
-                <option value="-17">-17</option>
-                <option value="-16">-16</option>
-                <option value="-15">-15</option>
-                <option value="-14">-14</option>
-                <option value="-13">-13</option>
-                <option value="-12">-12</option>
-                <option value="-11">-11</option>
-                <option value="-10">-10</option>
-                <option value="-9">-9</option>
-                <option value="-8">-8</option>
-                <option value="-7">-7</option>
-                <option value="-6">-6</option>
-                <option value="-5">-5</option>
-                <option value="-4">-4</option>
-                <option value="-3">-3</option>
-                <option value="-2">-2</option>
-                <option value="-1">-1</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-                <option value="16">16</option>
-                <option value="17">17</option>
-                <option value="18">18</option>
-                <option value="19">19</option>
-                <option value="20">20</option>
+                {Array.from({ length: 41 }, (_, i) => -20 + i).map((num) => (
+                  <option key={num} value={num}>
+                    {num}
+                  </option>
+                ))}
               </Form.Select>
             </Col>
             <Col xs={6} sm={3} className="pb-sm-0">
@@ -135,22 +103,16 @@ export default function SliderWithTooltips() {
             </Col>
 
             <Col sm={6}>
-              {/* @ts-ignore https://github.com/zillow/react-slider/issues/321 */}
-              {/* <ReactSlider
-                className="custom-slider"
-                thumbClassName="custom-thumb"
-                trackClassName="custom-track"
-                value={sliderValues1}
-                onChange={handleSliderChange1}
+              <Slider
+                range
                 min={-20}
                 max={40}
-                pearling
-                minDistance={1}
-                // @ts-ignore
-                renderTrack={({ key, ...restProps }) => <div key={key} {...restProps} className="custom-track" />}
-                // @ts-ignore
-                renderThumb={({ key, ...restProps }) => <div key={key} {...restProps} className="custom-thumb" />}
-              /> */}
+                className="custom-slider"
+                trackStyle={[{ height: 4, borderRadius: 2 }]}
+                railStyle={{ height: 4, borderRadius: 2 }}
+                defaultValue={sliderValues1}
+                onChange={handleSliderChange1}
+              />
             </Col>
           </Row>
           <Form.Text>

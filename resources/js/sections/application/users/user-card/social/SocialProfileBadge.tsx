@@ -1,5 +1,7 @@
 // react-bootstrap
 import Image from 'react-bootstrap/Image';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 // project-imports
 import CustomCardFooter from './CustomCardFooter';
@@ -17,13 +19,15 @@ export default function SocialProfileBadge() {
       <MainCard className="user-card user-card-3 support-bar1" footerClassName="p-0" footer={<CustomCardFooter />}>
         <div className="text-center">
           <div className="position-relative d-inline-block">
-            <Image className="img-radius wid-150" fluid src={avatar3} alt="User image" />
-            <div className="certificated-badge" data-bs-toggle="tooltip" data-bs-placement="right" title="Certificated">
-              <i className="ti ti-rosette-discount-check-filled text-primary bg-icon" />
+            <Image className="wid-120" fluid roundedCircle src={avatar3} alt="User image" />
+            <div className="certificated-badge">
+              <OverlayTrigger placement="top" overlay={<Tooltip id="certificate-tooltip">Certificated</Tooltip>}>
+                <i className="ti ti-rosette-discount-check-filled text-primary bg-icon" />
+              </OverlayTrigger>
             </div>
           </div>
-          <h3 className="mb-1 mt-3 f-w-400">Joseph William</h3>
-          <p className="mb-3 text-muted">UI/UX Designer</p>
+          <h4 className="mb-1 mt-3 f-w-500">Joseph William</h4>
+          <p className="mb-0 text-muted">UI/UX Designer</p>
         </div>
       </MainCard>
     </>

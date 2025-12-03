@@ -22,7 +22,6 @@ export default function DateRangePicker() {
           </Col>
 
           <Col lg={4} md={9} sm={12}>
-            {/* @ts-ignore */}
             <Flatpickr
               options={{
                 mode: 'range'
@@ -40,7 +39,6 @@ export default function DateRangePicker() {
 
           <Col lg={4} md={9} sm={12}>
             <InputGroup>
-              {/* @ts-ignore */}
               <Flatpickr
                 options={{
                   mode: 'range'
@@ -61,7 +59,6 @@ export default function DateRangePicker() {
           </Col>
 
           <Col lg={4} md={9} sm={12}>
-            {/* @ts-ignore */}
             <Flatpickr
               options={{
                 mode: 'range',
@@ -82,7 +79,6 @@ export default function DateRangePicker() {
           </Col>
 
           <Col lg={4} md={9} sm={12}>
-            {/* @ts-ignore */}
             <Flatpickr
               options={{
                 mode: 'range'

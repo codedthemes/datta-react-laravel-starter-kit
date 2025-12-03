@@ -8,40 +8,41 @@ import Stack from 'react-bootstrap/Stack';
 import MainCard from '@/components/MainCard';
 
 // assets
-import Avatar from '@assets/images/user/avatar-1.png';
-import Avatar1 from '@assets/images/user/avatar-2.png';
-import Avatar2 from '@assets/images/user/avatar-3.png';
-import Avatar3 from '@assets/images/user/avatar-4.png';
+import Avatar1 from '@assets/images/user/avatar-1.png';
+import Avatar2 from '@assets/images/user/avatar-2.png';
+import Avatar3 from '@assets/images/user/avatar-3.png';
+import Avatar4 from '@assets/images/user/avatar-4.png';
+import Avatar5 from '@assets/images/user/avatar-5.png';
 
 // member data
 const members = [
   {
-    avatar: Avatar,
+    avatar: Avatar1,
     name: 'Brieley join casual membership..',
     time: 'Today | 9:00 AM'
   },
   {
-    avatar: Avatar1,
+    avatar: Avatar2,
     name: 'Ashton end membership planing',
     time: 'Yesterday | 6:30 PM'
   },
   {
-    avatar: Avatar2,
+    avatar: Avatar3,
     name: 'Airi canceled in 2 months membership',
     time: '05 Feb | 3:45 PM'
   },
   {
-    avatar: Avatar3,
+    avatar: Avatar4,
     name: 'Colleen join Addicted membership',
     time: '05 Feb | 4:00 PM'
   },
   {
-    avatar: Avatar,
+    avatar: Avatar5,
     name: 'Airi canceled in 2 months membership',
     time: '05 Feb | 3:45 PM'
   },
   {
-    avatar: Avatar3,
+    avatar: Avatar1,
     name: 'Colleen join Addicted membership',
     time: '05 Feb | 4:00 PM'
   }
@@ -51,25 +52,28 @@ const members = [
 
 export default function Notifications() {
   return (
-    <MainCard>
-      <Stack direction="horizontal" className="align-items-center justify-content-between mb-3">
-        <h5 className="mb-0">Notifications</h5>
-        <Dropdown align="end">
-          <Dropdown.Toggle id="dropdown-custom-components" variant="link-secondary" className="avatar avatar-s  arrow-none">
-            <i className="ti ti-dots-vertical f-18"></i>
-          </Dropdown.Toggle>
+    <MainCard
+      bodyClassName="p-0"
+      title={
+        <Stack direction="horizontal" className="align-items-center justify-content-between">
+          <h5 className="m-0">Notifications</h5>
+          <Dropdown align="end">
+            <Dropdown.Toggle id="dropdown-custom-components" variant="link-secondary" className="avatar avatar-xs  arrow-none">
+              <i className="ti ti-dots-vertical f-18"></i>
+            </Dropdown.Toggle>
 
-          <Dropdown.Menu>
-            <Dropdown.Item href="#">Today</Dropdown.Item>
-            <Dropdown.Item href="#">Weekly</Dropdown.Item>
-            <Dropdown.Item href="#">Monthly</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-      </Stack>
-
+            <Dropdown.Menu>
+              <Dropdown.Item href="#">Today</Dropdown.Item>
+              <Dropdown.Item href="#">Weekly</Dropdown.Item>
+              <Dropdown.Item href="#">Monthly</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </Stack>
+      }
+    >
       <ListGroup variant="flush">
         {members.map((member, index) => (
-          <ListGroup.Item key={index} className="px-0 py-2">
+          <ListGroup.Item key={index} className="py-2">
             <div className="d-flex align-items-center">
               <div className="flex-shrink-0">
                 <Image src={member.avatar} alt="img" className="wid-40 rounded-circle" />

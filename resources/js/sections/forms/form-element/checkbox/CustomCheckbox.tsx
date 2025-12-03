@@ -19,63 +19,52 @@ export default function CustomCheckbox() {
     }
   }, []);
 
+  const inlineOptions = [
+    { id: 'inline-1', label: '1' },
+    { id: 'inline-2', label: '2' },
+    { id: 'inline-3', label: '3', defaultChecked: true },
+    { id: 'inline-4', label: '4 (disabled)', disabled: true }
+  ];
+
   return (
     <MainCard title="Custom Checkbox">
+      {/* Default checkboxes */}
       <Row className="mb-3">
         <Col sm={3} className="text-sm-end col-form-label pt-0">
           Checkboxes
         </Col>
         <Col sm={9}>
-          <Form.Group className="mb-2">
-            <Form.Check label="Default checkbox" />
-          </Form.Group>
-
-          <Form.Check type="checkbox" id="flexCheckChecked" label="Checked checkbox" defaultChecked />
-
-          <Form.Group className="mb-2">
-            <Form.Check label="Disabled checkbox" disabled />
-          </Form.Group>
-
-          <Form.Group className="mb-2">
-            <Form.Check label="Disabled checked checkbox" defaultChecked disabled />
-          </Form.Group>
+          <Form.Check id="checkbox-default" label="Default checkbox" className="mb-2" />
+          <Form.Check id="checkbox-checked" label="Checked checkbox" defaultChecked className="mb-2" />
+          <Form.Check id="checkbox-disabled" label="Disabled checkbox" disabled className="mb-2" />
+          <Form.Check id="checkbox-disabled-checked" label="Disabled checked checkbox" defaultChecked disabled />
         </Col>
       </Row>
 
+      {/* Inline checkboxes */}
       <Row className="mb-3">
-        <Col sm={3} className="text-sm-end col-form-label pt-0 pb-1">
+        <Col sm={3} className="text-sm-end col-form-label pt-0">
           Inline
         </Col>
         <Col sm={9}>
-          <Form.Group>
-            <Form.Check label="1" />
-          </Form.Group>
-
-          <Form.Group>
-            <Form.Check label="2" />
-          </Form.Group>
-
-          <Form.Group>
-            <Form.Check label="3" defaultChecked />
-          </Form.Group>
-
-          <Form.Group>
-            <Form.Check label="4 (disabled)" disabled />
-            <small className="form-text text-muted">
-              Add <code>.form-check-inline</code> to any <code>.custom-control</code>
-            </small>
-          </Form.Group>
+          {inlineOptions.map((opt) => (
+            <Form.Check key={opt.id} id={opt.id} label={opt.label} defaultChecked={opt.defaultChecked} disabled={opt.disabled} inline />
+          ))}
+          <small className="form-text text-muted d-block mt-2">
+            Add <code>.form-check-inline</code> for inline checkboxes
+          </small>
         </Col>
       </Row>
 
+      {/* Indeterminate checkbox */}
       <Row>
-        <Col sm={3} className="text-sm-end col-form-label pt-0 pb-1">
+        <Col sm={3} className="text-sm-end col-form-label pt-0">
           Indeterminate
         </Col>
         <Col sm={9}>
-          <Form.Check type="checkbox" label="Indeterminate" ref={checkboxRef} />
-          <small className="form-text text-muted">
-            <code>document.querySelector('your-checkbox').indeterminate=!0;</code>
+          <Form.Check type="checkbox" id="checkbox-indeterminate" label="Indeterminate" ref={checkboxRef} />
+          <small className="form-text text-muted d-block mt-2">
+            Example: <code>document.querySelector('#checkbox-indeterminate').indeterminate = true;</code>
           </small>
         </Col>
       </Row>

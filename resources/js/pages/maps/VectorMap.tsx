@@ -6,17 +6,17 @@ import Row from 'react-bootstrap/Row';
 
 // project-imports
 import ReferenceHeader from '@/components/ReferenceHeader';
-import BasicMap from '@/sections/maps/BasicMap';
-import CanadaMap from '@/sections/maps/CanadaMap';
-import IraqMap from '@/sections/maps/IraqMap';
-import ItalyMap from '@/sections/maps/ItalyMap';
-import RussiaMap from '@/sections/maps/RussiaMap';
-import SpainMap from '@/sections/maps/SpainMap';
-import UsAeaEnMap from '@/sections/maps/UsAeaEnMap';
-import UsLccEnMap from '@/sections/maps/UsLccEnMap';
-import UsMercEnMap from '@/sections/maps/UsMercEn';
-import UsMillEnMap from '@/sections/maps/UsMillEn';
-import WorldMap from '@/sections/maps/WorldMap';
+import BasicMap from '@/sections/maps/vector-maps/BasicMap';
+import CanadaMap from '@/sections/maps/vector-maps/CanadaMap';
+import IraqMap from '@/sections/maps/vector-maps/IraqMap';
+import ItalyMap from '@/sections/maps/vector-maps/ItalyMap';
+import RussiaMap from '@/sections/maps/vector-maps/RussiaMap';
+import SpainMap from '@/sections/maps/vector-maps/SpainMap';
+import UsAeaEnMap from '@/sections/maps/vector-maps/UsAeaEnMap';
+import UsLccEnMap from '@/sections/maps/vector-maps/UsLccEnMap';
+import UsMercEnMap from '@/sections/maps/vector-maps/UsMercEn';
+import UsMillEnMap from '@/sections/maps/vector-maps/UsMillEn';
+import WorldMap from '@/sections/maps/vector-maps/WorldMap';
 
 // ===============================|| MAPS - VECTOR MAP ||============================== //
 

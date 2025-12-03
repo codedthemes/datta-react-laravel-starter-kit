@@ -12,7 +12,7 @@ import Stack from 'react-bootstrap/Stack';
 import { useReactToPrint } from 'react-to-print';
 
 // project-imports
-import { ThemeMode } from '@/config';
+import { ThemeMode, APP_DEFAULT_PATH } from '@/config';
 import MainCard from '@/components/MainCard';
 import useConfig from '@/hooks/useConfig';
 import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
@@ -21,6 +21,30 @@ import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedThem
 import DarkLogo from '@assets/images/logo-dark.svg';
 import LightLogo from '@assets/images/logo-white.svg';
 
+// table data
+const tableData = [
+  {
+    title: 'Logo Design',
+    description: 'lorem ipsum dolor sit amet, consectetur adipisicing elit',
+    quantity: 6,
+    amount: '$200.00',
+    total: '$1200.00'
+  },
+  {
+    title: 'Logo Design',
+    description: 'lorem ipsum dolor sit amet, consectetur adipisicing elit',
+    quantity: 7,
+    amount: '$100.00',
+    total: '$700.00'
+  },
+  {
+    title: 'Logo Design',
+    description: 'lorem ipsum dolor sit amet, consectetur adipisicing elit',
+    quantity: 5,
+    amount: '$150.00',
+    total: '$750.00'
+  }
+];
 // ==============================|| INVOICE - INVOICE ||============================== //
 
 export default function InvoiceSection() {
@@ -36,16 +60,16 @@ export default function InvoiceSection() {
     <Row>
       <Col md={12}>
         <Stack direction="horizontal" className="justify-content-center">
-          <MainCard className="w-100" bodyClassName="px-4 py-0" ref={contentRef}>
+          <MainCard className="w-100" bodyClassName="px-4" ref={contentRef}>
             <Row>
-              <Col md={8} className="invoice-contact">
+              <Col md={8} className="invoice-contact pt-0">
                 <div className="invoice-box">
                   <Table borderless responsive className="invoice-table">
                     <tbody>
                       <tr>
                         <td>
-                          <a href="index.html">
-                            <Image className="img-fluid" src={logo} alt="Dashboard-kit Logo" />
+                          <a href={APP_DEFAULT_PATH}>
+                            <Image className="img-fluid" src={logo} alt="Datta able Logo" />
                           </a>
                         </td>
                       </tr>
@@ -74,21 +98,21 @@ export default function InvoiceSection() {
               </Col>
             </Row>
 
-            <Row className="invoice-info px-4">
+            <Row className="invoice-info gy-4">
               <Col sm={4} className="invoice-client-info">
-                <h6>Client Information :</h6>
+                <h6 className="mb-sm-3 mb-2">Client Information :</h6>
                 <h6 className="m-0">Josephin Villa</h6>
                 <p className="m-0">1065 Mandan Road, Columbia MO, Missouri. (123)-65202</p>
                 <p className="m-0">(1234) - 567891</p>
-                <p>
+                <p className="mb-0">
                   <a className="text-secondary" href="mailto:demo@gmail.com">
                     demo@gmail.com
                   </a>
                 </p>
               </Col>
               <Col sm={4}>
-                <h6>Order Information :</h6>
-                <Table borderless responsive className="invoice-table invoice-order">
+                <h6 className="mb-sm-3 mb-2">Order Information :</h6>
+                <Table borderless responsive className="invoice-table invoice-order mb-0">
                   <tbody>
                     <tr>
                       <th>Date :</th>
@@ -108,10 +132,10 @@ export default function InvoiceSection() {
                 </Table>
               </Col>
               <Col sm={4}>
-                <h6 className="m-b-20">
+                <h6 className="mb-sm-3 mb-2">
                   Invoice Number <span>#125863478945</span>
                 </h6>
-                <h6 className="text-uppercase text-primary">
+                <h6 className="text-uppercase text-primary mb-0">
                   Total Due : <span>$950.00</span>
                 </h6>
               </Col>
@@ -129,33 +153,17 @@ export default function InvoiceSection() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <h6>Logo Design</h6>
-                        <p className="m-0">lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-                      </td>
-                      <td>6</td>
-                      <td>$200.00</td>
-                      <td>$1200.00</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <h6>Logo Design</h6>
-                        <p className="m-0">lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-                      </td>
-                      <td>7</td>
-                      <td>$100.00</td>
-                      <td>$700.00</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <h6>Logo Design</h6>
-                        <p className="m-0">lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-                      </td>
-                      <td>5</td>
-                      <td>$150.00</td>
-                      <td>$750.00</td>
-                    </tr>
+                    {tableData.map((row, index) => (
+                      <tr key={index}>
+                        <td>
+                          <h6>{row.title}</h6>
+                          <p className="m-0">{row.description}</p>
+                        </td>
+                        <td>{row.quantity}</td>
+                        <td>{row.amount}</td>
+                        <td>{row.total}</td>
+                      </tr>
+                    ))}
                   </tbody>
                 </Table>
               </Col>
@@ -194,7 +202,7 @@ export default function InvoiceSection() {
             <Row>
               <Col sm={12}>
                 <h6>Terms and Condition :</h6>
-                <p>
+                <p className="mb-0">
                   lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
                   aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
                   aute irure dolor

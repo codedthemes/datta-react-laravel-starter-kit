@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 import CardImg from '@assets/images/light-box/l3.jpg';
 
 // ==============================|| CARD - HORIZONTAL ||============================== //
-
+  
 export default function Horizontal() {
   return (
     <Row>

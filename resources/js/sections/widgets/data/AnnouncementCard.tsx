@@ -1,6 +1,6 @@
 // project-imports
 import MainCard from '@/components/MainCard';
-import branding from '../../../../branding.json';
+import branding from '@/../branding.json';
 
 // ==============================|| WIDGETS DATA - ANNOUNCEMENT CARD ||============================== //
 

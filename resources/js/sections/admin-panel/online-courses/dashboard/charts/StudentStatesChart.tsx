@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 
-// material-ui
-
 // project-imports
 import { ThemeMode } from '@/config';
+import useConfig from '@/hooks/useConfig';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 // third-party
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
-import useConfig from '@/hooks/useConfig';
 
 const pieChartOptions = {
   chart: {
@@ -27,7 +26,10 @@ const pieChartOptions = {
 // ==============================|| DASHBOARD - STUDENT STATES CHART ||============================== //s
 
 export function ApexDonutChart() {
-  const { mode } = useConfig();
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
+
   const [options, setOptions] = useState<ChartProps>(pieChartOptions);
 
   const series = [70, 30];
@@ -38,12 +40,13 @@ export function ApexDonutChart() {
 
     setOptions((prevState) => ({
       ...prevState,
+      chart: { ...prevState.chart, fontFamily: fontFamily },
       colors: [primaryDark, primaryLight],
       grid: { borderColor: 'var(--bs-border-color)' },
       stroke: { colors: ['background.paper'] },
-      theme: { mode: mode === ThemeMode.DARK ? 'dark' : 'light' }
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
     }));
-  }, []);
+  }, [resolvedTheme, fontFamily]);
 
   return <ReactApexChart options={options} series={series} type="donut" height={240} />;
 }

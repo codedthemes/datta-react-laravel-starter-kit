@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { RefObject, useRef, useState } from 'react';
 
 // react-bootstrap
 import Form from 'react-bootstrap/Form';
@@ -30,7 +30,7 @@ export default function DateRangePage({ useClickOutside }: DatePickerDisabledPro
 
   const calendarRef = useRef<HTMLDivElement | null>(null);
 
-  useClickOutside(calendarRef, () => setIsCalendarOpen(false));
+  useClickOutside(calendarRef as RefObject<HTMLElement>, () => setIsCalendarOpen(false));
 
   const handleInputClick = (input: 'start' | 'end') => {
     setActiveInput(input);

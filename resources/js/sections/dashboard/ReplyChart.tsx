@@ -1,19 +1,24 @@
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
 
 // third-party
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // project-imports
 import MainCard from '@/components/MainCard';
+import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 // chart-options
-const chartOptions: ChartProps = {
+const replayChartOptions = {
   chart: {
+    type: 'bar',
+    height: 265,
+    background: 'transparent',
     toolbar: {
       show: false
     }
   },
-  colors: ['#1de9b6', '#a389d4', '#04a9f5', '#f44236'],
   fill: {
     type: 'gradient',
     opacity: 1,
@@ -53,22 +58,35 @@ const chartOptions: ChartProps = {
 // =============================|| PROJECT - REPLY CHART ||============================== //
 
 export default function ReplyChart() {
-  const series = useMemo(
-    () => [
-      {
-        name: 'Reply',
-        data: [53, 13, 30, 4]
-      }
-    ],
-    []
-  );
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
+
+  const [series] = useState([
+    {
+      name: 'Reply',
+      data: [53, 13, 30, 4]
+    }
+  ]);
+
+  const [options, setOptions] = useState<ChartProps>(replayChartOptions);
+
+  useEffect(() => {
+    setOptions({
+      ...replayChartOptions,
+      chart: { ...replayChartOptions.chart, fontFamily: fontFamily },
+      colors: ['var(--bs-success)', 'var(--bs-purple)', 'var(--bs-primary)', 'var(--bs-danger)'],
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
+    });
+  }, [resolvedTheme, fontFamily]);
+
   return (
     <>
       <MainCard title="Reply">
         <h3>2.43 h</h3>
         <span className="text-uppercase">average time for first reply</span>
 
-        <ReactApexChart options={chartOptions} series={series} type="bar" height={265} />
+        <ReactApexChart options={options} series={series} type="bar" height={265} />
       </MainCard>
     </>
   );

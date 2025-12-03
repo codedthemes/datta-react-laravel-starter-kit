@@ -7,7 +7,7 @@ import ToastContainer from 'react-bootstrap/ToastContainer';
 
 // project-imports
 import MainCard from '@/components/MainCard';
-import branding from '../../../../../branding.json';
+import branding from '@/../branding.json';
 
 // assets
 import Favicon from '@assets/images/favicon.svg';

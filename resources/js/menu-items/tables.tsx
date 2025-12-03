@@ -95,6 +95,12 @@ const tableComponents: NavItemType = {
           url: '/tables/react-table/expanding'
         },
         {
+          id: 'edit-table',
+          title: 'edit table',
+          type: 'item',
+          url: '/tables/react-table/edit-table'
+        },
+        {
           id: 'drag-drop',
           title: 'drag drop',
           type: 'item',
@@ -135,12 +141,6 @@ const tableComponents: NavItemType = {
           title: 'virtualized',
           type: 'item',
           url: '/tables/react-table/virtualized'
-        },
-        {
-          id: 'edit-table',
-          title: 'edit table',
-          type: 'item',
-          url: '/tables/react-table/edit-table'
         }
       ]
     }

@@ -34,14 +34,28 @@ function ConfigProvider({ children }: ConfigProviderProps) {
   const [config, setConfig] = useLocalStorage('datta-able-react-ts-config', initialState);
 
   useEffect(() => {
-    const width = window.innerWidth;
-    if (width < 1025 && config.menuOrientation !== 'vertical') {
-      setConfig((prevConfig: any) => ({
-        ...prevConfig,
-        menuOrientation: 'vertical'
-      }));
-    }
-  }, []);
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width < 1510 && config.menuOrientation == 'horizontal') {
+        setConfig((prevConfig: any) => ({
+          ...prevConfig,
+          menuOrientation: 'vertical'
+        }));
+      } else {
+        if (width < 1025 && config.menuOrientation !== 'vertical') {
+          setConfig((prevConfig: any) => ({
+            ...prevConfig,
+            menuOrientation: 'vertical'
+          }));
+        }
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    // run once on mount to ensure correct state without refresh
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+  }, [config.menuOrientation, setConfig]);
 
   const onReset = () => {
     setConfig(initialState);
@@ -55,7 +69,7 @@ function ConfigProvider({ children }: ConfigProviderProps) {
   };
 
   const onChangeMenuOrientation = (layout: MenuOrientation) => {
-    if (window.innerWidth >= 1025) {
+    if (window.innerWidth >= 1025 || layout === MenuOrientation.VERTICAL) {
       setConfig({
         ...config,
         menuOrientation: layout
@@ -113,7 +127,7 @@ function ConfigProvider({ children }: ConfigProviderProps) {
   };
 
   return (
-    <ConfigContext.Provider
+    <ConfigContext
       value={{
         ...config,
         onChangeLocalization,
@@ -129,7 +143,7 @@ function ConfigProvider({ children }: ConfigProviderProps) {
       }}
     >
       {children}
-    </ConfigContext.Provider>
+    </ConfigContext>
   );
 }
 

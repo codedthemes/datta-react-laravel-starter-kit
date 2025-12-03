@@ -1,11 +1,19 @@
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
+
+// project imports
+import useConfig from '@/hooks/useConfig';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
+import { ThemeMode } from '@/config';
 
 // third-party
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // chart-options
-const chartOptions: ChartProps = {
+const areaChartOptions: ChartProps = {
   chart: {
+    height: 350,
+    type: 'area',
+    background: 'transparent',
     toolbar: {
       show: false
     }
@@ -13,7 +21,6 @@ const chartOptions: ChartProps = {
   dataLabels: {
     enabled: false
   },
-  colors: ['#f4c22b', '#f44236'],
   xaxis: {
     type: 'datetime',
     categories: [
@@ -36,19 +43,32 @@ const chartOptions: ChartProps = {
 // ==============================|| APEX CHART - AREA CHART ||============================== //
 
 export default function AreaChart() {
-  const series = useMemo(
-    () => [
-      {
-        name: 'Series1',
-        data: [31, 40, 28, 51, 42, 109, 100]
-      },
-      {
-        name: 'Series2',
-        data: [11, 32, 45, 32, 34, 52, 41]
-      }
-    ],
-    []
-  );
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
 
-  return <ReactApexChart options={chartOptions} series={series} type="area" height={350} />;
+  const [series] = useState([
+    {
+      name: 'Series1',
+      data: [31, 40, 28, 51, 42, 109, 100]
+    },
+    {
+      name: 'Series2',
+      data: [11, 32, 45, 32, 34, 52, 41]
+    }
+  ]);
+
+  const [options, setOptions] = useState<ChartProps>(areaChartOptions);
+
+  useEffect(() => {
+    setOptions({
+      ...areaChartOptions,
+      chart: { ...areaChartOptions.chart, fontFamily: fontFamily },
+      colors: ['#f4c22b', '#f44236'],
+      grid: { borderColor: 'var(--bs-border-color)' },
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
+    });
+  }, [resolvedTheme, fontFamily]);
+
+  return <ReactApexChart options={options} series={series} type="area" height={350} />;
 }

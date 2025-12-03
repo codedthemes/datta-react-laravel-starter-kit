@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 
 // project-imports
 import { ThemeMode } from '@/config';
+import useConfig from '@/hooks/useConfig';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 // third-party
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
-import useConfig from '@/hooks/useConfig';
 
 interface Props {
   data: { data: number[] }[];
@@ -25,23 +26,24 @@ const barChartOptions = {
 // ==============================|| DASHBOARD - VISITOR CHART ||============================== //
 
 export default function VisitorChart({ data }: Props) {
-  const { mode } = useConfig();
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
 
   const [options, setOptions] = useState<ChartProps>(barChartOptions);
 
   useEffect(() => {
     setOptions((prevState) => ({
       ...prevState,
+      chart: { ...prevState.chart, fontFamily: fontFamily },
       xaxis: {
         ...prevState.xaxis,
-        categories: [2018, 2019, 2020, 2021, 2022, 2023],
-        labels: { style: { colors: 'var(--bs-secondary)' } }
+        categories: [2018, 2019, 2020, 2021, 2022, 2023]
       },
-      yaxis: { labels: { style: { colors: 'var(--bs-secondary)' } } },
       colors: ['#1de9b6'],
-      theme: { mode: mode === ThemeMode.DARK ? 'dark' : 'light' }
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
     }));
-  }, [mode]); // FIX: Added dependency array [mode]
+  }, [resolvedTheme, fontFamily]);
 
   const [series, setSeries] = useState(data);
 

@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 // react-bootstrap
 import Button from 'react-bootstrap/Button';
 
@@ -6,73 +8,67 @@ import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // project-imports
 import MainCard from '@/components/MainCard';
+import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 // chart-options
-const chartOptions: ChartProps = {
-  series: [{ name: 'Market Days ', data: [10, 60, 45, 72, 45, 86], color: '#fff' }],
+const metricTimelineChartOptions = {
+  chart: {
+    toolbar: {
+      show: false
+    }
+  },
+  dataLabels: {
+    enabled: false
+  },
+  markers: {
+    size: 6,
+    hover: {
+      size: 5
+    }
+  },
+  stroke: {
+    curve: 'straight',
+    width: 6
+  },
 
-  options: {
-    chart: {
-      toolbar: {
-        show: false
-      }
-    },
-    dataLabels: {
-      enabled: false
-    },
-    markers: {
-      size: 6,
-      hover: {
-        size: 5
-      }
-    },
-    stroke: {
-      curve: 'straight',
-      width: 6
-    },
-
-    grid: {
-      xaxis: {
-        lines: {
-          show: false
-        }
-      },
-      yaxis: {
-        lines: {
-          show: false
-        }
-      }
-    },
-
-    tooltip: {
-      x: {
-        show: false
-      },
-
-      marker: {
-        show: false
-      }
-    },
-
-    yaxis: {
-      labels: {
-        show: false
-      }
-    },
-
+  grid: {
     xaxis: {
-      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-      axisTicks: {
+      lines: {
         show: false
-      },
-      axisBorder: {
-        show: false
-      },
-      labels: {
-        style: {
-          colors: '#fff'
-        }
       }
+    },
+    yaxis: {
+      lines: {
+        show: false
+      }
+    }
+  },
+
+  tooltip: {
+    x: {
+      show: false
+    },
+
+    marker: {
+      show: false
+    }
+  },
+
+  yaxis: {
+    labels: {
+      show: false
+    }
+  },
+
+  xaxis: {
+    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    axisTicks: {
+      show: false
+    },
+    axisBorder: {
+      show: false
     }
   }
 };
@@ -80,6 +76,23 @@ const chartOptions: ChartProps = {
 // =============================|| WIDGET -  METRIC TIMELINE CHART ||============================== //
 
 export default function MetricTimelineChart() {
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
+
+  const [series] = useState([{ name: 'Market Days ', data: [10, 60, 45, 72, 45, 86], color: '#fff' }]);
+
+  const [options, setOptions] = useState<ChartProps>(metricTimelineChartOptions);
+
+  useEffect(() => {
+    setOptions({
+      ...metricTimelineChartOptions,
+      chart: { ...metricTimelineChartOptions.chart, fontFamily: fontFamily },
+      xaxis: { ...metricTimelineChartOptions.xaxis, labels: { style: { colors: '#fff' } } },
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
+    });
+  }, [fontFamily, resolvedTheme]);
+
   return (
     <MainCard
       headerClassName="border-bottom-0"
@@ -98,7 +111,7 @@ export default function MetricTimelineChart() {
           <span>Week2 +15.44</span>
         </div>
       </div>
-      <ReactApexChart options={chartOptions.options} series={chartOptions.series} type="line" height={210} />
+      <ReactApexChart options={options} series={series} type="line" height={210} />
     </MainCard>
   );
 }

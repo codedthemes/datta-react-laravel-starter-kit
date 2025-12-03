@@ -26,9 +26,7 @@ export default function DebouncedInput({
 }: Props) {
   const [value, setValue] = useState<number | string>(initialValue);
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
-  };
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => setValue(event.target.value);
 
   useEffect(() => {
     setValue(initialValue);

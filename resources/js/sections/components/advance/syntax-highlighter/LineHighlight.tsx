@@ -25,7 +25,6 @@ export default function LineHighlightPage() {
         <li>Whitespace is allowed anywhere and will be stripped off.</li>
       </ol>
       <h6 className="m-t-20 f-w-600">Usage:</h6>
-      {/* @ts-ignore https://github.com/react-syntax-highlighter/react-syntax-highlighter/issues/539 */}
       <SyntaxHighlighter
         language="javascript"
         style={dark}
@@ -46,7 +45,6 @@ export default function LineHighlightPage() {
       </SyntaxHighlighter>
 
       <h6 className="m-t-20 f-w-600">Example:</h6>
-      {/* @ts-ignore https://github.com/react-syntax-highlighter/react-syntax-highlighter/issues/539 */}
       <SyntaxHighlighter
         language="javascript"
         style={dark}

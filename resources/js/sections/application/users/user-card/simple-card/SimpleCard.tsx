@@ -10,6 +10,12 @@ import MainCard from '@/components/MainCard';
 import avatar2 from '@assets/images/user/avatar-2.png';
 import slider5 from '@assets/images/widget/slider5.jpg';
 
+const stats = [
+  { value: '89', label: 'Projects' },
+  { value: '3.5K', label: 'Followers' },
+  { value: '1.2K', label: 'Following' }
+];
+
 // =============================|| SIMPLE CARD - SIMPLE CARD ||==============================
 
 export default function SimpleCard() {
@@ -29,28 +35,21 @@ export default function SimpleCard() {
         <div className="user-about-block">
           <Row>
             <Col>
-              <Image src={avatar2} fluid className="wid-80 img-radius" />
+              <Image src={avatar2} fluid roundedCircle className="wid-80" />
             </Col>
           </Row>
         </div>
-        <h6 className="mb-1 mt-3">Josephin Doe</h6>
-        <p className="text-muted mb-3">UI/UX Designer</p>
-        <p className="mb-1">Lorem Ipsum is simply dummy text</p>
-        <p className="mb-0">been the industry's standard</p>
+        <h6 className="f-w-500 mb-1 mt-3">Jessica Martinez</h6>
+        <p className="text-muted mb-3">Frontend Developer</p>
+        <p className="mb-0">Passionate about creating responsive web applications with modern JavaScript framework</p>
         <hr className="wid-80 pt-1 mx-auto my-4" />
         <Row className="text-center">
-          <Col>
-            <h6 className="mb-1">37</h6>
-            <p className="mb-0">Mails</p>
-          </Col>
-          <Col>
-            <h6 className="mb-1">2749</h6>
-            <p className="mb-0">Followers</p>
-          </Col>
-          <Col>
-            <h6 className="mb-1">678</h6>
-            <p className="mb-0">Following</p>
-          </Col>
+          {stats.map((stat, index) => (
+            <Col key={index}>
+              <h6 className="mb-1 f-w-500">{stat.value}</h6>
+              <p className="mb-0 text-muted">{stat.label}</p>
+            </Col>
+          ))}
         </Row>
       </MainCard>
     </>

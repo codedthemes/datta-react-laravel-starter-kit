@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 // react-bootstrap
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -7,10 +9,16 @@ import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // project-imports
 import MainCard from '@/components/MainCard';
+import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 // chart-options
-const chartOptions: ChartProps = {
+const yearlySummaryChartOptions: ChartProps = {
   chart: {
+    type: 'bar',
+    height: 245,
+    background: 'transparent',
     toolbar: {
       show: false
     }
@@ -59,12 +67,36 @@ const chartOptions: ChartProps = {
         return '$ ' + val + ' thousands';
       }
     }
+  },
+  legend: {
+    show: true,
+    position: 'bottom',
+    offsetX: 10,
+    offsetY: 10,
+    labels: { useSeriesColors: false },
+    markers: { size: 6, shape: 'circle', strokeWidth: 0 },
+    itemMargin: { horizontal: 15, vertical: 8 }
   }
 };
 
 // =============================|| E-COMMERCE - YEARLY SUMMARY CHART ||============================== //
 
 export default function YearlySummaryChart({ height }: { height?: number }) {
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
+
+  const [options, setOptions] = useState<ChartProps>(yearlySummaryChartOptions);
+
+  useEffect(() => {
+    setOptions({
+      ...yearlySummaryChartOptions,
+      chart: { ...yearlySummaryChartOptions.chart, fontFamily: fontFamily },
+      grid: { borderColor: 'var(--bs-border-color)' },
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
+    });
+  }, [resolvedTheme, fontFamily]);
+
   return (
     <MainCard title="Yearly Summary">
       <Row className="pb-3">
@@ -83,7 +115,7 @@ export default function YearlySummaryChart({ height }: { height?: number }) {
           <span>Expenses</span>
         </Col>
       </Row>
-      <ReactApexChart options={chartOptions} series={chartOptions.series} type="bar" height={height || 245} />
+      <ReactApexChart options={options} series={options.series} type="bar" height={height || 245} />
     </MainCard>
   );
 }

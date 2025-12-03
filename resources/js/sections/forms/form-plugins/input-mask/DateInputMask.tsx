@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 
 // react-bootstrap
 import Col from 'react-bootstrap/Col';
@@ -6,39 +6,20 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
 // third-party
-import IMask from 'imask';
+import { IMaskInput } from 'react-imask';
 
 // project-imports
 import MainCard from '@/components/MainCard';
 
 const maskConfigs = [
-  { mask: '00/00/0000', label: 'Insert Date 1' },
-  { mask: '00-00-0000', label: 'Insert Date 2' }
+  { mask: '00/00/0000', label: 'Insert Date 1', Placeholder: 'DD/MM/YYYY' },
+  { mask: '00-00-0000', label: 'Insert Date 2', Placeholder: 'DD-MM-YYYY' }
 ];
-
-const useRefs = () => {
-  const ref1 = useRef<HTMLInputElement>(null);
-  const ref2 = useRef<HTMLInputElement>(null);
-  return [ref1, ref2];
-};
-
 // ==============================|| INPUT MASK - DATE ||============================== //
 
 export default function DateInputMask() {
-  const [values, setValues] = useState<string[]>(['', '']);
-  const refs = useRefs();
-
-  useEffect(() => {
-    const masks = refs.map((ref, index) => (ref.current ? IMask(ref.current, { mask: maskConfigs[index].mask }) : null));
-
-    return () => masks.forEach((mask) => mask?.destroy());
-  }, []);
-
-  const handleChange = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValues = [...values];
-    newValues[index] = e.target.value;
-    setValues(newValues);
-  };
+  const ref = useRef(null);
+  const inputRef = useRef(null);
 
   return (
     <MainCard
@@ -56,7 +37,16 @@ export default function DateInputMask() {
               {config.label}
             </Col>
             <Col lg={6} md={12}>
-              <Form.Control ref={refs[index]} value={values[index]} onChange={handleChange(index)} />
+              <IMaskInput
+                className="form-control"
+                mask={config.mask}
+                radix=""
+                value=""
+                unmask={true}
+                ref={ref}
+                inputRef={inputRef}
+                placeholder={config.Placeholder}
+              />
             </Col>
           </Row>
         ))}

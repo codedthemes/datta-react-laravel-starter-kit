@@ -45,12 +45,12 @@ export default function Friends() {
         </Stack>
       }
     >
-      <ul className="list-inline">
+      <ul className="list-inline mb-0">
         {friends.map((friend, index) => (
           <li key={index} className="list-inline-item">
-            <OverlayTrigger placement="top" overlay={<Tooltip>{friend.title}</Tooltip>}>
-              <a>
-                <Image src={friend.src} alt={friend.alt} roundedCircle className="mb-2" style={{ width: '50px', height: '50px' }} />
+            <OverlayTrigger placement="top" overlay={<Tooltip id={`tooltip-${index}`}>{friend.title}</Tooltip>}>
+              <a href="#!">
+                <Image src={friend.src} alt={friend.alt} roundedCircle className="wid-50 hei-50" />
               </a>
             </OverlayTrigger>
           </li>

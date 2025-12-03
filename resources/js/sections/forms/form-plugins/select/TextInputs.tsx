@@ -15,50 +15,67 @@ import MainCard from '@/components/MainCard';
 
 export default function TextInputs() {
   useEffect(() => {
-    const choicesElement1 = document.getElementById('choices-text-remove-button-1');
-    if (choicesElement1) {
-      new Choices(choicesElement1, {
-        removeItemButton: true,
-        maxItemCount: 5
-      }).setValue(['preset-1', 'preset-2']);
-    }
+    const instances: Choices[] = [];
 
-    const choicesElement2 = document.getElementById('choices-text-unique-values');
-    if (choicesElement2) {
-      new Choices(choicesElement2).setValue(['preset-1', 'preset-2']);
-    }
+    const initChoices = (id: string, options: any = {}, values: string[] = []) => {
+      const el = document.getElementById(id) as HTMLInputElement | null;
+      if (el) {
+        const instance = new Choices(el, options);
+        if (values.length > 0) {
+          instance.setValue(values);
+        }
+        instances.push(instance);
+      }
+    };
 
-    const choicesElement3 = document.getElementById('choices-text-email-filter');
-    if (choicesElement3) {
-      new Choices(choicesElement3).setValue([]);
-    }
+    initChoices('choices-text-remove-button-1', { removeItemButton: true, maxItemCount: 5 }, ['preset-1', 'preset-2']);
 
-    const choicesElement4 = document.getElementById('choices-text-disabled');
-    if (choicesElement4) {
-      new Choices(choicesElement4).setValue(['josh@joshuajohnson.co.uk', 'joe@bloggs.co.uk']);
-    }
+    initChoices('choices-text-unique-values', { duplicateItemsAllowed: false }, ['preset-1', 'preset-2']);
 
-    const choicesElement5 = document.getElementById('choices-text-prepend-append-value');
-    if (choicesElement5) {
-      new Choices(choicesElement5).setValue([]);
-    }
+    initChoices('choices-text-email-filter', {
+      addItemFilter: (value: string) => /\S+@\S+\.\S+/.test(value) // only allow emails
+    });
 
-    const choicesElement6 = document.getElementById('choices-text-preset-values');
-    if (choicesElement6) {
-      new Choices(choicesElement6).setValue(['Josh Johnson', 'Joe Bloggs', 'Michael Smith']);
-    }
+    initChoices('choices-text-disabled', {}, ['josh@joshuajohnson.co.uk', 'joe@bloggs.co.uk']);
 
-    const choicesElement7 = document.getElementById('choices-text-i18n');
-    if (choicesElement7) {
-      new Choices(choicesElement7).setValue([]);
-    }
+    initChoices('choices-text-prepend-append-value', {
+      callbackOnCreateTemplates: function (template: any) {
+        return {
+          item: (classNames: any, data: any) => {
+            return template(`
+              <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable}"
+                   data-item data-id="${data.id}" data-value="[PREPEND]${data.value}[APPEND]" data-deletable>
+                [PREPEND] ${data.label} [APPEND]
+              </div>
+            `);
+          },
+          choice: (classNames: any, data: any) => {
+            return template(`
+              <div class="${classNames.item} ${classNames.itemChoice}"
+                   data-select-text="Press to select" data-choice
+                   data-id="${data.id}" data-value="[PREPEND]${data.value}[APPEND]">
+                [PREPEND] ${data.label} [APPEND]
+              </div>
+            `);
+          }
+        };
+      }
+    });
 
-    const choicesElement8 = document.getElementById('choices-text-rtl');
-    if (choicesElement8) {
-      new Choices(choicesElement8, {
-        placeholderValue: 'This is a placeholder set in the config'
-      }).setValue(['Value 2', 'Value 1']);
-    }
+    initChoices('choices-text-preset-values', {}, ['Josh Johnson', 'Joe Bloggs', 'Michael Smith']);
+
+    initChoices('choices-text-i18n', {
+      loadingText: 'Un momento...',
+      noResultsText: 'Ningún resultado encontrado',
+      noChoicesText: 'No hay opciones disponibles',
+      itemSelectText: 'Pulsa para seleccionar'
+    });
+
+    initChoices('choices-text-rtl', { placeholderValue: 'This is a placeholder set in the config' }, ['Value 2', 'Value 1']);
+
+    return () => {
+      instances.forEach((instance) => instance.destroy());
+    };
   }, []);
 
   return (

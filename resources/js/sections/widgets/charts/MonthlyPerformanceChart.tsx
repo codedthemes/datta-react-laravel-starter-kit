@@ -1,11 +1,16 @@
+import { useState, useEffect } from 'react';
+
 // third-party
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // project-imports
 import MainCard from '@/components/MainCard';
+import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 // chart-options
-const chartOptions: ChartProps = {
+const monthlyPerformanceChartOptions = {
   chart: {
     zoom: {
       enabled: false
@@ -33,11 +38,6 @@ const chartOptions: ChartProps = {
       columnWidth: '30%'
     }
   },
-  series: [
-    {
-      data: [10, 13, 20, 28, 25, 4]
-    }
-  ],
   xaxis: {
     categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
     axisBorder: {
@@ -100,9 +100,29 @@ const chartOptions: ChartProps = {
 // =============================|| WIDGET - MONTHLY PERFORMANCE CHART ||============================== //
 
 export default function MonthlyPerformanceChart() {
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
+
+  const [series] = useState([
+    {
+      data: [10, 13, 20, 28, 25, 4]
+    }
+  ]);
+
+  const [options, setOptions] = useState<ChartProps>(monthlyPerformanceChartOptions);
+
+  useEffect(() => {
+    setOptions({
+      ...monthlyPerformanceChartOptions,
+      chart: { ...monthlyPerformanceChartOptions.chart, fontFamily: fontFamily },
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
+    });
+  }, [fontFamily, resolvedTheme]);
+
   return (
     <MainCard title="Statistics">
-      <ReactApexChart options={chartOptions} series={chartOptions.series} type="bar" height={260} />
+      <ReactApexChart options={options} series={series} type="bar" height={260} />
     </MainCard>
   );
 }

@@ -61,6 +61,7 @@ export default function LatestSignupList() {
         </Stack>
       }
       className="table-card"
+      bodyClassName="p-0"
     >
       <Table hover responsive className="mb-0">
         <thead>

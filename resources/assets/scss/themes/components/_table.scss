@@ -1,6 +1,7 @@
 // ============================
 //   17. Table css start
 // ============================
+@use 'sass:color';
 
 .table {
   &.table-align-center {
@@ -25,7 +26,7 @@
 }
 
 .table-hover tbody tr:hover {
-  background-color: transparentize($primary, 0.97);
+  background-color: #{color.adjust($primary, $alpha: -0.97)};
 }
 
 .affiliate-table {

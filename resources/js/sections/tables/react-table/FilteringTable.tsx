@@ -1,8 +1,6 @@
 import { useMemo, useState } from 'react';
 
 // react-bootstrap
-import Badge from 'react-bootstrap/Badge';
-import Stack from 'react-bootstrap/Stack';
 import Table from 'react-bootstrap/Table';
 
 // third-party
@@ -21,57 +19,57 @@ import {
   SortingFn,
   sortingFns
 } from '@tanstack/react-table';
+import { LabelKeyObject } from 'react-csv/lib/core';
 import { compareItems, rankItem, RankingInfo } from '@tanstack/match-sorter-utils';
 
 // project-imports
-import DebouncedInput from '@/components/third-party/react-table/DebouncedInput';
-import EmptyTable from '@/components/third-party/react-table/EmptyTable';
-import Filter from '@/components/third-party/react-table/Filter';
 import LinearWithLabel from '@/components/@extended/progress/LinearWithLabel';
-import SortingData from '@/components/third-party/react-table/SortingData';
 import MainCard from '@/components/MainCard';
 import makeData from '@/data/react-table';
+import { CSVExport, EmptyTable, Filter, StatusPill } from '@/components/third-party/react-table';
 
 // types
 import { TableDataProps } from '@/types/table';
 
-interface LabelKeyObject {
-  label: string;
-  key: string;
-}
-
 export const fuzzyFilter: FilterFn<TableDataProps> = (row, columnId, value, addMeta) => {
+  // rank the item
   const itemRank = rankItem(row.getValue(columnId), value);
+
+  // store the ranking info
   addMeta(itemRank);
+
+  // return if the item should be filtered in/out
   return itemRank.passed;
 };
 
 export const fuzzySort: SortingFn<TableDataProps> = (rowA, rowB, columnId) => {
   let dir = 0;
+
+  // only sort by rank if the column has ranking information
   if (rowA.columnFiltersMeta[columnId]) {
     dir = compareItems(rowA.columnFiltersMeta[columnId]! as RankingInfo, rowB.columnFiltersMeta[columnId]! as RankingInfo);
   }
+
+  // provide an alphanumeric fallback for when the item ranks are equal
   return dir === 0 ? sortingFns.alphanumeric(rowA, rowB, columnId) : dir;
 };
 
 interface ReactTableProps {
   columns: ColumnDef<TableDataProps>[];
   data: TableDataProps[];
+  title: string;
 }
 
 // ==============================|| REACT TABLE ||============================== //
 
-function ReactTable({ columns, data }: ReactTableProps) {
+function ReactTable({ columns, data, title }: ReactTableProps) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState('');
 
   const table = useReactTable({
     data,
     columns,
-    state: {
-      columnFilters,
-      globalFilter
-    },
+    state: { columnFilters, globalFilter },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
@@ -82,109 +80,102 @@ function ReactTable({ columns, data }: ReactTableProps) {
     globalFilterFn: fuzzyFilter
   });
 
-  let headers: LabelKeyObject[] = [];
-  table.getAllColumns().map((column) => {
-    const accessorKey = column.columnDef;
-
-    headers.push({
-      label: typeof column.columnDef.header === 'string' ? column.columnDef.header : '#',
-      key: typeof accessorKey === 'string' ? accessorKey : 'unknown'
-    });
-  });
+  const headers: LabelKeyObject[] = useMemo(
+    () =>
+      table.getAllColumns().map((col) => ({
+        label: typeof col.columnDef.header === 'string' ? col.columnDef.header : '#',
+        key: (col.columnDef as any).accessorKey ?? col.id
+      })),
+    [table]
+  );
 
   return (
-    <MainCard title="Filtering Table" className="table-card" bodyClassName="pb-0">
-      <Stack direction="horizontal" className="justify-content-between align-items-center flex-wrap p-4" gap={2}>
-        <SortingData getState={table.getState} setPageSize={table.setPageSize} />
-        <div className="datatable-search">
-          <DebouncedInput value={globalFilter ?? ''} onFilterChange={(value) => setGlobalFilter(String(value))} />
-        </div>
-      </Stack>
-      <div className="table-responsive">
-        <Table hover className="mb-0 border-top">
-          <thead>
-            {table.getHeaderGroups().map((headerGroup: HeaderGroup<any>) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <th key={header.id} {...header.column.columnDef.meta}>
-                    {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <thead>
-            {table.getHeaderGroups().map((headerGroup: HeaderGroup<any>) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <td key={header.id} {...header.column.columnDef.meta}>
-                    {header.column.getCanFilter() && <Filter column={header.column} table={table} />}
+    <MainCard
+      title={title}
+      secondary={<CSVExport {...{ data: table.getRowModel().rows.map((d) => d.original), headers, filename: 'filtering.csv' }} />}
+      className="table-card"
+      bodyClassName="pb-0"
+    >
+      {/* Table */}
+      <Table hover responsive className="mb-0 border-top">
+        <thead>
+          {table.getHeaderGroups().map((headerGroup: HeaderGroup<TableDataProps>) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <th key={header.id} {...(header.column.columnDef.meta ?? {})}>
+                  {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+
+        <thead>
+          {table.getHeaderGroups().map((headerGroup: HeaderGroup<any>) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <td key={header.id} {...header.column.columnDef.meta}>
+                  {header.column.getCanFilter() && <Filter column={header.column} table={table} />}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </thead>
+
+        <tbody>
+          {table.getRowModel().rows.length > 0 ? (
+            table.getRowModel().rows.map((row) => (
+              <tr key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <td key={cell.id} {...cell.column.columnDef.meta}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
               </tr>
-            ))}
-          </thead>
-          <tbody>
-            {table.getRowModel().rows.length > 0 ? (
-              table.getRowModel().rows.map((row) => (
-                <tr key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id} {...cell.column.columnDef.meta}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </td>
-                  ))}
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={table.getAllColumns().length}>
-                  <EmptyTable msg="No Data" themeMode="light" />
-                </td>
-              </tr>
-            )}
-          </tbody>
-          <tfoot className="footer-bg">
-            {table.getFooterGroups().map((footerGroup) => (
-              <tr key={footerGroup.id}>
-                {footerGroup.headers.map((footer) => {
-                  return (
-                    <td key={footer.id} {...footer.column.columnDef.meta}>
-                      {footer.isPlaceholder ? null : flexRender(footer.column.columnDef.header, footer.getContext())}
-                    </td>
-                  );
-                })}
-              </tr>
-            ))}
-          </tfoot>
-        </Table>
-      </div>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={table.getAllColumns().length}>
+                <EmptyTable msg="No Data" themeMode="light" />
+              </td>
+            </tr>
+          )}
+        </tbody>
+
+        <tfoot className="footer-bg">
+          {table.getFooterGroups().map((footerGroup) => (
+            <tr key={footerGroup.id}>
+              {footerGroup.headers.map((footer) => {
+                return (
+                  <td key={footer.id} {...footer.column.columnDef.meta}>
+                    {footer.isPlaceholder ? null : flexRender(footer.column.columnDef.header, footer.getContext())}
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tfoot>
+      </Table>
     </MainCard>
   );
 }
 
 // ==============================|| FILTERING TABLE ||============================== //
 
-export default function FilteringTable() {
-  const data: TableDataProps[] = useMemo(() => makeData(50), []);
+export default function FilteringTable({ title }: { title: string }) {
+  const data: TableDataProps[] = useMemo(() => makeData(10), []);
 
   const columns = useMemo<ColumnDef<TableDataProps>[]>(
     () => [
-      {
-        header: 'Name',
-        footer: 'Name',
-        accessorKey: 'fullName'
-      },
-      {
-        header: 'Email',
-        footer: 'Email',
-        accessorKey: 'email'
-      },
+      { header: 'Name', footer: 'Name', accessorKey: 'fullName', meta: { className: 'text-nowrap' } },
+      { header: 'Email', footer: 'Email', accessorKey: 'email' },
       {
         header: 'Role',
         footer: 'Role',
         accessorKey: 'role',
         filterFn: fuzzyFilter,
-        sortingFn: fuzzySort
+        sortingFn: fuzzySort,
+        meta: { className: 'text-nowrap' }
       },
       {
         header: 'Age',
@@ -202,36 +193,16 @@ export default function FilteringTable() {
           className: 'text-end'
         }
       },
-      {
-        header: 'Status',
-        accessorKey: 'status',
-        cell: (cell) => {
-          const status = cell.getValue() as string;
-          let variant;
-          switch (status) {
-            case 'Complicated':
-              variant = 'light-danger';
-              break;
-            case 'Relationship':
-              variant = 'light-success';
-              break;
-            case 'Single':
-            default:
-              variant = 'light-info';
-              break;
-          }
-          return <Badge bg={variant}>{status}</Badge>;
-        }
-      },
+      { header: 'Status', footer: 'Status', accessorKey: 'status', cell: (cell) => <StatusPill status={cell.getValue() as string} /> },
       {
         header: 'Profile Progress',
         footer: 'Profile Progress',
         accessorKey: 'progress',
-        cell: (props) => <LinearWithLabel value={props.getValue() as number} />
+        cell: ({ getValue }) => <LinearWithLabel value={getValue<number>()} />
       }
     ],
     []
   );
 
-  return <ReactTable {...{ data, columns }} />;
+  return <ReactTable {...{ data, columns, title }} />;
 }

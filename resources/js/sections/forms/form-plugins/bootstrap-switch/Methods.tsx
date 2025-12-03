@@ -14,19 +14,32 @@ import MainCard from '@/components/MainCard';
 
 export default function Methods() {
   const [isChecked, setIsChecked] = useState(false);
-  const handleOn = () => setIsChecked(true);
-  const handleOff = () => setIsChecked(false);
-  const handleToggle = () => setIsChecked((prevState) => !prevState);
+
+  const handleInitialize = () => {
+    setIsChecked(false);
+  };
 
   const handleDestroy = () => {
     setIsChecked(false);
   };
 
+  const handleOn = () => setIsChecked(true);
+  const handleOff = () => setIsChecked(false);
+  const handleToggle = () => setIsChecked((prev) => !prev);
+
+  const actions = [
+    { method: 'initialize', handler: handleInitialize, label: 'Initialize', desc: 'Initializes the switch-button with options' },
+    { method: 'destroy', handler: handleDestroy, label: 'Destroy', desc: 'Destroys the switch-button (disable + reset)' },
+    { method: 'on', handler: handleOn, label: 'On', desc: "Sets the switch-button to 'On' state" },
+    { method: 'off', handler: handleOff, label: 'Off', desc: "Sets the switch-button to 'Off' state" },
+    { method: 'toggle', handler: handleToggle, label: 'Toggle', desc: 'Toggles the state of the switch-button' }
+  ];
+
   return (
     <MainCard
       title="Methods"
       subheader="Methods can be used to control a switch button directly."
-      secondary={<BootstrapSwitchButton onlabel="On" offlabel="Off" checked={isChecked} onChange={() => setIsChecked(!isChecked)} />}
+      secondary={<BootstrapSwitchButton onlabel="On" offlabel="Off" checked={isChecked} onChange={() => setIsChecked((prev) => !prev)} />}
       className="table-card"
     >
       <Table responsive className="switch-table mb-0">
@@ -37,79 +50,20 @@ export default function Methods() {
             <th>Description</th>
           </tr>
         </thead>
-
         <tbody>
-          <tr>
-            <td>
-              <em>initialize</em>
-            </td>
-            <td>
-              <Button variant="outline-secondary" size="sm">
-                Initialize
-              </Button>
-            </td>
-            <td>Initializes the switch-button with options</td>
-          </tr>
-
-          <tr>
-            <td>
-              <em>destroy</em>
-            </td>
-            <td>
-              <Button variant="outline-secondary" size="sm" onClick={handleDestroy}>
-                Destroy
-              </Button>
-            </td>
-            <td>Destroys the switch-button</td>
-          </tr>
-
-          <tr>
-            <td>
-              <em>on</em>
-            </td>
-            <td>
-              <Button variant="outline-secondary" size="sm" onClick={handleOn}>
-                On
-              </Button>
-            </td>
-            <td>Sets the switch-button to 'On' state</td>
-          </tr>
-
-          <tr>
-            <td>
-              <em>off</em>
-            </td>
-            <td>
-              <Button variant="outline-secondary" size="sm" onClick={handleOff}>
-                Off
-              </Button>
-            </td>
-            <td>Sets the switch-button to 'Off' state</td>
-          </tr>
-
-          <tr>
-            <td>
-              <em>toggle</em>
-            </td>
-            <td>
-              <Button variant="outline-secondary" size="sm" onClick={handleToggle}>
-                Toggle
-              </Button>
-            </td>
-            <td>Toggles the state of the switch-button</td>
-          </tr>
-
-          <tr>
-            <td>
-              <em>disable </em>
-            </td>
-            <td>
-              <Button variant="outline-secondary" size="sm">
-                Disable
-              </Button>
-            </td>
-            <td>Disables the switch-button</td>
-          </tr>
+          {actions.map(({ method, handler, label, desc }) => (
+            <tr key={method}>
+              <td>
+                <em>{method}</em>
+              </td>
+              <td>
+                <Button variant="outline-secondary" size="sm" onClick={handler}>
+                  {label}
+                </Button>
+              </td>
+              <td>{desc}</td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </MainCard>

@@ -1,7 +1,6 @@
 // react-bootstrap
 import ListGroup from 'react-bootstrap/ListGroup';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import Stack from 'react-bootstrap/Stack';
 
 // project-imports
 import MainCard from '@/components/MainCard';
@@ -22,26 +21,20 @@ export default function AttachedFiles() {
       <ListGroup variant="flush">
         {files.map((file, index) => (
           <ListGroup.Item key={index} className="d-flex justify-content-between align-items-center">
-            <div>
-              <Row className="align-items-center">
-                <Col xs="auto" className="pr-0">
-                  <i className={`far ${file.icon} f-28 ${file.color}`} />
-                </Col>
-                <div className="col">
-                  <a href="#!">
-                    <span className="h6 d-block mb-1">{file.name}</span>
-                  </a>
-                  <small className="text-muted d-block">
-                    Size: {file.size} | Added by: {file.addedBy}
-                  </small>
-                </div>
-              </Row>
-            </div>
-            <div>
-              <a href="#!" className="link-secondary">
-                <i className="ph ph-cloud-arrow-down f-26"></i>
-              </a>
-            </div>
+            <Stack className="align-items-center" direction="horizontal" gap={1}>
+              <i className={`far ${file.icon} f-28 ${file.color}`} />
+              <div>
+                <a href="#!">
+                  <h6 className="mb-1">{file.name}</h6>
+                </a>
+                <small className="text-muted d-block">
+                  Size: {file.size} | Added by: {file.addedBy}
+                </small>
+              </div>
+            </Stack>
+            <a href="#!" className="link-secondary" aria-label={`Download ${file.name}`}>
+              <i className="ph ph-cloud-arrow-down f-16"></i>
+            </a>
           </ListGroup.Item>
         ))}
       </ListGroup>

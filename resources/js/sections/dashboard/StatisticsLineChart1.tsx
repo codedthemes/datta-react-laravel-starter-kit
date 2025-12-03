@@ -1,15 +1,20 @@
+import { useEffect, useState } from 'react';
+
 // third-party
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // project-imports
 import MainCard from '@/components/MainCard';
+import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 interface StatisticsLineChart1Props {
   height?: number;
 }
 
 // chart-options
-const chartOptions: ChartProps = {
+const stationLineChart1Options = {
   chart: {
     type: 'line',
     height: 300,
@@ -32,11 +37,6 @@ const chartOptions: ChartProps = {
       columnWidth: '30%'
     }
   },
-  series: [
-    {
-      data: [45, 30, 55]
-    }
-  ],
   xaxis: {
     categories: ['2019', '2020', '2021'],
     axisBorder: {
@@ -112,9 +112,29 @@ const chartOptions: ChartProps = {
 // =============================|| ANALYTICS - STATISTICS LINE CHART - 1 ||============================== //
 
 export default function StatisticsLineChart1({ height = 300 }: StatisticsLineChart1Props) {
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
+
+  const [series] = useState([
+    {
+      data: [45, 30, 55]
+    }
+  ]);
+
+  const [options, setOptions] = useState<ChartProps>(stationLineChart1Options);
+
+  useEffect(() => {
+    setOptions({
+      ...stationLineChart1Options,
+      chart: { ...stationLineChart1Options.chart, fontFamily: fontFamily },
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
+    });
+  }, [fontFamily, resolvedTheme]);
+
   return (
     <MainCard headerClassName="border-0" title={<p className="mb-0 text-white">Statistics</p>} className="bg-primary">
-      <ReactApexChart options={chartOptions} series={chartOptions.series} type="line" height={height} />
+      <ReactApexChart options={options} series={series} type="line" height={height} />
     </MainCard>
   );
 }

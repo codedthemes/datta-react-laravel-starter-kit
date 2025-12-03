@@ -20,7 +20,6 @@ export default function TimePicker() {
             <Form.Label className="mb-0">Simple Input</Form.Label>
           </Col>
           <Col lg={4} md={9} sm={12}>
-            {/* @ts-ignore */}
             <Flatpickr
               options={{
                 enableTime: true,
@@ -39,7 +38,6 @@ export default function TimePicker() {
           </Col>
           <Col lg={4} md={9} sm={12}>
             <InputGroup>
-              {/* @ts-ignore */}
               <Flatpickr
                 options={{
                   enableTime: true,
@@ -61,7 +59,6 @@ export default function TimePicker() {
             <Form.Label className="mb-0">24 Hours</Form.Label>
           </Col>
           <Col lg={4} md={9} sm={12}>
-            {/* @ts-ignore */}
             <Flatpickr
               options={{
                 enableTime: true,
@@ -80,7 +77,6 @@ export default function TimePicker() {
             <Form.Label className="mb-0">Time Picker w/ Limits</Form.Label>
           </Col>
           <Col lg={4} md={9} sm={12}>
-            {/* @ts-ignore */}
             <Flatpickr
               options={{
                 enableTime: true,
@@ -100,7 +96,6 @@ export default function TimePicker() {
             <Form.Label className="mb-0">Preloading Time</Form.Label>
           </Col>
           <Col lg={4} md={9} sm={12}>
-            {/* @ts-ignore */}
             <Flatpickr
               options={{
                 enableTime: true,

@@ -1,6 +1,8 @@
 /**  =====================
   36. Customizer css start
 ==========================  **/
+@use 'sass:map';
+
 // main framework
 .pct-c-btn {
   display: block;
@@ -49,6 +51,7 @@
     transform: rotate(360deg);
   }
 }
+
 .pct-tabs {
   background: rgba(var(--bs-primary-rgb), 0.06);
   border-top: 1px solid var(--bs-border-color);
@@ -92,7 +95,7 @@
   transition: transform 0.45s cubic-bezier(0.37, 0.24, 0.53, 0.99);
   box-shadow: 8px 0 14px rgba(27, 46, 94, 0.4);
 
-  ~ .offcanvas-backdrop {
+  ~.offcanvas-backdrop {
     opacity: 0.2;
   }
 
@@ -109,7 +112,7 @@
   .list-group-item {
     padding: 20px 0;
 
-    > div > .pct-content,
+    >div>.pct-content,
     a.btn {
       padding: var(--bs-list-group-item-padding-y) var(--bs-list-group-item-padding-x);
     }
@@ -146,7 +149,7 @@
   position: relative;
   padding: 0;
 
-  > a {
+  >a {
     position: relative;
     border-radius: 3px;
     display: inline-flex;
@@ -210,33 +213,37 @@
     $i: 1;
 
     @each $name, $value in $preset-colors {
-      > a {
+      >a {
         &[data-value='preset-#{$i}'] {
-          background: map-get($value, 'primary');
+          background: map.get($value, 'primary');
         }
       }
 
       $i: $i + 1;
     }
   }
+
   &.navbar-img {
-    > a {
+    >a {
       width: 45px;
       height: 100px;
       background-position: center;
       background-size: cover;
     }
   }
+
   &.drp-menu-link-icon,
   &.drp-menu-icon {
-    > a {
+    >a {
       width: 45px;
       height: 45px;
       border: 2px solid var(--bs-border-color);
+
       i {
         transform: scale(1);
         color: var(--bs-body-color);
       }
+
       &.active {
         flex: none;
         border-color: var(--bs-primary);
@@ -272,14 +279,14 @@
   }
 }
 
-// [data-pc-layout='horizontal'] {
-//   .pc-rtl {
-//     display: none;
-//   }
-// }
+[data-pc-layout='horizontal'] {
+  .pc-rtl {
+    display: none;
+  }
+}
 
 .auth-main {
-  ~ .pct-offcanvas {
+  ~.pct-offcanvas {
     .pc-boxcontainer {
       display: none;
     }

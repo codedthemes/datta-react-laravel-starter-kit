@@ -1,5 +1,4 @@
 // react-bootstrap
-import Badge from 'react-bootstrap/Badge';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -12,31 +11,41 @@ import { PatternFormat } from 'react-number-format';
 // project-imports
 import MainCard from '@/components/MainCard';
 import { getImageUrl, ImagePath } from '@/utils/getImageUrl';
+import { StatusPill } from '@/components/third-party/react-table';
 
-// ==============================|| EXPANDING - EXPANDING USER DETAILS ||============================== //
+// types
+import { TableDataProps } from '@/types/table';
 
-export default function ExpandingUserDetail({ data }: any) {
+interface ExpandingUserDetailProps {
+  data: TableDataProps;
+}
+
+// ==============================|| EXPANDING TABLE - USER DETAILS ||============================== //
+
+export default function ExpandingUserDetail({ data }: ExpandingUserDetailProps) {
   return (
     <Row className="g-3 custom-padding pt-3">
-      <Col xs={12} sm={5} md={4} xl={3.5}>
-        <MainCard>
-          <Badge bg="light-secondary" className="position-absolute top-0 end-0 rounded-0">
-            {data.status}
-          </Badge>
+      <Col xs={12} sm={5} md={4}>
+        <MainCard bodyClassName="p-4">
+          <div className="position-absolute top-0 end-0 rounded-0">
+            <StatusPill status={data.status} />
+          </div>
           <Col xs={12}>
-            <Stack className="align-items-center p-4 pb-0">
+            <Stack className="align-items-center" gap={4}>
               <Image
                 src={getImageUrl(`avatar-${data.avatar}.png`, ImagePath.USER)}
                 alt="User Avatar"
                 className="rounded-circle avatar avatar-l"
               />
-              <h5 className="mt-3 f-w-600">
-                {data.firstName} {data.lastName}
-              </h5>
-              <p>{data.role}</p>
+              <Stack className="align-items-center" gap={1}>
+                <h5 className="m-0 f-w-600">
+                  {data.firstName} {data.lastName}
+                </h5>
+                <p className="m-0">{data.role}</p>
+              </Stack>
             </Stack>
           </Col>
-          <hr />
+          <hr className="my-4" />
           <Col xs={12}>
             <Stack direction="horizontal" className="justify-content-space-around align-items-center">
               <Stack className="align-items-center" gap={0.5}>
@@ -53,12 +62,12 @@ export default function ExpandingUserDetail({ data }: any) {
               </Stack>
             </Stack>
           </Col>
-          <hr />
+          <hr className="my-4" />
           <Col xs={12}>
             <Stack gap={2} className="px-3">
               <Stack direction="horizontal" className="justify-content-between" gap={2}>
                 <Stack direction="horizontal">
-                  <i className="ti ti-mail me-2" />
+                  <i className="ti ti-mail me-2 f-18" />
                   <span className="text-muted">Email</span>
                 </Stack>
                 <Stack direction="horizontal" className="justify-content-between d-inline-block text-truncate">
@@ -67,7 +76,7 @@ export default function ExpandingUserDetail({ data }: any) {
               </Stack>
               <Stack direction="horizontal" className="justify-content-between">
                 <Stack direction="horizontal">
-                  <i className="ti ti-phone me-2" />
+                  <i className="ti ti-phone me-2 f-18" />
                   <span className="text-muted">Phone</span>
                 </Stack>
                 <Stack direction="horizontal" className="d-inline-block text-truncate">
@@ -76,7 +85,7 @@ export default function ExpandingUserDetail({ data }: any) {
               </Stack>
               <Stack direction="horizontal" className="justify-content-between">
                 <Stack direction="horizontal">
-                  <i className="ti ti-map-pin me-2" />
+                  <i className="ti ti-map-pin me-2 f-18" />
                   <span className="text-muted">Location</span>
                 </Stack>
                 <Stack direction="horizontal" className="d-inline-block text-truncate">
@@ -85,7 +94,7 @@ export default function ExpandingUserDetail({ data }: any) {
               </Stack>
               <Stack direction="horizontal" gap={2} className="justify-content-between">
                 <Stack direction="horizontal">
-                  <i className="ti ti-world me-2" />
+                  <i className="ti ti-world me-2 f-18" />
                   <span className="text-muted">Portfolio</span>
                 </Stack>
                 <Stack direction="horizontal" className="d-inline-block text-truncate">

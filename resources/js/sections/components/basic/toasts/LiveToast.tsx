@@ -7,7 +7,7 @@ import Toast from 'react-bootstrap/Toast';
 
 // project-imports
 import MainCard from '@/components/MainCard';
-import branding from '../../../../../branding.json';
+import branding from '@/../branding.json';
 
 // ==============================|| TOAST - LIVE TOAST ||============================== //
 

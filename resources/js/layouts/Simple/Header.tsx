@@ -1,7 +1,6 @@
 import { type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import { useCallback, useEffect, useRef } from 'react';
-// import { Link } from 'react-router-dom';
 
 // react-bootstrap
 import Button from 'react-bootstrap/Button';

@@ -1,14 +1,18 @@
 // ============================
 //     Dark css start
 // ============================
+@use 'sass:color';
+@use 'sass:map';
+
 & {
+  color-scheme: dark;
   // body
   --bs-body-bg: #{$dark-layout-color};
   --bs-body-bg-rgb: #{to-rgb($dark-layout-color)};
   --pc-heading-color: rgba(255, 255, 255, 0.8);
 
   // Navbar
-  --pc-sidebar-background: #{lighten($dark-layout-color, 4%)};
+  --pc-sidebar-background: #{color.adjust($dark-layout-color, $lightness: 4%)};
   --pc-sidebar-color: rgba(255, 255, 255, 0.7);
   --pc-sidebar-shadow: none;
   --pc-sidebar-color-rgb: #{to-rgb(#ffffff)};
@@ -21,21 +25,21 @@
   --pc-header-background: rgba(#{var(--bs-body-bg-rgb)}, 0.7);
   --pc-header-color: #6f747f;
   --pc-header-shadow: none;
-  --pc-active-background: #{lighten($dark-layout-color, 3%)};
+  --pc-active-background: #{color.adjust($dark-layout-color, $lightness: 3%)};
 
   // card
   --pc-card-box-shadow: 0 0px 2px 0 rgba(69, 90, 100, 0.5);
 
   // horizontal menu
-  // --pc-header-submenu-background: #{lighten($dark-layout-color, 10%)};
-  // --pc-header-submenu-color: var(--bs-body-color);
+  --pc-header-submenu-background: #{color.adjust($dark-layout-color, $lightness: 10%)};
+  --pc-header-submenu-color: var(--bs-body-color);
 
   --bs-heading-color: #fafafa;
   --bs-body-color: #bfbfbf;
   --bs-body-color-rgb: to-rgb(#bfbfbf);
-  --bs-border-color: #{lighten($dark-layout-color, 15%)};
+  --bs-border-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
 
-  --ck-color-image-caption-background: #{lighten($dark-layout-color, 4%)};
+  --ck-color-image-caption-background: #{color.adjust($dark-layout-color, $lightness: 4%)};
   --ck-color-image-caption-text: #bfbfbf;
 }
 
@@ -44,8 +48,9 @@
 }
 
 .card {
-  --bs-card-bg: #{lighten($dark-layout-color, 4%)};
-  --bs-card-border-color: #{lighten($dark-layout-color, 10%)};
+  --bs-card-bg: #{color.adjust($dark-layout-color, $lightness: 4%)};
+  --bs-card-border-color: #{color.adjust($dark-layout-color, $lightness: 10%)};
+
   &[class*='bg-'] {
     --bs-card-border-color: rgba(255, 255, 255, 0.5);
   }
@@ -57,27 +62,28 @@
 .offcanvas-lg,
 .offcanvas-md,
 .offcanvas-sm {
-  --bs-offcanvas-bg: #{lighten($dark-layout-color, 3%)};
+  --bs-offcanvas-bg: #{color.adjust($dark-layout-color, $lightness: 3%)};
 }
 
 .list-group {
   --bs-list-group-bg: transparent;
-  --bs-list-group-border-color: #{lighten($dark-layout-color, 7%)};
-  --bs-list-group-disabled-bg: #{lighten($dark-layout-color, 2%)};
-  --bs-list-group-action-hover-bg: #{lighten($dark-layout-color, 5%)};
+  --bs-list-group-action-color: var(--pc-heading-color);
+  --bs-list-group-border-color: #{color.adjust($dark-layout-color, $lightness: 7%)};
+  --bs-list-group-disabled-bg: #{color.adjust($dark-layout-color, $lightness: 2%)};
+  --bs-list-group-action-hover-bg: #{color.adjust($dark-layout-color, $lightness: 5%)};
   --bs-list-group-action-hover-color: var(--bs-body-color);
-  --bs-list-group-action-active-bg: #{lighten($dark-layout-color, 5%)};
+  --bs-list-group-action-active-bg: #{color.adjust($dark-layout-color, $lightness: 5%)};
   --bs-list-group-action-active-color: var(--bs-body-color);
 }
 
 .preset-btn {
-  --bs-gray-300: #{lighten($dark-layout-color, 5%)};
+  --bs-gray-300: #{color.adjust($dark-layout-color, $lightness: 5%)};
 }
 
 .progress,
 .progress-stacked {
-  --bs-progress-bg: #{lighten($dark-layout-color, 5%)};
-  background: #{lighten($dark-layout-color, 5%)};
+  --bs-progress-bg: #{color.adjust($dark-layout-color, $lightness: 5%)};
+  background: #{color.adjust($dark-layout-color, $lightness: 5%)};
 }
 
 .btn:not(.btn-light) {
@@ -92,25 +98,25 @@
 }
 
 .pct-c-btn {
-  background: lighten($dark-layout-color, 5%);
-  border-color: lighten($dark-layout-color, 5%);
+  background: #{color.adjust($dark-layout-color, $lightness: 5%)};
+  border-color: #{color.adjust($dark-layout-color, $lightness: 5%)};
 }
 
 .dropdown-menu {
   --bs-dropdown-color: var(--bs-body-color);
   --bs-dropdown-link-color: var(--bs-body-color);
-  --bs-dropdown-bg: #{lighten($dark-layout-color, 10%)};
-  --bs-dropdown-link-hover-bg: #{lighten($dark-layout-color, 3%)};
+  --bs-dropdown-bg: #{color.adjust($dark-layout-color, $lightness: 10%)};
+  --bs-dropdown-link-hover-bg: #{color.adjust($dark-layout-color, $lightness: 3%)};
 }
 
 .pagination {
-  --bs-pagination-bg: #{lighten($dark-layout-color, 3%)};
-  --bs-pagination-border-color: #{lighten($dark-layout-color, 7%)};
-  --bs-pagination-hover-bg: #{lighten($dark-layout-color, 6%)};
-  --bs-pagination-hover-border-color: #{lighten($dark-layout-color, 7%)};
-  --bs-pagination-focus-bg: #{lighten($dark-layout-color, 6%)};
-  --bs-pagination-disabled-bg: #{lighten($dark-layout-color, 1%)};
-  --bs-pagination-disabled-border-color: #{lighten($dark-layout-color, 7%)};
+  --bs-pagination-bg: #{color.adjust($dark-layout-color, $lightness: 3%)};
+  --bs-pagination-border-color: #{color.adjust($dark-layout-color, $lightness: 7%)};
+  --bs-pagination-hover-bg: #{color.adjust($dark-layout-color, $lightness: 6%)};
+  --bs-pagination-hover-border-color: #{color.adjust($dark-layout-color, $lightness: 7%)};
+  --bs-pagination-focus-bg: #{color.adjust($dark-layout-color, $lightness: 6%)};
+  --bs-pagination-disabled-bg: #{color.adjust($dark-layout-color, $lightness: 1%)};
+  --bs-pagination-disabled-border-color: #{color.adjust($dark-layout-color, $lightness: 7%)};
 }
 
 .accordion-item {
@@ -120,8 +126,10 @@
   --bs-accordion-btn-color: var(--bs-body-color);
   --bs-accordion-active-bg: rgba(var(--bs-primary-rgb), 0.2);
   --bs-accordion-btn-icon: #{escape-svg(
-      url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$gray-300}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>")
-    )};
+ url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$gray-300}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>"))
+}
+
+;
 }
 
 .navbar.navbar-light .navbar-nav {
@@ -143,19 +151,20 @@
 
   &.btn-close-white {
     filter: none;
+    background-color: #000;
   }
 }
 
 .modal {
-  --bs-modal-bg: #{lighten($dark-layout-color, 4%)};
-  --bs-modal-header-border-color: #{lighten($dark-layout-color, 7%)};
-  --bs-modal-footer-border-color: #{lighten($dark-layout-color, 7%)};
+  --bs-modal-bg: #{color.adjust($dark-layout-color, $lightness: 4%)};
+  --bs-modal-header-border-color: #{color.adjust($dark-layout-color, $lightness: 7%)};
+  --bs-modal-footer-border-color: #{color.adjust($dark-layout-color, $lightness: 7%)};
 }
 
 .toast {
-  --bs-toast-bg: #{lighten($dark-layout-color, 4%)};
+  --bs-toast-bg: #{color.adjust($dark-layout-color, $lightness: 4%)};
   --bs-toast-color: var(--bs-body-color);
-  --bs-toast-header-bg: #{lighten($dark-layout-color, 6%)};
+  --bs-toast-header-bg: #{color.adjust($dark-layout-color, $lightness: 6%)};
   --bs-toast-header-color: var(--bs-heading-color);
 }
 
@@ -165,9 +174,9 @@
   }
 
   li.vtree-leaf a.vtree-leaf-label:hover,
-  li.vtree-leaf.vtree-selected > a.vtree-leaf-label {
-    background-color: lighten($dark-layout-color, 8%);
-    outline-color: lighten($dark-layout-color, 8%);
+  li.vtree-leaf.vtree-selected>a.vtree-leaf-label {
+    background-color: #{color.adjust($dark-layout-color, $lightness: 8%)};
+    outline-color: #{color.adjust($dark-layout-color, $lightness: 8%)};
   }
 }
 
@@ -176,11 +185,11 @@
 .datatable-input,
 .form-select,
 .form-control {
-  background-color: #{lighten($dark-layout-color, 10%)};
+  background-color: #{color.adjust($dark-layout-color, $lightness: 10%)};
   color: var(--bs-body-color);
 
   &:not(:focus) {
-    border-color: #{lighten($dark-layout-color, 15%)};
+    border-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
   }
 
   &.is-valid {
@@ -198,20 +207,20 @@
 
 .form-check-input:not(:checked),
 .input-group-text {
-  background-color: #{lighten($dark-layout-color, 10%)};
+  background-color: #{color.adjust($dark-layout-color, $lightness: 10%)};
   color: var(--bs-body-color);
-  border-color: #{lighten($dark-layout-color, 15%)};
+  border-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
 }
 
 .form-control {
   &::file-selector-button {
-    background-color: #{lighten($dark-layout-color, 10%)};
+    background-color: #{color.adjust($dark-layout-color, $lightness: 10%)};
     color: var(--bs-body-color);
-    border-color: #{lighten($dark-layout-color, 15%)};
+    border-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
   }
 
   &:hover:not(:disabled):not([readonly])::file-selector-button {
-    background-color: #{lighten($dark-layout-color, 7%)};
+    background-color: #{color.adjust($dark-layout-color, $lightness: 7%)};
   }
 }
 
@@ -220,17 +229,15 @@ select.custom-select,
 select.datatable-selector,
 select.datatable-input,
 .form-select:not([multiple]) {
-  background-color: #{lighten($dark-layout-color, 10%)};
-  background-image: escape-svg(
-    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#6f747f' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/></svg>")
-  );
+  background-color: #{color.adjust($dark-layout-color, $lightness: 10%)};
+  background-image: escape-svg(url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#6f747f' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/></svg>"));
   background-repeat: no-repeat;
   background-size: $form-select-bg-size;
 }
 
 .form-range {
   &::-webkit-slider-runnable-track {
-    background-color: #{lighten($dark-layout-color, 10%)};
+    background-color: #{color.adjust($dark-layout-color, $lightness: 10%)};
   }
 }
 
@@ -259,17 +266,17 @@ select.datatable-input,
 @each $color, $value in $theme-colors {
   .alert-#{$color} {
     color: $value;
-    background: transparentize($value, 0.8);
-    border-color: transparentize($value, 0.8);
+    background: #{color.adjust($value, $alpha: -0.8)};
+    border-color: #{color.adjust($value, $alpha: -0.8)};
 
     .alert-link {
       color: $value;
     }
 
-    @if ($color == 'dark') {
+    @if ($color =='dark') {
       color: var(--bs-body-color);
-      background-color: #{lighten($dark-layout-color, 10%)};
-      border-color: #{lighten($dark-layout-color, 15%)};
+      background-color: #{color.adjust($dark-layout-color, $lightness: 10%)};
+      border-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
 
       .alert-link {
         color: var(--bs-body-color);
@@ -277,38 +284,51 @@ select.datatable-input,
     }
   }
 
+  .img-thumbnail.bg-white {
+    background: var(--bs-body-bg) !important;
+  }
+
+  .user-card {
+    .user-about-block {
+       img {
+        background: var(--bs-card-bg);
+       }
+    }
+  }
+
   .badge.bg-light-#{$color} {
-    background: transparentize($value, 0.8);
+    background: #{color.adjust($value, $alpha: -0.8)};
     color: $value;
-    border-color: transparentize($value, 0.8);
+    border-color: #{color.adjust($value, $alpha: -0.8)};
   }
 
   .icon-svg-#{$color} {
-    fill: transparentize($value, 0.8);
+    fill: #{color.adjust($value, $alpha: -0.8)};
     stroke: $value;
   }
 
   .bg-light-#{$color} {
-    background: transparentize($value, 0.8);
+    background: #{color.adjust($value, $alpha: -0.8)};
   }
 
   .btn-light-#{$color}:not(:hover) {
-    background: transparentize($value, 0.8) !important;
-    border-color: transparentize($value, 0.8);
+    background: #{color.adjust($value, $alpha: -0.8)} !important;
+    border-color: #{color.adjust($value, $alpha: -0.8)};
 
-    @if ($color == 'dark') {
+    @if ($color =='dark') {
       color: var(--bs-body-color);
     }
   }
 
   .btn-link-#{$color} {
+
     &:not(:disabled):not(.disabled).active,
     &:not(:disabled):not(.disabled):active,
     &:active,
     &:focus,
     &:hover {
-      background: transparentize($value, 0.8);
-      border-color: transparentize($value, 0.8);
+      background: #{color.adjust($value, $alpha: -0.8)};
+      border-color: #{color.adjust($value, $alpha: -0.8)};
     }
   }
 
@@ -316,22 +336,18 @@ select.datatable-input,
     .form-check-input {
       &.input-light-#{$color} {
         &:checked {
-          border-color: transparentize($value, 0.8);
-          background-color: transparentize($value, 0.8);
+          border-color: #{color.adjust($value, $alpha: -0.8)};
+          background-color: #{color.adjust($value, $alpha: -0.8)};
 
-          @if ($color == 'dark') {
-            border-color: transparentize($white, 0.8);
+          @if ($color =='dark') {
+            border-color: #{color.adjust($white, $alpha: -0.8)};
 
             &[type='checkbox'] {
-              background-image: escape-svg(
-                url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='#{$white}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/></svg>")
-              );
+              background-image: escape-svg(url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='#{$white}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/></svg>"));
             }
 
             &[type='radio'] {
-              background-image: escape-svg(
-                url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='2' fill='#{$white}'/></svg>")
-              );
+              background-image: escape-svg(url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='2' fill='#{$white}'/></svg>"));
             }
           }
         }
@@ -349,13 +365,13 @@ select.datatable-input,
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23ffffff'/%3e%3c/svg%3e");
 }
 
-.form-floating > .form-control:focus ~ label::after,
-.form-floating > .custom-select:focus ~ label::after,
-.form-floating > .form-control:not(:placeholder-shown) ~ label::after,
-.form-floating > .custom-select:not(:placeholder-shown) ~ label::after,
-.form-floating > .form-control-plaintext ~ label::after,
-.form-floating > .form-select ~ label::after {
-  background: #{lighten($dark-layout-color, 10%)};
+.form-floating>.form-control:focus~label::after,
+.form-floating>.custom-select:focus~label::after,
+.form-floating>.form-control:not(:placeholder-shown)~label::after,
+.form-floating>.custom-select:not(:placeholder-shown)~label::after,
+.form-floating>.form-control-plaintext~label::after,
+.form-floating>.form-select~label::after {
+  background: #{color.adjust($dark-layout-color, $lightness: 10%)};
 }
 
 @each $name, $value in $preset-colors {
@@ -364,82 +380,82 @@ select.datatable-input,
       .form-check-input {
         &.input-light-primary {
           &:checked {
-            border-color: transparentize(map-get($value, 'primary'), 0.8);
-            background-color: transparentize(map-get($value, 'primary'), 0.8);
+            border-color: #{color.adjust(map.get($value, 'primary'), $alpha: -0.8)};
+            background-color: #{color.adjust(map.get($value, 'primary'), $alpha: -0.8)};
           }
         }
       }
     }
 
     .btn-light-primary {
-      background: transparentize(map-get($value, 'primary'), 0.8);
-      color: map-get($value, 'primary');
-      border-color: transparentize(map-get($value, 'primary'), 0.8);
+      background: #{color.adjust(map.get($value, 'primary'), $alpha: -0.8)};
+      color: map.get($value, 'primary');
+      border-color: #{color.adjust(map.get($value, 'primary'), $alpha: -0.8)};
 
       &:hover {
-        background: map-get($value, 'primary');
+        background: map.get($value, 'primary');
         color: #fff;
-        border-color: map-get($value, 'primary');
+        border-color: map.get($value, 'primary');
       }
 
       &.focus,
       &:focus {
-        background: map-get($value, 'primary');
+        background: map.get($value, 'primary');
         color: #fff;
-        border-color: map-get($value, 'primary');
+        border-color: map.get($value, 'primary');
       }
 
       &:not(:disabled):not(.disabled).active,
       &:not(:disabled):not(.disabled):active,
-      .show > &.dropdown-toggle {
-        background: map-get($value, 'primary');
+      .show>&.dropdown-toggle {
+        background: map.get($value, 'primary');
         color: #fff;
-        border-color: map-get($value, 'primary');
+        border-color: map.get($value, 'primary');
       }
     }
 
     .btn-check:active,
     .btn-check:checked {
-      + .btn-light-primary {
-        background: map-get($value, 'primary') !important;
+      +.btn-light-primary {
+        background: map.get($value, 'primary') !important;
         color: #fff;
-        border-color: map-get($value, 'primary');
+        border-color: map.get($value, 'primary');
       }
     }
 
     .btn-link-primary {
       background: transparent;
-      color: map-get($value, 'primary');
+      color: map.get($value, 'primary');
       border-color: transparent;
 
       &:hover {
-        background: transparentize(map-get($value, 'primary'), 0.8);
-        color: map-get($value, 'primary');
-        border-color: transparentize(map-get($value, 'primary'), 0.8);
+        background: #{color.adjust(map.get($value, 'primary'), $alpha: -0.8)};
+        color: map.get($value, 'primary');
+        border-color: #{color.adjust(map.get($value, 'primary'), $alpha: -0.8)};
       }
 
       &.focus,
       &:focus {
-        background: transparentize(map-get($value, 'primary'), 0.8);
-        color: map-get($value, 'primary');
-        border-color: transparentize(map-get($value, 'primary'), 0.8);
+        background: #{color.adjust(map.get($value, 'primary'), $alpha: -0.8)};
+        color: map.get($value, 'primary');
+        border-color: #{color.adjust(map.get($value, 'primary'), $alpha: -0.8)};
       }
 
       &:not(:disabled):not(.disabled).active,
       &:not(:disabled):not(.disabled):active,
-      .show > &.dropdown-toggle {
-        background: transparentize(map-get($value, 'primary'), 0.8);
-        color: map-get($value, 'primary');
-        border-color: transparentize(map-get($value, 'primary'), 0.8);
+      .show>&.dropdown-toggle {
+        background: #{color.adjust(map.get($value, 'primary'), $alpha: -0.8)};
+        color: map.get($value, 'primary');
+        border-color: #{color.adjust(map.get($value, 'primary'), $alpha: -0.8)};
       }
     }
 
     .btn-check:active,
     .btn-check:checked {
-      + .btn-link-primary {
-        background: transparentize(map-get($value, 'primary'), 0.8);
-        color: map-get($value, 'primary');
-        border-color: transparentize(map-get($value, 'primary'), 0.8);
+      +.btn-link-primary {
+        background: #{color.adjust(map.get($value, 'primary'), $alpha: -0.8)};
+        color: map.get($value, 'primary');
+        border-color: #{color.adjust(map.get($value, 'primary'), $alpha: -0.8)};
       }
     }
   }
@@ -447,7 +463,7 @@ select.datatable-input,
 
 .card {
   .card-body code {
-    background: #{lighten($dark-layout-color, 10%)};
+    background: #{color.adjust($dark-layout-color, $lightness: 10%)};
   }
 
   .bg-light:not(.badge) {
@@ -467,10 +483,11 @@ select.datatable-input,
 .notifier,
 .datepicker-footer,
 .datepicker-picker {
-  background-color: #{lighten($dark-layout-color, 5%)};
+  background-color: #{color.adjust($dark-layout-color, $lightness: 5%)};
 }
 
 .datepicker-cell {
+
   &.focused:not(.selected),
   &:not(.disabled):hover {
     background: var(--bs-primary);
@@ -481,7 +498,7 @@ select.datatable-input,
   }
 
   &.range {
-    background: #{lighten($dark-layout-color, 5%)};
+    background: #{color.adjust($dark-layout-color, $lightness: 5%)};
   }
 }
 
@@ -532,11 +549,13 @@ select.datatable-input,
   }
 
   .flatpickr-current-month {
+
     .flatpickr-monthDropdown-months,
     .flatpickr-monthDropdown-months .flatpickr-monthDropdown-month {
       background: var(--bs-body-bg);
       color: var(--bs-body-color);
     }
+
     .flatpickr-monthDropdown-months .flatpickr-monthDropdown-month {
       border-color: var(--bs-border-color);
     }
@@ -583,11 +602,10 @@ select.datatable-input,
     &:focus,
     &.prevMonthDay:focus,
     &.nextMonthDay:focus {
-      background: #{lighten($dark-layout-color, 15%)};
-      border-color: #{lighten($dark-layout-color, 15%)};
-      box-shadow:
-        -5px 0 0 #{lighten($dark-layout-color, 15%)},
-        5px 0 0 #{lighten($dark-layout-color, 15%)};
+      background: #{color.adjust($dark-layout-color, $lightness: 15%)};
+      border-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
+      box-shadow: -5px 0 0 #{color.adjust($dark-layout-color, $lightness: 15%)},
+      5px 0 0 #{color.adjust($dark-layout-color, $lightness: 15%)};
     }
   }
 
@@ -607,6 +625,7 @@ select.datatable-input,
 }
 
 .flatpickr-time {
+
   input,
   .flatpickr-am-pm,
   .flatpickr-time-separator {
@@ -615,7 +634,7 @@ select.datatable-input,
 
     &:focus,
     &:hover {
-      background: #{lighten($dark-layout-color, 15%)};
+      background: #{color.adjust($dark-layout-color, $lightness: 15%)};
     }
   }
 
@@ -658,6 +677,7 @@ select.datatable-input,
 }
 
 .choices.is-disabled {
+
   .choices__inner,
   .choices__input {
     background: transparent;
@@ -690,13 +710,13 @@ select.datatable-input,
   color: var(--bs-body-color);
 }
 
-.typeahead > ul {
+.typeahead>ul {
   background: var(--bs-body-bg);
 }
 
 .ql-container.ql-snow,
 .ql-toolbar.ql-snow {
-  border-color: #{lighten($dark-layout-color, 15%)};
+  border-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
 }
 
 .ql-snow {
@@ -712,44 +732,44 @@ select.datatable-input,
 .ck {
   --ck-color-base-background: var(--bs-body-bg);
   --ck-color-toolbar-background: var(--bs-body-bg);
-  --ck-color-base-border: #{lighten($dark-layout-color, 15%)};
-  --ck-color-toolbar-border: #{lighten($dark-layout-color, 15%)};
+  --ck-color-base-border: #{color.adjust($dark-layout-color, $lightness: 15%)};
+  --ck-color-toolbar-border: #{color.adjust($dark-layout-color, $lightness: 15%)};
   --ck-color-dropdown-panel-border: rgba(0, 0, 0, 0.5);
   --ck-color-button-default-background: transparent;
   --ck-color-text: var(--bs-body-color);
   --ck-color-list-background: var(--bs-body-bg);
-  --ck-color-button-default-hover-background: #{lighten($dark-layout-color, 15%)};
-  --ck-color-button-default-active-background: #{lighten($dark-layout-color, 15%)};
-  --ck-color-button-on-active-background: #{lighten($dark-layout-color, 15%)};
-  --ck-color-button-on-background: #{lighten($dark-layout-color, 15%)};
-  --ck-color-button-on-hover-background: #{lighten($dark-layout-color, 15%)};
-  --ck-color-list-button-hover-background: #{lighten($dark-layout-color, 15%)};
+  --ck-color-button-default-hover-background: #{color.adjust($dark-layout-color, $lightness: 15%)};
+  --ck-color-button-default-active-background: #{color.adjust($dark-layout-color, $lightness: 15%)};
+  --ck-color-button-on-active-background: #{color.adjust($dark-layout-color, $lightness: 15%)};
+  --ck-color-button-on-background: #{color.adjust($dark-layout-color, $lightness: 15%)};
+  --ck-color-button-on-hover-background: #{color.adjust($dark-layout-color, $lightness: 15%)};
+  --ck-color-list-button-hover-background: #{color.adjust($dark-layout-color, $lightness: 15%)};
   --ck-color-dropdown-panel-background: var(--bs-body-bg);
   --ck-color-input-background: var(--bs-body-bg);
   --ck-color-panel-background: var(--bs-body-bg);
-  --ck-color-panel-border: #{lighten($dark-layout-color, 15%)};
+  --ck-color-panel-border: #{color.adjust($dark-layout-color, $lightness: 15%)};
 
   &.ck-editor__editable.ck-editor__editable_inline {
     background: var(--bs-body-bg) !important;
-    border-color: #{lighten($dark-layout-color, 15%)};
+    border-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
   }
 }
 
 #cke5-inline-demo .ck-content {
-  border-color: #{lighten($dark-layout-color, 15%)};
+  border-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
 }
 
 .editor-toolbar,
 .CodeMirror {
   background: var(--bs-body-bg);
   color: var(--bs-body-color);
-  border-color: #{lighten($dark-layout-color, 15%)};
+  border-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
 }
 
 .editor-toolbar {
   i.separator {
-    border-left-color: #{lighten($dark-layout-color, 15%)};
-    border-right-color: #{lighten($dark-layout-color, 15%)};
+    border-left-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
+    border-right-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
   }
 
   a {
@@ -757,24 +777,24 @@ select.datatable-input,
 
     &.active,
     &:hover {
-      background: #{lighten($dark-layout-color, 15%)};
-      border-color: #{lighten($dark-layout-color, 15%)};
+      background: #{color.adjust($dark-layout-color, $lightness: 15%)};
+      border-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
     }
   }
 }
 
 .dropzone {
-  background: #{lighten($dark-layout-color, 15%)};
+  background: #{color.adjust($dark-layout-color, $lightness: 15%)};
 }
 
 .uppy-Dashboard-inner,
 .uppy-DragDrop-container {
-  background: #{lighten($dark-layout-color, 15%)};
-  border-color: #{lighten($dark-layout-color, 15%)};
+  background: #{color.adjust($dark-layout-color, $lightness: 15%)};
+  border-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
 }
 
 .uppy-DashboardTab-btn:hover {
-  background: #{lighten($dark-layout-color, 15%)};
+  background: #{color.adjust($dark-layout-color, $lightness: 15%)};
 }
 
 .uppy-DashboardTab-btn,
@@ -783,14 +803,24 @@ select.datatable-input,
 }
 
 [data-uppy-drag-drop-supported='true'] .uppy-Dashboard-AddFiles {
-  border-color: #{lighten($dark-layout-color, 15%)};
+  border-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
 }
 
 .uppy-StatusBar,
 .uppy-DashboardContent-bar {
   border: none;
   color: var(--bs-body-color);
-  background: #{lighten($dark-layout-color, 15%)};
+  background: #{color.adjust($dark-layout-color, $lightness: 15%)};
+}
+
+.footer-bg {
+  tr {
+    td {
+      color: var(--bs-body-color);
+      background: #{color.adjust($dark-layout-color, $lightness: 15%)};
+      border-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
+    }
+  }
 }
 
 .datatable-table,
@@ -799,7 +829,7 @@ select.datatable-input,
   --bs-table-striped-color: var(--bs-body-color);
   --bs-table-active-color: var(--bs-body-color);
   --bs-table-hover-color: var(--bs-body-color);
-  --bs-table-border-color: #{lighten($dark-layout-color, 15%)};
+  --bs-table-border-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
 
   &.text-white {
     --bs-table-color: #fff;
@@ -807,31 +837,31 @@ select.datatable-input,
 
   thead th {
     color: var(--bs-body-color);
-    background: #{lighten($dark-layout-color, 15%)};
-    border-color: #{lighten($dark-layout-color, 15%)};
+    background: #{color.adjust($dark-layout-color, $lightness: 15%)};
+    border-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
   }
 
-  > :not(:last-child) > :last-child > *,
+  > :not(:last-child)> :last-child>*,
   td,
   th {
-    border-color: #{lighten($dark-layout-color, 15%)};
+    border-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
   }
 
   &[class*='bg-'] {
-    > :not(caption) > * > * {
+    > :not(caption)>*>* {
       color: #fff;
     }
   }
 
   &::not([class*='bg-']) {
-    > :not(caption) > * > * {
+    > :not(caption)>*>* {
       background-color: transparent;
       color: var(--bs-body-color);
     }
   }
 }
 
-.table-striped > tbody > tr:nth-of-type(odd) > * {
+.table-striped>tbody>tr:nth-of-type(odd)>* {
   --bs-table-accent-bg: transparent;
 }
 
@@ -840,7 +870,7 @@ select.datatable-input,
     color: var(--bs-body-color);
 
     &:hover {
-      background: #{lighten($dark-layout-color, 15%)};
+      background: #{color.adjust($dark-layout-color, $lightness: 15%)};
     }
   }
 
@@ -867,10 +897,10 @@ select.datatable-input,
   }
 }
 
-table.dataTable tbody tr > .dtfc-fixed-left,
-table.dataTable tbody tr > .dtfc-fixed-right,
-div.dataTables_scrollBody > table > tbody tr:first-child th,
-div.dataTables_scrollBody > table > tbody tr:first-child td,
+table.dataTable tbody tr>.dtfc-fixed-left,
+table.dataTable tbody tr>.dtfc-fixed-right,
+div.dataTables_scrollBody>table>tbody tr:first-child th,
+div.dataTables_scrollBody>table>tbody tr:first-child td,
 .datatable-table.dataTable[class*='table-'] thead th,
 .table.dataTable[class*='table-'] thead th,
 table.datatable.fixedHeader-floating,
@@ -881,23 +911,24 @@ table.DTFC_Cloned tr {
   background: var(--bs-body-bg);
 }
 
-table.dataTable thead tr > .dtfc-fixed-left,
-table.dataTable thead tr > .dtfc-fixed-right,
-table.dataTable tfoot tr > .dtfc-fixed-left,
-table.dataTable tfoot tr > .dtfc-fixed-right,
+table.dataTable thead tr>.dtfc-fixed-left,
+table.dataTable thead tr>.dtfc-fixed-right,
+table.dataTable tfoot tr>.dtfc-fixed-left,
+table.dataTable tfoot tr>.dtfc-fixed-right,
 .table.datatable[class*='table-'] thead th {
-  background: #{lighten($dark-layout-color, 15%)};
+  background: #{color.adjust($dark-layout-color, $lightness: 15%)};
 }
 
-.table-bordered > :not(caption) > * {
+.table-bordered> :not(caption)>* {
   border-width: 0px;
 }
 
-table.datatable > tbody > tr.child ul.dtr-details > li {
-  border-bottom-color: #{lighten($dark-layout-color, 15%)};
+table.datatable>tbody>tr.child ul.dtr-details>li {
+  border-bottom-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
 }
 
 .datatable-pagination {
+
   a,
   button {
     background-color: transparent;
@@ -905,8 +936,10 @@ table.datatable > tbody > tr.child ul.dtr-details > li {
 }
 
 .datatable-pagination .datatable-active {
+
   a,
   button {
+
     &,
     &:focus,
     &:hover {
@@ -915,89 +948,100 @@ table.datatable > tbody > tr.child ul.dtr-details > li {
   }
 }
 
-.apexcharts-legend-text {
-  color: var(--bs-body-color) !important;
-}
+// .apexcharts-legend-text {
+//   color: var(--bs-body-color) !important;
+// }
 
-text {
-  fill: rgba(255, 255, 255, 0.8) !important;
-}
+// text {
+//   fill: rgba(255, 255, 255, 0.8) !important;
+// }
 
-.apexcharts-datalabels,
-.apexcharts-data-labels {
-  text {
-    fill: #fff !important;
-  }
-}
+// .apexcharts-datalabels,
+// .apexcharts-data-labels {
+//   text {
+//     fill: #fff !important;
+//   }
+// }
 
-.apexcharts-radialbar-hollow {
-  fill: #{lighten($dark-layout-color, 4%)};
-}
+// .apexcharts-radialbar-hollow {
+//   fill: #{color.adjust($dark-layout-color, $lightness: 4%)};
+// }
 
-.apexcharts-canvas line {
-  stroke: transparent !important;
-}
-.apexcharts-menu {
-  background: var(--bs-body-bg);
-  border-color: #{lighten($dark-layout-color, 15%)};
-}
-.apexcharts-theme-light {
-  .apexcharts-menu-item {
-    &:hover {
-      background: var(--bs-card-bg);
-    }
-  }
-  .apexcharts-menu-icon:hover svg,
-  .apexcharts-reset-icon:hover svg,
-  .apexcharts-selection-icon:not(.apexcharts-selected):hover svg,
-  .apexcharts-zoom-icon:not(.apexcharts-selected):hover svg,
-  .apexcharts-zoomin-icon:hover svg,
-  .apexcharts-zoomout-icon:hover svg {
-    fill: var(--bs-body-color);
-  }
-}
-.apexcharts-tooltip.apexcharts-theme-light {
-  background: var(--bs-body-bg);
-  border-color: #{lighten($dark-layout-color, 15%)};
+// .apexcharts-canvas line {
+//   stroke: transparent !important;
+// }
+// .apexcharts-menu {
+//   background: var(--bs-body-bg);
+//   border-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
+// }
+// .apexcharts-theme-light {
+//   .apexcharts-menu-item {
+//     &:hover {
+//       background: var(--bs-card-bg);
+//     }
+//   }
+//   .apexcharts-menu-icon:hover svg,
+//   .apexcharts-reset-icon:hover svg,
+//   .apexcharts-selection-icon:not(.apexcharts-selected):hover svg,
+//   .apexcharts-zoom-icon:not(.apexcharts-selected):hover svg,
+//   .apexcharts-zoomin-icon:hover svg,
+//   .apexcharts-zoomout-icon:hover svg {
+//     fill: var(--bs-body-color);
+//   }
+// }
+// .apexcharts-tooltip.apexcharts-theme-light {
+//   background: var(--bs-body-bg);
+//   border-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
 
-  .apexcharts-tooltip-title {
-    background: var(--bs-body-bg);
-    border-bottom-color: #{lighten($dark-layout-color, 15%)};
-  }
-}
-.apexcharts-xaxistooltip,
-.apexcharts-yaxistooltip {
-  background: var(--bs-body-bg);
-  border-color: #{lighten($dark-layout-color, 15%)};
-  color: var(--bs-body-color);
-}
-.apexcharts-xaxistooltip-bottom {
-  &::after,
-  &::before {
-    border-bottom-color: var(--bs-body-bg);
-  }
-}
+//   .apexcharts-tooltip-title {
+//     background: var(--bs-body-bg);
+//     border-bottom-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
+//   }
+// }
+// .apexcharts-xaxistooltip,
+// .apexcharts-yaxistooltip {
+//   background: var(--bs-body-bg);
+//   border-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
+//   color: var(--bs-body-color);
+// }
+// .apexcharts-xaxistooltip-bottom {
+//   &::after,
+//   &::before {
+//     border-bottom-color: var(--bs-body-bg);
+//   }
+// }
 .fc .fc-list-sticky .fc-list-day>*,
 .fc .fc-scrollgrid-section-sticky>*,
 // .auth-main .auth-wrapper.v3,
 .auth-main .auth-wrapper.v2 .auth-form {
-  background: lighten($dark-layout-color, 4%);
+  background: #{color.adjust($dark-layout-color, $lightness: 4%)};
 }
 
 .table-bordered td,
 .table-bordered th,
 .table-bordered {
-  border-color: lighten($dark-layout-color, 15%);
+  border-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
 }
 
 .contact-form.bg-white {
-  background: lighten($dark-layout-color, 4%) !important;
+  background: #{color.adjust($dark-layout-color, $lightness: 4%)} !important;
+}
+
+.btn {
+  &.bg-white {
+    color: var(--bs-body-color);
+  }
+}
+
+.img-thumbnail {
+  background: var(--bs-body-bg);
+  border-color: #{color.adjust($dark-layout-color, $lightness: 15%)};
 }
 
 .fc-event {
   @each $color, $value in $theme-colors {
     &.event-#{$color} {
-      background: transparentize($value, 0.8) !important;
+      background: #{color.adjust($value, $alpha: -0.8)} !important;
       color: $value !important;
 
       &.fc-h-event {
@@ -1017,13 +1061,14 @@ text {
 
 .btns-gallery {
   .btn-light-primary {
+
     &:not(:hover),
     &:not(:focus),
     &:not(:active),
     &:not(.active) {
       background: transparent !important;
       border-color: transparent;
-      color: #{lighten($dark-layout-color, 30%)};
+      color: #{color.adjust($dark-layout-color, $lightness: 30%)};
     }
 
     &.active {
@@ -1034,11 +1079,12 @@ text {
 
 .jvm-container {
   path {
-    fill: #{lighten($dark-layout-color, 15%)};
+    fill: #{color.adjust($dark-layout-color, $lightness: 15%)};
   }
 }
 
 @each $color, $value in $theme-colors {
+
   // light color start
   .btn-light-#{$color} {
     &:hover {
@@ -1054,7 +1100,7 @@ text {
 
     &:not(:disabled):not(.disabled).active,
     &:not(:disabled):not(.disabled):active,
-    .show > &.dropdown-toggle {
+    .show>&.dropdown-toggle {
       background: $value;
       border-color: $value;
     }
@@ -1118,16 +1164,16 @@ div:where(.swal2-container) .swal2-range {
 }
 
 &.layout-2 {
-  --pc-sidebar-background: #{lighten($dark-layout-color, 10%)};
+  --pc-sidebar-background: #{color.adjust($dark-layout-color, $lightness: 10%)};
   --pc-sidebar-border: none;
   --pc-header-color: #fff;
 }
 
 .chat-sanders .received-chat .msg {
-  background: lighten($dark-layout-color, 8%);
+  background: #{color.adjust($dark-layout-color, $lightness: 8%)};
 
   &::after {
-    border-bottom-color: lighten($dark-layout-color, 8%);
+    border-bottom-color: #{color.adjust($dark-layout-color, $lightness: 8%)};
   }
 }
 
@@ -1138,11 +1184,11 @@ div:where(.swal2-container) .swal2-range {
 }
 
 .task-list:after {
-  background: #{lighten($dark-layout-color, 10%)};
+  background: #{color.adjust($dark-layout-color, $lightness: 10%)};
 }
 
 .list-pills.nav-pills .nav-link.active,
-.list-pills.nav-pills .show > .nav-link {
+.list-pills.nav-pills .show>.nav-link {
   border-color: rgba(#{var(--bs-primary-rgb)}, 0.1);
   background: rgba(#{var(--bs-primary-rgb)}, 0.1);
 }
@@ -1154,15 +1200,16 @@ div:where(.swal2-container) .swal2-range {
     }
 
     td {
-      background: #{lighten($dark-layout-color, 4%)};
+      background: #{color.adjust($dark-layout-color, $lightness: 4%)};
     }
   }
 }
 
 .task-card .task-list {
+
   &::before,
   &::after {
-    background: #{lighten($dark-layout-color, 10%)};
+    background: #{color.adjust($dark-layout-color, $lightness: 10%)};
   }
 }
 

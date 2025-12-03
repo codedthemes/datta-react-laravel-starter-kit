@@ -25,21 +25,12 @@ import {
 } from '@tanstack/react-table';
 
 // project-imports
-import HeaderSort from '@/sections/tables/react-table/sorting/HeaderSort';
+import { DebouncedInput, HeaderSort, SortingData, TablePagination } from '@/components/third-party/react-table';
 import MainCard from '@/components/MainCard';
-import DebouncedInput from '@/components/third-party/react-table/DebouncedInput';
-import TablePagination from '@/components/third-party/react-table/Pagination';
-import SortingData from '@/components/third-party/react-table/SortingData';
-
 import makeData from '@/data/react-table';
 
 // types
 import { TableDataProps } from '@/types/table';
-
-interface LabelKeyObject {
-  label: string;
-  key: string;
-}
 
 interface ReactTableProps {
   columns: ColumnDef<TableDataProps>[];
@@ -73,16 +64,6 @@ function ReactTable({ columns, data }: ReactTableProps) {
     onGlobalFilterChange: setGlobalFilter
   });
 
-  let headers: LabelKeyObject[] = [];
-  table.getAllColumns().map((column) => {
-    const accessorKey = column.columnDef;
-
-    headers.push({
-      label: typeof column.columnDef.header === 'string' ? column.columnDef.header : '#',
-      key: typeof accessorKey === 'string' ? accessorKey : 'unknown'
-    });
-  });
-
   return (
     <Row>
       <Col xs={12}>
@@ -97,12 +78,15 @@ function ReactTable({ columns, data }: ReactTableProps) {
           }
           className="table-card"
         >
-          <Stack direction="horizontal" className="justify-content-between p-4">
+          {/* toolbar */}
+          <Stack direction="horizontal" className="justify-content-between align-items-center p-4 flex-wrap gap-2">
             <SortingData getState={table.getState} setPageSize={table.setPageSize} />
             <div className="datatable-search">
               <DebouncedInput value={globalFilter ?? ''} onFilterChange={(value) => setGlobalFilter(String(value))} />
             </div>
           </Stack>
+
+          {/*  Table */}
           <Table hover responsive striped className="mb-0 border-top">
             <thead>
               {table.getHeaderGroups().map((headerGroup: HeaderGroup<any>) => (
@@ -122,12 +106,13 @@ function ReactTable({ columns, data }: ReactTableProps) {
                 </tr>
               ))}
             </thead>
+
             <tbody>
-              {table.getRowModel().rows.map((row) => (
-                <tr key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
+              {table.getRowModel().rows.map((row, index) => (
+                <tr key={index}>
+                  {row.getVisibleCells().map((cell, index) => (
                     <td
-                      key={cell.id}
+                      key={index}
                       {...cell.column.columnDef.meta}
                       className={`${(cell.column.columnDef.meta as ColumnMeta)?.className ?? ''}`}
                     >
@@ -138,6 +123,8 @@ function ReactTable({ columns, data }: ReactTableProps) {
               ))}
             </tbody>
           </Table>
+
+          {/* Table Pagination */}
           <TablePagination
             setPageSize={table.setPageSize}
             setPageIndex={table.setPageIndex}
@@ -149,7 +136,7 @@ function ReactTable({ columns, data }: ReactTableProps) {
         </MainCard>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title as="h6">
+            <Modal.Title as="h6" className="d-flex align-items-center">
               <i className="ph ph-user f-20 me-2 text-primary" />
               Add Customer
             </Modal.Title>

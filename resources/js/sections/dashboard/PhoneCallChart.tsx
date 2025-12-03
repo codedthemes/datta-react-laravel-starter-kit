@@ -1,11 +1,16 @@
+import { useEffect, useState } from 'react';
+
 // third-party
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // project-imports
 import MainCard from '@/components/MainCard';
+import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 // chart-options
-const chartOptions: ChartProps = {
+const phoneCallChartOptions = {
   chart: {
     sparkline: {
       enabled: true
@@ -70,10 +75,32 @@ const chartOptions: ChartProps = {
 // =============================|| CRM - PHONE CALL CHART ||============================== //
 
 export default function PhoneCallChart() {
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
+
+  const [series] = useState([
+    {
+      name: 'Series1',
+      data: [20, 25, 33, 28, 25, 35, 28]
+    }
+  ]);
+
+  const [options, setOptions] = useState<ChartProps>(phoneCallChartOptions);
+
+  useEffect(() => {
+    setOptions({
+      ...phoneCallChartOptions,
+      chart: { ...phoneCallChartOptions.chart, fontFamily: fontFamily },
+      colors: ['#1de9b6'],
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
+    });
+  }, [fontFamily, resolvedTheme]);
+
   return (
     <>
       <MainCard title="Phone Calls" bodyClassName="p-0">
-        <ReactApexChart options={chartOptions} series={chartOptions.series} type="area" height={355} />
+        <ReactApexChart options={options} series={series} type="area" height={355} />
       </MainCard>
     </>
   );

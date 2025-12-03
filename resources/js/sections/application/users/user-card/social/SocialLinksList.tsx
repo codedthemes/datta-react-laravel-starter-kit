@@ -22,7 +22,7 @@ export default function SocialLinksList({ isInline }: { isInline?: boolean }) {
     <ul className={`${isInline ? 'list-unstyled social-top-link' : 'list-inline mt-3'} f-20 mb-0`}>
       {socialLinks.map(({ platform, icon, color }) => (
         <li className={`${isInline ? 'list-item' : 'list-inline-item'}`} key={platform}>
-          <a className={`text-${platform}`}>
+          <a href="#!" className={`text-${platform}`}>
             <i className={`ti ${icon} ${color}`} />
           </a>
         </li>

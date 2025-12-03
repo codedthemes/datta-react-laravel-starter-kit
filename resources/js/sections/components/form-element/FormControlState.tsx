@@ -6,36 +6,40 @@ import Form from 'react-bootstrap/Form';
 // project-import
 import MainCard from '@/components/MainCard';
 
-// ============================|| FORM CONTROL STATE ||============================== //
+// ============================|| FORM ELEMENT - FORM CONTROL STATE ||============================== //
 
 export default function FormControlState() {
   return (
     <MainCard title="Form Control State">
       <Row className="g-4">
+        {/* Readonly example */}
         <Col md={6}>
           <h5>Readonly</h5>
           <hr />
 
-          <div className="mb-0">
-            <Form.Label className="col-sm-3 col-form-label">Email</Form.Label>
-            <Form.Control type="email" placeholder="Readonly input here…" value={'email@example.com'} readOnly />
-          </div>
+          <Form.Group as={Row} className="mb-0" controlId="readonlyEmail">
+            <Form.Label column sm={3}>
+              Email
+            </Form.Label>
+            <Col sm={9}>
+              <Form.Control type="email" value="email@example.com" placeholder="Readonly input here…" readOnly />
+            </Col>
+          </Form.Group>
         </Col>
 
+        {/* Readonly plaintext example */}
         <Col md={6}>
-          <h5>Readonly plain Text</h5>
+          <h5>Readonly plain text</h5>
           <hr />
 
-          <Form>
-            <Row>
-              <Col sm={3}>
-                <Form.Label className="col-form-label">Email</Form.Label>
-              </Col>
-              <Col sm={9}>
-                <Form.Control type="email" placeholder="Readonly input here…" value={'email@example.com'} readOnly plaintext />
-              </Col>
-            </Row>
-          </Form>
+          <Form.Group as={Row} className="mb-0" controlId="readonlyPlaintextEmail">
+            <Form.Label column sm={3}>
+              Email
+            </Form.Label>
+            <Col sm={9}>
+              <Form.Control type="email" value="email@example.com" placeholder="Readonly input here…" readOnly plaintext />
+            </Col>
+          </Form.Group>
         </Col>
       </Row>
     </MainCard>

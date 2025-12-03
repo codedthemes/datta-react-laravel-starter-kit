@@ -1,44 +1,91 @@
-import { useState, useRef, ReactNode } from 'react';
+import { useState, ReactNode } from 'react';
 
 // react-bootstrap
-import Badge from 'react-bootstrap/Badge';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
+import Image from 'react-bootstrap/Image';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Stack from 'react-bootstrap/Stack';
 import Tooltip from 'react-bootstrap/Tooltip';
 
 // Project imports
 import LinearWithLabel from '@/components/@extended/progress/LinearWithLabel';
+import StatusPill from './StatusPill';
+import { getImageUrl, ImagePath } from '@/utils/getImageUrl';
 
 // third-party
+import { UniqueIdentifier } from '@dnd-kit/core';
+import { useFormik } from 'formik';
 import { Row } from '@tanstack/react-table';
 import * as Yup from 'yup';
 
 interface EditRowProps<TData> {
   row: Row<TData>;
   onSave: (updatedData: Record<string, unknown>) => void;
+  groupedColumns?: string[];
 }
 
-function ShowStatus(value: string) {
-  const statusVariant =
-    {
-      Complicated: 'light-danger',
-      Relationship: 'light-success',
-      Single: 'light-primary'
-    }[value] || 'light-primary';
+const nonEditableFields: UniqueIdentifier[] = ['drag-handle', 'expander', 'select'];
 
-  return <Badge bg={statusVariant}>{value}</Badge>;
+function getYupSchemaForRow<TData>(row: Row<TData>) {
+  const shape: Record<string, any> = {};
+  const skipValidation = ['drag-handle', 'expander', 'select', 'actions'];
+  row.getVisibleCells().forEach((cell) => {
+    const columnId = cell.column.id;
+    if (skipValidation.includes(columnId)) {
+      return;
+    }
+    console.log('Generating validation for column:', columnId);
+    switch (columnId) {
+      case 'fullName':
+        shape[columnId] = Yup.string()
+          .test('trim', 'Name cannot be empty or contain only spaces', (value) => !!value && value.trim().length > 0)
+          .required('Name is required');
+        break;
+      case 'email':
+        shape[columnId] = Yup.string().email('Invalid email').required('Email is required');
+        break;
+      case 'age':
+        shape[columnId] = Yup.number()
+          .typeError('Age must be a number')
+          .required('Age is required')
+          .min(18, 'Minimum age is 18')
+          .max(65, 'Maximum age is 65');
+        break;
+      case 'visits':
+        shape[columnId] = Yup.number().typeError('Visits must be a number').required('Visits are required');
+        break;
+      case 'role':
+        shape[columnId] = Yup.string().required('Role is required');
+        break;
+      case 'contact':
+        shape[columnId] = Yup.string().required('Contact is required');
+        break;
+      case 'country':
+        shape[columnId] = Yup.string().required('Country is required');
+        break;
+      case 'status':
+        shape[columnId] = Yup.string().required('Status is required');
+        break;
+      case 'progress':
+        shape[columnId] = Yup.number().typeError('Progress must be a number').required('Progress is required');
+        break;
+      default:
+        // For any other fields, use a generic required message
+        shape[columnId] = Yup.string().required('This field is required');
+        break;
+    }
+  });
+  return Yup.object().shape(shape);
 }
 
 // ==============================|| REACT TABLE - EDIT ROW ||============================== //
 
-export default function EditRow<TData>({ row, onSave }: EditRowProps<TData>) {
+export default function EditRow<TData>({ row, onSave, groupedColumns }: EditRowProps<TData>) {
   const [isEditMode, setEditMode] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const initialEditData = useRef<Record<string, unknown>>(
-    row.getVisibleCells().reduce(
+  function getRowData<TData>(row: Row<TData>) {
+    return row.getVisibleCells().reduce(
       (acc, cell) => {
         if (cell.column.id !== 'Actions') {
           acc[cell.column.id] = cell.getValue();
@@ -46,74 +93,74 @@ export default function EditRow<TData>({ row, onSave }: EditRowProps<TData>) {
         return acc;
       },
       {} as Record<string, unknown>
-    )
-  );
+    );
+  }
 
-  const [editData, setEditData] = useState<Record<string, unknown>>(initialEditData.current);
+  const editableFields = row.getVisibleCells().filter((cell) => !nonEditableFields.includes(cell.column.id));
 
-  const validationSchemas: Record<string, Yup.Schema<any>> = {
-    email: Yup.string().email('Invalid email').required('Email is required'),
-    age: Yup.number().required('Age is required').min(18, 'Minimum age is 18').max(65, 'Maximum age is 65'),
-    visits: Yup.number().required('Visits are required').positive('Must be positive').integer('Must be an integer'),
-    fullName: Yup.string().required('Name is required'),
-    profile: Yup.number().required('Profile progress is required').min(0, 'Minimum progress is 0%').max(100, 'Maximum progress is 100%')
-  };
-
-  const handleValidate = async () => {
-    const newErrors: Record<string, string> = {};
-
-    for (const key in editData) {
-      const schema = validationSchemas[key];
-      if (schema) {
-        try {
-          await schema.validate(editData[key]);
-        } catch (error: any) {
-          newErrors[key] = error.message;
-        }
-      }
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSaveClick = async () => {
-    const isValid = await handleValidate();
-    if (isValid) {
-      onSave(editData);
+  const formik = useFormik({
+    initialValues: getRowData(row),
+    enableReinitialize: true,
+    validationSchema: getYupSchemaForRow(row),
+    onSubmit: (values, actions) => {
+      onSave(values);
       setEditMode(false);
+      actions.setSubmitting(false);
     }
-  };
+  });
 
-  const handleChange = (columnId: string, value: unknown) => {
-    setEditData((prev) => ({ ...prev, [columnId]: value }));
+  const { values, errors, handleChange } = formik;
+
+  const handleEditClick = () => {
+    formik.resetForm({ values: getRowData(row) });
+    setEditMode(true);
   };
 
   const handleCancelClick = () => {
-    setEditData(initialEditData.current);
-    setErrors({});
+    formik.resetForm({ values: getRowData(row) });
     setEditMode(false);
   };
 
+  const handleEditDataChange = (columnId: string, value: unknown) => {
+    formik.setFieldValue(columnId, value);
+  };
+
   return (
-    <tr>
-      {row.getVisibleCells().map((cell) => {
+    <>
+      {editableFields.map((cell) => {
+        const dataType = (cell.column.columnDef as any).dataType;
         const columnId = cell.column.id;
-        // @ts-expect-error: columnDef may not always have a `dataType` property
-        const dataType = cell.column.columnDef.dataType;
         const value = cell.getValue();
+
+        // Hide value in grouped columns for leaf rows
+        if (groupedColumns && groupedColumns.includes(columnId)) {
+          return null;
+        }
 
         let cellContent;
         switch (dataType) {
-          case 'text':
+          case 'avatar':
+            cellContent = <Image alt="Avatar" className="avatar avatar-xs" src={getImageUrl(`avatar-${value}.png`, ImagePath.USER)} />;
+            break;
           case 'number':
+          case 'text':
             cellContent = isEditMode ? (
               <>
                 <FormControl
                   type={dataType === 'number' ? 'number' : 'text'}
-                  value={editData[columnId] as string | number}
-                  onChange={(e) => handleChange(columnId, dataType === 'number' ? Number(e.target.value) : e.target.value)}
+                  value={values[columnId] as string | number}
+                  onChange={(e) => {
+                    handleChange(e);
+                    const val = e.target.value;
+                    handleEditDataChange(columnId, dataType === 'number' && val !== '' && !isNaN(Number(val)) ? Number(val) : val);
+                  }}
                   isInvalid={!!errors[columnId]}
+                  onBlur={(e) => {
+                    const trimmed = (e.target.value ?? '').trim();
+                    if (trimmed !== formik.values[columnId]) {
+                      formik.setFieldValue(columnId, trimmed, false);
+                    }
+                  }}
                 />
                 <Form.Control.Feedback className="invalid-feedback text-start" type="invalid">
                   {errors[columnId]}
@@ -123,11 +170,10 @@ export default function EditRow<TData>({ row, onSave }: EditRowProps<TData>) {
               value
             );
             break;
-
           case 'select':
             cellContent = isEditMode ? (
               <>
-                <Form.Select value={editData[columnId] as string} onChange={(e) => handleChange(columnId, e.target.value)}>
+                <Form.Select value={values[columnId] as string} onChange={(e) => handleEditDataChange(columnId, e.target.value)}>
                   <option value="Complicated">Complicated</option>
                   <option value="Relationship">Relationship</option>
                   <option value="Single">Single</option>
@@ -135,7 +181,7 @@ export default function EditRow<TData>({ row, onSave }: EditRowProps<TData>) {
                 <Form.Control.Feedback type="invalid">{errors[columnId]}</Form.Control.Feedback>
               </>
             ) : (
-              ShowStatus(value as string)
+              <StatusPill status={value as string} />
             );
             break;
 
@@ -144,8 +190,8 @@ export default function EditRow<TData>({ row, onSave }: EditRowProps<TData>) {
               <>
                 <FormControl
                   type="number"
-                  value={editData[columnId] as number}
-                  onChange={(e) => handleChange(columnId, Number(e.target.value))}
+                  value={values[columnId] as number}
+                  onChange={(e) => handleEditDataChange(columnId, e.target.value)}
                   isInvalid={!!errors[columnId]}
                 />
                 <Form.Control.Feedback type="invalid">{errors[columnId]}</Form.Control.Feedback>
@@ -164,14 +210,14 @@ export default function EditRow<TData>({ row, onSave }: EditRowProps<TData>) {
                   </a>
                 </OverlayTrigger>
                 <OverlayTrigger overlay={<Tooltip>Save</Tooltip>}>
-                  <a href="#" className="btn-link-success avatar avatar-xs mx-1" onClick={handleSaveClick}>
+                  <a href="#" className="btn-link-success avatar avatar-xs mx-1" onClick={() => formik.handleSubmit()}>
                     <i className="ti ti-check f-20" />
                   </a>
                 </OverlayTrigger>
               </Stack>
             ) : (
               <OverlayTrigger overlay={<Tooltip>Edit</Tooltip>}>
-                <a href="#" className="btn-link-primary avatar avatar-xs " onClick={() => setEditMode(true)}>
+                <a href="#" className="btn-link-primary avatar avatar-xs " onClick={handleEditClick}>
                   <i className="ti ti-ti ti-edit f-20" />
                 </a>
               </OverlayTrigger>
@@ -181,12 +227,13 @@ export default function EditRow<TData>({ row, onSave }: EditRowProps<TData>) {
           default:
             cellContent = value;
         }
+
         return (
           <td key={cell.id} {...cell.column.columnDef.meta}>
             {cellContent as ReactNode}
           </td>
         );
       })}
-    </tr>
+    </>
   );
 }

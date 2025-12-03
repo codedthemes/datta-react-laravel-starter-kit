@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
 
 // react-bootstrap
 import Col from 'react-bootstrap/Col';
@@ -11,12 +11,15 @@ import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // project-imports
 import MainCard from '@/components/MainCard';
+import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 // assets
 import Avater1 from '@assets/images/user/avatar-2.png';
 
 // chart-options
-const chartOptions: ChartProps = {
+const discussionActivityChartOptions = {
   chart: {
     toolbar: {
       show: false
@@ -58,15 +61,27 @@ const chartOptions: ChartProps = {
 // =============================|| WIDGET - DISCUSSION ACTIVITY CHART ||============================== //
 
 export default function DiscussionActivityChart() {
-  const series = useMemo(
-    () => [
-      {
-        name: 'Comments',
-        data: [30, 55, 80, 60, 100, 70]
-      }
-    ],
-    []
-  );
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
+
+  const [series] = useState([
+    {
+      name: 'Comments',
+      data: [30, 55, 80, 60, 100, 70]
+    }
+  ]);
+
+  const [options, setOptions] = useState<ChartProps>(discussionActivityChartOptions);
+
+  useEffect(() => {
+    setOptions({
+      ...discussionActivityChartOptions,
+      chart: { ...discussionActivityChartOptions.chart, fontFamily: fontFamily },
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
+    });
+  }, [fontFamily, resolvedTheme]);
+
   return (
     <MainCard
       headerClassName="border-bottom-0"
@@ -78,7 +93,7 @@ export default function DiscussionActivityChart() {
       }
       bodyClassName="p-0"
     >
-      <ReactApexChart options={chartOptions} series={series} type="area" height={200} />
+      <ReactApexChart options={options} series={series} type="area" height={200} />
       <div className="comment-bar p-4">
         <h6 className="text-uppercase text-muted">
           COMMENTERS<span className="text-uppercase float-end">view all</span>

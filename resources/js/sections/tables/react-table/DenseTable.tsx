@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react';
 
 // react-bootstrap
-import Badge from 'react-bootstrap/Badge';
 import Stack from 'react-bootstrap/Stack';
 import Table from 'react-bootstrap/Table';
 
@@ -15,32 +14,27 @@ import {
   getPaginationRowModel,
   getFilteredRowModel
 } from '@tanstack/react-table';
+import { LabelKeyObject } from 'react-csv/lib/core';
 
 // project-imports
 import MainCard from '@/components/MainCard';
 import LinearWithLabel from '@/components/@extended/progress/LinearWithLabel';
-import TablePagination from '@/components/third-party/react-table/Pagination';
-import SortingData from '@/components/third-party/react-table/SortingData';
-import DebouncedInput from '@/components/third-party/react-table/DebouncedInput';
 import makeData from '@/data/react-table';
+import { CSVExport, DebouncedInput, SortingData, StatusPill, TablePagination } from '@/components/third-party/react-table';
 
 // types
 import { TableDataProps } from '@/types/table';
 
-interface LabelKeyObject {
-  label: string;
-  key: string;
-}
-
 interface ReactTableProps {
   columns: ColumnDef<TableDataProps>[];
   data: TableDataProps[];
-  striped?: boolean;
+  dense?: boolean;
+  title?: string;
 }
 
 // ==============================|| REACT TABLE ||============================== //
 
-function ReactTable({ columns, data, striped }: ReactTableProps) {
+function ReactTable({ columns, data, dense, title }: ReactTableProps) {
   const [globalFilter, setGlobalFilter] = useState('');
 
   const table = useReactTable({
@@ -52,40 +46,44 @@ function ReactTable({ columns, data, striped }: ReactTableProps) {
     getPaginationRowModel: getPaginationRowModel()
   });
 
-  let headers: LabelKeyObject[] = [];
-  table.getAllColumns().map((columns) =>
-    headers.push({
-      label: typeof columns.columnDef.header === 'string' ? columns.columnDef.header : '#',
-      // @ts-ignore
-      key: columns.columnDef.accessorKey
-    })
+  const headers: LabelKeyObject[] = useMemo(
+    () =>
+      table.getAllColumns().map((col) => ({
+        label: typeof col.columnDef.header === 'string' ? col.columnDef.header : '#',
+        key: (col.columnDef as any).accessorKey ?? col.id
+      })),
+    [table]
   );
 
   return (
-    <MainCard title="Dense Table" className="table-card">
+    <MainCard title={title} secondary={<CSVExport {...{ data, headers, filename: 'dense.csv' }} />} className="table-card">
+      {/* Toolbar */}
       <Stack direction="horizontal" className="justify-content-between align-items-center p-4 flex-wrap gap-2">
         <SortingData getState={table.getState} setPageSize={table.setPageSize} />
         <div className="datatable-search">
           <DebouncedInput value={globalFilter ?? ''} onFilterChange={(value) => setGlobalFilter(String(value))} />
         </div>
       </Stack>
-      <Table hover responsive className="mb-0 border-top">
+
+      {/* Table */}
+      <Table hover responsive className={`mb-0 border-top ${dense && 'table-dense'}`}>
         <thead>
-          {table.getHeaderGroups().map((headerGroup: HeaderGroup<any>) => (
+          {table.getHeaderGroups().map((headerGroup: HeaderGroup<TableDataProps>) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id} {...header.column.columnDef.meta}>
+                <th key={header.id} {...(header.column.columnDef.meta ?? {})}>
                   {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                 </th>
               ))}
             </tr>
           ))}
         </thead>
-        <tbody {...(striped && { className: 'striped' })}>
+
+        <tbody>
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} {...cell.column.columnDef.meta}>
+                <td key={cell.id} {...(cell.column.columnDef.meta ?? {})}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
@@ -93,13 +91,15 @@ function ReactTable({ columns, data, striped }: ReactTableProps) {
           ))}
         </tbody>
       </Table>
+
+      {/* Pagination */}
       <TablePagination
         setPageSize={table.setPageSize}
         setPageIndex={table.setPageIndex}
         getState={table.getState}
         getPageCount={table.getPageCount}
         initialPageSize={10}
-        totalEntries={50}
+        totalEntries={data.length}
       />
     </MainCard>
   );
@@ -107,19 +107,13 @@ function ReactTable({ columns, data, striped }: ReactTableProps) {
 
 // ==============================|| DENSE TABLE ||============================== //
 
-export default function DenseTable({ striped, title }: { striped?: boolean; title?: string }) {
-  const data: TableDataProps[] = makeData(50);
+export default function DenseTable({ dense, title }: { dense?: boolean; title?: string }) {
+  const data: TableDataProps[] = makeData(20);
 
   const columns = useMemo<ColumnDef<TableDataProps>[]>(
     () => [
-      {
-        header: 'Name',
-        accessorKey: 'fullName'
-      },
-      {
-        header: 'Email',
-        accessorKey: 'email'
-      },
+      { header: 'Name', accessorKey: 'fullName', meta: { className: 'text-nowrap' } },
+      { header: 'Email', accessorKey: 'email' },
       {
         header: 'Age',
         accessorKey: 'age',
@@ -127,48 +121,23 @@ export default function DenseTable({ striped, title }: { striped?: boolean; titl
           className: 'text-end'
         }
       },
-      {
-        header: 'Role',
-        footer: 'Role',
-        accessorKey: 'role'
-      },
+      { header: 'Role', footer: 'Role', accessorKey: 'role' },
       {
         header: 'Visits',
-        footer: 'Visits',
         accessorKey: 'visits',
         meta: {
           className: 'text-end'
         }
       },
-      {
-        header: 'Status',
-        accessorKey: 'status',
-        cell: (cell) => {
-          const status = cell.getValue() as string;
-          let variant;
-          switch (status) {
-            case 'Complicated':
-              variant = 'light-danger';
-              break;
-            case 'Relationship':
-              variant = 'light-success';
-              break;
-            case 'Single':
-            default:
-              variant = 'light-info';
-              break;
-          }
-          return <Badge bg={variant}>{status}</Badge>;
-        }
-      },
+      { header: 'Status', accessorKey: 'status', cell: (cell) => <StatusPill status={cell.getValue() as string} /> },
       {
         header: 'Profile Progress',
         accessorKey: 'progress',
-        cell: (props) => <LinearWithLabel value={props.getValue() as number} />
+        cell: ({ getValue }) => <LinearWithLabel value={getValue<number>()} />
       }
     ],
     []
   );
 
-  return <ReactTable {...{ data, columns, title, striped }} />;
+  return <ReactTable {...{ data, columns, title, dense }} />;
 }

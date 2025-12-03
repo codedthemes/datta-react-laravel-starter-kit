@@ -1,44 +1,40 @@
 import { useEffect, useMemo, useState } from 'react';
 
 // react-bootstrap
-import Badge from 'react-bootstrap/Badge';
 import Image from 'react-bootstrap/Image';
 import Table from 'react-bootstrap/Table';
 import Stack from 'react-bootstrap/Stack';
 
 // third-party
-import {
-  flexRender,
-  useReactTable,
-  ColumnDef,
-  HeaderGroup,
-  getCoreRowModel,
-  getPaginationRowModel,
-  getFilteredRowModel
-} from '@tanstack/react-table';
+import { flexRender, useReactTable, ColumnDef, getCoreRowModel, getPaginationRowModel, getFilteredRowModel } from '@tanstack/react-table';
+import { LabelKeyObject } from 'react-csv/lib/core';
 
 // project-imports
 import MainCard from '@/components/MainCard';
 import LinearWithLabel from '@/components/@extended/progress/LinearWithLabel';
-import SelectColumnVisibility from '@/components/third-party/react-table/SelectColumnVisibility';
-import SortingData from '@/components/third-party/react-table/SortingData';
-import DebouncedInput from '@/components/third-party/react-table/DebouncedInput';
-import TablePagination from '@/components/third-party/react-table/Pagination';
-import { getImageUrl, ImagePath } from '@/utils/getImageUrl';
 import makeData from '@/data/react-table';
+import {
+  CSVExport,
+  DebouncedInput,
+  SortingData,
+  StatusPill,
+  TablePagination,
+  SelectColumnVisibility
+} from '@/components/third-party/react-table';
+import { getImageUrl, ImagePath } from '@/utils/getImageUrl';
 
 // types
 import { TableDataProps } from '@/types/table';
-import { LabelKeyObject } from 'react-csv/lib/core';
 
 interface ReactTableProps {
   columns: ColumnDef<TableDataProps>[];
   data: TableDataProps[];
+  title: string;
 }
 
 // ==============================|| REACT TABLE ||============================== //
 
-function ReactTable({ columns, data }: ReactTableProps) {
+function ReactTable({ columns, data, title }: ReactTableProps) {
   const [columnVisibility, setColumnVisibility] = useState({});
   const [globalFilter, setGlobalFilter] = useState('');
 
@@ -57,42 +53,50 @@ function ReactTable({ columns, data }: ReactTableProps) {
 
   useEffect(() => setColumnVisibility({ id: false, role: false, contact: false, country: false }), []);
 
-  let headers: LabelKeyObject[] = [];
-  table.getAllColumns().map((columns) =>
+  const headers: LabelKeyObject[] = [];
+  table.getAllColumns().map((column) => {
+    const accessorKey = (column.columnDef as { accessorKey?: string }).accessorKey;
     headers.push({
-      label: typeof columns.columnDef.header === 'string' ? columns.columnDef.header : '#',
-      // @ts-ignore
-      key: columns.columnDef.accessorKey
-    })
-  );
+      label: typeof column.columnDef.header === 'string' ? column.columnDef.header : '#',
+      key: accessorKey ?? ''
+    });
+  });
 
   return (
     <MainCard
-      title="Column Visibility"
+      title={title}
       secondary={
-        <SelectColumnVisibility
-          {...{
-            getVisibleLeafColumns: table.getVisibleLeafColumns,
-            getIsAllColumnsVisible: table.getIsAllColumnsVisible,
-            getToggleAllColumnsVisibilityHandler: table.getToggleAllColumnsVisibilityHandler,
-            getAllColumns: table.getAllColumns
-          }}
-        />
+        <Stack direction="horizontal" gap={2} className="justify-content-center flex-wrap">
+          <SelectColumnVisibility
+            {...{
+              getVisibleLeafColumns: table.getVisibleLeafColumns,
+              getIsAllColumnsVisible: table.getIsAllColumnsVisible,
+              getToggleAllColumnsVisibilityHandler: table.getToggleAllColumnsVisibilityHandler,
+              getAllColumns: table.getAllColumns
+            }}
+          />
+          <CSVExport {...{ data, headers, filename: 'column-visibility.csv' }} />
+        </Stack>
       }
       className="table-card"
     >
+      {/* toolbar */}
       <Stack direction="horizontal" className="justify-content-between align-items-center flex-wrap p-4" gap={2}>
         <SortingData getState={table.getState} setPageSize={table.setPageSize} />
         <div className="datatable-search">
           <DebouncedInput value={globalFilter ?? ''} onFilterChange={(value) => setGlobalFilter(String(value))} />
         </div>
       </Stack>
+
+      {/* table */}
       <Table responsive hover className="mb-0 border-top">
         <thead>
-          {table.getHeaderGroups().map((headerGroup: HeaderGroup<any>) => (
+          {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id}>{header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}</th>
+                <th key={header.id} {...header.column.columnDef.meta}>
+                  {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                </th>
               ))}
             </tr>
           ))}
@@ -101,19 +105,23 @@ function ReactTable({ columns, data }: ReactTableProps) {
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
+                <td key={cell.id} {...cell.column.columnDef.meta}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
               ))}
             </tr>
           ))}
         </tbody>
       </Table>
+
+      {/* Pagination */}
       <TablePagination
         setPageSize={table.setPageSize}
         setPageIndex={table.setPageIndex}
         getState={table.getState}
         getPageCount={table.getPageCount}
         initialPageSize={10}
-        totalEntries={50}
+        totalEntries={data.length}
       />
     </MainCard>
   );
@@ -121,84 +129,31 @@ function ReactTable({ columns, data }: ReactTableProps) {
 
 // ==============================|| REACT TABLE - COLUMN VISIBILITY ||============================== //
 
-export default function ColumnVisibility() {
-  const data: TableDataProps[] = makeData(50);
+export default function ColumnVisibility({ title }: { title: string }) {
+  const data: TableDataProps[] = makeData(10);
 
   const columns = useMemo<ColumnDef<TableDataProps>[]>(
     () => [
+      { header: '#', accessorKey: 'id', title: 'Id' },
       {
-        header: '#',
-        accessorKey: 'id',
-        title: 'Id',
-        meta: {
-          className: 'text-center'
-        }
+        header: 'Avatar',
+        accessorKey: 'avatar',
+        cell: (cell) => (
+          <Image
+            className="avatar avatar-xs"
+            alt={`Avatar ${cell.getValue()}`}
+            src={getImageUrl(`avatar-${cell.getValue()}.png`, ImagePath.USER)}
+          />
+        )
       },
-      // {
-      //   header: 'Avatar',
-      //   accessorKey: 'avatar',
-      //   cell: (cell) => (
-      //     <Image
-      //       alt={`Avatar ${cell.getValue()}`}
-      //       className="avatar avatar-xs"
-      //       src={getImageUrl(`avatar-${cell.getValue()}.png`, ImagePath.USER)}
-      //     />
-      //   ),
-      //   meta: {
-      //     className: 'text-center'
-      //   }
-      // },
-      {
-        header: 'Name',
-        accessorKey: 'fullName'
-      },
-      {
-        header: 'Email',
-        accessorKey: 'email'
-      },
-      {
-        header: 'Age',
-        accessorKey: 'age',
-        meta: {
-          className: 'text-end'
-        }
-      },
-      {
-        header: 'Role',
-        accessorKey: 'role'
-      },
-      {
-        header: 'Contact',
-        accessorKey: 'contact'
-      },
-      {
-        header: 'Country',
-        accessorKey: 'country'
-      },
-      {
-        header: 'Visits',
-        accessorKey: 'visits',
-        meta: {
-          className: 'text-end'
-        }
-      },
-      {
-        id: 'status',
-        header: 'Status',
-        footer: 'Status',
-        accessorKey: 'status',
-        cell: (cell) => {
-          switch (cell.getValue()) {
-            case 'Complicated':
-              return <Badge bg="light-danger">Complicated</Badge>;
-            case 'Relationship':
-              return <Badge bg="light-success">Relationship</Badge>;
-            case 'Single':
-            default:
-              return <Badge bg="light-info">Single</Badge>;
-          }
-        }
-      },
+      { header: 'Name', accessorKey: 'fullName', meta: { className: 'text-nowrap' } },
+      { header: 'Email', accessorKey: 'email' },
+      { header: 'Age', accessorKey: 'age', meta: { className: 'text-end' } },
+      { header: 'Role', accessorKey: 'role' },
+      { header: 'Contact', accessorKey: 'contact' },
+      { header: 'Country', accessorKey: 'country' },
+      { header: 'Visits', accessorKey: 'visits', meta: { className: 'text-end' } },
+      { header: 'Status', accessorKey: 'status', cell: (cell) => <StatusPill status={cell.getValue() as string} /> },
       {
         header: 'Profile Progress',
         accessorKey: 'progress',
@@ -208,5 +163,5 @@ export default function ColumnVisibility() {
     []
   );
 
-  return <ReactTable {...{ columns, data }} />;
+  return <ReactTable {...{ columns, data, title }} />;
 }

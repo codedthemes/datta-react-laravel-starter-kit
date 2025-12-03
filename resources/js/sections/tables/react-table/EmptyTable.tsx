@@ -24,8 +24,7 @@ import {
 // project-imports
 import makeData from '@/data/react-table';
 import MainCard from '@/components/MainCard';
-import EmptyTable from '@/components/third-party/react-table/EmptyTable';
-import Filter from '@/components/third-party/react-table/Filter';
+import { EmptyTable, Filter } from '@/components/third-party/react-table';
 
 // types
 import { TableDataProps } from '@/types/table';

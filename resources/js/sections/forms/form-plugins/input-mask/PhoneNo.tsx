@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 
 // react-bootstrap
 import Col from 'react-bootstrap/Col';
@@ -6,33 +6,23 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
 // third-party
-import IMask from 'imask';
+import { IMaskInput } from 'react-imask';
 
 // project-imports
 import MainCard from '@/components/MainCard';
 
-// Mask configurations
-const masks = ['0000-000-000', '0000-0000', '(00) 0000-0000', '(000) 000-0000'];
+const maskConfigs = [
+  { mask: '0000-000-000', label: 'Mobile No.', Placeholder: '0000-000-000' },
+  { mask: '0000-0000', label: 'Telephone', Placeholder: '0000-0000' },
+  { mask: '(00) 0000-0000', label: 'Tel. with Code Area', Placeholder: '(00) 0000-0000' },
+  { mask: '(000) 000-0000', label: 'US Telephone', Placeholder: '(000) 000-0000' }
+];
 
 // ==============================|| INPUT MASK - PHONE NO ||============================== //
 
 export default function PhoneNo() {
-  const [values, setValues] = useState<string[]>(Array(masks.length).fill(''));
-  const inputRefs = useRef<(HTMLInputElement | null)[]>(Array(masks.length).fill(null));
-
-  useEffect(() => {
-    const maskInstances = inputRefs.current.map((input, index) => (input ? IMask(input, { mask: masks[index] }) : null));
-
-    return () => {
-      maskInstances.forEach((mask) => mask?.destroy());
-    };
-  }, []);
-
-  const handleChange = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValues((prev) => prev.map((val, i) => (i === index ? e.target.value : val)));
-  };
-
-  const labels = ['Mobile No.', 'Telephone', 'Tel. with Code Area', 'US Telephone'];
+  const ref = useRef(null);
+  const inputRef = useRef(null);
 
   return (
     <MainCard
@@ -43,13 +33,22 @@ export default function PhoneNo() {
         </p>
       }
     >
-      {labels.map((label, index) => (
+      {maskConfigs.map((config, index) => (
         <Row className="mb-3" key={index}>
           <Col lg={3} sm={12} className="text-lg-end col-form-label">
-            <Form.Label className="mb-0">{label}</Form.Label>
+            <Form.Label className="mb-0">{config.label}</Form.Label>
           </Col>
           <Col lg={6} sm={12}>
-            <Form.Control ref={(el) => (inputRefs.current[index] = el)} value={values[index]} onChange={handleChange(index)} />
+            <IMaskInput
+              className="form-control"
+              mask={config.mask}
+              radix=""
+              value=""
+              unmask={true}
+              ref={ref}
+              inputRef={inputRef}
+              placeholder={config.Placeholder}
+            />
           </Col>
         </Row>
       ))}

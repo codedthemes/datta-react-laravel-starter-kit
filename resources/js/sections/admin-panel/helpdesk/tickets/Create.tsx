@@ -11,6 +11,20 @@ import Stack from 'react-bootstrap/Stack';
 import MainCard from '@/components/MainCard';
 import ReactQuillDemo from '@/components/third-party/ReactQuill';
 
+// customer names
+const names = [
+  'Oliver Hansen',
+  'Van Henry',
+  'April Tucker',
+  'Ralph Hubbard',
+  'Omar Alexander',
+  'Carlos Abbott',
+  'Miriam Wagner',
+  'Bradley Wilkerson',
+  'Virginia Andrews',
+  'Kelly Snyder'
+];
+
 // ==============================|| TICKET - CREATE ||============================== //
 
 export default function Create() {
@@ -28,6 +42,11 @@ export default function Create() {
             <Form.Label>Customer</Form.Label>
             <Form.Select className="mb-3">
               <option>Default select</option>
+              {names.map((name) => (
+                <option key={name} value={name}>
+                  {name}
+                </option>
+              ))}
             </Form.Select>
           </div>
         </Col>
@@ -36,6 +55,9 @@ export default function Create() {
             <Form.Label>Category</Form.Label>
             <Form.Select className="mb-3">
               <option>Default select</option>
+              <option value="1">Bug</option>
+              <option value="2">Modify</option>
+              <option value="3">Suggestions</option>
             </Form.Select>
           </div>
         </Col>
@@ -49,8 +71,8 @@ export default function Create() {
           <ReactQuillDemo value={text} onChange={handleChange} />
         </div>
 
-        <div className="mt-5">
-          <Form action="/file-upload" className="dropzone" id="my-awesome-dropzone">
+        <div>
+          <Form action="/file-upload" className="dropzone dz-clickable" id="my-awesome-dropzone">
             <p className="mb-0 p-t-30 p-b-30">Drop files here to upload</p>
           </Form>
           <Stack direction="horizontal" gap={2} className="justify-content-end mt-4">

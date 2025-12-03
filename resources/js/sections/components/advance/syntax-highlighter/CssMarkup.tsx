@@ -16,7 +16,6 @@ export default function CssMarkupPage() {
     <MainCard title="CSS Markup">
       <p>Use the following code to use CSS syntax highlighter.</p>
       <h6 className=" m-t-20 f-w-600">Example:</h6>
-      {/* @ts-ignore https://github.com/react-syntax-highlighter/react-syntax-highlighter/issues/539 */}
       <SyntaxHighlighter
         language="javascript"
         style={dark}

@@ -22,11 +22,10 @@ import { useVirtualizer } from '@tanstack/react-virtual';
 import { keepPreviousData, useInfiniteQuery, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 // project-imports
-import HeaderSort from '../sorting/HeaderSort';
 import MainCard from '@/components/MainCard';
 import LinearWithLabel from '@/components/@extended/progress/LinearWithLabel';
-import DebouncedInput from '@/components/third-party/react-table/DebouncedInput';
 import makeData from '@/data/react-table';
+import { DebouncedInput, HeaderSort } from '@/components/third-party/react-table';
 
 // types
 import { TableDataApiResponse, TableDataProps } from '@/types/table';

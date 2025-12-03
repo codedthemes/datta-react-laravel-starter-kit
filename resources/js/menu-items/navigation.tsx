@@ -71,6 +71,13 @@ const navigation: NavItemType = {
           layout: 'vertical'
         },
         {
+          id: 'horizontal',
+          title: 'horizontal',
+          type: 'item',
+          url: '/layouts/horizontal',
+          layout: 'horizontal'
+        },
+        {
           id: 'tab',
           title: 'tab',
           type: 'item',
@@ -90,6 +97,13 @@ const navigation: NavItemType = {
           type: 'item',
           url: '/layouts/layout-3',
           layout: 'layout 3'
+        },
+        {
+          id: 'rtl',
+          title: 'RTL',
+          type: 'item',
+          url: '#!',
+          direction: 'rtl'
         }
       ]
     },

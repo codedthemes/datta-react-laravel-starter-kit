@@ -6,9 +6,12 @@ import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // project-imports
 import MainCard from '@/components/MainCard';
+import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 // chart-options
-const generateChartOptions = (color: string): ChartProps => {
+const generateChartOptions = ({ color, resolvedTheme }: { color: string; resolvedTheme: string }): ChartProps => {
   return {
     chart: {
       toolbar: {
@@ -38,7 +41,8 @@ const generateChartOptions = (color: string): ChartProps => {
     dataLabels: {
       enabled: false
     },
-    colors: [color]
+    colors: [color],
+    theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
   };
 };
 
@@ -80,15 +84,19 @@ const markets = [
 // ==============================|| CRM - MARKETS CARD ||============================== //
 
 export default function MarketsCard() {
+  const { mode } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
+
   return (
     <>
       <MainCard title="Markets">
         {markets.map((market, index) => (
           <Stack direction="horizontal" className={`justify-content-between ${index !== 0 && 'mt-4'}`} key={index}>
             <div className="flex-shrink-0">
-              <h6 className="text-muted">
+              <h6 className="text-muted d-flex align-items-center gap-2">
                 {market.name}/{market.currency}
-                <span className={`ms-3 ${market.percentageChange > 0 ? 'text-success' : 'text-danger'}`}>
+                <span className={`${market.percentageChange > 0 ? 'text-success' : 'text-danger'}`}>
                   {market.percentageChange > 0 ? `+${market.percentageChange}%` : `${market.percentageChange}%`}
                 </span>
               </h6>
@@ -97,7 +105,7 @@ export default function MarketsCard() {
               </h6>
             </div>
             <ReactApexChart
-              options={generateChartOptions(colorPalette[index % colorPalette.length])}
+              options={generateChartOptions({ color: colorPalette[index % colorPalette.length], resolvedTheme })}
               series={[{ name: market.name, data: market.chartData }]}
               type="line"
               height={40}

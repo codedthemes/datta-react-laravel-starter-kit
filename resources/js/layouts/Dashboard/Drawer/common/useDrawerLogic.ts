@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 
 // project-imports
 import { handlerDrawerOpen, useGetMenuMaster } from '@/api/menu';
@@ -8,6 +7,7 @@ import useConfig from '@/hooks/useConfig';
 
 // types
 import { NavItemType } from '@/types/menu';
+import { usePage } from '@inertiajs/react';
 
 // ==============================|| COMMON DRAWER LOGIC HOOK ||============================== //
 
@@ -19,8 +19,9 @@ export const useDrawerLogic = () => {
   const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth <= 1024);
 
   const overlayRef = useRef<HTMLDivElement | null>(null);
-  const { menuOrientation, sidebarTheme, themeDirection } = useConfig();
-  const location = useLocation();
+  const { menuOrientation, sidebarTheme, themeDirection, customColor } = useConfig();
+  const location = usePage();
+  
 
   // Handle Resize
   useEffect(() => {
@@ -59,9 +60,10 @@ export const useDrawerLogic = () => {
   useEffect(() => {
     const removeClasses = ['layout-2', 'layout-3', 'preset-1', 'preset-brand-1'];
     document.body.classList.remove(...removeClasses);
-    document.body.removeAttribute('data-pc-preset');
+    document.body.setAttribute('data-pc-preset', customColor);
 
-    const pathname = location.pathname;
+    // const pathname = location.pathname;
+    const pathname = new URL(location.url, window.location.origin).pathname;
 
     if (!isLargeScreen) {
       document.body.setAttribute('data-pc-layout', 'vertical');
@@ -96,7 +98,7 @@ export const useDrawerLogic = () => {
       default:
         break;
     }
-  }, [menuOrientation, isLargeScreen, location.pathname]);
+  }, [menuOrientation, isLargeScreen, new URL(location.url, window.location.origin).pathname, customColor]);
 
   return {
     drawerOpen,

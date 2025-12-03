@@ -1,11 +1,16 @@
+import { useEffect, useState } from 'react';
+
 // third-party
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // project-imports
 import MainCard from '@/components/MainCard';
+import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 // chart-options
-const chartOptions: ChartProps = {
+const ageChartOptions = {
   chart: {
     type: 'bar',
     height: 260,
@@ -19,7 +24,6 @@ const chartOptions: ChartProps = {
   dataLabels: {
     enabled: false
   },
-  colors: ['#1de9b6', '#a389d4', '#1de9b6', '#a389d4', '#1de9b6', '#a389d4'],
   fill: {
     type: 'gradient',
     opacity: 1,
@@ -36,11 +40,6 @@ const chartOptions: ChartProps = {
       distributed: true
     }
   },
-  series: [
-    {
-      data: [30, 35, 40, 30, 32, 38]
-    }
-  ],
   legend: {
     show: false
   },
@@ -106,9 +105,30 @@ const chartOptions: ChartProps = {
 // =============================|| ANALYTICS - AGE CHART ||============================== //
 
 export default function AgeChart() {
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
+
+  const [series] = useState([
+    {
+      data: [30, 35, 40, 30, 32, 38]
+    }
+  ]);
+
+  const [options, setOptions] = useState<ChartProps>(ageChartOptions);
+
+  useEffect(() => {
+    setOptions({
+      ...ageChartOptions,
+      chart: { ...ageChartOptions.chart, fontFamily: fontFamily },
+      colors: ['var(--bs-success)', 'var(--bs-purple)', 'var(--bs-success)', 'var(--bs-purple)', 'var(--bs-success)', 'var(--bs-purple)'],
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
+    });
+  }, [fontFamily, resolvedTheme]);
+
   return (
-    <MainCard title="Age" subheader={<p className="mb-0">Average 40+</p>} bodyClassName="p-0">
-      <ReactApexChart options={chartOptions} series={chartOptions.series} type="bar" height={225} />
+    <MainCard title="Age" subheader={<p className="mb-0"> Average 40+</p>} bodyClassName="p-0">
+      <ReactApexChart options={options} series={series} type="bar" height={225} />
     </MainCard>
   );
 }

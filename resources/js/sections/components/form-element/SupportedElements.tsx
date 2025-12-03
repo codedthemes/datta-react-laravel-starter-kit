@@ -7,12 +7,12 @@ import Form from 'react-bootstrap/Form';
 // project-import
 import MainCard from '@/components/MainCard';
 
-// =============================|| SUPPORTED ELEMENTS ||============================== //
+// =============================|| FORM ELEMENT - SUPPORTED ELEMENTS WITH FEEDBACK ||============================== //
 
 export default function SupportedElements() {
   const [validated, setValidated] = useState(false);
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -24,22 +24,30 @@ export default function SupportedElements() {
 
   return (
     <MainCard title="Supported Elements">
-      <Form className="was-validated" noValidate validated={validated} onSubmit={handleSubmit}>
+      <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        {/* Textarea */}
         <div className="mb-3">
-          <Form.Label htmlFor="validationCustom01">Textarea</Form.Label>
-          <Form.Control as="textarea" placeholder="Required example textarea" required />
-          <div className="invalid-feedback">Please enter a message in the textarea.</div>
+          <Form.Label htmlFor="validationTextarea">Textarea</Form.Label>
+          <Form.Control as="textarea" id="validationTextarea" placeholder="Required example textarea" required />
+          <Form.Control.Feedback type="valid">Looks good!</Form.Control.Feedback>
+          <Form.Control.Feedback type="invalid">Please enter a message in the textarea.</Form.Control.Feedback>
         </div>
+
+        {/* Checkbox */}
         <Form.Group className="mb-3">
-          <Form.Check required label="Check this checkbox" feedback="Example invalid feedback text" feedbackType="invalid" />
+          <Form.Check required label="Check this checkbox" feedback="You did it!" feedbackType="valid" />
+          <Form.Control.Feedback type="invalid">Example invalid feedback text</Form.Control.Feedback>
         </Form.Group>
 
+        {/* Radio buttons */}
         <div className="mb-3">
           <Form.Check label="Toggle this radio" type="radio" name="radioGroup" id="validationFormCheck2" required />
           <Form.Check label="Or toggle this other radio" type="radio" name="radioGroup" id="validationFormCheck3" required />
-          <div className="invalid-feedback">Please select an option.</div>
+          <Form.Control.Feedback type="valid">Good choice!</Form.Control.Feedback>
+          <Form.Control.Feedback type="invalid">Please select an option.</Form.Control.Feedback>
         </div>
 
+        {/* Select */}
         <div className="mb-3">
           <Form.Select required>
             <option value="">Open this select menu</option>
@@ -47,13 +55,18 @@ export default function SupportedElements() {
             <option value="2">Two</option>
             <option value="3">Three</option>
           </Form.Select>
-          <div className="invalid-feedback">Example invalid select feedback</div>
+          <Form.Control.Feedback type="valid">Nice selection!</Form.Control.Feedback>
+          <Form.Control.Feedback type="invalid">Example invalid select feedback</Form.Control.Feedback>
         </div>
 
+        {/* File Upload */}
         <div className="mb-3">
           <Form.Control type="file" required />
-          <div className="invalid-feedback">Example invalid form file feedback</div>
+          <Form.Control.Feedback type="valid">File selected successfully!</Form.Control.Feedback>
+          <Form.Control.Feedback type="invalid">Example invalid form file feedback</Form.Control.Feedback>
         </div>
+
+        {/* Submit */}
         <Button type="submit">Submit form</Button>
       </Form>
     </MainCard>

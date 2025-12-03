@@ -5,6 +5,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Stack from 'react-bootstrap/Stack';
 
 // project-imports
+import { NotificationData } from '@/data/invoice';
 import MainCard from '@/components/MainCard';
 
 // ==============================|| ADMIN PANEL - DASHBOARD NOTIFICATION ||============================== //
@@ -26,101 +27,29 @@ export default function Notification() {
         </Dropdown>
       </Stack>
       <ListGroup>
-        <ListGroup.Item className="border-0">
-          <Stack direction="horizontal" className="align-items-center">
-            <div className="flex-shrink-0">
-              <div className="avatar bg-light-success rounded-circle">
-                <i className="ti ti-file-download f-26" />
+        {NotificationData.map((item, index) => (
+          <ListGroup.Item className="border-0" key={index}>
+            <Stack direction="horizontal" className="align-items-center">
+              <div className="flex-shrink-0">
+                <div className={`avatar ${item.bg} rounded-circle`}>
+                  {item.icon && <i className={`${item.icon} f-26`} />}
+                  {!item.icon && item.avatar && <span className="f-24 fw-normal">{item.avatar}</span>}
+                </div>
               </div>
-            </div>
-            <div className="flex-grow-1 mx-2">
-              <h6 className="mb-1">
-                Johnny sent you an invoice billed <span className="text-primary">$1,000.</span>
-              </h6>
-              <p className="mb-0 text-sm">2 August</p>
-            </div>
-            <div className="flex-shrink-0">
-              <a href="#!" className="avatar avatar-s btn-link-secondary">
-                <i className="ti ti-link" />
-              </a>
-            </div>
-          </Stack>
-        </ListGroup.Item>
-        <ListGroup.Item className="border-0">
-          <Stack direction="horizontal" className="align-items-center">
-            <div className="flex-shrink-0">
-              <div className="avatar bg-light-primary rounded-circle">
-                <i className="ti ti-file-text f-26" />
+              <div className="flex-grow-1 mx-2">
+                <h6 className="mb-1">
+                  Johnny sent you an invoice billed <span className="text-primary">$1,000.</span>
+                </h6>
+                <p className="mb-0 text-sm">2 August</p>
               </div>
-            </div>
-            <div className="flex-grow-1 mx-2">
-              <h6 className="mb-1">
-                Sent an invoice to Aida Bugg amount of <span className="text-primary">$200.</span>
-              </h6>
-              <p className="mb-0 text-sm">7 hours ago</p>
-            </div>
-            <div className="flex-shrink-0">
-              <a href="#!" className="avatar avatar-s btn-link-secondary">
-                <i className="ti ti-link" />
-              </a>
-            </div>
-          </Stack>
-        </ListGroup.Item>
-        <ListGroup.Item className="border-0">
-          <Stack direction="horizontal" className="align-items-center">
-            <div className="flex-shrink-0">
-              <div className="avatar bg-light-danger rounded-circle">
-                <i className="ti ti-adjustments f-26" />
+              <div className="flex-shrink-0">
+                <a href="#!" className="avatar avatar-s btn-link-secondary">
+                  <i className="ti ti-link" />
+                </a>
               </div>
-            </div>
-            <div className="flex-grow-1 mx-2">
-              <h6 className="mb-1">There was a failure to your setup</h6>
-              <p className="mb-0 text-sm">7 hours ago</p>
-            </div>
-            <div className="flex-shrink-0">
-              <a href="#!" className="avatar avatar-s btn-link-secondary">
-                <i className="ti ti-link" />
-              </a>
-            </div>
-          </Stack>
-        </ListGroup.Item>
-        <ListGroup.Item className="border-0">
-          <Stack direction="horizontal" className="align-items-center">
-            <div className="flex-shrink-0">
-              <div className="avatar bg-light-primary rounded-circle">
-                <span className="f-24 fw-normal">c</span>
-              </div>
-            </div>
-            <div className="flex-grow-1 mx-2">
-              <h6 className="mb-1">Cristina danny invited to you join Meeting</h6>
-              <p className="mb-0 text-sm">7 hours ago</p>
-            </div>
-            <div className="flex-shrink-0">
-              <a href="#!" className="avatar avatar-s btn-link-secondary">
-                <i className="ti ti-link" />
-              </a>
-            </div>
-          </Stack>
-        </ListGroup.Item>
-        <ListGroup.Item className="border-0">
-          <Stack direction="horizontal" className="align-items-center">
-            <div className="flex-shrink-0">
-              <div className="avatar bg-light-primary rounded-circle">
-                <span className="f-24 fw-normal">c</span>
-              </div>
-            </div>
-            <div className="flex-grow-1 mx-2">
-              <h6 className="mb-1">Cristina danny invited to you join Meeting</h6>
-              <p className="mb-0 text-sm">7 hours ago</p>
-            </div>
-            <div className="flex-shrink-0">
-              <a href="#!" className="avatar avatar-s btn-link-secondary">
-                <i className="ti ti-link " />
-              </a>
-            </div>
-          </Stack>
-        </ListGroup.Item>
-
+            </Stack>
+          </ListGroup.Item>
+        ))}
         <ListGroup.Item className="border-0">
           <div className="d-grid">
             <Button variant="outline-secondary">View All</Button>

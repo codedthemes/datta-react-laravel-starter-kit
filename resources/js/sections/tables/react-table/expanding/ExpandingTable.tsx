@@ -1,8 +1,7 @@
 import { Fragment, useEffect, useMemo, useState } from 'react';
 
 // react-bootstrap
-import Badge from 'react-bootstrap/Badge';
-import Spinner from 'react-bootstrap/Spinner';
+import Placeholder from 'react-bootstrap/Placeholder';
 import Stack from 'react-bootstrap/Stack';
 import Table from 'react-bootstrap/Table';
 
@@ -11,21 +10,19 @@ import {
   flexRender,
   useReactTable,
   ColumnDef,
-  HeaderGroup,
   getExpandedRowModel,
   getCoreRowModel,
   getPaginationRowModel,
   getFilteredRowModel
 } from '@tanstack/react-table';
+import { LabelKeyObject } from 'react-csv/lib/core';
 
 // project-imports
 import MainCard from '@/components/MainCard';
 import LinearWithLabel from '@/components/@extended/progress/LinearWithLabel';
-import SortingData from '@/components/third-party/react-table/SortingData';
-import DebouncedInput from '@/components/third-party/react-table/DebouncedInput';
-import TablePagination from '@/components/third-party/react-table/Pagination';
 import makeData from '@/data/react-table';
 import mockData from '@/utils/mock-data';
+import { CSVExport, DebouncedInput, StatusPill, SortingData, TablePagination } from '@/components/third-party/react-table';
 
 // types
 import { TableDataProps } from '@/types/table';
@@ -40,7 +37,10 @@ function RenderSubComponent() {
     () => [
       {
         header: 'Name',
-        accessorKey: 'fullName'
+        accessorKey: 'fullName',
+        meta: {
+          className: 'text-nowrap'
+        }
       },
       {
         header: 'Email',
@@ -53,37 +53,11 @@ function RenderSubComponent() {
           className: 'text-end'
         }
       },
-      {
-        header: 'Status',
-        accessorKey: 'status',
-        cell: (cell) => {
-          switch (cell.getValue()) {
-            case 'Complicated':
-              return (
-                <Badge bg="light-danger" pill>
-                  Complicated
-                </Badge>
-              );
-            case 'Relationship':
-              return (
-                <Badge bg="light-success" pill>
-                  Relationship
-                </Badge>
-              );
-            case 'Single':
-            default:
-              return (
-                <Badge bg="light-info" pill>
-                  Single
-                </Badge>
-              );
-          }
-        }
-      },
+      { header: 'Status', accessorKey: 'status', cell: (cell) => <StatusPill status={cell.getValue() as string} /> },
       {
         header: 'Profile Progress',
         accessorKey: 'progress',
-        cell: (props) => <LinearWithLabel value={props.getValue() as number} />
+        cell: ({ getValue }) => <LinearWithLabel value={getValue<number>()} />
       }
     ],
     []
@@ -120,27 +94,19 @@ function TableSubRows({ columns, data, loading }: ReactSubTableProps) {
     getExpandedRowModel: getExpandedRowModel()
   });
 
-  if (loading) {
-    return (
-      <>
-        {[0, 1, 2].map((item: number) => (
-          <tr key={item}>
-            <td />
-            {[0, 1, 2, 3, 4].map((col: number) => (
-              <td key={col}>
-                <Spinner animation="border" variant="primary" size="sm" />
-              </td>
-            ))}
-          </tr>
-        ))}
-      </>
-    );
-  }
-
-  return (
-    <>
-      {table.getRowModel().rows.map((row, index) => (
-        <tr key={index}>
+  return loading
+    ? Array.from({ length: 3 }).map((_, rowIdx) => (
+        <tr key={rowIdx}>
+          <td />
+          {Array.from({ length: 5 }).map((_, colIdx) => (
+            <td key={colIdx}>
+              <Placeholder className="w-100 h-100 bg-secondary-200" />
+            </td>
+          ))}
+        </tr>
+      ))
+    : table.getRowModel().rows.map((row, index) => (
+        <tr key={index} className="expand-bg-color">
           <td />
           {row.getVisibleCells().map((cell) => (
             <td key={cell.id} {...cell.column.columnDef.meta}>
@@ -148,9 +114,7 @@ function TableSubRows({ columns, data, loading }: ReactSubTableProps) {
             </td>
           ))}
         </tr>
-      ))}
-    </>
-  );
+      ));
 }
 
 // ==============================|| REACT TABLE ||============================== //
@@ -158,13 +122,10 @@ function TableSubRows({ columns, data, loading }: ReactSubTableProps) {
 interface ReactTableProps {
   columns: ColumnDef<TableDataProps>[];
   data: TableDataProps[];
-}
-interface LabelKeyObject {
-  label: string;
-  key: string;
+  title: string;
 }
 
-function ReactTable({ columns, data }: ReactTableProps) {
+function ReactTable({ columns, data, title }: ReactTableProps) {
   const [globalFilter, setGlobalFilter] = useState('');
 
   const table = useReactTable({
@@ -178,36 +139,39 @@ function ReactTable({ columns, data }: ReactTableProps) {
     getPaginationRowModel: getPaginationRowModel()
   });
 
-  let headers: LabelKeyObject[] = [];
-  table.getAllColumns().forEach((column) => {
-    const key = column.columnDef;
-
-    if (typeof key === 'string') {
-      headers.push({
-        label: typeof column.columnDef.header === 'string' ? column.columnDef.header : '#',
-        key
-      });
-    }
-  });
+  const headers: LabelKeyObject[] = useMemo(
+    () =>
+      table.getAllColumns().map((col) => ({
+        label: typeof col.columnDef.header === 'string' ? col.columnDef.header : '#',
+        key: (col.columnDef as any).accessorKey ?? col.id
+      })),
+    [table]
+  );
 
   return (
-    <MainCard title="Expanding Table" className="table-card">
+    <MainCard title={title} secondary={<CSVExport {...{ data, headers, filename: 'expanding.csv' }} />} className="table-card">
+      {/* Toolbar */}
       <Stack direction="horizontal" className="justify-content-between align-items-center flex-wrap p-4" gap={2}>
         <SortingData getState={table.getState} setPageSize={table.setPageSize} />
         <div className="datatable-search">
           <DebouncedInput value={globalFilter ?? ''} onFilterChange={(value) => setGlobalFilter(String(value))} />
         </div>
       </Stack>
+
+      {/* Table */}
       <Table responsive className="mb-0 border-top">
         <thead>
-          {table.getHeaderGroups().map((headerGroup: HeaderGroup<any>) => (
+          {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id}>{header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}</th>
+                <th key={header.id} {...(header.column.columnDef.meta ?? {})}>
+                  {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                </th>
               ))}
             </tr>
           ))}
         </thead>
+
         <tbody>
           {table.getRowModel().rows.map((row) => (
             <Fragment key={row.id}>
@@ -223,13 +187,15 @@ function ReactTable({ columns, data }: ReactTableProps) {
           ))}
         </tbody>
       </Table>
+
+      {/* pagination */}
       <TablePagination
         setPageSize={table.setPageSize}
         setPageIndex={table.setPageIndex}
         getState={table.getState}
         getPageCount={table.getPageCount}
         initialPageSize={10}
-        totalEntries={50}
+        totalEntries={data.length}
       />
     </MainCard>
   );
@@ -237,7 +203,7 @@ function ReactTable({ columns, data }: ReactTableProps) {
 
 // ==============================|| REACT TABLE - EXPANDING TABLE ||============================== //
 
-export default function ExpandingTable() {
+export default function ExpandingTable({ title }: { title: string }) {
   const data: TableDataProps[] = makeData(50);
 
   const columns = useMemo<ColumnDef<TableDataProps>[]>(
@@ -248,18 +214,18 @@ export default function ExpandingTable() {
         cell: ({ row }) => {
           return row.getCanExpand() ? (
             <i
-              className={`ti ${row.getIsExpanded() ? 'ti-chevron-down' : 'ti-chevron-right'} fs-5 cursor-pointer`}
-              style={{ color: row.getIsExpanded() ? '#0d6efd' : '#6c757d' }}
+              className={`${row.getIsExpanded() ? 'ti ti-chevron-down text-primary' : 'ti ti-chevron-right text-secondary'} fs-5 cursor-pointer`}
               onClick={row.getToggleExpandedHandler()}
             />
           ) : (
-            <i className="ti ti-ban fs-5" style={{ color: '#6c757d' }} />
+            <i className="ti ti-ban fs-5 text-secondary" />
           );
         }
       },
       {
-        header: 'Name',
-        accessorKey: 'fullName'
+        header: 'Names',
+        accessorKey: 'fullName',
+        meta: { className: 'text-nowrap' }
       },
       {
         header: 'Email',
@@ -272,29 +238,15 @@ export default function ExpandingTable() {
           className: 'text-end'
         }
       },
-      {
-        header: 'Status',
-        accessorKey: 'status',
-        cell: (cell) => {
-          switch (cell.getValue()) {
-            case 'Complicated':
-              return <Badge bg="light-danger">Complicated</Badge>;
-            case 'Relationship':
-              return <Badge bg="light-success">Relationship</Badge>;
-            case 'Single':
-            default:
-              return <Badge bg="light-info">Single</Badge>;
-          }
-        }
-      },
+      { header: 'Status', accessorKey: 'status', cell: (cell) => <StatusPill status={cell.getValue() as string} /> },
       {
         header: 'Profile Progress',
         accessorKey: 'progress',
-        cell: (props) => <LinearWithLabel value={props.getValue() as number} />
+        cell: ({ getValue }) => <LinearWithLabel value={getValue<number>()} />
       }
     ],
     []
   );
 
-  return <ReactTable {...{ columns, data }} />;
+  return <ReactTable {...{ columns, data, title }} />;
 }

@@ -1,4 +1,9 @@
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
+
+// project import
+import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 // third-party
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
@@ -13,7 +18,12 @@ type FormatterOptions = {
 };
 
 // chart-options
-const chartOptions: ChartProps = {
+const radialBarCustomAngleChartOptions: ChartProps = {
+  chart: {
+    type: 'radialBar',
+    height: 350,
+    background: 'transparent'
+  },
   plotOptions: {
     radialBar: {
       offsetY: -30,
@@ -35,7 +45,6 @@ const chartOptions: ChartProps = {
       }
     }
   },
-  colors: ['#04a9f5', '#1de9b6', '#f4c22b', '#f44236'],
   labels: ['Vimeo', 'Messenger', 'Facebook', 'LinkedIn'],
   legend: {
     show: true,
@@ -73,7 +82,26 @@ const chartOptions: ChartProps = {
 // ==============================|| APEX CHART - RADIAL BAR CUSTOM ANGLE  CHART ||============================== //
 
 export default function RadialBarCustomAngleChart() {
-  const series = useMemo(() => [76, 67, 61, 90], []);
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
 
-  return <ReactApexChart options={chartOptions} series={series} type="radialBar" height={350} />;
+  const primaryMain = 'var(--bs-primary)';
+  const successMain = 'var(--bs-success)';
+  const errorMain = 'var(--bs-danger)';
+  const warningMain = 'var(--bs-warning)';
+
+  const [series] = useState([76, 67, 61, 90]);
+  const [options, setOptions] = useState<ChartProps>(radialBarCustomAngleChartOptions);
+
+  useEffect(() => {
+    setOptions({
+      ...radialBarCustomAngleChartOptions,
+      chart: { ...radialBarCustomAngleChartOptions.chart, fontFamily: fontFamily },
+      colors: [primaryMain, warningMain, successMain, errorMain],
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
+    });
+  }, [resolvedTheme, fontFamily, primaryMain, warningMain, errorMain, successMain]);
+
+  return <ReactApexChart options={options} series={series} type="radialBar" height={350} />;
 }

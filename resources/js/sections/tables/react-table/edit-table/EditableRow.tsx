@@ -1,16 +1,15 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, Dispatch, SetStateAction } from 'react';
 
 // react-bootstrap
 import Table from 'react-bootstrap/Table';
 
 // third-party
-import { ColumnDef, useReactTable, getCoreRowModel, flexRender, HeaderGroup } from '@tanstack/react-table';
+import { ColumnDef, useReactTable, getCoreRowModel, flexRender } from '@tanstack/react-table';
 
 // project-imports
 import MainCard from '@/components/MainCard';
-import EditRow from '@/components/third-party/react-table/EditRow';
-import CSVExport from '@/components/third-party/react-table/CSVExport';
 import makeData from '@/data/react-table';
+import { CSVExport, EditRow } from '@/components/third-party/react-table';
 
 // types
 import { TableDataProps } from '@/types/table';
@@ -19,7 +18,8 @@ import { LabelKeyObject } from 'react-csv/lib/core';
 interface ReactTableProps {
   columns: ColumnDef<TableDataProps>[];
   data: TableDataProps[];
-  setData: any;
+  setData: Dispatch<SetStateAction<TableDataProps[]>>;
+  title?: string;
 }
 interface ColumnMeta {
   className?: string;
@@ -27,7 +27,7 @@ interface ColumnMeta {
 
 // ==============================|| REACT TABLE ||============================== //
 
-function ReactTable({ columns, data, setData }: ReactTableProps) {
+function ReactTable({ columns, data, setData, title }: ReactTableProps) {
   const table = useReactTable<TableDataProps>({
     data,
     columns,
@@ -35,26 +35,27 @@ function ReactTable({ columns, data, setData }: ReactTableProps) {
     debugTable: true
   });
 
-  const headers: LabelKeyObject[] = [];
-  table.getAllColumns().forEach((column) => {
-    const accessorKey = (column.columnDef as { accessorKey?: string }).accessorKey;
-    headers.push({
-      label: typeof column.columnDef.header === 'string' ? column.columnDef.header : '#',
-      key: accessorKey ?? ''
-    });
-  });
+  const headers: LabelKeyObject[] = useMemo(
+    () =>
+      table.getAllColumns().map((col) => ({
+        label: typeof col.columnDef.header === 'string' ? col.columnDef.header : '#',
+        key: (col.columnDef as any).accessorKey ?? col.id
+      })),
+    [table]
+  );
 
   return (
     <MainCard
-      title="Editable Row"
+      title={title}
       secondary={
         <CSVExport {...{ data: table.getRowModel().flatRows.map((row) => row.original), headers, filename: 'editable-row.csv' }} />
       }
       className="table-card"
     >
+      {/* table */}
       <Table hover responsive className="mb-0">
         <thead>
-          {table.getHeaderGroups().map((headerGroup: HeaderGroup<any>) => (
+          {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
                 <th
@@ -68,15 +69,18 @@ function ReactTable({ columns, data, setData }: ReactTableProps) {
             </tr>
           ))}
         </thead>
+
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <EditRow
-              key={row.id}
-              row={row}
-              onSave={(updatedData) => {
-                setData((prev: any[]) => prev.map((item) => (item.id === row.original.id ? { ...item, ...updatedData } : item)));
-              }}
-            />
+            <tr key={row.id}>
+              <EditRow
+                key={row.id}
+                row={row}
+                onSave={(updatedData) => {
+                  setData((prev) => prev.map((item) => (item.id === row.original.id ? { ...item, ...updatedData } : item)));
+                }}
+              />
+            </tr>
           ))}
         </tbody>
       </Table>
@@ -86,47 +90,21 @@ function ReactTable({ columns, data, setData }: ReactTableProps) {
 
 // ==============================|| REACT TABLE - EDITABLE ROW ||============================== //
 
-export default function EditableRow() {
+export default function EditableRow({ title }: { title?: string }) {
   const [data, setData] = useState<TableDataProps[]>(() => makeData(10));
 
   const columns = useMemo<ColumnDef<TableDataProps>[]>(
     () => [
-      {
-        header: 'Name',
-        accessorKey: 'fullName',
-        dataType: 'text'
-      },
-      {
-        header: 'Email',
-        accessorKey: 'email',
-        dataType: 'text'
-      },
-      {
-        header: 'Age',
-        accessorKey: 'age',
-        dataType: 'number',
-        meta: { className: 'text-end' }
-      },
-      {
-        header: 'Visits',
-        accessorKey: 'visits',
-        dataType: 'number',
-        meta: { className: 'text-end' }
-      },
-      {
-        header: 'Status',
-        accessorKey: 'status',
-        dataType: 'select'
-      },
-      {
-        header: 'Profile Progress',
-        accessorKey: 'progress',
-        dataType: 'progress'
-      },
-      { header: 'Actions', dataType: 'actions', meta: { className: 'text-center' } }
+      { header: 'Name', accessorKey: 'fullName', dataType: 'text', meta: { className: 'text-nowrap' } },
+      { header: 'Email', accessorKey: 'email', dataType: 'text' },
+      { header: 'Age', accessorKey: 'age', dataType: 'number', meta: { className: 'text-end' } },
+      { header: 'Visits', accessorKey: 'visits', dataType: 'number', meta: { className: 'text-end' } },
+      { header: 'Status', accessorKey: 'status', dataType: 'select' },
+      { header: 'Profile Progress', accessorKey: 'progress', dataType: 'progress' },
+      { id: 'actions', header: 'Actions', dataType: 'actions', meta: { className: 'text-center' } }
     ],
     []
   );
 
-  return <ReactTable {...{ data, columns, setData }} />;
+  return <ReactTable {...{ data, columns, setData, title }} />;
 }

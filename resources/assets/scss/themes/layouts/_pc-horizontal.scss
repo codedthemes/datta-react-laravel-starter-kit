@@ -1,6 +1,7 @@
 // ========================================
 //    8. Horizontal layout css start
 // ========================================
+@use 'sass:color';
 
 [data-pc-layout='horizontal'] {
   @media (min-width: 1025px) {
@@ -83,12 +84,12 @@
           align-items: center;
         }
 
-        > .pc-item {
+        >.pc-item {
           position: relative;
           margin: 0;
 
           &:hover:not(.active) {
-            > .pc-link {
+            >.pc-link {
               color: var(--bs-primary);
 
               &:after {
@@ -105,16 +106,16 @@
             }
           }
 
-          > .pc-submenu.edge {
+          >.pc-submenu.edge {
             left: auto;
             right: 0;
           }
 
-          > .pc-link {
+          >.pc-link {
             margin-left: 2px;
             margin-right: 2px;
 
-            > .pc-arrow {
+            >.pc-arrow {
               transform: rotate(90deg);
               margin-left: 10px;
             }
@@ -158,7 +159,7 @@
         display: inline-block;
         transition: all 0.2s ease-in-out;
 
-        > svg {
+        >svg {
           width: 14px;
           height: 14px;
         }
@@ -180,11 +181,12 @@
         .pc-item {
           display: block;
           position: relative;
+
           .pc-link {
             display: block;
           }
 
-          .pc-submenu > .pc-item:before,
+          .pc-submenu>.pc-item:before,
           &::before {
             left: 20px;
           }
@@ -195,6 +197,7 @@
             padding: 12px 15px 12px 20px;
 
             .pc-icon {
+
               svg,
               i {
                 color: var(--pc-sidebar-color);
@@ -206,8 +209,8 @@
             }
           }
 
-          &:hover > .pc-link,
-          & > .pc-link:hover {
+          &:hover>.pc-link,
+          &>.pc-link:hover {
             color: var(--bs-primary);
           }
         }
@@ -244,11 +247,11 @@
               }
 
               &::-webkit-scrollbar-thumb {
-                background: darken($body-bg, 05%);
+                background: #{color.adjust($body-bg, $lightness: -5%)};
               }
 
               &::-webkit-scrollbar-thumb:hover {
-                background: darken($body-bg, 25%);
+                background: #{color.adjust($body-bg, $lightness: -25%)};
               }
 
               .pc-submenu.edge,
@@ -266,8 +269,9 @@
         }
 
         &:hover {
-          > .pc-submenu {
+          >.pc-submenu {
             display: block;
+            z-index: 1020;
           }
         }
       }
@@ -280,7 +284,7 @@
 
     .pc-container {
       .pc-content {
-        > .row:first-child {
+        >.row:first-child {
           padding-top: 20px;
         }
       }
@@ -295,6 +299,7 @@
   }
 
   &[data-pc-direction='rtl'] {
+
     .pc-container,
     .pc-footer {
       margin-right: 20px;
@@ -307,7 +312,7 @@
           margin-left: 0;
         }
 
-        .pc-navbar > .pc-item .pc-submenu {
+        .pc-navbar>.pc-item .pc-submenu {
           .pc-item {
             &:before {
               right: 20px;

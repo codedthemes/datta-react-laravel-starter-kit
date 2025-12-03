@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, RefObject } from 'react';
 
 // react-bootstrap
 import Col from 'react-bootstrap/Col';
@@ -8,35 +8,48 @@ import Row from 'react-bootstrap/Row';
 
 // third-party
 import Calendar from 'react-calendar';
+import { Value } from 'react-calendar/dist/shared/types.js';
 
 // types
-import { DatePickerDisabledProps, SelectedValue } from '@/types/date-picker';
+import { DatePickerDisabledProps } from 'types/date-picker';
 
 function formatDate(date: Date) {
-  const day = date.getDate().toString().padStart(2, '0');
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const year = date.getFullYear();
-
-  return `${day}/${month}/${year}`;
+  return date.toLocaleDateString('en-GB'); // dd/mm/yyyy
 }
 
 // ==============================|| DATE - HELPER BUTTON ||============================== //
 
 export default function HelperButton({ useClickOutside }: DatePickerDisabledProps) {
-  const [helperButton, setHelperButton] = useState<Date | null>(null);
-  const [isHelperButton, setIsHelperButton] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const helperButtonRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
-  useClickOutside(helperButtonRef, () => setIsHelperButton(false));
+  useClickOutside(containerRef as RefObject<HTMLElement>, () => setIsOpen(false));
 
-  const handleHelperButtonClick = () => {
-    setIsHelperButton((prev) => !prev);
+  const handleOpen = () => setIsOpen(true);
+  const handleClose = () => setIsOpen(false);
+  const handleToggle = () => setIsOpen((prev) => !prev);
+
+  const handleDateChange = (value: Value) => {
+    if (value instanceof Date) {
+      setSelectedDate(value);
+      handleClose();
+    }
   };
 
-  const handleHelperButton = (selectedDate: SelectedValue) => {
-    if (selectedDate instanceof Date) {
-      setHelperButton(selectedDate);
+  const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleToggle();
+    }
+    if (event.key === 'Escape') {
+      event.stopPropagation();
+      handleClose();
+    }
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      handleOpen();
     }
   };
 
@@ -45,34 +58,48 @@ export default function HelperButton({ useClickOutside }: DatePickerDisabledProp
       <Col lg={3} sm={12} className="col-form-label text-lg-end">
         <Form.Label className="mb-0">Helper Button</Form.Label>
       </Col>
-      <Col lg={4} md={9} sm={12}>
-        <InputGroup>
-          <Form.Control
-            type="text"
-            className="datepicker-input"
-            placeholder="Select date"
-            id="d_week_1"
-            value={helperButton ? formatDate(helperButton) : ''}
-            onClick={handleHelperButtonClick}
-            readOnly
-          />
-          <InputGroup.Text>
-            <i className="ph ph-calendar-blank f-18" />
-          </InputGroup.Text>
-        </InputGroup>
-        {isHelperButton && (
-          <div ref={helperButtonRef}>
-            <Calendar
-              onChange={handleHelperButton}
-              formatShortWeekday={(locale, date) => date.toLocaleDateString(locale, { weekday: 'short' }).slice(0, 2)}
-              value={helperButton}
-              prev2Label={null}
-              next2Label={null}
-              prevLabel="«"
-              nextLabel="»"
+      <Col lg={4} md={9} sm={12} className="position-relative">
+        <div ref={containerRef} className="position-relative">
+          <InputGroup>
+            <Form.Control
+              type="text"
+              className="datepicker-input"
+              placeholder="Select date"
+              id="helperbutton-input"
+              value={selectedDate ? formatDate(selectedDate) : ''}
+              onClick={handleToggle}
+              onKeyDown={handleInputKeyDown}
+              aria-haspopup="dialog"
+              aria-expanded={isOpen}
+              aria-controls="helperbutton-calendar"
+              readOnly
             />
-          </div>
-        )}
+            <InputGroup.Text
+              as="button"
+              type="button"
+              aria-label="Toggle calendar"
+              onClick={handleToggle}
+              aria-expanded={isOpen}
+              aria-controls="helperbutton-calendar"
+            >
+              <i className="ph ph-calendar-blank f-18" />
+            </InputGroup.Text>
+          </InputGroup>
+
+          {isOpen && (
+            <div id="helperbutton-calendar" role="dialog" aria-modal="false" className="position-absolute start-0 top-100 z-3">
+              <Calendar
+                onChange={handleDateChange}
+                value={selectedDate}
+                formatShortWeekday={(locale, date) => date.toLocaleDateString(locale, { weekday: 'short' }).slice(0, 2)}
+                prev2Label={null}
+                next2Label={null}
+                prevLabel="«"
+                nextLabel="»"
+              />
+            </div>
+          )}
+        </div>
       </Col>
     </Row>
   );

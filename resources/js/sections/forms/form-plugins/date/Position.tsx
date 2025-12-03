@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { Dispatch, RefObject, SetStateAction, useRef, useState } from 'react';
 
 // react-bootstrap
 import Col from 'react-bootstrap/Col';
@@ -10,7 +10,7 @@ import Row from 'react-bootstrap/Row';
 import Calendar from 'react-calendar';
 
 // types
-import { DatePickerDisabledProps, SelectedValue } from '@/types/date-picker';
+import { DatePickerDisabledProps, SelectedValue } from 'types/date-picker';
 
 type PositionType = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
 
@@ -27,9 +27,9 @@ const positions: { key: PositionType; placeholder: string; className: string }[]
 
 // Helper hook to attach useClickOutside safely
 function usePositionClickOutside(
-  ref: React.RefObject<HTMLElement>,
+  ref: RefObject<HTMLElement>,
   key: PositionType,
-  setVisible: React.Dispatch<React.SetStateAction<Record<PositionType, boolean>>>,
+  setVisible: Dispatch<SetStateAction<Record<PositionType, boolean>>>,
   useClickOutside: DatePickerDisabledProps['useClickOutside']
 ) {
   useClickOutside(ref, () => setVisible((prev) => ({ ...prev, [key]: false })));
@@ -52,11 +52,11 @@ export default function Position({ useClickOutside }: DatePickerDisabledProps) {
     bottomRight: false
   });
 
-  const refs: Record<PositionType, React.RefObject<HTMLDivElement>> = {
-    topLeft: useRef(null),
-    topRight: useRef(null),
-    bottomLeft: useRef(null),
-    bottomRight: useRef(null)
+  const refs: Record<PositionType, RefObject<HTMLDivElement>> = {
+    topLeft: useRef<HTMLDivElement>(null!) as RefObject<HTMLDivElement>,
+    topRight: useRef<HTMLDivElement>(null!) as RefObject<HTMLDivElement>,
+    bottomLeft: useRef<HTMLDivElement>(null!) as RefObject<HTMLDivElement>,
+    bottomRight: useRef<HTMLDivElement>(null!) as RefObject<HTMLDivElement>
   };
 
   usePositionClickOutside(refs.topLeft, 'topLeft', setVisible, useClickOutside);
@@ -65,12 +65,49 @@ export default function Position({ useClickOutside }: DatePickerDisabledProps) {
   usePositionClickOutside(refs.bottomRight, 'bottomRight', setVisible, useClickOutside);
 
   const toggleCalendar = (key: PositionType) => {
-    setVisible((prev) => ({ ...prev, [key]: !prev[key] }));
+    setVisible((prev) => ({
+      topLeft: false,
+      topRight: false,
+      bottomLeft: false,
+      bottomRight: false,
+      [key]: !prev[key]
+    }));
   };
 
   const handleDateChange = (key: PositionType, date: SelectedValue) => {
     if (date instanceof Date) {
       setSelectedDates((prev) => ({ ...prev, [key]: date }));
+      setVisible((prev) => ({ ...prev, [key]: false }));
+    }
+  };
+
+  const handleInputKeyDown = (key: PositionType) => (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      toggleCalendar(key);
+    }
+    if (event.key === 'Escape') {
+      event.stopPropagation();
+      setVisible((prev) => ({ ...prev, [key]: false }));
+    }
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      setVisible({ topLeft: false, topRight: false, bottomLeft: false, bottomRight: false, [key]: true });
+    }
+  };
+
+  const getWrapperPlacementClass = (key: PositionType) => {
+    switch (key) {
+      case 'bottomLeft':
+        return 'start-0 top-100';
+      case 'bottomRight':
+        return 'end-0 top-100';
+      case 'topLeft':
+        return 'start-0 bottom-100';
+      case 'topRight':
+        return 'end-0 bottom-100';
+      default:
+        return 'start-0 top-100';
     }
   };
 
@@ -81,17 +118,39 @@ export default function Position({ useClickOutside }: DatePickerDisabledProps) {
       </Col>
       <Col lg={4} md={9} sm={12}>
         {positions.map(({ key, placeholder, className }, idx) => (
-          <InputGroup className={idx !== 0 ? 'mt-3' : ''} key={key}>
-            <Form.Control
-              type="text"
-              className="datepicker-input"
-              placeholder={placeholder}
-              value={selectedDates[key] ? formatDate(selectedDates[key]!) : ''}
-              onClick={() => toggleCalendar(key)}
-              readOnly
-            />
+          <div ref={refs[key]} key={key} className={idx !== 0 ? 'mt-3 position-relative' : 'position-relative'}>
+            <InputGroup>
+              <Form.Control
+                type="text"
+                className="datepicker-input"
+                placeholder={placeholder}
+                value={selectedDates[key] ? formatDate(selectedDates[key]!) : ''}
+                onClick={() => toggleCalendar(key)}
+                onKeyDown={handleInputKeyDown(key)}
+                aria-haspopup="dialog"
+                aria-expanded={visible[key]}
+                aria-controls={`calendar-${key}`}
+                readOnly
+              />
+              <InputGroup.Text
+                as="button"
+                type="button"
+                aria-label={`Toggle calendar ${placeholder}`}
+                aria-expanded={visible[key]}
+                aria-controls={`calendar-${key}`}
+                onClick={() => toggleCalendar(key)}
+                style={{ cursor: 'pointer' }}
+              >
+                <i className="ph ph-calendar-blank" />
+              </InputGroup.Text>
+            </InputGroup>
             {visible[key] && (
-              <div ref={refs[key]}>
+              <div
+                id={`calendar-${key}`}
+                role="dialog"
+                aria-modal="false"
+                className={`position-absolute position-calender ${getWrapperPlacementClass(key)}`}
+              >
                 <Calendar
                   formatShortWeekday={(locale, date) => date.toLocaleDateString(locale, { weekday: 'short' }).slice(0, 2)}
                   value={selectedDates[key]}
@@ -104,10 +163,7 @@ export default function Position({ useClickOutside }: DatePickerDisabledProps) {
                 />
               </div>
             )}
-            <InputGroup.Text>
-              <i className="ph ph-calendar-blank" />
-            </InputGroup.Text>
-          </InputGroup>
+          </div>
         ))}
       </Col>
     </Row>

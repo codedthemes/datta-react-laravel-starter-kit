@@ -15,10 +15,15 @@ export default function UserProfile() {
       <Card className="widget-profile-card-2 text-center">
         <Image src={slider5} alt="card-style-1" />
         <Card.Body>
-          <Image fluid className="img-thumbnail img-radius user-img mb-3 mt-2" src={imgRound1} alt="Profile-user" />
-          <Card.Title as="h3">Jenny Joe</Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">Web Designer</Card.Subtitle>
-          <Card.Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci a, rem accusantium recusandae beatae.</Card.Text>
+          <Image className="user-img mb-3 mt-2" src={imgRound1} roundedCircle thumbnail fluid alt="Profile-user" />
+          <Card.Title as="h4" className="f-20 text-dark f-w-500 mb-2">
+            Jenny Joe
+          </Card.Title>
+          <Card.Subtitle className="mb-2 text-muted">Senior Web Designer</Card.Subtitle>
+          <Card.Text>
+            Passionate designer with 5+ years of experience creating intuitive digital experiences. Specialized in user research,
+            prototyping, and design systems.
+          </Card.Text>
         </Card.Body>
       </Card>
     </>

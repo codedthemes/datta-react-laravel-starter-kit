@@ -11,43 +11,42 @@ import ClipboardJS from 'clipboard';
 // project-imports
 import MainCard from '@/components/MainCard';
 
-const iconList = [
-  { name: 'ti-trending-down-2' },
-  { name: 'ti-virus' },
-  { name: 'ti-wifi' },
-  { name: 'ti-yin-yang' },
-  { name: 'ti-zodiac-taurus' },
-  { name: 'ti-zoom-out' },
-  { name: 'ti-discount' },
-  { name: 'ti-target' },
-  { name: 'ti-eye' },
-  { name: 'ti-circle' },
-  { name: 'ti-fish' },
-  { name: 'ti-checkbox' },
-  { name: 'ti-chart-arcs' },
-  { name: 'ti-fold' },
-  { name: 'ti-bug' },
-  { name: 'ti-brand-steam' },
-  { name: 'ti-bottle' },
-  { name: 'ti-award' },
-  { name: 'ti-file' },
-  { name: ' ti-git-branch' },
-  { name: 'ti-gift' },
-  { name: 'ti-hand-off' },
-  { name: 'ti-hanger' },
-  { name: 'ti-home' },
-  { name: 'ti-italic' },
-  { name: 'ti-layout' },
-  { name: 'ti-letter-d' },
-  { name: 'ti-letter-d' },
-  { name: 'ti-login' },
-  { name: 'ti-logout' },
-  { name: 'ti-loader' },
-  { name: 'ti-layout-cards' },
-  { name: 'ti-map' },
-  { name: 'ti-markdown' },
-  { name: 'ti-menu' }
-];
+const iconNames = [
+  'ti-trending-down-2',
+  'ti-virus',
+  'ti-wifi',
+  'ti-yin-yang',
+  'ti-zodiac-taurus',
+  'ti-zoom-out',
+  'ti-discount',
+  'ti-target',
+  'ti-eye',
+  'ti-circle',
+  'ti-fish',
+  'ti-checkbox',
+  'ti-chart-arcs',
+  'ti-fold',
+  'ti-bug',
+  'ti-brand-steam',
+  'ti-bottle',
+  'ti-award',
+  'ti-file',
+  'ti-git-branch',
+  'ti-gift',
+  'ti-hand-off',
+  'ti-hanger',
+  'ti-home',
+  'ti-italic',
+  'ti-layout',
+  'ti-letter-d',
+  'ti-login',
+  'ti-logout',
+  'ti-loader',
+  'ti-layout-cards',
+  'ti-map',
+  'ti-markdown',
+  'ti-menu'
+] as const;
 
 // =============================|| ICONS - TABLER  ||============================== //
 
@@ -56,23 +55,31 @@ export default function TablerIcons() {
     const clipboard = new ClipboardJS('.i-block');
     clipboard.on('success', (e) => {
       const targetElement = e.trigger as HTMLElement;
+      const existingBadge = targetElement.querySelector('.ic-badge');
+      if (existingBadge) targetElement.removeChild(existingBadge);
       const badge = document.createElement('span');
-      badge.className = 'ic-badge badge bg-success';
+      badge.className = 'ic-badge center badge bg-success';
       badge.innerText = 'Copied';
       targetElement.appendChild(badge);
       setTimeout(() => {
-        targetElement.removeChild(badge);
+        if (badge.parentElement === targetElement) {
+          targetElement.removeChild(badge);
+        }
       }, 3000);
     });
 
     clipboard.on('error', (e) => {
       const targetElement = e.trigger as HTMLElement;
+      const existingBadge = targetElement.querySelector('.ic-badge');
+      if (existingBadge) targetElement.removeChild(existingBadge);
       const badge = document.createElement('span');
-      badge.className = 'ic-badge badge bg-danger';
+      badge.className = 'ic-badge center badge bg-danger';
       badge.innerText = 'Error';
       targetElement.appendChild(badge);
       setTimeout(() => {
-        targetElement.removeChild(badge);
+        if (badge.parentElement === targetElement) {
+          targetElement.removeChild(badge);
+        }
       }, 3000);
     });
 
@@ -81,17 +88,48 @@ export default function TablerIcons() {
     };
   }, []);
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    const isActivationKey = event.key === 'Enter' || event.key === ' ';
+    if (!isActivationKey) return;
+    event.preventDefault();
+    event.stopPropagation();
+    (event.currentTarget as HTMLDivElement).click();
+  };
+
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const target = event.currentTarget as HTMLDivElement;
+    // Refocus tile to keep tab order/context after copy
+    setTimeout(() => target.focus(), 0);
+  };
+
   return (
     <MainCard title="Tabler Icons">
       <Stack direction="horizontal" gap={1} id="icon-wrapper" className="i-main flex-wrap align-items-center">
-        {iconList.map(({ name }, index) => (
-          <OverlayTrigger key={index} placement="top" overlay={<Tooltip id={`tooltip-${index}`}>{name}</Tooltip>}>
-            <div className="i-main i-block" data-clipboard-text={name} data-filter={name} title={name}>
+        {iconNames.map((name, index) => (
+          <OverlayTrigger key={index} placement="top" overlay={<Tooltip id={`tooltip-${name}`}>{name}</Tooltip>}>
+            <div
+              className="i-main i-block"
+              data-clipboard-text={name}
+              data-filter={name}
+              title={name}
+              role="button"
+              tabIndex={0}
+              aria-label={`Copy ${name} icon class`}
+              onKeyDown={handleKeyDown}
+              onClick={handleClick}
+            >
               <i className={`ti ${name}`} />
             </div>
           </OverlayTrigger>
         ))}
-        <a href="https://tabler.io/icons" target="_blank" className="text-primary">
+        <a
+          href="https://tabler.io/icons"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="i-main i-block text-primary text-decoration-none d-flex align-items-center justify-content-center"
+          aria-label="Open Tabler icons website"
+          title="more ..."
+        >
           more ...
         </a>
       </Stack>

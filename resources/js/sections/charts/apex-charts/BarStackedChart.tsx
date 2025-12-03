@@ -1,10 +1,15 @@
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
+
+// project import
+import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 // third-party
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // chart-options
-const chartOptions: ChartProps = {
+const BarStackedChartOptions = {
   chart: {
     stacked: true,
     toolbar: {
@@ -14,7 +19,6 @@ const chartOptions: ChartProps = {
       enabled: true
     }
   },
-  colors: ['#04a9f5', '#1de9b6', '#f4c22b', '#13c2c2'],
   responsive: [
     {
       breakpoint: 480,
@@ -29,7 +33,9 @@ const chartOptions: ChartProps = {
   ],
   plotOptions: {
     bar: {
-      horizontal: false
+      horizontal: false,
+      columnWidth: '55%',
+      endingShape: 'rounded'
     }
   },
   xaxis: {
@@ -44,7 +50,13 @@ const chartOptions: ChartProps = {
     ]
   },
   legend: {
-    position: 'bottom'
+    show: true,
+    position: 'top',
+    offsetX: 10,
+    offsetY: 10,
+    labels: { useSeriesColors: false },
+    markers: { size: 6, shape: 'circle', strokeWidth: 0 },
+    itemMargin: { horizontal: 10, vertical: 8 }
   },
   fill: {
     opacity: 1
@@ -54,27 +66,49 @@ const chartOptions: ChartProps = {
 // ==============================|| APEX CHART - BAR STACKED CHART ||============================== //
 
 export default function BarStackedChart() {
-  const series = useMemo(
-    () => [
-      {
-        name: 'PRODUCT A',
-        data: [44, 55, 41, 67, 22, 43]
-      },
-      {
-        name: 'PRODUCT B',
-        data: [13, 23, 20, 8, 13, 27]
-      },
-      {
-        name: 'PRODUCT C',
-        data: [11, 17, 15, 15, 21, 14]
-      },
-      {
-        name: 'PRODUCT D',
-        data: [21, 7, 25, 13, 22, 8]
-      }
-    ],
-    []
-  );
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
 
-  return <ReactApexChart options={chartOptions} series={series} type="bar" height={350} />;
+  const primaryMain = 'var(--bs-primary)';
+  const successMain = 'var(--bs-success)';
+  const warningMain = 'var(--bs-warning)';
+  const infoMain = 'var(--bs-info)';
+
+  const line = 'var(--bs-border-color)';
+
+  const [series] = useState([
+    {
+      name: 'PRODUCT A',
+      data: [44, 55, 41, 67, 22, 43]
+    },
+    {
+      name: 'PRODUCT B',
+      data: [13, 23, 20, 8, 13, 27]
+    },
+    {
+      name: 'PRODUCT C',
+      data: [11, 17, 15, 15, 21, 14]
+    },
+    {
+      name: 'PRODUCT D',
+      data: [21, 7, 25, 13, 22, 8]
+    }
+  ]);
+
+  const [options, setOptions] = useState<ChartProps>(BarStackedChartOptions);
+
+  useEffect(() => {
+    setOptions({
+      ...BarStackedChartOptions,
+      chart: { ...BarStackedChartOptions.chart, fontFamily: fontFamily },
+      colors: [primaryMain, successMain, warningMain, infoMain],
+      xaxis: { ...BarStackedChartOptions.xaxis },
+      grid: { borderColor: line },
+      legend: { ...BarStackedChartOptions.legend, labels: { ...BarStackedChartOptions.legend.labels } },
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
+    });
+  }, [resolvedTheme, fontFamily, primaryMain, successMain, warningMain, infoMain]);
+
+  return <ReactApexChart options={options} series={series} type="bar" height={350} />;
 }

@@ -12,7 +12,8 @@ import MainCard from '@/components/MainCard';
 export default function Selects() {
   return (
     <MainCard title="Select">
-      <FloatingLabel controlId="floatingSelect" label="Works with selects">
+      {/* Basic Floating Select */}
+      <FloatingLabel controlId="floatingSelect1" label="Works with selects">
         <Form.Select aria-label="Floating label select example">
           <option>Open this select menu</option>
           <option value="1">One</option>
@@ -25,25 +26,29 @@ export default function Selects() {
       <hr />
 
       <Row className="g-4">
+        {/* ✅ Valid Select */}
         <Col md={6}>
-          <FloatingLabel controlId="floatingSelect" label="Works with selects">
-            <Form.Select aria-label="Floating label select example" isValid>
-              <option>Open this select menu</option>
+          <FloatingLabel controlId="floatingSelect2" label="Valid select">
+            <Form.Select aria-label="Valid select example" isValid defaultValue="1">
+              <option value="">Open this select menu</option>
               <option value="1">One</option>
               <option value="2">Two</option>
               <option value="3">Three</option>
             </Form.Select>
+            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </FloatingLabel>
         </Col>
 
+        {/* ❌ Invalid Select */}
         <Col md={6}>
-          <FloatingLabel controlId="floatingSelect" label="Works with selects">
-            <Form.Select aria-label="Floating label select example" isInvalid>
-              <option>Open this select menu</option>
+          <FloatingLabel controlId="floatingSelect3" label="Invalid select">
+            <Form.Select aria-label="Invalid select example" isInvalid>
+              <option value="">Open this select menu</option>
               <option value="1">One</option>
               <option value="2">Two</option>
               <option value="3">Three</option>
             </Form.Select>
+            <Form.Control.Feedback type="invalid">Please select a valid option.</Form.Control.Feedback>
           </FloatingLabel>
         </Col>
       </Row>

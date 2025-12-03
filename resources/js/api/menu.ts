@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import useSWR, { mutate } from 'swr';
 
 // types
-import { MenuProps } from '@/types/menu';
+import { MenuProps } from 'types/menu';
 
 const initialState: MenuProps = {
   isDashboardDrawerOpened: false,

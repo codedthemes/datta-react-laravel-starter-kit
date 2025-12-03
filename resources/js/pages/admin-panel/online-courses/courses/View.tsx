@@ -67,9 +67,9 @@ export default function CourseViewPage() {
           <MainCard
             title="Course"
             secondary={
-              <Link className="btn btn-primary" href="/admin-panel/online-course/course/add">
+              <a className="btn btn-primary" href="/admin-panel/online-course/course/add">
                 Add Courses
-              </Link>
+              </a>
             }
           >
             <Row>

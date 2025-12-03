@@ -1,6 +1,7 @@
 // ============================
 //   4. header css start
 // ============================
+@use 'sass:color';
 
 .pc-header {
   background: var(--pc-header-background);
@@ -238,7 +239,7 @@
     .cart-head {
       border-radius: 2px 2px 0 0;
       padding: 20px;
-      background: transparentize(shift-color($primary, $soft-bg-level), 0.8);
+      background: #{color.adjust(shift-color($primary, $soft-bg-level), $alpha: -0.8)};
       border-bottom: 1px solid $border-color;
     }
 
@@ -264,7 +265,7 @@
 
       &.table-responsive {
         border-top: 1px solid $border-color;
-        background: transparentize(shift-color($primary, $soft-bg-level), 0.8);
+        background: #{color.adjust(shift-color($primary, $soft-bg-level), $alpha: -0.8)};
       }
 
       svg {

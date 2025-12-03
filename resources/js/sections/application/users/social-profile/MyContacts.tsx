@@ -14,16 +14,16 @@ export default function MyContacts() {
   return (
     <Row>
       <Col lg={6}>
-        <CardSlider title="" />
+        <CardSlider />
       </Col>
       <Col lg={6}>
-        <CardCertificatedBadge title="" />
+        <CardCertificatedBadge />
       </Col>
       <Col lg={6}>
-        <CardHover title="" />
+        <CardHover />
       </Col>
       <Col lg={6}>
-        <ClipSliderCenter title="" />
+        <ClipSliderCenter />
       </Col>
     </Row>
   );

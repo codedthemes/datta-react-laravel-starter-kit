@@ -1,23 +1,28 @@
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
+
+// project import
+import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 // third-party
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // chart-options
-const chartOptions: ChartProps = {
+const raderChartOptions = {
+  chart: {
+    type: 'radar',
+    toolbar: {
+      show: false
+    },
+    background: 'transparent'
+  },
   labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
   plotOptions: {
     radar: {
-      size: 140,
-      polygons: {
-        strokeColor: '#f3f6ff',
-        fill: {
-          colors: ['#f3f6ff', '#fff']
-        }
-      }
+      size: 140
     }
   },
-  colors: ['#f44236'],
   markers: {
     size: 4,
     colors: ['#fff'],
@@ -48,15 +53,37 @@ const chartOptions: ChartProps = {
 // ==============================|| APEX CHART - RADAR CHART ||============================== //
 
 export default function RadarChart() {
-  const series = useMemo(
-    () => [
-      {
-        name: 'Series 1',
-        data: [20, 100, 40, 30, 50, 80, 33]
-      }
-    ],
-    []
-  );
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
 
-  return <ReactApexChart options={chartOptions} series={series} type="radar" height={350} />;
+  const [series] = useState([
+    {
+      name: 'Series 1',
+      data: [20, 100, 40, 30, 50, 80, 33]
+    }
+  ]);
+
+  const [options, setOptions] = useState<ChartProps>(raderChartOptions);
+
+  useEffect(() => {
+    setOptions({
+      ...raderChartOptions,
+      chart: { ...raderChartOptions.chart, fontFamily: fontFamily },
+      colors: ['var(--bs-danger)'],
+      plotOptions: {
+        radar: {
+          polygons: {
+            strokeColor: resolvedTheme === ThemeMode.DARK ? '#3e4853' : '#f3f6ff',
+            fill: {
+              colors: resolvedTheme === ThemeMode.DARK ? ['#3e4853', '#1e293b'] : ['#f8fafc', '#fff']
+            }
+          }
+        }
+      },
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
+    });
+  }, [resolvedTheme, fontFamily]);
+
+  return <ReactApexChart options={options} series={series} type="radar" height={350} />;
 }

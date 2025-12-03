@@ -31,6 +31,31 @@ const socialLinks: SocialLink[] = [
   { platform: 'linkedin', icon: 'ti ti-brand-linkedin-filled' }
 ];
 
+const stats = [
+  { value: '30', label: 'Projects' },
+  { value: '1.5K', label: 'Followers' },
+  { value: '352', label: 'Following' }
+];
+
+const StatsRow = ({ isWhiteText = false }: { isWhiteText?: boolean }) => (
+  <Row>
+    {stats.map((stat, index) => (
+      <Col key={`${stat.label}-${index}`}>
+        <h6 className={`mb-1 f-w-500 ${isWhiteText ? 'text-white' : ''}`}>{stat.value}</h6>
+        <p className="mb-0">{stat.label}</p>
+      </Col>
+    ))}
+  </Row>
+);
+
+const DropdownMenu = () => (
+  <Dropdown.Menu align="end">
+    <Dropdown.Item href="#">View Portfolio</Dropdown.Item>
+    <Dropdown.Item href="#">Send Message</Dropdown.Item>
+    <Dropdown.Item href="#">Connect</Dropdown.Item>
+  </Dropdown.Menu>
+);
+
 // ==============================|| USER CARD - FOOTER ||============================== //
 
 export default function Footer() {
@@ -45,31 +70,16 @@ export default function Footer() {
           footerClassName="bg-secondary text-white text-center"
           title={
             <div className="cover-img-block">
-              <Image src={slider7} alt="" className="img-fluid" />
+              <Image src={slider7} alt="" fluid />
             </div>
           }
-          footer={
-            <Row>
-              <Col>
-                <h6 className="mb-1 text-white">37</h6>
-                <p className="mb-0">Mails</p>
-              </Col>
-              <Col>
-                <h6 className="mb-1 text-white">2749</h6>
-                <p className="mb-0">Followers</p>
-              </Col>
-              <Col>
-                <h6 className="mb-1 text-white">678</h6>
-                <p className="mb-0">Following</p>
-              </Col>
-            </Row>
-          }
+          footer={<StatsRow isWhiteText />}
         >
           <div className="user-about-block text-center">
             <Row className="align-items-end justify-content-center">
               <Col>
                 <div className="position-relative d-inline-block">
-                  <Image className="img-radius img-fluid wid-80" src={avatar1} alt="User" />
+                  <Image className="wid-80" src={avatar1} alt="User" roundedCircle fluid />
                   <div className="certificated-badge">
                     <i className="ti ti-rosette-discount-check-filled text-primary bg-icon" />
                   </div>
@@ -80,19 +90,14 @@ export default function Footer() {
                   <Dropdown.Toggle as="div" bsPrefix="false" className="arrow-none dropdown-toggle" id="dropdown-custom-components">
                     <i className="ph ph-dots-three-outline align-middle" />
                   </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item href="#">Action</Dropdown.Item>
-                    <Dropdown.Item href="#">Another action</Dropdown.Item>
-                    <Dropdown.Item href="#">Something else here</Dropdown.Item>
-                  </Dropdown.Menu>
+                  <DropdownMenu />
                 </Dropdown>
               </Col>
             </Row>
           </div>
-          <h6 className="mb-1 mt-3">Lary Doe</h6>
+          <h6 className="f-w-500 mb-1 mt-3">Lary Doe</h6>
           <p className="mb-3 text-muted">UI/UX Designer</p>
-          <p className="mb-1">Lorem Ipsum is simply dummy text</p>
-          <p className="mb-0">been the industry's standard</p>
+          <p className="mb-0">Specializing in modern web interfaces and mobile apps</p>
         </MainCard>
       </Col>
 
@@ -109,33 +114,21 @@ export default function Footer() {
             </div>
           }
           footer={
-            <Row>
-              <Col>
-                <h6 className="mb-1">37</h6>
-                <p className="mb-0">Mails</p>
-              </Col>
-              <Col>
-                <h6 className="mb-1">2749</h6>
-                <p className="mb-0">Followers</p>
-              </Col>
-              <Col>
-                <h6 className="mb-1">678</h6>
-                <p className="mb-0">Following</p>
-              </Col>
+            <Row className="text-center">
+              <StatsRow />
             </Row>
           }
         >
           <div className="user-about-block">
             <Row>
               <Col>
-                <Image src={avatar2} fluid className="wid-80 img-radius" />
+                <Image src={avatar2} fluid roundedCircle className="wid-80" />
               </Col>
             </Row>
           </div>
-          <h6 className="mb-1 mt-3">Josephin Doe</h6>
+          <h6 className="f-w-500 mb-1 mt-3">Josephin Doe</h6>
           <p className="text-muted mb-3">UI/UX Designer</p>
-          <p className="mb-1">Lorem Ipsum is simply dummy text</p>
-          <p className="mb-0">been the industry's standard</p>
+          <p className="mb-0">Creative designer specializing in modern interfaces and user-centered design solutions</p>
         </MainCard>
       </Col>
 
@@ -147,23 +140,12 @@ export default function Footer() {
           bodyClassName="pt-0"
           title={
             <div className="cover-img-block">
-              <Image src={slider5} alt="" className="img-fluid" />
+              <Image src={slider5} alt="" fluid />
             </div>
           }
           footer={
             <Row className="text-center">
-              <Col>
-                <h6 className="mb-1">37</h6>
-                <p className="mb-0">Mails</p>
-              </Col>
-              <Col>
-                <h6 className="mb-1">2749</h6>
-                <p className="mb-0">Followers</p>
-              </Col>
-              <Col>
-                <h6 className="mb-1">678</h6>
-                <p className="mb-0">Following</p>
-              </Col>
+              <StatsRow />
             </Row>
           }
         >
@@ -172,36 +154,33 @@ export default function Footer() {
               <Col>
                 <Row className="align-items-center">
                   <Col xs="auto" className="pr-0">
-                    <Image className="img-radius img-fluid wid-80" src={avatar3} alt="User image" />
+                    <Image className="wid-80" src={avatar3} alt="User image" roundedCircle fluid />
                   </Col>
                   <Col>
-                    <h6 className="mb-1">Sara Soudein</h6>
+                    <h6 className="f-w-500 mb-1">Sara Soudein</h6>
                     <p className="mb-0">UI/UX Designer</p>
                   </Col>
                 </Row>
               </Col>
               <Col xs="auto">
-                <Dropdown>
+                <Dropdown align="end">
                   <Dropdown.Toggle as="div" className="arrow-none dropdown-toggle" data-bs-toggle="dropdown">
                     <i className="ph ph-dots-three-outline align-middle"></i>
                   </Dropdown.Toggle>
-                  <Dropdown.Menu align="end">
-                    <Dropdown.Item href="#">Action</Dropdown.Item>
-                    <Dropdown.Item href="#">Another action</Dropdown.Item>
-                    <Dropdown.Item href="#">Something else here</Dropdown.Item>
-                  </Dropdown.Menu>
+                  <DropdownMenu />
                 </Dropdown>
               </Col>
             </Row>
           </div>
           <div className="mt-3">
-            <p className="mb-1">Lorem Ipsum is simply dummy text</p>
-            <p className="mb-0">been the industry's standard</p>
+            <p className="mb-0">Creative designer specializing in modern interfaces and user-centered design solutions</p>
           </div>
           <ul className="list-inline f-20 mt-3 mb-0">
             {socialLinks.map((icon, index) => (
               <li className="list-inline-item" key={index}>
-                <i className={`${icon.icon} text-${icon.platform} me-1`} />
+                <a href="#!">
+                  <i className={`${icon.icon} text-${icon.platform}`} />
+                </a>
               </li>
             ))}
           </ul>

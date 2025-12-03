@@ -2,11 +2,10 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
-import FormControl from 'react-bootstrap/FormControl';
+import Form from 'react-bootstrap/Form';
 import Image from 'react-bootstrap/Image';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
-import Stack from 'react-bootstrap/Stack';
 
 // project-imports
 import MainCard from '@/components/MainCard';
@@ -56,37 +55,36 @@ const initialComments: Comment[] = [
 
 // ===========================|| COMMENTS - COMMENT ITEM ||=========================== //
 
-const CommentItem = ({ comment }: { comment: Comment }) => (
-  <Row>
+const CommentItem = ({ comment, isReply = false }: { comment: Comment; isReply?: boolean }) => (
+  <Row className={isReply ? 'ms-2' : ''}>
     <Col xs="auto" className="me-0">
-      <Image fluid className="img-radius wid-45 img-thumbnail" src={comment.avatar} alt="User Avatar" />
+      <Image fluid roundedCircle thumbnail className="wid-45" src={comment.avatar} alt={`${comment.name} avatar`} />
     </Col>
     <Col>
-      <div className="h6">
+      <h6>
         {comment.name}
         <span className="f-12 text-muted ms-1">
           <i className="ph ph-clock align-middle f-14 ms-1 me-1" />
           {comment.time}
         </span>
-      </div>
+      </h6>
       <p className="text-muted">{comment.text}</p>
-      <a className="me-2 link-primary">
-        <i className="ph ph-chat-dots align-middle f-16 text-primary me-1" />
-        Reply
-      </a>{' '}
-      <a className="me-2 link-success">
-        <i className="ph ph-pencil-simple-line align-middle f-16 text-success me-1" />
-        Edit
-      </a>{' '}
-      <a className="me-2 link-danger">
-        <i className="ph ph-trash align-middle f-16 text-danger me-1" />
-        Delete
-      </a>
+      <div className="d-flex flex-wrap gap-2">
+        <a href="#!" className="link-primary text-decoration-none">
+          <i className="ph ph-chat-dots f-16 text-primary me-1" style={{ verticalAlign: '-2px' }} /> Reply
+        </a>
+        <a href="#!" className="link-success text-decoration-none">
+          <i className="ph ph-pencil-simple-line f-16 text-success me-1" style={{ verticalAlign: '-2px' }} /> Edit
+        </a>
+        <a href="#!" className="link-danger text-decoration-none">
+          <i className="ph ph-trash f-16 text-danger me-1" style={{ verticalAlign: '-2px' }} /> Delete
+        </a>
+      </div>
       {comment.borderBottom && <hr />}
       {comment.replies && (
         <div className="mt-3">
           {comment.replies.map((reply) => (
-            <CommentItem key={reply.id} comment={reply} />
+            <CommentItem key={reply.id} comment={reply} isReply={true} />
           ))}
         </div>
       )}
@@ -101,14 +99,14 @@ export default function Comments() {
     <MainCard
       bodyClassName="p-0"
       title={
-        <Stack direction="horizontal" gap={2} className="align-items-center justify-content-between">
-          <h5>
-            <i className="ph ph-chat-dots align-middle f-20 text-primary" /> Comments
-          </h5>
-          <Button variant="light-primary" size="sm">
-            <i className="ti ti-plus" /> Add
-          </Button>
-        </Stack>
+        <h5>
+          <i className="ph ph-chat-dots align-text-top f-20 text-primary" /> Comments
+        </h5>
+      }
+      secondary={
+        <Button variant="light-primary" size="sm">
+          <i className="ti ti-plus" /> Add
+        </Button>
       }
     >
       <Card.Body className="border-bottom">
@@ -116,14 +114,14 @@ export default function Comments() {
           <CommentItem key={comment.id} comment={comment} />
         ))}
       </Card.Body>
-      <Card.Body className="py-3">
+      <Card.Footer className="py-3">
         <InputGroup>
-          <FormControl placeholder="Add New Comment..." defaultValue="" />
-          <Button variant="light-secondary">
-            <i className="ti ti-search" />
+          <Form.Control placeholder="Add New Comment..." defaultValue="" aria-label="new comment" aria-describedby="button-addon1" />
+          <Button variant="light-secondary" id="button-addon1">
+            <i className="ti ti-send" />
           </Button>
         </InputGroup>
-      </Card.Body>
+      </Card.Footer>
     </MainCard>
   );
 }

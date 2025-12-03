@@ -12,12 +12,18 @@ import MainCard from '@/components/MainCard';
 import blurBackground from '@assets/images/widget/user-blur-bg.png';
 import bgBlur from '@assets/images/widget/blur-bg.png';
 
-// ==============================|| SOCIAL - BACKROUND COVER ||============================== //
+const stats = [
+  { value: '247', label: 'Projects' },
+  { value: '18,543', label: 'Followers' },
+  { value: '892', label: 'Following' }
+];
+
+// ==============================|| SOCIAL - BACKGROUND COVER ||============================== //
 
 export default function BackGroundCover() {
   return (
     <>
-      <h6 className="text-center mb-3">Backround cover image</h6>
+      <h6 className="text-center mb-3">Background cover image</h6>
       <MainCard className="text-center" bodyClassName="p-0">
         <div
           className="widget-main-card blur-user-card"
@@ -26,27 +32,19 @@ export default function BackGroundCover() {
           }}
         >
           <Image src={blurBackground} alt="Profile Background" fluid />
-          <Card.Title as="h3" className="text-white">
+          <Card.Title as="h4" className="mt-4 text-white f-w-500">
             Linda Fox
           </Card.Title>
           <p className="text-white">UI Designer at CreativesCastle Studio</p>
-          <Button variant="info" className="m-t-30">
-            + Follow
-          </Button>
+          <Button variant="info">+ Follow</Button>
           <Card.Footer className="mt-4">
             <Row className="text-center">
-              <Col>
-                <h4 className="text-white">134</h4>
-                <span>Shots</span>
-              </Col>
-              <Col>
-                <h4 className="text-white">13,227</h4>
-                <span>Followers</span>
-              </Col>
-              <Col>
-                <h4 className="text-white">488</h4>
-                <span>Following</span>
-              </Col>
+              {stats.map((stat, index) => (
+                <Col key={index}>
+                  <h5 className="f-w-500 text-white">{stat.value}</h5>
+                  <span>{stat.label}</span>
+                </Col>
+              ))}
             </Row>
           </Card.Footer>
         </div>

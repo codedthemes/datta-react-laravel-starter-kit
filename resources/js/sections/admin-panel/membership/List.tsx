@@ -27,11 +27,8 @@ import {
 import { PatternFormat } from 'react-number-format';
 
 // project-imports
-import HeaderSort from '@/sections/tables/react-table/sorting/HeaderSort';
 import MainCard from '@/components/MainCard';
-import DebouncedInput from '@/components/third-party/react-table/DebouncedInput';
-import TablePagination from '@/components/third-party/react-table/Pagination';
-import SortingData from '@/components/third-party/react-table/SortingData';
+import { DebouncedInput, HeaderSort, SortingData, TablePagination } from '@/components/third-party/react-table';
 
 import makeData from '@/data/react-table';
 import { getImageUrl, ImagePath } from '@/utils/getImageUrl';
@@ -39,25 +36,10 @@ import { getImageUrl, ImagePath } from '@/utils/getImageUrl';
 // types
 import { TableDataProps } from '@/types/table';
 
-interface LabelKeyObject {
-  label: string;
-  key: string;
-}
-
 interface ReactTableProps {
   columns: ColumnDef<TableDataProps>[];
   data: TableDataProps[];
 }
-interface ColumnMeta {
-  className: string;
-}
-
-// action icons data
-const actionIcons = [
-  { icon: 'ti ti-eye', name: 'View' },
-  { icon: 'ti ti-edit', name: 'Edit' },
-  { icon: 'ti ti-trash', name: 'Delete' }
-];
 
 // ==============================|| REACT TABLE ||============================== //
 
@@ -76,40 +58,30 @@ function ReactTable({ columns, data }: ReactTableProps) {
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
     getPaginationRowModel: getPaginationRowModel(),
     onColumnFiltersChange: setColumnFilters,
-    onGlobalFilterChange: setGlobalFilter
-  });
-
-  let headers: LabelKeyObject[] = [];
-  table.getAllColumns().map((column) => {
-    const accessorKey = column.columnDef;
-
-    headers.push({
-      label: typeof column.columnDef.header === 'string' ? column.columnDef.header : '#',
-      key: typeof accessorKey === 'string' ? accessorKey : 'unknown'
-    });
+    onGlobalFilterChange: setGlobalFilter,
+    debugTable: true
   });
 
   return (
     <Row>
       <Col sm={12}>
         <MainCard className="table-card" title="Membership list">
-          <Stack direction="horizontal" className="justify-content-between align-items-center p-3">
+          {/* toolbar */}
+          <Stack direction="horizontal" className="justify-content-between align-items-center p-4 flex-wrap gap-2">
             <SortingData getState={table.getState} setPageSize={table.setPageSize} />
             <div className="datatable-search">
               <DebouncedInput value={globalFilter ?? ''} onFilterChange={(value) => setGlobalFilter(String(value))} />
             </div>
           </Stack>
+
+          {/* table */}
           <Table hover responsive className="mb-0 border-top">
             <thead>
               {table.getHeaderGroups().map((headerGroup: HeaderGroup<any>) => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((header, index) => {
                     return (
-                      <th
-                        key={header.id}
-                        onClick={header.column.getToggleSortingHandler()}
-                        className={` ${index === 0 ? 'ps-4' : ''} ${index === headerGroup.headers.length - 1 ? 'pe-4' : ''}`}
-                      >
+                      <th key={index} onClick={header.column.getToggleSortingHandler()}>
                         {header.isPlaceholder ? null : (
                           <Stack direction="horizontal" className={`justify-content-between`}>
                             {flexRender(header.column.columnDef.header, header.getContext())}
@@ -122,15 +94,12 @@ function ReactTable({ columns, data }: ReactTableProps) {
                 </tr>
               ))}
             </thead>
+
             <tbody>
-              {table.getRowModel().rows.map((row) => (
-                <tr key={row.id}>
+              {table.getRowModel().rows.map((row, index) => (
+                <tr key={index}>
                   {row.getVisibleCells().map((cell, cellIndex) => (
-                    <td
-                      key={cell.id}
-                      {...cell.column.columnDef.meta}
-                      className={`${(cell.column.columnDef.meta as ColumnMeta)?.className ?? ''} ${cellIndex === 0 ? 'ps-4' : ''} ${cellIndex === row.getVisibleCells().length - 1 ? 'pe-4' : ''}`}
-                    >
+                    <td key={cellIndex} {...cell.column.columnDef.meta}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </td>
                   ))}
@@ -138,6 +107,8 @@ function ReactTable({ columns, data }: ReactTableProps) {
               ))}
             </tbody>
           </Table>
+
+          {/* pagination */}
           <TablePagination
             setPageSize={table.setPageSize}
             setPageIndex={table.setPageIndex}
@@ -155,10 +126,14 @@ function ReactTable({ columns, data }: ReactTableProps) {
 // ==============================|| MEMBERSHIP - LIST ||============================== //
 
 export default function StudentApply() {
-  const data: TableDataProps[] = useMemo(() => makeData(100), []);
+  const [tableData, setTableData] = useState<TableDataProps[]>(() => makeData(100));
   const getRandomDate = (start: Date, end: Date): string => {
     const randomDate = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
     return randomDate.toISOString().split('T')[0].replace(/-/g, '/');
+  };
+
+  const handleDelete = (rowIndex: number) => {
+    setTableData((prev) => prev.filter((_, i) => i !== rowIndex));
   };
 
   const columns = useMemo<ColumnDef<TableDataProps>[]>(() => {
@@ -215,20 +190,28 @@ export default function StudentApply() {
       },
       {
         header: 'Action',
-        cell: () => (
+        cell: ({ row }) => (
           <Stack direction="horizontal" gap={1}>
-            {actionIcons.map((action, idx) => (
-              <OverlayTrigger key={idx} placement="bottom" overlay={<Tooltip>{action.name}</Tooltip>}>
-                <a href="#" className="btn-link-secondary avatar avatar-xs mx-1">
-                  <i className={`${action.icon} f-20`} />
-                </a>
-              </OverlayTrigger>
-            ))}
+            <OverlayTrigger placement="bottom" overlay={<Tooltip>{'View'}</Tooltip>}>
+              <a href="#" className="btn-link-secondary avatar avatar-xs mx-1">
+                <i className="ti ti-eye f-20" />
+              </a>
+            </OverlayTrigger>
+            <OverlayTrigger placement="bottom" overlay={<Tooltip>{'Edit'}</Tooltip>}>
+              <a href="#" className="btn-link-primary avatar avatar-xs mx-1">
+                <i className="ti ti-edit f-20" />
+              </a>
+            </OverlayTrigger>
+            <OverlayTrigger placement="bottom" overlay={<Tooltip>{'Delete'}</Tooltip>}>
+              <a href="#" className="btn-link-danger avatar avatar-xs mx-1" onClick={() => handleDelete(row.index)}>
+                <i className="ti ti-trash f-20" />
+              </a>
+            </OverlayTrigger>
           </Stack>
         )
       }
     ];
   }, []);
 
-  return <ReactTable data={data} columns={columns} />;
+  return <ReactTable data={tableData} columns={columns} />;
 }

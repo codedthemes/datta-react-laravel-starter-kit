@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 // react-bootstrap
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
@@ -8,12 +10,15 @@ import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // project-imports
 import MainCard from '@/components/MainCard';
+import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 // assets
 import Avatar1 from '@assets/images/user/avatar-1.png';
 
 // chart-options
-const chartOptions: ChartProps = {
+const profileGrowthWidgetChartOptions = {
   chart: {
     height: 100,
     type: 'line',
@@ -28,13 +33,7 @@ const chartOptions: ChartProps = {
     width: 3,
     curve: 'smooth'
   },
-  series: [
-    {
-      name: 'Car',
-      data: [85, 65, 140, 110, 180]
-    }
-  ],
-  colors: ['#04a9f5'],
+  colors: ['var(--bs-primary)'],
   fill: {
     type: 'solid'
   },
@@ -56,6 +55,27 @@ const chartOptions: ChartProps = {
 // =============================|| WIDGET - PROFILE GROWTH WIDGET CHART ||============================== //
 
 export default function ProfileGrowthWidgetChart() {
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
+
+  const [series] = useState([
+    {
+      name: 'Car',
+      data: [85, 65, 140, 110, 180]
+    }
+  ]);
+
+  const [options, setOptions] = useState<ChartProps>(profileGrowthWidgetChartOptions);
+
+  useEffect(() => {
+    setOptions({
+      ...profileGrowthWidgetChartOptions,
+      chart: { ...profileGrowthWidgetChartOptions.chart, fontFamily: fontFamily },
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
+    });
+  }, [fontFamily, resolvedTheme]);
+
   return (
     <MainCard>
       <Row className="align-items-center justify-content-center">
@@ -76,7 +96,7 @@ export default function ProfileGrowthWidgetChart() {
 
       <Row className="m-t-40">
         <Col xs={6}>
-          <ReactApexChart options={chartOptions} series={chartOptions.series} type="line" height={120} />
+          <ReactApexChart options={options} series={series} type="line" height={120} />
         </Col>
 
         <Col xs={6}>

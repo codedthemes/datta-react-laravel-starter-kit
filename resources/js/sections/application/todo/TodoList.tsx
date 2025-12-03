@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, KeyboardEvent } from 'react';
 
 // react-bootstrap
 import Button from 'react-bootstrap/Button';
@@ -8,6 +8,7 @@ import CardBody from 'react-bootstrap/CardBody';
 import FormCheck from 'react-bootstrap/FormCheck';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import Stack from 'react-bootstrap/Stack';
 
 interface Task {
   id: number;
@@ -28,17 +29,21 @@ const staticData: Task[] = [
 // ==============================|| TODO - TODO LIST ||============================== //
 
 export default function TodoList() {
-  const [tasks, setTasks] = useState<Task[]>(staticData);
-  const [newTask, setNewTask] = useState<string>('');
+  const [tasks, setTasks] = useState(staticData);
+  const [newTask, setNewTask] = useState('');
+  const [taskIdCounter, setTaskIdCounter] = useState(staticData.length + 1);
+  const [error, setError] = useState('');
 
   const addTask = () => {
     if (!newTask.trim()) {
-      alert('please enter a task');
+      setError('Please enter a task');
       return;
     }
-    const newTaskObj: Task = { id: tasks.length + 1, task: newTask, completed: false };
+    const newTaskObj: Task = { id: taskIdCounter, task: newTask.trim(), completed: false };
     setTasks([...tasks, newTaskObj]);
+    setTaskIdCounter((prev) => prev + 1);
     setNewTask('');
+    setError('');
   };
 
   const toggleTaskCompletion = (taskId: number) => {
@@ -51,6 +56,14 @@ export default function TodoList() {
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setNewTask(e.target.value);
+    if (error) setError('');
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      addTask();
+    }
   };
 
   return (
@@ -60,22 +73,28 @@ export default function TodoList() {
       </CardHeader>
       <CardBody className="py-3 border-bottom">
         <InputGroup>
-          <Form.Control type="text" value={newTask} onChange={handleInputChange} placeholder="Create your task list" required />
-          <Button variant="secondary" onClick={addTask}>
+          <Form.Control
+            type="text"
+            value={newTask}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+            placeholder="Create your task list"
+          />
+          <Button variant="secondary" onClick={addTask} disabled={!newTask.trim()}>
             <i className="ti ti-plus" />
           </Button>
         </InputGroup>
+        {error && <Form.Control.Feedback className="text-danger">{error}</Form.Control.Feedback>}
       </CardBody>
       <CardBody>
         <div className="new-task">
-          {tasks.map((task) => (
-            <div key={task.id} className="to-do-list mb-3">
-              <div className="float-end">
-                <a href="#!" onClick={() => deleteTask(task.id)} className="delete_todolist">
-                  <i className="ti ti-trash" />
-                </a>
-              </div>
-              <div className="d-inline-block">
+          {tasks.map((task, index) => (
+            <Stack
+              key={task.id}
+              direction="horizontal"
+              className={`justify-content-between to-do-list ${index !== tasks.length - 1 ? 'mb-3' : ''}`}
+            >
+              <div className="d-inline-block pe-2">
                 <FormCheck className="check-task">
                   <FormCheck.Input
                     type="checkbox"
@@ -88,7 +107,12 @@ export default function TodoList() {
                   </FormCheck.Label>
                 </FormCheck>
               </div>
-            </div>
+              <div className="float-end">
+                <Button variant="link" onClick={() => deleteTask(task.id)} className="delete_todolist p-0 text-decoration-none">
+                  <i className="ti ti-trash text-danger" />
+                </Button>
+              </div>
+            </Stack>
           ))}
         </div>
       </CardBody>

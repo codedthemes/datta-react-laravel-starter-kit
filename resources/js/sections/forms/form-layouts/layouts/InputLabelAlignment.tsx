@@ -55,9 +55,9 @@ export default function InputLabelAlignmentPage() {
             <Form.Label className="col-form-label">language:</Form.Label>
           </Col>
           <Col lg={6}>
-            <Form.Check required label="English" feedbackType="invalid" defaultChecked />
-            <Form.Check required label="French" feedbackType="invalid" />
-            <Form.Check required label="Dutch" feedbackType="invalid" />
+            <Form.Check className="form-check-inline" required label="English" feedbackType="invalid" defaultChecked />
+            <Form.Check className="form-check-inline" required label="French" feedbackType="invalid" />
+            <Form.Check className="form-check-inline" required label="Dutch" feedbackType="invalid" />
           </Col>
         </Row>
       </Form>

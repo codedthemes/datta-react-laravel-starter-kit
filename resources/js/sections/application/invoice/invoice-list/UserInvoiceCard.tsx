@@ -30,6 +30,23 @@ interface InvoiceData {
   description: string;
 }
 
+// dropdown data
+const statusDropdownItems = [
+  { icon: 'ph ph-info', action: 'Pending' },
+  { icon: 'ph ph-checks', action: 'Paid' },
+  { divider: true },
+  { icon: 'ph ph-hourglass-medium', action: 'On Hold', active: true },
+  { icon: 'ph ph-x-circle', action: 'Canceled' }
+];
+
+const invoiceActionItems = [
+  { icon: 'ph ph-printer', action: 'Print Invoice' },
+  { icon: 'ph ph-download-simple', action: 'Download Invoice' },
+  { divider: true },
+  { icon: 'ph ph-pencil-simple-line', action: 'Edit Invoice' },
+  { icon: 'ph ph-trash', action: 'Remove Invoice' }
+];
+
 // invoice data
 const invoices: InvoiceData[] = [
   {
@@ -94,22 +111,16 @@ const InvoiceCard: React.FC<{ data: InvoiceData }> = ({ data }) => {
                 <i className="ph ph-dots-three-outline-vertical align-middle" />
               </Dropdown.Toggle>
               <Dropdown.Menu align="end">
-                <Dropdown.Item href="#">
-                  <i className="ph ph-info align-middle" />
-                  Pending
-                </Dropdown.Item>
-                <Dropdown.Item href="#">
-                  <i className="ph ph-checks align-middle" />
-                  Paid
-                </Dropdown.Item>
-                <hr className="m-0 my-2" />
-                <Dropdown.Item active href="#">
-                  <i className="ph ph-hourglass-medium align-middle" /> On Hold
-                </Dropdown.Item>
-                <Dropdown.Item href="#">
-                  <i className="ph ph-x-circle align-middle" />
-                  Canceled
-                </Dropdown.Item>
+                {statusDropdownItems.map((item, index) =>
+                  item.divider ? (
+                    <hr className="m-0 my-2" key={index} />
+                  ) : (
+                    <Dropdown.Item href="#" key={index} active={item.active}>
+                      <i className={`${item.icon} align-middle`} />
+                      {item.action}
+                    </Dropdown.Item>
+                  )
+                )}
               </Dropdown.Menu>
             </Dropdown>
           </Stack>
@@ -117,7 +128,7 @@ const InvoiceCard: React.FC<{ data: InvoiceData }> = ({ data }) => {
       >
         <Card.Body className="py-3 border-bottom d-flex align-items-center justify-content-between">
           <p className="mb-0">
-            <i className="ph ph-timer align-middle f-18 text-danger me-1" />
+            <i className="ph ph-timer align-text-bottom f-18 text-danger me-1" />
             Due : {data.due}
           </p>
           <p className="mb-0 h4">
@@ -152,7 +163,7 @@ const InvoiceCard: React.FC<{ data: InvoiceData }> = ({ data }) => {
         </Card.Body>
         <Card.Footer className="bg-light py-3 border-bottom d-flex align-items-center justify-content-between">
           <Button className=" btn-light-success" size="sm">
-            <i className="ph ph-eye align-baseline me-1" />
+            <i className="ph ph-eye align-middle me-1" />
             View
           </Button>
           <Dropdown>
@@ -160,22 +171,16 @@ const InvoiceCard: React.FC<{ data: InvoiceData }> = ({ data }) => {
               Action
             </Dropdown.Toggle>
             <Dropdown.Menu align="end">
-              <Dropdown.Item href="#">
-                <i className="ph ph-printer align-middle" />
-                Print Invoice
-              </Dropdown.Item>
-              <Dropdown.Item href="#">
-                <i className="ph ph-download-simple align-middle" />
-                Download Invoice
-              </Dropdown.Item>
-              <hr className="m-0 my-2" />
-              <Dropdown.Item href="#">
-                <i className="ph ph-pencil-simple-line align-middle" /> Edit Invoice
-              </Dropdown.Item>
-              <Dropdown.Item href="#">
-                <i className="ph ph-trash align-middle" />
-                Remove Invoice
-              </Dropdown.Item>
+              {invoiceActionItems.map((item, index) =>
+                item.divider ? (
+                  <hr className="m-0 my-2" key={index} />
+                ) : (
+                  <Dropdown.Item href="#" key={index}>
+                    <i className={`${item.icon} align-middle`} />
+                    {item.action}
+                  </Dropdown.Item>
+                )
+              )}
             </Dropdown.Menu>
           </Dropdown>
         </Card.Footer>

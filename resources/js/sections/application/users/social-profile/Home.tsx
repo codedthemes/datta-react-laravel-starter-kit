@@ -29,6 +29,7 @@ interface Comment {
 }
 
 interface Post {
+  id: string;
   user: string;
   userImage: string;
   time: string;
@@ -43,6 +44,7 @@ interface Post {
 // post data
 const posts: Post[] = [
   {
+    id: 'post-1',
     user: 'Josephin Doe',
     userImage: avatar1,
     time: '50 minutes ago',
@@ -65,6 +67,7 @@ const posts: Post[] = [
     totalComments: 50
   },
   {
+    id: 'post-2',
     user: 'Josephin Doe',
     userImage: avatar1,
     time: '50 minutes ago',
@@ -82,6 +85,7 @@ const posts: Post[] = [
     totalComments: 50
   },
   {
+    id: 'post-3',
     user: 'Josephin Doe',
     userImage: avatar1,
     time: '50 minutes ago',
@@ -101,39 +105,39 @@ const PostCard: React.FC<{ post: Post }> = ({ post }) => (
     <Card.Header className="d-flex align-items-center">
       <Image src={post.userImage} roundedCircle width={40} height={40} className="me-2" />
       <div>
-        <h5 className="mb-1">
-          <a className="text-h-primary text-reset">
+        <h5>
+          <a href="#!" className="text-reset">
             <strong>{post.user}</strong>
-          </a>
+          </a>{' '}
           posted on your timeline
         </h5>
-        <p className="text-muted mb-0">{post.time}</p>
+        <p className="text-muted mt-1 mb-0">{post.time}</p>
       </div>
     </Card.Header>
     <Image fluid src={post.postImage} />
     <Card.Body>
-      <a className="text-h-primary">
-        <h6>{post.title}</h6>
+      <a href="#!">
+        <h6 className="f-w-500">{post.title}</h6>
       </a>
       <p className="text-muted mb-0">{post.content}</p>
     </Card.Body>
     <Card.Body className="border-top border-bottom">
-      <ListGroup horizontal className="m-0">
+      <ListGroup horizontal className="m-0 gap-2">
         <ListGroup.Item className="border-0 p-0">
-          <a className={`${post.liked === true ? 'text-danger' : 'text-muted'} me-1`}>
-            <i className="ph ph-heart me-2 align-middle" />
+          <a className={`${post.liked === true ? 'text-danger' : 'text-muted'} me-1 d-flex align-items-center`}>
+            <i className="ph ph-heart me-2" />
             Like
           </a>
         </ListGroup.Item>
         <ListGroup.Item className="border-0 p-0 ms-2">
-          <a className="text-muted me-1">
-            <i className="ph ph-chat me-2 align-middle" />
+          <a className="text-muted me-1 d-flex align-items-center">
+            <i className="ph ph-chat me-2" />
             Comment
           </a>
         </ListGroup.Item>
         <ListGroup.Item className="border-0 p-0 ms-2">
-          <a className="text-muted">
-            <i className="ph ph-share-network me-2 align-middle" />
+          <a className="text-muted d-flex align-items-center">
+            <i className="ph ph-share-network me-2" />
             Share
           </a>
         </ListGroup.Item>
@@ -142,10 +146,12 @@ const PostCard: React.FC<{ post: Post }> = ({ post }) => (
     <Card.Body>
       <Row className="justify-content-between mb-4">
         <Col xs="auto">
-          <a className="text-muted text-h-primary">Comment ({post.totalComments})</a>
+          <h6 className="f-w-500 mb-0">Comment ({post.totalComments})</h6>
         </Col>
         <Col xs="auto">
-          <a className="text-muted text-h-primary">See All</a>
+          <a href="#!" className="text-muted">
+            See All
+          </a>
         </Col>
       </Row>
       {post.comments.map((comment, idx) => (
@@ -165,9 +171,9 @@ const CommentInput: React.FC = () => (
   <Stack direction="horizontal">
     <Image src={avatar1} roundedCircle width={40} height={40} className="me-2" />
     <InputGroup className="mb-0">
-      <Form.Control placeholder="Write a comment here..." className="border-0 shadow-none" />
+      <Form.Control placeholder="Write a comment here..." />
       <Button variant="primary">
-        <i className="ph ph-chat-circle" />
+        <i className="ph ph-paper-plane-right" />
       </Button>
     </InputGroup>
   </Stack>
@@ -176,20 +182,18 @@ const CommentInput: React.FC = () => (
 // =============================|| COMMENT ||============================== //
 
 const Comment: React.FC<{ comment: Comment }> = ({ comment }) => (
-  <Stack direction="horizontal" className="mb-3">
+  <Stack direction="horizontal" className="align-items-start">
     <Image src={comment.userImage} roundedCircle width={30} height={30} className="me-2" />
-    <div>
-      <h6 className="mb-0 text-h-primary">{comment.user}</h6>
-      <p className="mb-0">
-        {comment.text}
-        <a className="text-muted ms-2">
-          <small>Like</small>
-        </a>
-        <a className="text-muted ms-2">
-          <small>Comment</small>
-        </a>
-      </p>
+    <div className="w-100">
+      <h6 className="mb-0">{comment.user}</h6>
+      <p className="mb-2">{comment.text}</p>
+      <a href="#!">
+        <small>Reply</small>
+      </a>
     </div>
+    <a href="#!" className="text-muted ms-2">
+      <i className="ph ph-heart"></i>
+    </a>
   </Stack>
 );
 
@@ -198,8 +202,8 @@ const Comment: React.FC<{ comment: Comment }> = ({ comment }) => (
 export default function Home() {
   return (
     <div className="tab-pane fade show active" id="home">
-      {posts.map((post, index) => (
-        <PostCard key={index} post={post} />
+      {posts.map((post) => (
+        <PostCard key={post.id} post={post} />
       ))}
     </div>
   );

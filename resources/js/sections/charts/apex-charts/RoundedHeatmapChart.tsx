@@ -1,4 +1,9 @@
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
+
+// project import
+import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 // third-party
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
@@ -17,7 +22,12 @@ function generateDatasehrat(count: number, yrange: { min: number; max: number })
   return series;
 }
 
-const options: ChartProps = {
+const roundedHeatMapChartOptions = {
+  chart: {
+    type: 'heatmap',
+    height: 350,
+    background: 'transparent'
+  },
   stroke: {
     width: 0
   },
@@ -47,7 +57,15 @@ const options: ChartProps = {
       colors: ['#fff']
     }
   },
-  colors: ['#04a9f5', '#13c2c2', '#1de9b6', '#f4c22b', '#f44236'],
+  legend: {
+    show: true,
+    position: 'bottom',
+    offsetX: 10,
+    offsetY: 10,
+    labels: { useSeriesColors: false },
+    markers: { size: 6, shape: 'circle', strokeWidth: 0 },
+    itemMargin: { horizontal: 10, vertical: 8 }
+  },
   xaxis: {
     type: 'category'
   }
@@ -56,74 +74,88 @@ const options: ChartProps = {
 // ==============================|| APEX CHART - ROUNDED HEATMAP CHART ||============================== //
 
 export default function RoundedHeatMapChart() {
-  const series = useMemo(
-    () => [
-      {
-        name: 'Metric1',
-        data: generateDatasehrat(15, {
-          min: 0,
-          max: 90
-        })
-      },
-      {
-        name: 'Metric2',
-        data: generateDatasehrat(15, {
-          min: 0,
-          max: 90
-        })
-      },
-      {
-        name: 'Metric3',
-        data: generateDatasehrat(15, {
-          min: 0,
-          max: 90
-        })
-      },
-      {
-        name: 'Metric4',
-        data: generateDatasehrat(15, {
-          min: 0,
-          max: 90
-        })
-      },
-      {
-        name: 'Metric5',
-        data: generateDatasehrat(15, {
-          min: 0,
-          max: 90
-        })
-      },
-      {
-        name: 'Metric6',
-        data: generateDatasehrat(15, {
-          min: 0,
-          max: 90
-        })
-      },
-      {
-        name: 'Metric7',
-        data: generateDatasehrat(15, {
-          min: 0,
-          max: 90
-        })
-      },
-      {
-        name: 'Metric8',
-        data: generateDatasehrat(15, {
-          min: 0,
-          max: 90
-        })
-      },
-      {
-        name: 'Metric8',
-        data: generateDatasehrat(15, {
-          min: 0,
-          max: 90
-        })
-      }
-    ],
-    []
-  );
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
+
+  const [series] = useState([
+    {
+      name: 'Metric1',
+      data: generateDatasehrat(15, {
+        min: 0,
+        max: 90
+      })
+    },
+    {
+      name: 'Metric2',
+      data: generateDatasehrat(15, {
+        min: 0,
+        max: 90
+      })
+    },
+    {
+      name: 'Metric3',
+      data: generateDatasehrat(15, {
+        min: 0,
+        max: 90
+      })
+    },
+    {
+      name: 'Metric4',
+      data: generateDatasehrat(15, {
+        min: 0,
+        max: 90
+      })
+    },
+    {
+      name: 'Metric5',
+      data: generateDatasehrat(15, {
+        min: 0,
+        max: 90
+      })
+    },
+    {
+      name: 'Metric6',
+      data: generateDatasehrat(15, {
+        min: 0,
+        max: 90
+      })
+    },
+    {
+      name: 'Metric7',
+      data: generateDatasehrat(15, {
+        min: 0,
+        max: 90
+      })
+    },
+    {
+      name: 'Metric8',
+      data: generateDatasehrat(15, {
+        min: 0,
+        max: 90
+      })
+    },
+    {
+      name: 'Metric8',
+      data: generateDatasehrat(15, {
+        min: 0,
+        max: 90
+      })
+    }
+  ]);
+
+  const [options, setOptions] = useState<ChartProps>(roundedHeatMapChartOptions);
+
+  useEffect(() => {
+    setOptions({
+      ...roundedHeatMapChartOptions,
+      chart: { ...roundedHeatMapChartOptions.chart, fontFamily: fontFamily },
+      colors: ['var(--bs-primary)', 'var(--bs-success)', 'var(--bs-info)', 'var(--bs-warning)', 'var(--bs-danger)'],
+      grid: { borderColor: 'var(--bs-border-color)' },
+      legend: { ...roundedHeatMapChartOptions.legend },
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
+    });
+  }, [resolvedTheme, fontFamily]);
 
   return <ReactApexChart options={options} series={series} type="heatmap" height={350} />;
 }

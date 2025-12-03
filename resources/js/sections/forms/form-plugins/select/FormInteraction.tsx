@@ -64,7 +64,7 @@ export default function FormInteraction() {
         <Form.Group className="my-2 py-2" as={Row}>
           <Form.Label column lg={4} sm={12} className="text-lg-end" />
           <Col lg={6} md={11} sm={12}>
-            <Button variant="light-warning" type="reset">
+            <Button variant="light-danger" type="reset">
               <i className="ph ph-warning me-2" /> Reset
             </Button>
           </Col>

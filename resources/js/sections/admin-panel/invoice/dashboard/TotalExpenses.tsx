@@ -1,17 +1,25 @@
+import { useState, useEffect } from 'react';
+
 // react-bootstrap
 import Dropdown from 'react-bootstrap/Dropdown';
 import Stack from 'react-bootstrap/Stack';
 
 // project-imports
 import MainCard from '@/components/MainCard';
+import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 // third-party
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // chart-options
-const chartOptions: ChartProps = {
+const expenssChartOptions = {
+  chart: {
+    type: 'donut',
+    height: 280
+  },
   series: [27, 23, 20, 17],
-  colors: ['#f4c22b', '#1de9b6', '#f44236', '#04a9f5'],
   labels: ['Pending', 'Paid', 'Overdue', 'Draft'],
   fill: {
     opacity: [1, 1, 1, 0.3]
@@ -69,6 +77,21 @@ const expenses = [
 // ==============================|| ADMIN PANEL - DASHBOARD EXPENSES CHART ||============================== //
 
 export default function ExpensesChart() {
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
+
+  const [options, setOptions] = useState<ChartProps>(expenssChartOptions);
+
+  useEffect(() => {
+    setOptions({
+      ...expenssChartOptions,
+      chart: { ...expenssChartOptions.chart, fontFamily: fontFamily },
+      colors: ['var(--bs-warning)', 'var(--bs-success)', 'var(--bs-danger)', 'var(--bs-primary)'],
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
+    });
+  }, [fontFamily, resolvedTheme]);
+
   return (
     <MainCard>
       <Stack direction="horizontal" className="align-items-center justify-content-between pb-0">
@@ -85,15 +108,15 @@ export default function ExpensesChart() {
         </Dropdown>
       </Stack>
       <Stack className="justify-content-center pt-4">
-        <ReactApexChart options={chartOptions} series={chartOptions.series} type="donut" height={280} />
+        <ReactApexChart options={options} series={options.series} type="donut" height={280} />
       </Stack>
-      {expenses.map(({ label, amount, color }) => (
-        <Stack key={label} direction="horizontal" className="align-items-center justify-content-between mb-2 mt-2">
+      {expenses.map((item, index) => (
+        <Stack key={index} direction="horizontal" className="align-items-center justify-content-between mb-2 mt-2">
           <Stack direction="horizontal" gap={2} className="align-items-center">
-            <i className={`ti ti-circle-filled text-${color} f-12`} />
-            <h6 className="mb-0">{label}</h6>
+            <i className={`ti ti-circle-filled text-${item.color} f-12`} />
+            <h6 className="mb-0">{item.label}</h6>
           </Stack>
-          <p className="mb-0 text-muted">{amount}</p>
+          <p className="mb-0 text-muted">{item.amount}</p>
         </Stack>
       ))}
       <Stack direction="horizontal" className="align-items-center justify-content-between">

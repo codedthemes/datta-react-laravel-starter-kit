@@ -11,8 +11,8 @@ import { useVirtualizer } from '@tanstack/react-virtual';
 // project-imports
 import LinearWithLabel from '@/components/@extended/progress/LinearWithLabel';
 import MainCard from '@/components/MainCard';
-import DebouncedInput from '@/components/third-party/react-table/DebouncedInput';
 import makeData from '@/data/react-table';
+import { DebouncedInput } from '@/components/third-party/react-table';
 
 // types
 import { TableDataProps } from '@/types/table';

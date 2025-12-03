@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-
 // third-party
 import { Editor } from '@tinymce/tinymce-react';
 
@@ -70,16 +68,16 @@ export default function BasicDemo() {
   const { mode } = useConfig();
   const resolvedTheme = getResolvedTheme(mode);
   setResolvedTheme(mode);
-  const [editorKey, setEditorKey] = useState(0);
+  // const [editorKey, setEditorKey] = useState('xomft3i4azv3nhkzmkytfdpvsn5xgs56qeusm3wt0n1fwqet');
 
-  useEffect(() => {
-    setEditorKey((prevKey) => prevKey + 1);
-  }, [resolvedTheme]);
+  // useEffect(() => {
+  //   setEditorKey((prevKey) => prevKey + 1);
+  // }, [resolvedTheme]);
 
   return (
     <MainCard title="Basic Demo">
       <Editor
-        key={editorKey}
+        key={'xomft3i4azv3nhkzmkytfdpvsn5xgs56qeusm3wt0n1fwqet'}
         initialValue={initialValues}
         init={{
           height: 500,

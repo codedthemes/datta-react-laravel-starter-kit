@@ -17,6 +17,8 @@ export default function MasonryGalleryPage() {
       <Row>
         <Col sm={12}>
           <FilterLayout />
+      </Col>
+      <Col sm={12}>
           <MasonryLayout />
         </Col>
       </Row>

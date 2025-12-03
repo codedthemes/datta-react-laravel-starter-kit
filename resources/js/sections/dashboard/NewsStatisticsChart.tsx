@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
 
 // react-bootstrap
 import Col from 'react-bootstrap/Col';
@@ -9,21 +9,18 @@ import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // project-imports
 import MainCard from '@/components/MainCard';
+import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 // chart-options
-const chartOptions: ChartProps = {
-  series: [
-    {
-      name: 'News',
-      data: [53, 13, 30, 4]
-    }
-  ],
+const statisticsChartOptions = {
   chart: {
+    type: 'bar',
     toolbar: {
       show: false
     }
   },
-  colors: ['#1de9b6', '#a389d4', '#04a9f5', '#f44236'],
   fill: {
     type: 'gradient',
     opacity: 1,
@@ -39,6 +36,9 @@ const chartOptions: ChartProps = {
       columnWidth: '35%',
       distributed: true
     }
+  },
+  stroke: {
+    show: false
   },
   dataLabels: {
     enabled: false
@@ -90,19 +90,32 @@ const newsStatisticsData = [
 // =============================|| CRM - NEWS STATISTICS CHART ||============================== //
 
 export default function NewsStatisticsChart() {
-  const series = useMemo(
-    () => [
-      {
-        name: 'Sport',
-        data: [53, 13, 30, 4]
-      }
-    ],
-    []
-  );
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
+
+  const [series] = useState([
+    {
+      name: 'Sport',
+      data: [53, 13, 30, 4]
+    }
+  ]);
+
+  const [options, setOptions] = useState<ChartProps>(statisticsChartOptions);
+
+  useEffect(() => {
+    setOptions({
+      ...statisticsChartOptions,
+      chart: { ...statisticsChartOptions.chart, fontFamily: fontFamily },
+      colors: ['var(--bs-success)', 'var(--bs-purple)', 'var(--bs-primary)', 'var(--bs-danger)'],
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
+    });
+  }, [fontFamily, resolvedTheme]);
+
   return (
     <>
       <MainCard title="News Statistics" className="mb-0" bodyClassName="pl-0 pr-0 pb-2">
-        <ReactApexChart options={chartOptions} series={series} type="bar" height={200} />
+        <ReactApexChart options={options} series={series} type="bar" height={200} />
       </MainCard>
       <MainCard className="border-top">
         <Row>

@@ -17,7 +17,11 @@
         0 100%,
         100% 100%;
       transition: background 0.3s ease-out;
-      background-image: linear-gradient(to top, theme-color('primary') 2px, rgba(255, 255, 255, 0) 2px);
+      background-image: linear-gradient(
+        to top,
+        theme-color('primary') 2px,
+        rgba(255, 255, 255, 0) 2px
+      );
 
       &.active {
         background-size:

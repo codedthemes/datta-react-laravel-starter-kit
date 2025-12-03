@@ -40,17 +40,18 @@ const invoices: InvoiceData[] = Array(4)
     ...invoice,
     id: index + 1
   }));
+
 // dropdown item data
 const dropdownItems = [
-  { icon: <i className="ph ph-printer align-middle" />, label: 'Print Invoice' },
-  { icon: <i className="ph ph-download-simple align-middle" />, label: 'Download Invoice' },
-  { icon: <i className="ph ph-pencil-simple-line align-middle" />, label: 'Edit Invoice' },
-  { icon: <i className="ph ph-trash align-middle" />, label: 'Remove Invoice' },
+  { icon: 'ph ph-printer', label: 'Print Invoice' },
+  { icon: 'ph ph-download-simple', label: 'Download Invoice' },
+  { icon: 'ph ph-pencil-simple-line', label: 'Edit Invoice' },
+  { icon: 'ph ph-trash', label: 'Remove Invoice' },
   { divider: true },
-  { icon: <i className="ph ph-info align-middle" />, label: 'Pending' },
-  { icon: <i className="ph ph-checks align-middle" />, label: 'Paid' },
-  { icon: <i className="ph ph-hourglass-medium align-middle" />, label: 'On Hold' },
-  { icon: <i className="ph ph-x-circle align-middle" />, label: 'Canceled' }
+  { icon: 'ph ph-info', label: 'Pending' },
+  { icon: 'ph ph-checks', label: 'Paid' },
+  { icon: 'ph ph-hourglass-medium', label: 'On Hold' },
+  { icon: 'ph ph-x-circle', label: 'Canceled' }
 ];
 
 // =============================|| INVOICE LIST ||============================== //
@@ -59,19 +60,19 @@ const InvoiceListItem: React.FC<{ data: InvoiceData }> = ({ data }) => {
   return (
     <Card.Body className="py-3 border-bottom">
       <Row className="justify-content-sm-between align-items-center">
-        <Col sm={3}>
+        <Col sm={3} className="mb-2 mb-sm-0">
           <Stack direction="horizontal" gap={2} className="align-items-center">
             <Image src={data.avatar} className="img-radius wid-25" fluid />
             <h6 className="m-0">{data.name}</h6>
           </Stack>
         </Col>
-        <Col sm={3}>
+        <Col sm={3} className="mb-2 mb-sm-0">
           <p className="h5 mb-0">
-            <i className="ph ph-wallet align-middle f-20 text-primary" /> {data.amount}
+            <i className="ph ph-wallet align-bottom f-20 text-primary" /> {data.amount}
           </p>
         </Col>
         <Col sm={6} className="d-sm-flex justify-content-between align-items-center">
-          <p className="mb-0">
+          <p className="mb-2 mb-sm-0">
             <i className="ph ph-receipt align-middle f-18 text-info" /> {data.invoiceNo}
           </p>
           <div>
@@ -91,7 +92,8 @@ const InvoiceListItem: React.FC<{ data: InvoiceData }> = ({ data }) => {
                     <hr className="m-0 my-2" key={index} />
                   ) : (
                     <Dropdown.Item key={index} href="#">
-                      {item.icon} {item.label}
+                      <i className={`${item.icon} align-middle`} />
+                      {item.label}
                     </Dropdown.Item>
                   )
                 )}

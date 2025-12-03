@@ -9,11 +9,11 @@ import MainCard from '@/components/MainCard';
 
 export default function InvoiceReceivableCard() {
   return (
-    <MainCard className="bg-primary">
+    <MainCard className="bg-primary" bodyClassName="p-3">
       <Stack direction="horizontal" className="align-items-center">
         <div className="flex-shrink-0">
-          <div className="avatar bg-white bg-opacity-10 text-white svg-wid-22">
-            <i className="ph ph-user-plus f-22" />
+          <div className="avatar avatar-s bg-white bg-opacity-10 text-white">
+            <i className="ph ph-user-plus f-20" />
           </div>
         </div>
         <div className="flex-grow-1 ms-3">
@@ -22,7 +22,7 @@ export default function InvoiceReceivableCard() {
           </Stack>
           <Stack direction="horizontal" className="align-items-center justify-content-between">
             <Stack direction="horizontal" className="text-white mb-0 align-items-center" gap={2}>
-              Current <span className="fw-medium f-16">109.1k</span>
+              Current <span className="fw-medium">109.1k</span>
             </Stack>
             <Stack direction="horizontal" className="text-white mb-0 align-items-center" gap={2}>
               Overdue <span className="fw-medium f-16">62k</span>

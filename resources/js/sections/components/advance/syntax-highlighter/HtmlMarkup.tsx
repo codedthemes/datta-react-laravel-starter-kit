@@ -15,7 +15,6 @@ export default function HtmlMarkupPage() {
     <MainCard title="HTML Markup ">
       <p>Use the following code to use HTML syntax highlighter.</p>
       <h6 className="m-t-20 f-w-600">Usage:</h6>
-      {/* @ts-ignore https://github.com/react-syntax-highlighter/react-syntax-highlighter/issues/539 */}
       <SyntaxHighlighter
         language="javascript"
         style={dark}
@@ -34,7 +33,6 @@ export default function HtmlMarkupPage() {
       </SyntaxHighlighter>
 
       <h6 className="m-t-20 f-w-600">Example:</h6>
-      {/* @ts-ignore https://github.com/react-syntax-highlighter/react-syntax-highlighter/issues/539 */}
       <SyntaxHighlighter
         language="javascript"
         style={dark}

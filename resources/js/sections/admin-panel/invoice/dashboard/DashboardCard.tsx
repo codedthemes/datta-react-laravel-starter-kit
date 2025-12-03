@@ -5,8 +5,14 @@ import Row from 'react-bootstrap/Row';
 // project-imports
 import MainCard from '@/components/MainCard';
 
+interface CardProps {
+  icon: string;
+  label: string;
+  bg: string;
+}
+
 // card data
-const cardData: { icon: string; label: string; bg: string }[] = [
+const cardData: CardProps[] = [
   { icon: 'ph ph-invoice', label: 'All Invoices', bg: 'bg-primary' },
   { icon: 'ph ph-book-bookmark ', label: 'Reports', bg: 'bg-info' },
   { icon: 'ph ph-currency-circle-dollar ', label: 'Paid', bg: 'bg-success' },

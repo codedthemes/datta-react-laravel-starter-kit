@@ -35,7 +35,7 @@ export default function ThreeColumnsFormLayoutPage() {
               <Form.Label>Password:</Form.Label>
               <InputGroup>
                 <InputGroup.Text>
-                  <i className="ph ph-lock-key" />
+                  <i className="ti ti-lock f-20" />
                 </InputGroup.Text>
                 <Form.Control type="text" placeholder="Enter full name" />
               </InputGroup>
@@ -59,7 +59,7 @@ export default function ThreeColumnsFormLayoutPage() {
               <InputGroup>
                 <Form.Control type="email" placeholder="Profile URL" />
                 <InputGroup.Text>
-                  <i className="ph ph-link" />
+                  <i className="ti ti-link f-20" />
                 </InputGroup.Text>
               </InputGroup>
               <Form.Text>Please enter your email</Form.Text>
@@ -87,8 +87,11 @@ export default function ThreeColumnsFormLayoutPage() {
           <Col lg={4}>
             <Form.Group className="mb-3">
               <Form.Label>User Type:</Form.Label>
-              <Form.Check type="radio" name="userType" label="Administrator" id="Administrator" defaultChecked />
-              <Form.Check type="radio" name="userType" label="Author" id="Author" />
+              <div>
+                <Form.Check className="form-check-inline" type="radio" name="userType" label="Administrator" id="Administrator" />
+                <Form.Check className="form-check-inline" type="radio" name="userType" label="Author" id="Author" />
+              </div>
+              <small className="form-text text-muted">Please select user type</small>
             </Form.Group>
           </Col>
         </Row>

@@ -1,32 +1,31 @@
+import { useState } from 'react';
+
 // react-bootstrap
 import Button from 'react-bootstrap/Button';
+import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Stack from 'react-bootstrap/Stack';
 
 // third-party
-import { EventInput } from '@fullcalendar/common';
+import Calendar from 'react-calendar';
 import * as Yup from 'yup';
+import { EventInput } from '@fullcalendar/common';
 import { useFormik, Form as FormikForm, FormikProvider } from 'formik';
+import { Value } from 'react-calendar/dist/shared/types.js';
+import { addDays } from 'date-fns';
 
 import { createEvent, updateEvent } from '@/api/calender';
+
+// project-imports
+import { COLOR_CLASS_MAP } from '@/utils/colorClassMap';
 
 interface AddEventFormProps {
   open: boolean;
   handleEventModal: () => void;
   selectedEvent: EventInput | null;
+  selectedRange?: { start: Date; end: Date } | null;
 }
-
-const COLOR_CLASS_MAP: Record<string, string> = {
-  '#f6ffed': 'event-danger',
-  '#8c8c8c': 'event-secondary',
-  '#fffbe6': 'event-warning',
-  '#faad14': 'event-warning',
-  '#52c41a': 'event-success',
-  '#1890ff': 'event-primary',
-  '#f5222d': 'event-danger',
-  '#e6f7ff': 'event-info'
-};
 
 // formik validation
 const EventSchema = Yup.object().shape({
@@ -38,22 +37,43 @@ const EventSchema = Yup.object().shape({
 
 // ==============================|| CALENDAR - ADD EVENT FORM ||============================== //
 
-export default function AddEventForm({ open, handleEventModal, selectedEvent }: AddEventFormProps) {
+export default function AddEventForm({ open, handleEventModal, selectedEvent, selectedRange }: AddEventFormProps) {
+  const [startDate, setStartDate] = useState<Date | null>(
+    selectedEvent?.start ? new Date(selectedEvent.start as string) : (selectedRange?.start ?? null)
+  );
+  const [endDate, setEndDate] = useState<Date | null>(
+    selectedEvent?.end ? new Date(selectedEvent.end as string) : (selectedRange?.end ?? null)
+  );
+  const [activeInput, setActiveInput] = useState<'start' | 'end' | null>(null);
+  const handleInputClick = (input: 'start' | 'end') => {
+    setActiveInput(input);
+  };
+  const handleDateChange = (value: Value) => {
+    if (Array.isArray(value)) {
+      const [start, end] = value;
+      setStartDate(start);
+      setEndDate(end);
+
+      // update formik values
+      formik.setFieldValue('start', start);
+      formik.setFieldValue('end', end);
+
+      setActiveInput(null);
+    } else if (value instanceof Date) {
+      setStartDate(value);
+      formik.setFieldValue('start', value);
+      setEndDate(null);
+      formik.setFieldValue('end', null);
+    }
+  };
+
   const formik = useFormik({
     initialValues: {
       title: selectedEvent?.title || '',
       venue: 'City Town',
       description: selectedEvent?.description || '',
-      start: selectedEvent?.start
-        ? typeof selectedEvent.start === 'string'
-          ? new Date(Date.parse(selectedEvent.start))
-          : selectedEvent.start
-        : null,
-      end: selectedEvent?.end
-        ? typeof selectedEvent.end === 'string'
-          ? new Date(Date.parse(selectedEvent.end))
-          : selectedEvent.end
-        : null,
+      start: selectedEvent?.start ? new Date(selectedEvent.start as string) : (selectedRange?.start ?? null),
+      end: selectedEvent?.end ? new Date(selectedEvent.end as string) : (selectedRange?.end ?? null),
       color: selectedEvent?.color || ''
     },
     validationSchema: EventSchema,
@@ -62,12 +82,8 @@ export default function AddEventForm({ open, handleEventModal, selectedEvent }: 
       try {
         const transformedValues = {
           ...values,
-          start: Array.isArray(values.start)
-            ? new Date(values.start[0])
-            : typeof values.start === 'number'
-              ? new Date(values.start)
-              : values.start,
-          end: Array.isArray(values.end) ? new Date(values.end[0]) : typeof values.end === 'number' ? new Date(values.end) : values.end,
+          sstart: values.start instanceof Date ? values.start : null,
+          end: values.end instanceof Date ? addDays(values.end, 1) : null,
           color: values.color,
           textColor: values.color,
           allDay: true
@@ -92,7 +108,7 @@ export default function AddEventForm({ open, handleEventModal, selectedEvent }: 
   return (
     <Offcanvas show={open} onHide={handleEventModal} placement="end">
       <Offcanvas.Header closeButton>
-        <h3 className="f-w-600 text-truncate">{selectedEvent ? 'Update Event' : 'Add Event'}</h3>
+        <h4 className="f-w-600 text-truncate mb-0">{selectedEvent ? 'Update Event' : 'Add Event'}</h4>
       </Offcanvas.Header>
 
       <Offcanvas.Body>
@@ -149,6 +165,44 @@ export default function AddEventForm({ open, handleEventModal, selectedEvent }: 
                   </option>
                 ))}
               </Form.Select>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Date Range</Form.Label>
+              <InputGroup>
+                {/* Start Date */}
+                <Form.Control
+                  type="text"
+                  className="rounded-start rounded-end-0"
+                  placeholder="Start date"
+                  value={formik.values.start ? new Date(formik.values.start).toLocaleDateString() : ''}
+                  onClick={() => handleInputClick('start')}
+                  readOnly
+                />
+                {/* End Date */}
+                <Form.Control
+                  type="text"
+                  className="text-end rounded-start-0 rounded-end"
+                  placeholder="End date"
+                  value={formik.values.end ? new Date(formik.values.end).toLocaleDateString() : ''}
+                  onClick={() => handleInputClick('end')}
+                  readOnly
+                />
+              </InputGroup>
+              {activeInput && (
+                <Calendar
+                  {...getFieldProps('dateRange')}
+                  selectRange
+                  onChange={handleDateChange}
+                  value={[startDate, endDate]}
+                  formatShortWeekday={(locale, date) => date.toLocaleDateString(locale, { weekday: 'short' }).slice(0, 2)}
+                  prev2Label={null}
+                  next2Label={null}
+                  prevLabel="«"
+                  nextLabel="»"
+                  className={`react-calendar react-calendar-${activeInput}`}
+                />
+              )}
             </Form.Group>
 
             <Stack direction="horizontal" className="justify-content-between">

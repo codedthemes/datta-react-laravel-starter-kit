@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 
 // react-bootstrap
 import Collapse from 'react-bootstrap/Collapse';
@@ -18,6 +17,7 @@ import menuItems from '@/menu-items';
 
 // types
 import { NavItemType } from '@/types/menu';
+import { usePage } from '@inertiajs/react';
 
 // ==============================|| TAB DRAWER CONTENT ||============================== //
 
@@ -30,7 +30,7 @@ export default function TabDrawerContent({ selectedItems, setSelectedItems }: Ta
   const { onChangeMenuOrientation } = useConfig();
   const [selectTab, setSelectTab] = useState<NavItemType | undefined>(menuItems.items[0]);
   const { menuMaster } = useGetMenuMaster();
-  const { pathname } = useLocation();
+  const  pathname  = usePage();
   const drawerOpen = menuMaster?.isDashboardDrawerOpened;
 
   const [open, setOpen] = useState<Record<string, boolean>>({});
@@ -96,7 +96,10 @@ export default function TabDrawerContent({ selectedItems, setSelectedItems }: Ta
   const isActive = useCallback(
     (item: NavItemType) => {
       if (!item.url) return false;
-      return pathname.toLowerCase().includes(item.url.toLowerCase());
+      // return pathname.toLowerCase().includes(item.url.toLowerCase());
+      return typeof pathname === "string" &&
+       typeof item?.url === "string" &&
+       pathname.toLowerCase().includes(item.url.toLowerCase());
     },
     [pathname]
   );
@@ -142,7 +145,7 @@ export default function TabDrawerContent({ selectedItems, setSelectedItems }: Ta
                   key={item.id}
                   className={`pc-item pc-hasmenu ${open[item.id as string] ? 'pc-trigger' : ''} ${isActive(item) ? 'active' : ''}`}
                 >
-                  <Link to={item.url || '#'} className="pc-link" onClick={() => handleClick(item, selectTab?.children)}>
+                  <a href={item.url || '#'} className="pc-link" onClick={() => handleClick(item, selectTab?.children)}>
                     {item.icon && (
                       <span className="pc-micon">
                         <i className={item.icon} />
@@ -156,7 +159,7 @@ export default function TabDrawerContent({ selectedItems, setSelectedItems }: Ta
                         <i className="ti ti-chevron-right" />
                       </span>
                     )}
-                  </Link>
+                  </a>
 
                   {item.children && (
                     <Collapse in={!!open[item.id as string]} mountOnEnter unmountOnExit>
@@ -167,8 +170,8 @@ export default function TabDrawerContent({ selectedItems, setSelectedItems }: Ta
                               key={child.id}
                               className={`pc-item ${child.type === 'collapse' ? 'pc-hasmenu' : ''} ${open[child.id as string] ? 'pc-trigger' : ''} ${isActive(child) ? 'active' : ''}`}
                             >
-                              <Link
-                                to={child.url || '#'}
+                              <a
+                                href={child.url || '#'}
                                 className="pc-link"
                                 onClick={() => {
                                   handleClick(child, item.children);
@@ -188,7 +191,7 @@ export default function TabDrawerContent({ selectedItems, setSelectedItems }: Ta
                                     <i className="ti ti-chevron-right" />
                                   </span>
                                 )}
-                              </Link>
+                              </a>
 
                               {child.children && (
                                 <Collapse in={!!open[child.id as string]} mountOnEnter unmountOnExit>
@@ -199,9 +202,9 @@ export default function TabDrawerContent({ selectedItems, setSelectedItems }: Ta
                                           key={value.id}
                                           className={`pc-item ${value.type === 'collapse' ? 'pc-hasmenu' : ''} ${open[value.id as string] ? 'pc-trigger' : ''} ${isActive(value) ? 'active' : ''}`}
                                         >
-                                          <Link
+                                          <a
                                             className="pc-link"
-                                            to={value.url || ''}
+                                            href={value.url || ''}
                                             onClick={() => {
                                               handleClick(value, child.children);
                                               if (value?.layout === value?.title) {
@@ -215,7 +218,7 @@ export default function TabDrawerContent({ selectedItems, setSelectedItems }: Ta
                                               </span>
                                             )}
                                             <FormattedMessage id={value.title as string} />
-                                          </Link>
+                                          </a>
                                         </li>
                                       ))}
                                     </ul>

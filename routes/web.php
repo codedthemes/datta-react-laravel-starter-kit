@@ -20,9 +20,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Layout
     Route::get('layouts/vertical', function () {return Inertia::render('navigation/layouts/Vertical');})->name('Vertical');
+    Route::get('layouts/horizontal', function () {return Inertia::render('navigation/layouts/Horizontal');})->name('Horizontal');
     Route::get('layouts/tab', function () {return Inertia::render('navigation/layouts/Tab');})->name('Tab');
     Route::get('layouts/layout-2', function () {return Inertia::render('navigation/layouts/LayoutTwoPage');})->name('LayoutTwoPage');
     Route::get('layouts/layout-3', function () {return Inertia::render('navigation/layouts/LayoutThreePage');})->name('LayoutThreePage');
+    Route::get('layouts/rtl', function () {return Inertia::render('navigation/layouts/Rtl');})->name('Rtl');
 
     // Widgets
     Route::get('widget/statistics', function () {return Inertia::render('navigation/widgets/statistics/index');})->name('statistics');
@@ -62,10 +64,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
     // Invoice
     Route::get('admin-panel/invoice/dashboard', function () {return Inertia::render('admin-panel/invoice/Dashboard');})->name('Dashboard');
-    Route::get('admin-panel/invoice/details', function () {return Inertia::render('admin-panel/invoice/Details');})->name('Details');
+    Route::get('admin-panel/invoice/details/{id}', function ($id) {
+    return Inertia::render('admin-panel/invoice/Details', ['id' => $id]);
+})->name('invoice.details');
     Route::get('admin-panel/invoice/create', function () {return Inertia::render('admin-panel/invoice/Create');})->name('Create');
     Route::get('admin-panel/invoice/list', function () {return Inertia::render('admin-panel/invoice/List');})->name('List');
-    Route::get('admin-panel/invoice/edit', function () {return Inertia::render('admin-panel/invoice/Edit');})->name('Edit');
+    Route::get('admin-panel/invoice/edit/{id}', function ($id) {
+    return Inertia::render('admin-panel/invoice/Edit', ['id' => $id]);
+})->name('invoice.edit');
     
     // Basic component
     Route::get('basic/alert', function () {return Inertia::render('components/basic/Alert');})->name('Alert');

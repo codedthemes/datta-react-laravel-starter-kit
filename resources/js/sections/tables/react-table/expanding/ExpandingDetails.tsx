@@ -1,7 +1,6 @@
 import { Fragment, useMemo, useState } from 'react';
 
 // react-bootstrap
-import Badge from 'react-bootstrap/Badge';
 import Stack from 'react-bootstrap/Stack';
 import Table from 'react-bootstrap/Table';
 
@@ -17,15 +16,14 @@ import {
   getPaginationRowModel,
   getFilteredRowModel
 } from '@tanstack/react-table';
+import { LabelKeyObject } from 'react-csv/lib/core';
 
 // project-imports
 import ExpandingUserDetail from './ExpandingUserDetailsTable';
 import MainCard from '@/components/MainCard';
 import LinearWithLabel from '@/components/@extended/progress/LinearWithLabel';
-import DebouncedInput from '@/components/third-party/react-table/DebouncedInput';
-import SortingData from '@/components/third-party/react-table/SortingData';
-import TablePagination from '@/components/third-party/react-table/Pagination';
 import makeData from '@/data/react-table';
+import { CSVExport, DebouncedInput, SortingData, StatusPill, TablePagination } from '@/components/third-party/react-table';
 
 // types
 import { TableDataProps } from '@/types/table';
@@ -33,11 +31,12 @@ import { TableDataProps } from '@/types/table';
 interface ReactTableProps {
   columns: ColumnDef<TableDataProps>[];
   data: TableDataProps[];
+  title: string;
 }
 
 // ==============================|| REACT TABLE ||============================== //
 
-function ReactTable({ data, columns }: ReactTableProps) {
+function ReactTable({ data, columns, title }: ReactTableProps) {
   const [globalFilter, setGlobalFilter] = useState('');
 
   const table = useReactTable({
@@ -51,30 +50,47 @@ function ReactTable({ data, columns }: ReactTableProps) {
     getPaginationRowModel: getPaginationRowModel()
   });
 
+  const headers = useMemo<LabelKeyObject[]>(
+    () =>
+      table.getAllColumns().map((column) => ({
+        label: typeof column.columnDef.header === 'string' ? column.columnDef.header : '#',
+        key: (column.columnDef as { accessorKey?: string }).accessorKey ?? ''
+      })),
+    [table]
+  );
+
   return (
-    <MainCard title="Expanding User Details" className="table-card">
+    <MainCard title={title} secondary={<CSVExport data={data} headers={headers} filename="expanding-details.csv" />} className="table-card">
+      {/* Toolbar */}
       <Stack direction="horizontal" className="justify-content-between align-items-center flex-wrap p-4" gap={2}>
         <SortingData getState={table.getState} setPageSize={table.setPageSize} />
         <div className="datatable-search">
           <DebouncedInput value={globalFilter ?? ''} onFilterChange={(value) => setGlobalFilter(String(value))} />
         </div>
       </Stack>
+
+      {/* Table */}
       <Table responsive className="border-top">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id}>{header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}</th>
+                <th key={header.id} {...header.column.columnDef.meta}>
+                  {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                </th>
               ))}
             </tr>
           ))}
         </thead>
+
         <tbody>
           {table.getRowModel().rows.map((row) => (
             <Fragment key={row.id}>
               <tr>
                 {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
+                  <td key={cell.id} {...cell.column.columnDef.meta}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
                 ))}
               </tr>
               {row.getIsExpanded() && !row.getIsGrouped() && (
@@ -88,13 +104,15 @@ function ReactTable({ data, columns }: ReactTableProps) {
           ))}
         </tbody>
       </Table>
+
+      {/* pagination */}
       <TablePagination
         setPageSize={table.setPageSize}
         setPageIndex={table.setPageIndex}
         getState={table.getState}
         getPageCount={table.getPageCount}
         initialPageSize={10}
-        totalEntries={50}
+        totalEntries={data.length}
       />
     </MainCard>
   );
@@ -102,10 +120,10 @@ function ReactTable({ data, columns }: ReactTableProps) {
 
 // ==============================|| EXPANDING - EXPANDING DETAILS ||============================== //
 
-export default function ExpandingDetails() {
-  const data = makeData(50);
+export default function ExpandingDetails({ title }: { title: string }) {
+  const data: TableDataProps[] = makeData(50);
 
-  const columns = useMemo(
+  const columns = useMemo<ColumnDef<TableDataProps>[]>(
     () => [
       {
         id: 'expander',
@@ -119,7 +137,10 @@ export default function ExpandingDetails() {
       },
       {
         header: 'Name',
-        accessorKey: 'fullName'
+        accessorKey: 'fullName',
+        meta: {
+          className: 'text-nowrap'
+        }
       },
       {
         header: 'Email',
@@ -133,26 +154,15 @@ export default function ExpandingDetails() {
         },
         cell: ({ getValue }: CellContext<TableDataProps, number>) => <div>{getValue()}</div>
       },
-      {
-        header: 'Status',
-        accessorKey: 'status',
-        cell: ({ getValue }: CellContext<TableDataProps, string>) => {
-          const status = getValue();
-          return (
-            <Badge bg={status === 'Complicated' ? 'light-danger' : status === 'Relationship' ? 'light-success' : 'light-info'}>
-              {status}
-            </Badge>
-          );
-        }
-      },
+      { header: 'Status', accessorKey: 'status', cell: (cell) => <StatusPill status={cell.getValue() as string} /> },
       {
         header: 'Profile Progress',
         accessorKey: 'progress',
-        cell: (props) => <LinearWithLabel value={Number(props.getValue())} />
+        cell: ({ getValue }) => <LinearWithLabel value={getValue<number>()} />
       }
     ],
     []
   );
 
-  return <ReactTable columns={columns} data={data} />;
+  return <ReactTable {...{ columns, data, title }} />;
 }

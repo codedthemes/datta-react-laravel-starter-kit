@@ -228,7 +228,8 @@ const adminPanel: NavItemType = {
           id: 'invoice-details',
           title: 'details',
           type: 'item',
-          url: '/admin-panel/invoice/details'
+          url: '/admin-panel/invoice/details/1',
+          link: '/admin-panel/invoice/details/:id'
         },
         {
           id: 'invoice-list',
@@ -240,7 +241,8 @@ const adminPanel: NavItemType = {
           id: 'invoice-edit',
           title: 'edit',
           type: 'item',
-          url: '/admin-panel/invoice/edit'
+          url: '/admin-panel/invoice/edit/1',
+          link: '/admin-panel/invoice/edit/:id'
         }
       ]
     }

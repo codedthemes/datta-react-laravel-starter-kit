@@ -1,6 +1,7 @@
 // ============================
 //   6. Common layout css start
 // ============================
+@use 'sass:color';
 
 .pc-container {
   $temp: $header-height + 66;
@@ -425,7 +426,7 @@
   &:before {
     position: absolute;
     content: '';
-    background: darken($body-bg, 25%);
+    background: #{color.adjust($body-bg, $lightness: -25%)};
     border-radius: 7px;
     left: 2px;
     right: 2px;

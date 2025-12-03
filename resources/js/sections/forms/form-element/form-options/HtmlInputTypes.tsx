@@ -9,38 +9,50 @@ import Stack from 'react-bootstrap/Stack';
 // project-imports
 import MainCard from '@/components/MainCard';
 
+type FormState = {
+  text: string;
+  number: number;
+  tel: string;
+  email: string;
+  password: string;
+  dateTime: string;
+  date: string;
+  time: string;
+  month: string;
+  week: string;
+  color: string;
+  range: number;
+  search: string;
+  url: string;
+};
+
 // =============================|| FORM OPTIONS - HTML INPUT TYPES ||============================== //
 
 export default function HTMLInputTypes() {
-  const [inputText, setInputText] = useState('john Doe');
-  const [numberValue, setNumberValue] = useState(100);
-  const [telValue, setTelValue] = useState('+918888888888');
-  const [emailValue, setEmailValue] = useState('demo@example.com');
-  const [passwordValue, setPasswordValue] = useState('Password');
-  const [dateTime, setDateTime] = useState('2021-12-31T04:03:20');
-  const [date, setDate] = useState('2021-12-31');
-  const [time, setTime] = useState('04:03:20');
-  const [month, setMonth] = useState('2021-12');
-  const [week, setWeek] = useState('2021-W41');
-  const [color, setColor] = useState('#5052FC');
-  const [range, setRange] = useState(25);
-  const [search, setSearch] = useState('Best Admin Template');
-  const [url, setUrl] = useState('https://validator.w3.org/');
+  const [formData, setFormData] = useState<FormState>({
+    text: 'John Doe',
+    number: 100,
+    tel: '+918888888888',
+    email: 'demo@example.com',
+    password: 'Password',
+    dateTime: '2021-12-31T04:03:20',
+    date: '2021-12-31',
+    time: '04:03:20',
+    month: '2021-12',
+    week: '2021-W41',
+    color: '#5052FC',
+    range: 25,
+    search: 'Best Admin Template',
+    url: 'https://validator.w3.org/'
+  });
 
-  const handleInputTextChange = (e: ChangeEvent<HTMLInputElement>) => setInputText(e.target.value);
-  const handleNumberChange = (e: ChangeEvent<HTMLInputElement>) => setNumberValue(parseInt(e.target.value));
-  const handleTelChange = (e: ChangeEvent<HTMLInputElement>) => setTelValue(e.target.value);
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => setEmailValue(e.target.value);
-  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => setPasswordValue(e.target.value);
-  const handleDateTimeChange = (e: ChangeEvent<HTMLInputElement>) => setDateTime(e.target.value);
-  const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => setDate(e.target.value);
-  const handleTimeChange = (e: ChangeEvent<HTMLInputElement>) => setTime(e.target.value);
-  const handleMonthChange = (e: ChangeEvent<HTMLInputElement>) => setMonth(e.target.value);
-  const handleWeekChange = (e: ChangeEvent<HTMLInputElement>) => setWeek(e.target.value);
-  const handleColorChange = (e: ChangeEvent<HTMLInputElement>) => setColor(e.target.value);
-  const handleRangeChange = (e: ChangeEvent<HTMLInputElement>) => setRange(parseInt(e.target.value));
-  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value);
-  const handleUrlChange = (e: ChangeEvent<HTMLInputElement>) => setUrl(e.target.value);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === 'number' || type === 'range' ? parseInt(value) || 0 : value
+    }));
+  };
 
   return (
     <MainCard title="HTML Input Types">
@@ -56,90 +68,97 @@ export default function HTMLInputTypes() {
         </Stack>
       </Alert>
 
-      <div className="mb-3">
+      {/* Text Inputs */}
+      <Form.Group className="mb-3">
         <Form.Label>Simple Input Text</Form.Label>
-        <Form.Control type="text" value={inputText} onChange={handleInputTextChange} />
-      </div>
+        <Form.Control type="text" name="text" value={formData.text} onChange={handleChange} />
+      </Form.Group>
 
-      <div className="mb-3">
+      <Form.Group className="mb-3">
         <Form.Label>Number</Form.Label>
-        <Form.Control type="number" value={numberValue} onChange={handleNumberChange} />
-      </div>
+        <Form.Control type="number" name="number" value={formData.number} onChange={handleChange} min={0} />
+      </Form.Group>
 
-      <div className="mb-3">
+      <Form.Group className="mb-3">
         <Form.Label>Telephone</Form.Label>
-        <Form.Control type="tel" value={telValue} onChange={handleTelChange} />
-      </div>
+        <Form.Control type="tel" name="tel" value={formData.tel} onChange={handleChange} placeholder="+91 8888888888" />
+      </Form.Group>
 
-      <div className="mb-3">
+      <Form.Group className="mb-3">
         <Form.Label>Email</Form.Label>
-        <Form.Control type="email" value={emailValue} onChange={handleEmailChange} />
-      </div>
+        <Form.Control type="email" name="email" value={formData.email} onChange={handleChange} />
+      </Form.Group>
 
-      <div className="mb-3">
+      <Form.Group className="mb-3">
         <Form.Label>Password</Form.Label>
-        <Form.Control type="password" value={passwordValue} onChange={handlePasswordChange} />
-      </div>
+        <Form.Control type="password" name="password" value={formData.password} onChange={handleChange} />
+      </Form.Group>
 
-      <div className="mb-3">
+      {/* Files */}
+      <Form.Group className="mb-3">
         <Form.Label>File</Form.Label>
         <Form.Control type="file" />
-      </div>
+      </Form.Group>
 
-      <div className="mb-3">
+      <Form.Group className="mb-3">
         <Form.Label>Multi Files</Form.Label>
         <Form.Control type="file" multiple />
-        <small>Try selecting more than one file when browsing for files.</small>
-      </div>
+        <Form.Text>Try selecting more than one file when browsing.</Form.Text>
+      </Form.Group>
 
-      <div className="mb-3">
+      {/* Other Inputs */}
+      <Form.Group className="mb-3">
         <Form.Label>URL</Form.Label>
-        <Form.Control type="url" value={url} onChange={handleUrlChange} />
-      </div>
-      <div className="mb-3">
+        <Form.Control type="url" name="url" value={formData.url} onChange={handleChange} />
+      </Form.Group>
+
+      <Form.Group className="mb-3">
         <Form.Label>Search</Form.Label>
-        <Form.Control type="search" value={search} onChange={handleSearchChange} />
-        <small>a search field behaves like a regular text field</small>
-      </div>
+        <Form.Control type="search" name="search" value={formData.search} onChange={handleChange} />
+        <Form.Text>A search field behaves like a regular text field</Form.Text>
+      </Form.Group>
 
-      <div className="mb-3">
+      <Form.Group className="mb-3">
         <Form.Label>Date Time Local</Form.Label>
-        <Form.Control type="datetime-local" value={dateTime} onChange={handleDateTimeChange} />
-      </div>
+        <Form.Control type="datetime-local" name="dateTime" value={formData.dateTime} onChange={handleChange} />
+      </Form.Group>
 
-      <div className="mb-3">
+      <Form.Group className="mb-3">
         <Form.Label>Date only</Form.Label>
-        <Form.Control type="date" value={date} onChange={handleDateChange} />
-      </div>
+        <Form.Control type="date" name="date" value={formData.date} onChange={handleChange} />
+      </Form.Group>
 
-      <div className="mb-3">
+      <Form.Group className="mb-3">
         <Form.Label>Time only</Form.Label>
-        <Form.Control type="time" value={time} onChange={handleTimeChange} />
-      </div>
+        <Form.Control type="time" name="time" value={formData.time} onChange={handleChange} />
+      </Form.Group>
 
-      <div className="mb-3">
+      <Form.Group className="mb-3">
         <Form.Label>Month only</Form.Label>
-        <Form.Control type="month" value={month} onChange={handleMonthChange} />
-      </div>
+        <Form.Control type="month" name="month" value={formData.month} onChange={handleChange} />
+      </Form.Group>
 
-      <div className="mb-3">
+      <Form.Group className="mb-3">
         <Form.Label>Week only</Form.Label>
-        <Form.Control type="week" value={week} onChange={handleWeekChange} />
-      </div>
+        <Form.Control type="week" name="week" value={formData.week} onChange={handleChange} />
+      </Form.Group>
 
-      <div className="mb-3">
+      <Form.Group className="mb-3">
         <Form.Label>Color</Form.Label>
-        <Form.Control type="color" value={color} onChange={handleColorChange} className="w-100" />
-      </div>
+        <Form.Control type="color" name="color" value={formData.color} onChange={handleChange} className="w-100" />
+      </Form.Group>
 
-      <div className="mb-4">
+      <Form.Group className="mb-4">
         <Form.Label>Range</Form.Label>
-        <Form.Range value={range} min={0} max={50} onChange={handleRangeChange} />
-      </div>
+        <Form.Range name="range" value={formData.range} min={0} max={50} onChange={handleChange} />
+      </Form.Group>
 
+      {/* Buttons */}
       <Stack direction="horizontal" gap={2} className="pt-4">
-        <Button>Submit</Button>
-        <Button variant="danger">Cancel</Button>
+        <Button type="submit">Submit</Button>
+        <Button variant="danger" type="reset">
+          Cancel
+        </Button>
       </Stack>
     </MainCard>
   );

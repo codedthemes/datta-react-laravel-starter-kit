@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 // react-bootstrap
 import Button from 'react-bootstrap/Button';
@@ -53,36 +53,41 @@ export default function Personal() {
     if (isValid) setIsCollapsed(true);
   };
 
-  const validateForm = () => {
-    for (const key in formData) {
-      if (formData[key].trim() === '') return false;
-    }
-    return true;
-  };
+  const validateForm = useCallback(() => {
+    return Object.values(formData).every((value) => value.trim() !== '');
+  }, [formData]);
 
   useEffect(() => {
     setIsValid(validateForm());
   }, [formData]);
 
+  const getRowClassName = (index: number) => {
+    const baseClass = 'align-items-center col-form-label';
+    if (index === 0) return `${baseClass} pt-0`;
+    if (index === profileData.length - 1) return `${baseClass} pb-0`;
+    return baseClass;
+  };
+
   return (
-    <MainCard bodyClassName="p-0">
-      <Card.Body className="d-flex align-items-center justify-content-between">
-        <h5 className="mb-0">Personal Details</h5>
+    <MainCard
+      bodyClassName="p-0"
+      title="Personal Details"
+      secondary={
         <Button variant="primary" size="sm" className="rounded m-0 float-end" onClick={() => setIsCollapsed(!isCollapsed)}>
           <i className="ph ph-note-pencil align-middle" />
         </Button>
-      </Card.Body>
-
+      }
+    >
       {/* View Mode */}
       {isCollapsed && (
         <Card.Body className="border-top">
           <Form>
             {profileData.map((item, index) => (
-              <Row key={index} className="mb-3 align-items-center col-form-label">
-                <Col sm={3} className="font-weight-bolder">
+              <Row key={index} className={getRowClassName(index)}>
+                <Col sm={3} xs={5} className="f-w-500">
                   {item.label}
                 </Col>
-                <Col sm={9} className="text-muted">
+                <Col sm={9} xs={7} className="text-muted">
                   {formData[item.label]}
                 </Col>
               </Row>
@@ -97,7 +102,7 @@ export default function Personal() {
           <Form onSubmit={handleSave}>
             {profileData.map((item, index) => (
               <Row key={index} className="mb-3 align-items-center">
-                <Col sm={3} className="font-weight-bolder">
+                <Col sm={3} className="col-form-label f-w-500">
                   {item.label}
                 </Col>
                 <Col sm={9}>
@@ -165,7 +170,7 @@ export default function Personal() {
               </Row>
             ))}
 
-            <Row className="align-items-center">
+            <Row>
               <Col sm={3}></Col>
               <Col sm={9}>
                 <Button variant="primary" type="submit" disabled={!isValid}>

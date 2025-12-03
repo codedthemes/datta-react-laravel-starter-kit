@@ -21,58 +21,68 @@ export default function Sizing() {
         </Stack>
       </Alert>
 
-      <div className="mb-3">
+      {/* Small Input */}
+      <Form.Group className="mb-3" controlId="smallInput">
         <Form.Control size="sm" type="text" placeholder=".form-control-sm" />
-        <small>
+        <Form.Text muted>
           <code>.form-control-sm</code>
-        </small>
-      </div>
+        </Form.Text>
+      </Form.Group>
 
-      <div className="mb-3">
+      {/* Default Input */}
+      <Form.Group className="mb-3" controlId="defaultInput">
         <Form.Control type="text" placeholder="Default Input" />
-        <small>
+        <Form.Text muted>
           <code>.form-control</code>
-        </small>
-      </div>
+        </Form.Text>
+      </Form.Group>
 
-      <div className="mb-3">
+      {/* Large Input */}
+      <Form.Group className="mb-3" controlId="largeInput">
         <Form.Control size="lg" type="text" placeholder=".form-control-lg" />
-        <small>
+        <Form.Text muted>
           <code>.form-control-lg</code>
-        </small>
-      </div>
+        </Form.Text>
+      </Form.Group>
+
       <hr />
 
-      <div className="mb-3">
+      {/* Large Select */}
+      <Form.Group className="mb-3" controlId="largeSelect">
         <Form.Label>Large select</Form.Label>
         <Form.Select size="lg">
           <option>Option 1</option>
           <option>Option 2</option>
           <option>Option 3</option>
         </Form.Select>
-      </div>
+      </Form.Group>
 
-      <div className="mb-3">
+      {/* Default Select */}
+      <Form.Group className="mb-3" controlId="defaultSelect">
         <Form.Label>Default select</Form.Label>
-        <Form.Select size="lg">
+        <Form.Select>
           <option>Option 1</option>
           <option>Option 2</option>
           <option>Option 3</option>
         </Form.Select>
-      </div>
+      </Form.Group>
 
-      <div className="mb-4">
+      {/* Small Select */}
+      <Form.Group className="mb-4" controlId="smallSelect">
         <Form.Label>Small select</Form.Label>
         <Form.Select size="sm">
           <option>Option 1</option>
           <option>Option 2</option>
           <option>Option 3</option>
         </Form.Select>
-      </div>
+      </Form.Group>
 
+      {/* Buttons */}
       <Stack direction="horizontal" gap={2} className="pt-4">
-        <Button>Submit</Button>
-        <Button className="btn-link-danger">Reset</Button>
+        <Button type="submit">Submit</Button>
+        <Button type="reset" className="btn-link-danger">
+          Reset
+        </Button>
       </Stack>
     </MainCard>
   );

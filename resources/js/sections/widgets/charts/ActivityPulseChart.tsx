@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 // react-bootstrap
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -7,9 +9,12 @@ import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // project-import
 import MainCard from '@/components/MainCard';
+import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 // chart-options
-const chartOptions: ChartProps = {
+const activityPulseChartOptions = {
   chart: {
     type: 'area',
     height: 170,
@@ -38,12 +43,6 @@ const chartOptions: ChartProps = {
     width: 5,
     color: '#ffffff'
   },
-  series: [
-    {
-      name: 'series1',
-      data: [20, 25, 33, 28, 25, 35, 28]
-    }
-  ],
   tooltip: {
     fixed: {
       enabled: false
@@ -67,6 +66,27 @@ const chartOptions: ChartProps = {
 // =============================|| WIDGET - ACTIVITY PULSE CHART ||============================== //
 
 export default function ActivityPulseChart() {
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
+
+  const [series] = useState([
+    {
+      name: 'series1',
+      data: [20, 25, 33, 28, 25, 35, 28]
+    }
+  ]);
+
+  const [options, setOptions] = useState<ChartProps>(activityPulseChartOptions);
+
+  useEffect(() => {
+    setOptions({
+      ...activityPulseChartOptions,
+      chart: { ...activityPulseChartOptions.chart, fontFamily: fontFamily },
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
+    });
+  }, [fontFamily, resolvedTheme]);
+
   return (
     <MainCard
       headerClassName="border-bottom-0"
@@ -88,7 +108,7 @@ export default function ActivityPulseChart() {
           <span className="d-block text-white">Today</span>
         </Col>
       </Row>
-      <ReactApexChart options={chartOptions} series={chartOptions.series} type="area" height={200} />
+      <ReactApexChart options={options} series={series} type="area" height={200} />
     </MainCard>
   );
 }

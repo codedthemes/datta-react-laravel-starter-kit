@@ -1,52 +1,101 @@
-import { useMemo, useState } from 'react';
+import { CSSProperties, useMemo, useState } from 'react';
 
 // react-bootstrap
-import Badge from 'react-bootstrap/Badge';
 import Stack from 'react-bootstrap/Stack';
 import Table from 'react-bootstrap/Table';
 
 // third-party
-import { DndContext, closestCenter, useSensor, useSensors, PointerSensor, TouchSensor } from '@dnd-kit/core';
+import { DndContext, closestCenter, useSensor, useSensors, TouchSensor, DragEndEvent, MouseSensor, KeyboardSensor } from '@dnd-kit/core';
+import { restrictToHorizontalAxis } from '@dnd-kit/modifiers';
+import { arrayMove, horizontalListSortingStrategy, SortableContext, useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 import {
+  Cell,
   ColumnDef,
   ColumnOrderState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
-  HeaderGroup,
+  getPaginationRowModel,
+  Header,
   useReactTable
 } from '@tanstack/react-table';
 import { LabelKeyObject } from 'react-csv/lib/core';
 
 // project-imports
 import MainCard from '@/components/MainCard';
-import DraggableColumnHeader from '@/components/third-party/react-table/DraggableColumnHeader';
-import SortingData from '@/components/third-party/react-table/SortingData';
-import DebouncedInput from '@/components/third-party/react-table/DebouncedInput';
-import TablePagination from '@/components/third-party/react-table/Pagination';
 import LinearWithLabel from '@/components/@extended/progress/LinearWithLabel';
 import makeData from '@/data/react-table';
+import useConfig from '@/hooks/useConfig';
+import { ThemeDirection } from '@/config';
+import { CSVExport, DebouncedInput, SortingData, StatusPill, TablePagination } from '@/components/third-party/react-table';
 
 // types
 import { TableDataProps } from '@/types/table';
 
-const reorderColumn = (draggedColumnId: string, targetColumnId: string, columnOrder: string[]): ColumnOrderState => {
-  columnOrder.splice(columnOrder.indexOf(targetColumnId), 0, columnOrder.splice(columnOrder.indexOf(draggedColumnId), 1)[0] as string);
-  return [...columnOrder];
-};
-
 interface ReactTableProps {
   defaultColumns: ColumnDef<TableDataProps>[];
   data: TableDataProps[];
+  title: string;
 }
 
 interface ColumnMeta {
   className?: string;
 }
 
+// ==============================|| DRAGGABLE HEADER ||============================== //
+
+function DraggableTableHeader({ header, className }: { header: Header<TableDataProps, unknown>; className?: string }) {
+  const { attributes, isDragging, listeners, setNodeRef, transform } = useSortable({
+    id: header.column.id
+  });
+
+  const style: CSSProperties = {
+    opacity: isDragging ? 0.7 : 1,
+    position: 'relative',
+    transform: CSS.Translate.toString(transform),
+    transition: 'width transform 0.2s ease-in-out',
+    whiteSpace: 'nowrap',
+    width: header.column.getSize(),
+    zIndex: isDragging ? 1 : 0
+  };
+
+  return (
+    <th colSpan={header.colSpan} ref={setNodeRef} style={style} {...header.column.columnDef.meta}>
+      {header.isPlaceholder ? null : (
+        <div {...attributes} {...listeners} style={{ cursor: isDragging ? 'grabbing' : 'grab' }} className={`${className}`}>
+          {flexRender(header.column.columnDef.header, header.getContext())}
+        </div>
+      )}
+    </th>
+  );
+}
+
+// ==============================|| DRAGGABLE CELL ||============================== //
+
+function DragAlongCell({ cell }: { cell: Cell<TableDataProps, unknown> }) {
+  const { isDragging, setNodeRef, transform } = useSortable({
+    id: cell.column.id
+  });
+
+  const style: CSSProperties = {
+    opacity: isDragging ? 0.7 : 1,
+    position: 'relative',
+    transform: CSS.Translate.toString(transform),
+    transition: 'width transform 0.2s ease-in-out',
+    zIndex: isDragging ? 1 : 0
+  };
+
+  return (
+    <td style={style} ref={setNodeRef} {...cell.column.columnDef.meta}>
+      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+    </td>
+  );
+}
+
 // ==============================|| REACT TABLE ||============================== //
 
-function ReactTable({ defaultColumns, data }: ReactTableProps) {
+function ReactTable({ defaultColumns, data, title }: ReactTableProps) {
   const [columns] = useState(() => [...defaultColumns]);
   const [globalFilter, setGlobalFilter] = useState('');
 
@@ -57,70 +106,61 @@ function ReactTable({ defaultColumns, data }: ReactTableProps) {
   const table = useReactTable({
     data,
     columns,
-    state: { globalFilter, columnOrder },
+    state: { columnOrder, globalFilter },
     onColumnOrderChange: setColumnOrder,
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     debugTable: true,
     debugHeaders: true,
     debugColumns: true
   });
 
-  let headers: LabelKeyObject[] = [];
-  table.getAllColumns().map((column) =>
+  const headers: LabelKeyObject[] = [];
+  table.getAllColumns().map((column) => {
+    const accessorKey = (column.columnDef as { accessorKey?: string }).accessorKey;
     headers.push({
       label: typeof column.columnDef.header === 'string' ? column.columnDef.header : '#',
-      key: ('accessorKey' in column.columnDef ? column.columnDef.accessorKey : column.id) as string
-    })
-  );
+      key: accessorKey ?? ''
+    });
+  });
 
-  const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: {
-        distance: 10
-      }
-    }),
-    useSensor(TouchSensor, {
-      activationConstraint: {
-        delay: 100,
-        tolerance: 5
-      }
-    })
-  );
+  const sensors = useSensors(useSensor(MouseSensor, {}), useSensor(TouchSensor, {}), useSensor(KeyboardSensor, {}));
 
-  const handleDragEnd = (event: any) => {
+  function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
     if (active && over && active.id !== over.id) {
-      const draggedColumnId = active.id;
-      const targetColumnId = over.id;
-      const newColumnOrder = reorderColumn(draggedColumnId, targetColumnId, columnOrder);
-      setColumnOrder(newColumnOrder);
+      setColumnOrder((columnOrder) => {
+        const oldIndex = columnOrder.indexOf(active.id as string);
+        const newIndex = columnOrder.indexOf(over.id as string);
+        return arrayMove(columnOrder, oldIndex, newIndex);
+      });
     }
-  };
+  }
 
   return (
-    <MainCard title="Column Drag & Drop (Ordering)" className="mb-0 table-card">
+    <MainCard title={title} className="mb-0 table-card" secondary={<CSVExport {...{ data, headers, filename: 'column-dragable.csv' }} />}>
       <Stack direction="horizontal" className="justify-content-between align-items-center flex-wrap p-4" gap={2}>
         <SortingData getState={table.getState} setPageSize={table.setPageSize} />
         <div className="datatable-search">
           <DebouncedInput value={globalFilter ?? ''} onFilterChange={(value) => setGlobalFilter(String(value))} />
         </div>
       </Stack>
-      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+
+      <DndContext collisionDetection={closestCenter} modifiers={[restrictToHorizontalAxis]} onDragEnd={handleDragEnd} sensors={sensors}>
         <Table responsive hover className="mb-0 border-top">
           <thead>
-            {table.getHeaderGroups().map((headerGroup: HeaderGroup<any>) => (
+            {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <DraggableColumnHeader
-                    key={header.id}
-                    header={header}
-                    table={table}
-                    className={`${(header.column.columnDef.meta as ColumnMeta)?.className}`}
-                  >
-                    <>{header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}</>
-                  </DraggableColumnHeader>
-                ))}
+                <SortableContext items={columnOrder} strategy={horizontalListSortingStrategy}>
+                  {headerGroup.headers.map((header) => (
+                    <DraggableTableHeader
+                      key={header.id}
+                      header={header}
+                      className={`${(header.column.columnDef.meta as ColumnMeta)?.className}`}
+                    />
+                  ))}
+                </SortableContext>
               </tr>
             ))}
           </thead>
@@ -128,22 +168,24 @@ function ReactTable({ defaultColumns, data }: ReactTableProps) {
             {table.getRowModel().rows.map((row) => (
               <tr key={row.id}>
                 {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} {...cell.column.columnDef.meta} className={`${(cell.column.columnDef.meta as ColumnMeta)?.className} `}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
+                  <SortableContext key={cell.id} items={columnOrder} strategy={horizontalListSortingStrategy}>
+                    <DragAlongCell key={cell.id} cell={cell} />
+                  </SortableContext>
                 ))}
               </tr>
             ))}
           </tbody>
         </Table>
       </DndContext>
+
+      {/* Pagination */}
       <TablePagination
         setPageSize={table.setPageSize}
         setPageIndex={table.setPageIndex}
         getState={table.getState}
         getPageCount={table.getPageCount}
         initialPageSize={10}
-        totalEntries={10}
+        totalEntries={data.length}
       />
     </MainCard>
   );
@@ -151,71 +193,25 @@ function ReactTable({ defaultColumns, data }: ReactTableProps) {
 
 // ==============================|| DRAG & DROP - COLUMN DRAG & DROP TABLE ||============================== //
 
-export default function ColumnDragDrop() {
+export default function ColumnDragDrop({ title }: { title: string }) {
   const data = useMemo(() => makeData(10), []);
 
+  const { themeDirection } = useConfig();
+
   const defaultColumns: ColumnDef<TableDataProps>[] = [
-    {
-      id: 'fullName',
-      header: 'Name',
-      footer: 'Name',
-      accessorKey: 'fullName'
-    },
-    {
-      id: 'email',
-      header: 'Email',
-      footer: 'Email',
-      accessorKey: 'email'
-    },
-    {
-      id: 'age',
-      header: 'Age',
-      footer: 'Age',
-      accessorKey: 'age',
-      meta: {
-        className: 'text-end'
-      }
-    },
-    {
-      id: 'role',
-      header: 'Role',
-      footer: 'Role',
-      accessorKey: 'role'
-    },
-    {
-      id: 'visits',
-      header: 'Visits',
-      footer: 'Visits',
-      accessorKey: 'visits',
-      meta: {
-        className: 'text-end'
-      }
-    },
-    {
-      id: 'status',
-      header: 'Status',
-      footer: 'Status',
-      accessorKey: 'status',
-      cell: (cell) => {
-        switch (cell.getValue()) {
-          case 'Complicated':
-            return <Badge bg="light-danger">Complicated</Badge>;
-          case 'Relationship':
-            return <Badge bg="light-success">Relationship</Badge>;
-          case 'Single':
-          default:
-            return <Badge bg="light-info">Single</Badge>;
-        }
-      }
-    },
+    { id: 'fullName', header: 'Name', accessorKey: 'fullName', meta: { className: 'text-nowrap' } },
+    { id: 'email', header: 'Email', accessorKey: 'email' },
+    { id: 'age', header: 'Age', accessorKey: 'age', meta: { className: 'text-end' } },
+    { id: 'role', header: 'Role', accessorKey: 'role' },
+    { id: 'visits', header: 'Visits', accessorKey: 'visits', meta: { align: themeDirection === ThemeDirection.RTL ? 'left' : 'right' } },
+    { id: 'status', header: 'Status', accessorKey: 'status', cell: (cell) => <StatusPill status={cell.getValue() as string} /> },
     {
       id: 'progress',
       header: 'Profile Progress',
-      footer: 'Profile Progress',
       accessorKey: 'progress',
       cell: (props) => <LinearWithLabel value={props.getValue() as number} />
     }
   ];
 
-  return <ReactTable {...{ defaultColumns, data }} />;
+  return <ReactTable {...{ defaultColumns, data, title }} />;
 }

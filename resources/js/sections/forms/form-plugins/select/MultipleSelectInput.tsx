@@ -14,50 +14,75 @@ import MainCard from '@/components/MainCard';
 // =============================|| SELECT - MULTIPLE SELECT INPUT ||============================== //
 
 export default function MultipleSelectInput() {
-  const defaultSelectRef = useRef<HTMLSelectElement | null>(null);
-  const removeButtonSelectRef = useRef<HTMLSelectElement | null>(null);
-  const groupSelectRef = useRef<HTMLSelectElement | null>(null);
-  const remoteSelectRef = useRef<HTMLSelectElement | null>(null);
-  const rtlSelectRef = useRef<HTMLSelectElement | null>(null);
-  const labelsSelectRef = useRef<HTMLSelectElement | null>(null);
-  const messageref = useRef<HTMLDivElement | null>(null);
+  const defaultSelectRef = useRef<HTMLSelectElement>(null);
+  const removeButtonSelectRef = useRef<HTMLSelectElement>(null);
+  const groupSelectRef = useRef<HTMLSelectElement>(null);
+  const remoteSelectRef = useRef<HTMLSelectElement>(null);
+  const rtlSelectRef = useRef<HTMLSelectElement>(null);
+  const labelsSelectRef = useRef<HTMLSelectElement>(null);
+  const messageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const instances: Choices[] = [];
+
     if (defaultSelectRef.current) {
-      new Choices(defaultSelectRef.current, {
+      const choices = new Choices(defaultSelectRef.current, {
         removeItemButton: false,
         maxItemCount: 5,
         placeholderValue: 'This is a placeholder set in the config'
-      }).setValue(['Choice 1']);
+      });
+      choices.setValue(['Choice 1']);
+      instances.push(choices);
     }
 
     if (removeButtonSelectRef.current) {
-      new Choices(removeButtonSelectRef.current, {
+      const choices = new Choices(removeButtonSelectRef.current, {
         removeItemButton: true
-      }).setValue(['Choice 1']);
+      });
+      choices.setValue(['Choice 1']);
+      instances.push(choices);
     }
 
     if (groupSelectRef.current) {
-      new Choices(groupSelectRef.current, {
+      const choices = new Choices(groupSelectRef.current, {
         removeItemButton: true
-      }).setValue([]);
+      });
+      instances.push(choices);
     }
 
     if (remoteSelectRef.current) {
-      new Choices(remoteSelectRef.current, {
+      const choices = new Choices(remoteSelectRef.current, {
         removeItemButton: true,
         placeholderValue: 'Pick a Strokes record'
       });
+      instances.push(choices);
+
+      // Example fetch for remote data (optional)
+      fetch('https://jsonplaceholder.typicode.com/users')
+        .then((res) => res.json())
+        .then((data) => {
+          choices.setChoices(
+            data.map((user: any) => ({
+              value: user.id,
+              label: user.name
+            })),
+            'value',
+            'label',
+            false
+          );
+        });
     }
 
     if (rtlSelectRef.current) {
-      new Choices(rtlSelectRef.current, {
+      const choices = new Choices(rtlSelectRef.current, {
         placeholderValue: 'This is a placeholder set in the config'
-      }).setValue(['choice 1']);
+      });
+      choices.setValue(['Choice 1']);
+      instances.push(choices);
     }
 
     if (labelsSelectRef.current) {
-      const choicesSelect = new Choices(labelsSelectRef.current, {
+      const choices = new Choices(labelsSelectRef.current, {
         removeItemButton: true,
         choices: [
           { value: 'One', label: 'Label One' },
@@ -66,7 +91,7 @@ export default function MultipleSelectInput() {
         ]
       });
 
-      choicesSelect.setChoices(
+      choices.setChoices(
         [
           { value: 'Four', label: 'Label Four', disabled: true },
           { value: 'Five', label: 'Label Five' },
@@ -77,18 +102,25 @@ export default function MultipleSelectInput() {
         false
       );
 
-      choicesSelect.passedElement.element.addEventListener('addItem', (event: any) => {
-        if (messageref.current) {
-          messageref.current.innerHTML = `<span class="badge bg-light-primary"> You just added "${event.detail.label}"</span>`;
+      choices.passedElement.element.addEventListener('addItem', (event: any) => {
+        if (messageRef.current) {
+          messageRef.current.innerHTML = `<span class="badge bg-light-primary"> You just added "${event.detail.label}"</span>`;
         }
       });
 
-      choicesSelect.passedElement.element.addEventListener('removeItem', (event: any) => {
-        if (messageref.current) {
-          messageref.current.innerHTML = `<span class="badge bg-light-danger"> You just removed "${event.detail.label}"</span>`;
+      choices.passedElement.element.addEventListener('removeItem', (event: any) => {
+        if (messageRef.current) {
+          messageRef.current.innerHTML = `<span class="badge bg-light-danger"> You just removed "${event.detail.label}"</span>`;
         }
       });
+
+      instances.push(choices);
     }
+
+    // Cleanup to avoid memory leaks
+    return () => {
+      instances.forEach((instance) => instance.destroy());
+    };
   }, []);
 
   return (
@@ -99,7 +131,7 @@ export default function MultipleSelectInput() {
             Default
           </Form.Label>
           <Col lg={6} md={11} sm={12}>
-            <Form.Control as="select" ref={defaultSelectRef} multiple defaultValue={['Choice 1']} data-select-text="Press to select">
+            <Form.Control as="select" ref={defaultSelectRef} multiple defaultValue={['Choice 1']}>
               <option value="Choice 1">Choice 1</option>
               <option value="Choice 2">Choice 2</option>
               <option value="Choice 3">Choice 3</option>
@@ -149,11 +181,11 @@ export default function MultipleSelectInput() {
 
         <Form.Group className="mb-3" as={Row}>
           <Form.Label column lg={4} sm={12} className="text-lg-end">
-            Options from remote source (Fetch API) &amp; limited to 5
+            Options from remote source (Fetch API)
           </Form.Label>
           <Col lg={6} md={11} sm={12}>
             <Form.Control as="select" ref={remoteSelectRef} />
-            <small>If the following example does not load, the Discogs rate limit has probably been reached. Try again later!</small>
+            <small className="text-muted">Data loads from API (example users)</small>
           </Col>
         </Form.Group>
 
@@ -179,7 +211,7 @@ export default function MultipleSelectInput() {
           </Form.Label>
           <Col lg={6} md={11} sm={12}>
             <Form.Select ref={labelsSelectRef} multiple />
-            <div ref={messageref} />
+            <div ref={messageRef} />
           </Col>
         </Form.Group>
       </Form>

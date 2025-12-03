@@ -70,7 +70,7 @@ export default function Navigation({ selectedItems, setSelectedItems, setSelectT
             remItems={remItems}
             lastItemId={lastItemId}
             item={item}
-            setSelectTab={setSelectTab ?? (() => { })}
+            setSelectTab={setSelectTab ?? (() => {})}
           />
         );
     }

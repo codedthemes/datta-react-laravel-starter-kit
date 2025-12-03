@@ -34,24 +34,24 @@ export default function RecentInvoice() {
             <i className="ti ti-dots-vertical f-18" />
           </Dropdown.Toggle>
           <Dropdown.Menu align="end">
-            {['Today', 'Weekly', 'Monthly'].map((filter) => (
-              <Dropdown.Item key={filter}>{filter}</Dropdown.Item>
+            {['Today', 'Weekly', 'Monthly'].map((filter, index) => (
+              <Dropdown.Item key={index}>{filter}</Dropdown.Item>
             ))}
           </Dropdown.Menu>
         </Dropdown>
       </Stack>
       <ListGroup>
-        {invoices.map(({ id, name, avatar, amount, time }) => (
-          <ListGroup.Item key={id} className="border-0">
+        {invoices.map((item, index) => (
+          <ListGroup.Item key={index} className="border-0">
             <Stack direction="horizontal" className="align-items-center">
-              <Image src={avatar} className="rounded-circle" width={40} height={40} />
+              <Image src={item.avatar} className="rounded-circle" width={40} height={40} />
               <div className="flex-grow-1 mx-2">
                 <h6 className="mb-1">
-                  {name} - {id}
+                  {item.name} - {item.id}
                 </h6>
-                <p className="mb-0 text-primary">{amount}</p>
+                <p className="mb-0 text-primary">{item.amount}</p>
               </div>
-              <p className="text-muted mb-0">{time}</p>
+              <p className="text-muted mb-0">{item.time}</p>
             </Stack>
           </ListGroup.Item>
         ))}

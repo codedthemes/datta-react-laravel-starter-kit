@@ -87,7 +87,7 @@ export default function Setting() {
               <p>
                 Can’t Remember your current password? <a className="link-primary text-decoration-underline">Reset your password</a>
               </p>
-              <Button>Save Password</Button>
+              <Button variant="primary">Save Password</Button>
             </MainCard>
           </Col>
         </Row>
@@ -95,8 +95,8 @@ export default function Setting() {
       <Row className="g-3">
         <Col md={6} xl={4}>
           <MainCard className="shadow-none border mb-0">
-            <h6 className="mb-3 fw-medium">Membership Plan</h6>
-            <h4 className="mb-3 fw-normal text-muted">Addicted $150</h4>
+            <h6 className="mb-3 fw-normal text-muted">Membership Plan</h6>
+            <h4 className="mb-3 f-w-600 f-20">Addicted $150</h4>
             <Stack as="a" href="#!" direction="horizontal" className="link-primary  align-items-center gap-2">
               See more Plan <i className="ti ti-chevron-right" />
             </Stack>
@@ -105,8 +105,8 @@ export default function Setting() {
 
         <Col md={6} xl={4}>
           <MainCard className="shadow-none border mb-0">
-            <h6 className="mb-3 fw-medium">Manage</h6>
-            <h4 className="mb-3 fw-normal text-muted">Membership</h4>
+            <h6 className="mb-3 fw-normal text-muted">Manage</h6>
+            <h4 className="mb-3 f-w-600 f-20">Membership</h4>
             <Stack as="a" href="#!" direction="horizontal" className="link-primary  align-items-center gap-2">
               Update, Cancel and more
               <i className="ti ti-chevron-right" />
@@ -116,8 +116,8 @@ export default function Setting() {
 
         <Col md={12} xl={4}>
           <MainCard className="shadow-none border mb-0">
-            <h6 className="mb-3 fw-medium">Renewal Date</h6>
-            <h4 className="mb-3 fw-normal text-muted">120 November, 2024</h4>
+            <h6 className="mb-3 fw-normal text-muted">Renewal Date</h6>
+            <h4 className="mb-3 f-w-600 f-20">120 November, 2024</h4>
             <Stack as="a" href="#!" direction="horizontal" className="link-primary  align-items-center gap-2">
               View payment method
               <i className="ti ti-chevron-right" />
@@ -133,7 +133,7 @@ export default function Setting() {
               <br />
               Deleting your account will remove all the content associated with it.
             </p>
-            <Button className="btn btn-danger">Delete Account</Button>
+            <Button variant="danger">Delete Account</Button>
           </MainCard>
         </Col>
       </Row>

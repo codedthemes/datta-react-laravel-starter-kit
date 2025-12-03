@@ -21,10 +21,10 @@ const videoSources = [
 export default function VideoGridGallery() {
   return (
     <MainCard title="Video Grid">
-      <Row>
+      <Row className="g-3">
         {videoSources.map((video, index) => (
           <Col key={index} lg={4} sm={6}>
-            <div className="thumbnail mb-4">
+            <div className="thumbnail">
               <div className="thumb">
                 <Ratio aspectRatio="16x9">
                   <embed className="embed-responsive-item" src={video.src} />

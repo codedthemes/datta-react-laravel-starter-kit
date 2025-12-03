@@ -132,12 +132,12 @@ const formComponents: NavItemType = {
           type: 'item',
           url: '/forms/form-plugins/clipboard'
         },
-        // {
-        //   id: 'nouislider',
-        //   title: 'nouislider',
-        //   type: 'item',
-        //   url: '/forms/form-plugins/nouislider'
-        // },
+        {
+          id: 'nouislider',
+          title: 'nouislider',
+          type: 'item',
+          url: '/forms/form-plugins/nouislider'
+        },
         {
           id: 'bootstrap-switch',
           title: 'bootstrap switch',

@@ -31,8 +31,7 @@ export default function ChangePassword() {
     <>
       <Alert variant="warning">
         <h5 className="alert-heading">
-          <i className="ph ph-warning-circle me-2" />
-          Alert!
+          <i className="ph ph-warning-circle align-text-bottom f-24 me-2" /> Alert!
         </h5>
         <p>Your Password will expire every 3 months. Please change it periodically.</p>
         <hr />
@@ -41,25 +40,26 @@ export default function ChangePassword() {
       <MainCard
         title={
           <h5>
-            <i className="ph ph-lock-key align-text-bottom text-primary f-20" />
-            <span>Change Password</span>
+            <i className="ph ph-lock-key align-text-bottom text-primary f-20 me-1" />
+            <span> Change Password</span>
           </h5>
         }
+        footerClassName="pt-0"
         footer={
           <Stack direction="horizontal" className="justify-content-end">
             <Button variant="danger" type="submit">
               Change Password
             </Button>
-            <Button variant="outline-dark" className="ms-2" type="button">
+            <Button variant="outline-dark" className="ms-2">
               Clear
             </Button>
           </Stack>
         }
       >
         <Form>
-          <Row>
+          <Row className="mb-3">
             <Col sm={6}>
-              <Form.Group className="mb-3">
+              <Form.Group>
                 <Form.Label>
                   Current Password <span className="text-danger">*</span>
                 </Form.Label>
@@ -71,14 +71,14 @@ export default function ChangePassword() {
                   placeholder="Enter Your Current password"
                 />
                 <Form.Text className="text-muted">
-                  Forgot password? <a>Click here</a>
+                  Forgot password? <a href="#!">Click here</a>
                 </Form.Text>
               </Form.Group>
             </Col>
           </Row>
-          <Row>
+          <Row className="g-3">
             <Col sm={6}>
-              <Form.Group className="mb-3">
+              <Form.Group>
                 <Form.Label>
                   New Password <span className="text-danger">*</span>
                 </Form.Label>
@@ -92,7 +92,7 @@ export default function ChangePassword() {
               </Form.Group>
             </Col>
             <Col sm={6}>
-              <Form.Group className="mb-3">
+              <Form.Group>
                 <Form.Label>
                   Confirm Password <span className="text-danger">*</span>
                 </Form.Label>

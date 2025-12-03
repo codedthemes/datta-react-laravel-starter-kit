@@ -26,26 +26,26 @@ import WinstonAdvance from '@/sections/application/gallery/advance/WinstonAdvanc
 export default function AdvanceGalleryPage() {
   return (
     <AppLayout>
-            <Head title="Advance gallery" />
-    <Row>
-      <Col sm={12}>
-        <JuliaAdvance />
-        <GoliathAdvance />
-        <HeraAdvance />
-        <WinstonAdvance />
-        <SelenaAdvance />
-        <TerryAdvance />
-        <PhoebeAdvance />
-        <ApolloAdvance />
-        <KiraAdvance />
-        <SteveAdvance />
-        <MosesAdvance />
-        <JazzAdvance />
-        <MingAdvance />
-        <LexiAdvance />
-        <DukeAdvance />
-      </Col>
-    </Row>
+      <Head title="Advance gallery" />
+      <Row>
+        <Col sm={12}>
+          <JuliaAdvance />
+          <GoliathAdvance />
+          <HeraAdvance />
+          <WinstonAdvance />
+          <SelenaAdvance />
+          <TerryAdvance />
+          <PhoebeAdvance />
+          <ApolloAdvance />
+          <KiraAdvance />
+          <SteveAdvance />
+          <MosesAdvance />
+          <JazzAdvance />
+          <MingAdvance />
+          <LexiAdvance />
+          <DukeAdvance />
+        </Col>
+      </Row>
     </AppLayout>
   );
 }

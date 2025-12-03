@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // project-imports
-import { ThemeMode } from '@/config';
 import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 interface Props {
   color: string;
@@ -30,17 +31,20 @@ const areaChartOptions = {
 // ==============================|| DASHBOARD - TOTAL CARD CHART ||============================== //
 
 export function TotalChart({ color, data }: Props) {
-  const { mode } = useConfig();
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
 
   const [options, setOptions] = useState<ChartProps>(areaChartOptions);
 
   useEffect(() => {
     setOptions((prevState) => ({
       ...prevState,
+      chart: { ...prevState.chart, fontFamily: fontFamily },
       colors: [color],
-      theme: { mode: mode === ThemeMode.DARK ? 'dark' : 'light' }
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
     }));
-  }, [color, mode]);
+  }, [color, resolvedTheme]);
 
   const [series] = useState([{ name: 'Orders', data }]);
 

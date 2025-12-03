@@ -125,7 +125,7 @@ export default function ReviewSummaryChart() {
           <span className="b-block pt-2">567 Reviews</span>
         </Col>
 
-        <Col sm={12}>
+        <Col sm={12} className="text-center">
           <Button className=" text-uppercase btn-block mt-3 me-0" type="button">
             view all reviews
           </Button>

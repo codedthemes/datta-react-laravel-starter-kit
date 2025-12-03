@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, RefObject } from 'react';
 
 // react-bootstrap
 import Form from 'react-bootstrap/Form';
@@ -33,7 +33,7 @@ export default function DatePickerHighlightedPage({ useClickOutside }: DatePicke
 
   const calendarRef = useRef<HTMLDivElement | null>(null);
 
-  useClickOutside(calendarRef, () => setIsCalendarOpen(false));
+  useClickOutside(calendarRef as RefObject<HTMLElement>, () => setIsCalendarOpen(false));
 
   const handleInputClick = () => {
     setIsCalendarOpen((prev) => !prev);

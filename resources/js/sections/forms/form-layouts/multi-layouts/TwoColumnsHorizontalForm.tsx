@@ -37,7 +37,7 @@ export default function TwoColumnsHorizontalFormPage() {
           <InputGroup>
             <Form.Control type="password" placeholder="Enter your Password" />
             <InputGroup.Text>
-              <i className="ph ph-lock-key" />
+              <i className="ti ti-lock f-20" />
             </InputGroup.Text>
           </InputGroup>
           <Form.Text>Please enter your Password</Form.Text>
@@ -49,7 +49,7 @@ export default function TwoColumnsHorizontalFormPage() {
           <InputGroup>
             <Form.Control type="email" placeholder="Enter your Profile URL" />
             <InputGroup.Text>
-              <i className="ph ph-link" />
+              <i className="ti ti-link f-20" />
             </InputGroup.Text>
           </InputGroup>
           <Form.Text>Please enter your Profile URL</Form.Text>
@@ -61,8 +61,10 @@ export default function TwoColumnsHorizontalFormPage() {
           <Form.Label className="mb-0">User Type:</Form.Label>
         </Col>
         <Col lg={3}>
-          <Form.Check type="radio" name="userType" label="Administrator" id="Administrator" defaultChecked />
-          <Form.Check type="radio" name="userType" label="Author" id="Author" />
+          <div>
+            <Form.Check className="form-check-inline" type="radio" name="userType" label="Administrator" id="Administrator" />
+            <Form.Check className="form-check-inline" type="radio" name="userType" label="Author" id="Author" />
+          </div>
         </Col>
       </Row>
     </MainCard>

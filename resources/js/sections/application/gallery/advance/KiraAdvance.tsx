@@ -1,6 +1,5 @@
 // react-bootstrap
 import Figure from 'react-bootstrap/Figure';
-import FigureCaption from 'react-bootstrap/FigureCaption';
 
 // project-imports
 import MainCard from '@/components/MainCard';
@@ -9,56 +8,36 @@ import MainCard from '@/components/MainCard';
 import advanceImage5 from '@assets/images/gallery-grid/img-grd-gal-5.jpg';
 import advanceImage6 from '@assets/images/gallery-grid/img-grd-gal-6.jpg';
 
+const items = [
+  { src: advanceImage5, alt: 'advance-5' },
+  { src: advanceImage6, alt: 'advance-6' }
+];
+
+const icons = ['ti ti-home', 'ti ti-download', 'ti ti-heart', 'ti ti-brand-stackshare'];
+
 // ==============================|| ADVANCE - KIRA ||============================== //
 
 export default function KiraAdvance() {
   return (
     <MainCard title="Kira">
-      <div className="grid">
-        <Figure className="effect-kira">
-          <Figure.Image src={advanceImage5} alt="advance-5" />
-          <FigureCaption>
-            <h2>
-              Dark <span>Kira</span>
-            </h2>
-            <p>
-              <a>
-                <i className="ti ti-home text-black" />
-              </a>
-              <a>
-                <i className="ti ti-download text-black" />
-              </a>
-              <a>
-                <i className="ti ti-heart-filled text-black" />
-              </a>
-              <a>
-                <i className="ti ti-brand-stackshare text-black" />
-              </a>
-            </p>
-          </FigureCaption>
-        </Figure>
-        <Figure className="effect-kira">
-          <Figure.Image src={advanceImage6} alt="advance-6" />
-          <FigureCaption>
-            <h2>
-              Dark <span>Kira</span>
-            </h2>
-            <p>
-              <a>
-                <i className="ti ti-home text-black" />
-              </a>
-              <a>
-                <i className="ti ti-download text-black" />
-              </a>
-              <a>
-                <i className="ti ti-heart-filled text-black" />
-              </a>
-              <a>
-                <i className="ti ti-brand-stackshare text-black" />
-              </a>
-            </p>
-          </FigureCaption>
-        </Figure>
+      <div className="grid p-0">
+        {items.map((item, index) => (
+          <Figure key={index} className="effect-kira">
+            <Figure.Image src={item.src} alt={item.alt} />
+            <Figure.Caption>
+              <h2>
+                Dark <span>Kira</span>
+              </h2>
+              <p>
+                {icons.map((icon, i) => (
+                  <a href="#!" key={i}>
+                    <i className={`${icon} text-black`} />
+                  </a>
+                ))}
+              </p>
+            </Figure.Caption>
+          </Figure>
+        ))}
       </div>
     </MainCard>
   );

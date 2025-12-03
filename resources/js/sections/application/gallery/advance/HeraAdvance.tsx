@@ -1,6 +1,5 @@
 // react-bootstrap
 import Figure from 'react-bootstrap/Figure';
-import FigureCaption from 'react-bootstrap/FigureCaption';
 
 // project-imports
 import MainCard from '@/components/MainCard';
@@ -9,56 +8,36 @@ import MainCard from '@/components/MainCard';
 import advanceImage5 from '@assets/images/gallery-grid/img-grd-gal-5.jpg';
 import advanceImage6 from '@assets/images/gallery-grid/img-grd-gal-6.jpg';
 
+const items = [
+  { src: advanceImage5, alt: 'advance-5' },
+  { src: advanceImage6, alt: 'advance-6' }
+];
+
+const icons = ['ti ti-file-type-pdf', 'ti ti-photo', 'ti ti-file-zip', 'ti ti-file-code'];
+
 // ==============================|| ADVANCE - HERA ||============================== //
 
 export default function HeraAdvance() {
   return (
     <MainCard title="Hera">
-      <div className="grid">
-        <Figure className="effect-hera">
-          <Figure.Image src={advanceImage5} alt="advance-5" />
-          <FigureCaption>
-            <h2>
-              Tender <span>Hera</span>
-            </h2>
-            <p className="text-spacing">
-              <a>
-                <i className="ti ti-file-type-pdf f-36" />
-              </a>
-              <a>
-                <i className="ti ti-photo f-36" />
-              </a>
-              <a>
-                <i className="ti ti-file-zip f-36" />
-              </a>
-              <a>
-                <i className="ti ti-file-code f-36" />
-              </a>
-            </p>
-          </FigureCaption>
-        </Figure>
-        <Figure className="effect-hera">
-          <Figure.Image src={advanceImage6} alt="advance-6" />
-          <FigureCaption>
-            <h2>
-              Tender <span>Hera</span>
-            </h2>
-            <p className="text-spacing">
-              <a>
-                <i className="ti ti-file-type-pdf f-36" />
-              </a>
-              <a>
-                <i className="ti ti-photo f-36" />
-              </a>
-              <a>
-                <i className="ti ti-file-zip f-36" />
-              </a>
-              <a>
-                <i className="ti ti-file-code f-36" />
-              </a>
-            </p>
-          </FigureCaption>
-        </Figure>
+      <div className="grid p-0">
+        {items.map((item, index) => (
+          <Figure key={index} className="effect-hera">
+            <Figure.Image src={item.src} alt={item.alt} />
+            <Figure.Caption>
+              <h2>
+                Tender <span>Hera</span>
+              </h2>
+              <p className="text-spacing">
+                {icons.map((icon, i) => (
+                  <a href="#!" key={i}>
+                    <i className={`${icon} f-36`} />
+                  </a>
+                ))}
+              </p>
+            </Figure.Caption>
+          </Figure>
+        ))}
       </div>
     </MainCard>
   );

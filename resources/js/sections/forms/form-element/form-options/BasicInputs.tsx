@@ -19,44 +19,55 @@ export default function BasicInputs() {
         </Stack>
       </Alert>
 
-      <div className="mb-3">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="email@company.com" />
-      </div>
+      <Form>
+        {/* Email */}
+        <Form.Group className="mb-3" controlId="basicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control type="email" placeholder="email@company.com" />
+        </Form.Group>
 
-      <div className="mb-3">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="password" placeholder="Password" />
-        <small>Your password must be between 8 and 30 characters.</small>
-      </div>
+        {/* Password */}
+        <Form.Group className="mb-3" controlId="basicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" placeholder="Password" />
+          <Form.Text muted>Your password must be between 8 and 30 characters.</Form.Text>
+        </Form.Group>
 
-      <div className="mb-3">
-        <Form.Label>Select</Form.Label>
-        <Form.Select aria-label="Default select example">
-          <option>option 1</option>
-          <option value="1">Option 2</option>
-          <option value="2">Option 3</option>
-        </Form.Select>
-      </div>
+        {/* Select */}
+        <Form.Group className="mb-3" controlId="basicSelect">
+          <Form.Label>Select</Form.Label>
+          <Form.Select>
+            <option>Option 1</option>
+            <option value="1">Option 2</option>
+            <option value="2">Option 3</option>
+          </Form.Select>
+        </Form.Group>
 
-      <div className="mb-3">
-        <Form.Label>Select</Form.Label>
-        <Form.Select multiple aria-label="Default select example">
-          <option>option 1</option>
-          <option value="1">Option 2</option>
-          <option value="2">Option 3</option>
-        </Form.Select>
-        <small>Hold shift or press ctrl for multi select.</small>
-      </div>
+        {/* Multi Select */}
+        <Form.Group className="mb-3" controlId="basicMultiSelect">
+          <Form.Label>Multi Select</Form.Label>
+          <Form.Select multiple>
+            <option>Option 1</option>
+            <option value="1">Option 2</option>
+            <option value="2">Option 3</option>
+          </Form.Select>
+          <Form.Text muted>Hold shift or press Ctrl (Cmd on Mac) to select multiple options.</Form.Text>
+        </Form.Group>
 
-      <div className="mb-4">
-        <Form.Label>Textarea</Form.Label>
-        <Form.Control as="textarea" rows={3} />
-      </div>
-      <Stack direction="horizontal" className="pt-4" gap={2}>
-        <Button>Submit</Button>
-        <Button className="btn-link-danger">Reset</Button>
-      </Stack>
+        {/* Textarea */}
+        <Form.Group className="mb-4" controlId="basicTextarea">
+          <Form.Label>Textarea</Form.Label>
+          <Form.Control as="textarea" rows={3} placeholder="Enter your message..." />
+        </Form.Group>
+
+        {/* Buttons */}
+        <Stack direction="horizontal" className="pt-4" gap={2}>
+          <Button type="submit">Submit</Button>
+          <Button type="reset" className="btn-link-danger">
+            Reset
+          </Button>
+        </Stack>
+      </Form>
     </MainCard>
   );
 }

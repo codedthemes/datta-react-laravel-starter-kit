@@ -1,12 +1,20 @@
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
+
+// project import
+import useConfig from '@/hooks/useConfig';
+import { ThemeMode } from '@/config';
+import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedTheme';
 
 // third-party
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
 // chart-options
-const chartOptions: ChartProps = {
-  series: [44, 55, 41, 17, 15],
-  colors: ['#04a9f5', '#1de9b6', '#13c2c2', '#f4c22b', '#f44236'],
+const pieDonutChartOptions = {
+  chart: {
+    type: 'donut',
+    height: 320,
+    background: 'transparent'
+  },
   legend: {
     show: true,
     position: 'bottom'
@@ -47,7 +55,27 @@ const chartOptions: ChartProps = {
 // ==============================|| APEX CHART - PIE DONUT CHART ||============================== //
 
 export default function PieDonutChart() {
-  const series = useMemo(() => [44, 55, 41, 17, 15], []);
+  const { mode, fontFamily } = useConfig();
+  const resolvedTheme = getResolvedTheme(mode);
+  setResolvedTheme(mode);
 
-  return <ReactApexChart options={chartOptions} series={series} type="donut" height={320} />;
+  const [series] = useState([44, 55, 41, 17, 15]);
+  const [options, setOptions] = useState<ChartProps>(pieDonutChartOptions);
+
+  const primaryMain = 'var(--bs-primary)';
+  const successMain = 'var(--bs-success)';
+  const errorMain = 'var(--bs-danger)';
+  const warningMain = 'var(--bs-warning)';
+
+  useEffect(() => {
+    setOptions({
+      ...pieDonutChartOptions,
+      chart: { ...pieDonutChartOptions.chart, fontFamily: fontFamily },
+      colors: [primaryMain, warningMain, successMain, errorMain],
+      stroke: { colors: ['#fff'] },
+      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
+    });
+  }, [resolvedTheme, fontFamily, primaryMain, warningMain, errorMain, successMain]);
+
+  return <ReactApexChart options={options} series={series} type="donut" height={320} />;
 }

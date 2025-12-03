@@ -43,7 +43,7 @@ export default function AuthRegisterForm({ className, link }: FormProps) {
   const resolvedTheme = getResolvedTheme(mode);
   setResolvedTheme(mode);
 
-  const logo = resolvedTheme === ThemeMode.DARK ? LightLogo : DarkLogo;
+  const logo = resolvedTheme === ThemeMode.DARK ? LightLogo : window.location.pathname.includes('v3') ? LightLogo : DarkLogo;
 
   const [showPassword, setShowPassword] = useState(false);
   const {

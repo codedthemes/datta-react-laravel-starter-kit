@@ -25,7 +25,7 @@ const orders: Order[] = [
 export default function OrderCard({ title }: { title: string }) {
   return (
     <MainCard title={title} className="table-card" bodyClassName="pb-0">
-      <Table hover responsive>
+      <Table hover responsive className="mb-0">
         <thead>
           <tr>
             <th>#</th>

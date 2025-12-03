@@ -81,13 +81,13 @@ export default function FilterLayout() {
   return (
     <MainCard title="Filter Magical Layouts" content={false}>
       <Card.Body className="border-bottom">
-        <Stack direction="horizontal" id="filters" gap={1} className="btn-filter flex-wrap">
+        <Stack direction="horizontal" id="filters" gap={1} aria-label="gallery filters" className="btn-filter flex-wrap">
           {filters.map(({ label, filter }, index) => (
             <Button
               key={index}
               size="sm"
               variant="light-secondary"
-              className={`my-1 ${activeFilter === filter ? 'active' : ''}`}
+              className={`${activeFilter === filter ? 'active' : ''}`}
               data-filter={filter}
               onClick={() => handleFilterClick(filter)}
             >
@@ -97,10 +97,10 @@ export default function FilterLayout() {
         </Stack>
       </Card.Body>
       <Card.Body>
-        <Row className="grid" ref={gridRef}>
+        <Row className="grid m-0 mt-n3 py-0 g-3" ref={gridRef}>
           {images.map(({ src, category }, index) => (
             <Col key={index} xl={3} md={4} sm={6} className={`element-item ${category}`}>
-              <Image fluid className="img-thumbnail mb-3" src={src} alt="Gallery item" />
+              <Image fluid thumbnail src={src} alt="Gallery item" />
             </Col>
           ))}
         </Row>
