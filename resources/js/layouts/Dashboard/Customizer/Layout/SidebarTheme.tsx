@@ -11,7 +11,7 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import useConfig from '@/hooks/useConfig';
 
 // types
-import { CustomThemeTypes } from 'types/customizer';
+import { CustomThemeTypes } from '@/types/customizer';
 
 const sidebarThemeOptions: CustomThemeTypes[] = [
   {

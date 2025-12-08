@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react';
-
 // third-party
 import ReactApexChart, { Props as ChartProps } from 'react-apexcharts';
 
@@ -60,36 +58,61 @@ const userStatisticsChartOptions = {
 // =============================|| WIDGET - USER STATISTICS CHART ||============================== //
 
 export default function UserStatisticsChart() {
-  const { mode, fontFamily } = useConfig();
-  const resolvedTheme = getResolvedTheme(mode);
-  setResolvedTheme(mode);
-
-  const [series] = useState([
-    {
-      name: 'Car',
-      data: [160, 140, 150, 95, 130, 55, 75, 65, 140, 120, 110, 180]
+  // chart-options
+  const chartOptions: ChartProps = {
+    chart: {
+      toolbar: {
+        show: false
+      }
     },
-    {
-      name: 'Bike',
-      data: [85, 95, 90, 125, 105, 120, 110, 140, 100, 95, 130, 80]
-    }
-  ]);
+    grid: {
+      xaxis: {
+        lines: {
+          show: false
+        }
+      }
+    },
+    plotOptions: {
+      bar: {
+        horizontal: false,
+        columnWidth: 26,
+        endingShape: 'rounded'
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: 'smooth',
+      width: 2
+    },
 
-  const [options, setOptions] = useState<ChartProps>(userStatisticsChartOptions);
+    markers: {
+      size: 6,
+      hover: {
+        size: 5
+      }
+    },
+    xaxis: {
+      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    },
 
-  useEffect(() => {
-    setOptions({
-      ...userStatisticsChartOptions,
-      chart: { ...userStatisticsChartOptions.chart, fontFamily: fontFamily },
-      colors: ['var(--bs-purple)', 'var(--bs-success)'],
-      grid: { borderColor: 'var(--bs-border-color)' },
-      theme: { mode: resolvedTheme === ThemeMode.DARK ? 'dark' : 'light' }
-    });
-  }, [fontFamily, resolvedTheme]);
+    series: [
+      {
+        name: 'Car',
+        data: [160, 140, 150, 95, 130, 55, 75, 65, 140, 120, 110, 180]
+      },
+      {
+        name: 'Bike',
+        data: [85, 95, 90, 125, 105, 120, 110, 140, 100, 95, 130, 80]
+      }
+    ],
 
+    colors: ['#AC94D8', '#50E3D3']
+  };
   return (
     <MainCard title="Statistics">
-      <ReactApexChart options={options} series={series} type="line" height={225} />
+      <ReactApexChart options={chartOptions} series={chartOptions.series} type="line" height={225} />
     </MainCard>
   );
 }

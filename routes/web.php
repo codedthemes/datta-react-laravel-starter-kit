@@ -64,14 +64,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
     // Invoice
     Route::get('admin-panel/invoice/dashboard', function () {return Inertia::render('admin-panel/invoice/Dashboard');})->name('Dashboard');
-    Route::get('admin-panel/invoice/details/{id}', function ($id) {
-    return Inertia::render('admin-panel/invoice/Details', ['id' => $id]);
-})->name('invoice.details');
+    Route::get('admin-panel/invoice/details/{id}', function ($id) {return Inertia::render('admin-panel/invoice/Details', ['id' => $id]);})->name('invoice.details');
     Route::get('admin-panel/invoice/create', function () {return Inertia::render('admin-panel/invoice/Create');})->name('Create');
     Route::get('admin-panel/invoice/list', function () {return Inertia::render('admin-panel/invoice/List');})->name('List');
-    Route::get('admin-panel/invoice/edit/{id}', function ($id) {
-    return Inertia::render('admin-panel/invoice/Edit', ['id' => $id]);
-})->name('invoice.edit');
+    Route::get('admin-panel/invoice/edit/{id}', function ($id) {return Inertia::render('admin-panel/invoice/Edit', ['id' => $id]);})->name('invoice.edit');
     
     // Basic component
     Route::get('basic/alert', function () {return Inertia::render('components/basic/Alert');})->name('Alert');

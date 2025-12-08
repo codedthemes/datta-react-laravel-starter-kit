@@ -19,7 +19,6 @@
     svg {
       stroke: #fff;
     }
-
     i {
       color: #fff;
     }
@@ -402,7 +401,6 @@
     }
   }
 }
-
 @media (min-width: 1025px) {
   .navbar-overlay {
     .pc-sidebar {
@@ -519,7 +517,6 @@
     background: transparent;
 
     .pc-head-link {
-
       &.active,
       &:active,
       &:focus,
@@ -590,7 +587,6 @@
         .breadcrumb-item,
         a {
           color: #fff;
-
           &:active,
           &:focus,
           &:hover {

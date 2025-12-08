@@ -165,7 +165,6 @@ function ReactTable({ title }: { title: string }) {
             </tr>
           ))}
         </thead>
-
         <tbody>
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id}>

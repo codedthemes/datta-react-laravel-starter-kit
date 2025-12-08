@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 // project-imports
-import { Gender } from 'config';
+import { Gender } from '@/config';
 
 // types
 import { KeyedObject } from './root';

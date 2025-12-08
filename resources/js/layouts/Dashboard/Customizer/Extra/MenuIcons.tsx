@@ -5,7 +5,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import useConfig from '@/hooks/useConfig';
 
 // types
-import { IconItem } from 'types/customizer';
+import { IconItem } from '@/types/customizer';
 
 const iconClasses = ['ti ti-chevron-right', 'ti ti-chevrons-right', 'ti ti-caret-right', 'ti ti-circle-plus', 'ti ti-plus'];
 

@@ -181,7 +181,6 @@
         .pc-item {
           display: block;
           position: relative;
-
           .pc-link {
             display: block;
           }
@@ -197,7 +196,6 @@
             padding: 12px 15px 12px 20px;
 
             .pc-icon {
-
               svg,
               i {
                 color: var(--pc-sidebar-color);
@@ -299,7 +297,6 @@
   }
 
   &[data-pc-direction='rtl'] {
-
     .pc-container,
     .pc-footer {
       margin-right: 20px;

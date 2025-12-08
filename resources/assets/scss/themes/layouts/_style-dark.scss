@@ -321,7 +321,6 @@ select.datatable-input,
   }
 
   .btn-link-#{$color} {
-
     &:not(:disabled):not(.disabled).active,
     &:not(:disabled):not(.disabled):active,
     &:active,
@@ -549,13 +548,11 @@ select.datatable-input,
   }
 
   .flatpickr-current-month {
-
     .flatpickr-monthDropdown-months,
     .flatpickr-monthDropdown-months .flatpickr-monthDropdown-month {
       background: var(--bs-body-bg);
       color: var(--bs-body-color);
     }
-
     .flatpickr-monthDropdown-months .flatpickr-monthDropdown-month {
       border-color: var(--bs-border-color);
     }
@@ -625,7 +622,6 @@ select.datatable-input,
 }
 
 .flatpickr-time {
-
   input,
   .flatpickr-am-pm,
   .flatpickr-time-separator {
@@ -677,7 +673,6 @@ select.datatable-input,
 }
 
 .choices.is-disabled {
-
   .choices__inner,
   .choices__input {
     background: transparent;
@@ -1061,7 +1056,6 @@ table.datatable>tbody>tr.child ul.dtr-details>li {
 
 .btns-gallery {
   .btn-light-primary {
-
     &:not(:hover),
     &:not(:focus),
     &:not(:active),
@@ -1084,7 +1078,6 @@ table.datatable>tbody>tr.child ul.dtr-details>li {
 }
 
 @each $color, $value in $theme-colors {
-
   // light color start
   .btn-light-#{$color} {
     &:hover {

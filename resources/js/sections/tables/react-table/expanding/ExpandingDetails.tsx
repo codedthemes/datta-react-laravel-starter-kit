@@ -82,7 +82,6 @@ function ReactTable({ data, columns, title }: ReactTableProps) {
             </tr>
           ))}
         </thead>
-
         <tbody>
           {table.getRowModel().rows.map((row) => (
             <Fragment key={row.id}>

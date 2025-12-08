@@ -1,82 +1,34 @@
-import { useState, ReactNode } from 'react';
+import { useState, useRef, ReactNode } from 'react';
 
 // react-bootstrap
+import Badge from 'react-bootstrap/Badge';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
-import Image from 'react-bootstrap/Image';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Stack from 'react-bootstrap/Stack';
 import Tooltip from 'react-bootstrap/Tooltip';
 
 // Project imports
 import LinearWithLabel from '@/components/@extended/progress/LinearWithLabel';
-import StatusPill from './StatusPill';
-import { getImageUrl, ImagePath } from '@/utils/getImageUrl';
 
 // third-party
-import { UniqueIdentifier } from '@dnd-kit/core';
-import { useFormik } from 'formik';
 import { Row } from '@tanstack/react-table';
 import * as Yup from 'yup';
 
 interface EditRowProps<TData> {
   row: Row<TData>;
   onSave: (updatedData: Record<string, unknown>) => void;
-  groupedColumns?: string[];
 }
 
-const nonEditableFields: UniqueIdentifier[] = ['drag-handle', 'expander', 'select'];
+function ShowStatus(value: string) {
+  const statusVariant =
+    {
+      Complicated: 'light-danger',
+      Relationship: 'light-success',
+      Single: 'light-primary'
+    }[value] || 'light-primary';
 
-function getYupSchemaForRow<TData>(row: Row<TData>) {
-  const shape: Record<string, any> = {};
-  const skipValidation = ['drag-handle', 'expander', 'select', 'actions'];
-  row.getVisibleCells().forEach((cell) => {
-    const columnId = cell.column.id;
-    if (skipValidation.includes(columnId)) {
-      return;
-    }
-    console.log('Generating validation for column:', columnId);
-    switch (columnId) {
-      case 'fullName':
-        shape[columnId] = Yup.string()
-          .test('trim', 'Name cannot be empty or contain only spaces', (value) => !!value && value.trim().length > 0)
-          .required('Name is required');
-        break;
-      case 'email':
-        shape[columnId] = Yup.string().email('Invalid email').required('Email is required');
-        break;
-      case 'age':
-        shape[columnId] = Yup.number()
-          .typeError('Age must be a number')
-          .required('Age is required')
-          .min(18, 'Minimum age is 18')
-          .max(65, 'Maximum age is 65');
-        break;
-      case 'visits':
-        shape[columnId] = Yup.number().typeError('Visits must be a number').required('Visits are required');
-        break;
-      case 'role':
-        shape[columnId] = Yup.string().required('Role is required');
-        break;
-      case 'contact':
-        shape[columnId] = Yup.string().required('Contact is required');
-        break;
-      case 'country':
-        shape[columnId] = Yup.string().required('Country is required');
-        break;
-      case 'status':
-        shape[columnId] = Yup.string().required('Status is required');
-        break;
-      case 'progress':
-        shape[columnId] = Yup.number().typeError('Progress must be a number').required('Progress is required');
-        break;
-      default:
-        // For any other fields, use a generic required message
-        shape[columnId] = Yup.string().required('This field is required');
-        break;
-    }
-  });
-  return Yup.object().shape(shape);
+  return <Badge bg={statusVariant}>{value}</Badge>;
 }
 
 // ==============================|| REACT TABLE - EDIT ROW ||============================== //
@@ -227,7 +179,6 @@ export default function EditRow<TData>({ row, onSave, groupedColumns }: EditRowP
           default:
             cellContent = value;
         }
-
         return (
           <td key={cell.id} {...cell.column.columnDef.meta}>
             {cellContent as ReactNode}
