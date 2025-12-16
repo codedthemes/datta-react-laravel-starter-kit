@@ -19,7 +19,6 @@ import { getResolvedTheme, setResolvedTheme } from '@/components/setResolvedThem
 import LightLogo from '@assets/images/logo-white.svg';
 import DarkLogo from '@assets/images/logo-dark.svg';
 
-
 export default function Login({
     status,
     canResetPassword
